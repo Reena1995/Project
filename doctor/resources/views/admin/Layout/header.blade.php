@@ -218,6 +218,18 @@
 								</ul>
 							</li>	
 							<li class="submenu">
+								<a href="#"><i class="fe fe-users"></i> <span>Contact</span> <span class="menu-arrow"></span></a>
+								<ul style="display: none;">
+									<li><a href="{{url('/contacts')}}"><i class="fe fe-user"></i>Manage contact</a></li>
+									
+									
+								<ul style="display: none;">
+								
+								</ul>
+									
+								</ul>
+							</li>	
+							<li class="submenu">
 								<a href="#"><i class="fe fe-user"></i> <span> Patient</span> <span class="menu-arrow"></span></a>
 								<ul style="display: none;">
 									<li><a href="{{url('/admin-patient')}}"><i class="fe fe-user"></i>Manage Patients</a></li>

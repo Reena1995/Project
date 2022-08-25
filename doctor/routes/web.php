@@ -12,6 +12,7 @@ use App\Http\Controllers\patient_controller;
 use App\Http\Controllers\drspecialitie_controller;
 use App\Http\Controllers\state_controller;
 use App\Http\Controllers\specialist_controller;
+use App\Http\Controllers\contact_controller;
 
 
 
@@ -63,7 +64,13 @@ Route::get('/doctorprofile/{id}',[doctor_controller::class,'doctorprofile']);
 //Route::get('/', function (){return view('patient.index');});
 Route::get('/index', function (){return view('patient.index');});
 Route::get('/about', function (){return view('patient.about');});
-Route::get('/contact', function (){return view('patient.contact');});
+
+
+//contact page and store
+//Route::get('/contact', function (){return view('patient.contact');});
+Route::get('/contact',[contact_controller::class,'create']);
+Route::post('/contact',[contact_controller::class,'store']);
+//
 
 
 
@@ -157,6 +164,7 @@ Route::group(['middleware'=>['doctorafterlogin']], function(){
         Route::get('/doctor-components', function (){return view('doctor.components');});
         Route::get('/doctor-invoice-view', function (){return view('doctor.invoice-view');});
         Route::get('/doctor-blank-page', function (){return view('doctor.blank-page');});
+        Route::get('/doctor-my-medicine', function (){return view('doctor.my-medicine');});
 
 });
 
@@ -217,6 +225,13 @@ Route::get('/addcity/{id}',[state_controller::class,'destroycity']);
 Route::get('/addarea/{id}',[state_controller::class,'destroyarea']);
 
 //
+
+//contact manage
+//Route::get('/contacts', function (){return view('admin.managecontact');});
+Route::get('/contacts',[contact_controller::class,'index']);
+Route::get('/contact/{id}',[contact_controller::class,'destroy']);
+//
+
 
 //doctor
 Route::get('/admin-add-doctor',[doctor_controller::class,'create']);//show doctor form
