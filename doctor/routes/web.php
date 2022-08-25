@@ -25,7 +25,7 @@ use App\Http\Controllers\specialist_controller;
 | contains the "web" middleware group. Now create something great!
 |
 */
-///////////////patient
+///////////////patientbhbjhbjb
 Route::get('/', function () {
     return view('welcome');
 });
