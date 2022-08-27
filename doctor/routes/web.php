@@ -13,6 +13,8 @@ use App\Http\Controllers\drspecialitie_controller;
 use App\Http\Controllers\state_controller;
 use App\Http\Controllers\specialist_controller;
 use App\Http\Controllers\contact_controller;
+use App\Http\Controllers\medicine_controller;
+use App\Http\Controllers\doc_fav_medicine_controller;
 
 
 
@@ -127,11 +129,11 @@ Route::group(['middleware'=>['doctorbeforelogin']], function(){
         Route::get('/doctor-contact', function (){return view('doctor.contact');});
 
 });
-
+Route::get('/doctorlogout',[doctor_controller::class,'doctorlogout']);
 // afterdoctor miidleware
 Route::group(['middleware'=>['doctorafterlogin']], function(){
 
-        Route::get('/doctorlogout',[doctor_controller::class,'doctorlogout']);
+        
         Route::get('/editdoctor',[doctor_controller::class,'editdoctor']);
         Route::post('/editdoctor/{id}',[doctor_controller::class,'updatedoctor']);   
 
@@ -143,7 +145,13 @@ Route::group(['middleware'=>['doctorafterlogin']], function(){
         Route::get('/addservice/{id}',[service_controller::class,'destroyservices']);
         Route::get('/adddrspecialist/{id}',[service_controller::class,'destroyspcialist']);
         
-        
+     //medicine  
+    // Route::get('/doctor-my-medicine', function (){return view('doctor.my-medicine');}); 
+    Route::get('/doctor-my-medicine',[doc_fav_medicine_controller::class,'create']);
+    Route::post('/addmedicinelist',[doc_fav_medicine_controller::class,'addmedicinelist']);
+    Route::post('/addmedicine',[doc_fav_medicine_controller::class,'addmedicine']);
+    Route::get('/doctor-my-medicine/{id}',[doc_fav_medicine_controller::class,'destroy']);
+    
        
 
         Route::get('/doctor-dashboard', function (){return view('doctor.doctor-dashboard');});
@@ -164,7 +172,7 @@ Route::group(['middleware'=>['doctorafterlogin']], function(){
         Route::get('/doctor-components', function (){return view('doctor.components');});
         Route::get('/doctor-invoice-view', function (){return view('doctor.invoice-view');});
         Route::get('/doctor-blank-page', function (){return view('doctor.blank-page');});
-        Route::get('/doctor-my-medicine', function (){return view('doctor.my-medicine');});
+        
 
 });
 

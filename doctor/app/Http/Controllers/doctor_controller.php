@@ -64,6 +64,14 @@ class doctor_controller extends Controller
               
                    $request->Session()->put('doctor_id',$data->id);
                    $request->Session()->put('email',$data->email);
+                   $drname=$data->first_name." ".$data->last_name; 
+                   $request->Session()->put('drname',$drname);
+                   $request->Session()->put('profile_img',$data->profile_img);
+                   
+
+                   //echo session('drname');
+                  //echo session('profile_img');
+                   //exit();
                    return redirect('/doctor-dashboard');
                
            }
@@ -81,6 +89,8 @@ class doctor_controller extends Controller
     {
         Session()->pull('doctor_id');
         Session()->pull('email');
+       // Session()->pull('drname');
+       // Session()->pull('profile_img');
         return redirect('/doctor');
     }
 

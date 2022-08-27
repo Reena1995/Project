@@ -44,21 +44,21 @@
 										@if(session()->has('success'))
 								            <i class="alert alert-success">{{session('success')}}</i>
 							            @endif
-										<form action="{{url('/addlistmedicine')}}" method="post" enctype="multipart/form-data">
+										<form action="{{url('/addmedicinelist')}}" method="post" enctype="multipart/form-data">
 											@csrf
 										<div class="form-group">
 											<label>Medicines</label>
 											<select class="col-lg-9 form-control" name="medicine_name">
 											<option value="">Select</option>
-															<?php
-															foreach($medicine_arr as $data)
-															{
-															?>
-															<option value="<?php echo $data->medicine_name;?>">
-															       <?php echo $data->medicine_name ?></option>
-															<?php
-															}
-															?>			
+											<?php foreach($medi_arr as $data)
+							                              {
+								                        ?>
+                                                        <option value="<?php echo $data->medicine_name;?>">
+                                                       <?php echo $data->medicine_name;?></option>
+								                       <?php 
+							                              }
+														?>
+															
 											</select>
 										</div>
 										<div class="text-right">
@@ -99,9 +99,10 @@
 											</thead>
 											<tbody>
 											<?php
-													foreach($medi_arr as $fetch) 
+													foreach($medicine_arr as $fetch) 
 													{
 												?>
+											
 												<tr>
 													<td><?php echo $fetch->id?></td>
 													<td><?php echo $fetch->medicine_name?></td>
@@ -114,12 +115,9 @@
 													</td>
 												</tr>
 												<?php
-												}
+													}
 												?>
-												
-												
-												
-												
+											
 											</tbody>
 										</table>
 									</div>
