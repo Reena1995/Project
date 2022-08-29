@@ -32,6 +32,21 @@ use App\Http\Controllers\doc_fav_medicine_controller;
 Route::get('/', function () {
     return view('welcome');
 });
+//company panel
+
+Route::get('/company-login', function (){return view('company.login');});
+Route::get('/company-dashbord', function (){return view('company.index');});
+Route::get('/company-divisions-manager', function (){return view('company.divisionsmanage');});
+Route::get('/company-medicine-manager', function (){return view('company.medicine-manager');});
+Route::get('/company-doctor', function (){return view('company.doctor-list');});
+Route::get('/company-manager', function (){return view('company.manager');});
+Route::get('/company-add-manager', function (){return view('company.add-manager');});
+Route::get('/company-mr', function (){return view('company.mr');});
+Route::get('/company-add-mr', function (){return view('company.add-mr');});
+Route::get('/company-add-stockiest', function (){return view('company.add-stockiest');});
+Route::get('/company-stockiest', function (){return view('company.stockiest');});
+//
+
 // before patient login middleware
 Route::group(['middleware'=>['beforepatient']], function(){
 
@@ -40,6 +55,15 @@ Route::group(['middleware'=>['beforepatient']], function(){
     Route::get('/register',[patient_controller::class,'create']);
     Route::post('/register',[patient_controller::class,'store']);
     Route::post('/patientlogin',[patient_controller::class,'patientlogin']);
+    //Route::get('/forgot-password', function (){return view('patient.forgot-password');});
+     //Route::get('/send-otp', function (){return view('patient.sendotp');});
+     //Route::get('/confirm-password', function (){return view('patient.confirmpwd');});
+    Route::get('/forgotpwd',[patient_controller::class,'forgotpwd']);
+   
+    Route::get('/sendotp',[patient_controller::class,'sendotp']);
+    
+    Route::get('/confirm-password',[patient_controller::class,'confirmpwd']);
+
    
     
 
@@ -58,6 +82,7 @@ Route::post('/editpatient/{id}',[patient_controller::class,'updatepatient']);
 
 //Route::get('/doctorsearch', function (){return view('patient.doctorsearch');});
 Route::get('/doctorsearch',[doctor_controller::class,'doctorlist']);
+
 
 //all doctor profile
 //Route::get('/doctor-profile', function (){return view('patient.doctor-profile');});
@@ -78,8 +103,11 @@ Route::post('/contact',[contact_controller::class,'store']);
 
 
 Route::get('/patient-dashboard', function (){return view('patient.patient-dashboard');});
-
-
+//reset password
+//Route::get('/Reset-password', function (){return view('patient.resetpwd');});
+Route::get('/Reset-password',[patient_controller::class,'resetcreate']);
+Route::post('/Reset-password',[patient_controller::class,'resetpassword']);
+//
 Route::get('/favourites', function (){return view('patient.favourites');});
 
 
@@ -96,7 +124,7 @@ Route::get('/prescription-view', function (){return view('patient.prescription-v
 
 
 Route::get('/change-password', function (){return view('patient.change-password');});
-Route::get('/forgot-password', function (){return view('patient.forgot-password');});
+
 
 
 

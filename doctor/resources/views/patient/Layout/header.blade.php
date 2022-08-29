@@ -128,6 +128,7 @@
 									<li><a href="{{url('/blank-page')}}">Starter Page</a></li>
 									
 									<li><a href="{{url('/forgot-password')}}">Forgot Password</a></li>
+									<li><a href="{{url('/Reset-password')}}">Reset Password</a></li>
 								</ul>
 							</li>
 							
