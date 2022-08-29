@@ -1,3 +1,6 @@
+@extends('patient.Layout.main_layout') 	
+@section('main_container')
+			
 <!DOCTYPE html> 
 <html lang="en">
 	
@@ -32,54 +35,7 @@
 		<!-- Main Wrapper -->
 		<div class="main-wrapper">
 		
-			<!-- Header -->
-			<header class="header">
-				<nav class="navbar navbar-expand-lg header-nav">
-					<div class="navbar-header">
-						<a id="mobile_btn" href="javascript:void(0);">
-							<span class="bar-icon">
-								<span></span>
-								<span></span>
-								<span></span>
-							</span>
-						</a>
-						<a href="{{url('/index')}}" class="navbar-brand logo">
-							<img src="{{url('Frontend/assets/img/logo.png')}}" class="img-fluid" alt="Logo">
-						</a>
-					</div>
-					<div class="main-menu-wrapper">
-						<div class="menu-header">
-							<a href="{{url('/index')}}" class="menu-logo">
-								<img src="{{url('Frontend/assets/img/logo.png')}}" class="img-fluid" alt="Logo">
-							</a>
-							<a id="menu_close" class="menu-close" href="javascript:void(0);">
-								<i class="fas fa-times"></i>
-							</a>
-						</div>
-						<ul class="main-nav">
-							<li>
-								<a href="{{url('/index')}}">Home</a>
-							</li>
-							
-						</ul>
-					</div>		 
-					<ul class="nav header-navbar-rht">
-						<li class="nav-item contact-item">
-							<div class="header-contact-img">
-								<i class="far fa-hospital"></i>							
-							</div>
-							<div class="header-contact-detail">
-								<p class="contact-header">Contact</p>
-								<p class="contact-info-header"> +1 315 369 5943</p>
-							</div>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link header-login" href="{{url('/login')}}">login / Signup </a>
-						</li>
-					</ul>
-				</nav>
-			</header>
-			<!-- /Header -->
+			
 			
 			<!-- Page Content -->
 			<div class="content">
@@ -101,7 +57,7 @@
 										</div>
 										
 										<!-- Forgot Password Form -->
-										<form action="https://dreamguys.co.in/demo/doccure/{{url('/login')}}">
+										<form action="{{url('/sendotp')}}">
 											<div class="form-group form-focus">
 												<input type="email" class="form-control floating">
 												<label class="focus-label">Email</label>
@@ -109,7 +65,7 @@
 											<div class="text-right">
 												<a class="forgot-link" href="{{url('/login')}}">Remember your password?</a>
 											</div>
-											<button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Reset Password</button>
+											<button class="btn btn-primary btn-block btn-lg login-btn" href="{{url('/send-otp')}}" type="submit">send mail</button>
 										</form>
 										<!-- /Forgot Password Form -->
 										
@@ -126,159 +82,8 @@
 			</div>		
 			<!-- /Page Content -->
    
-			<!-- Footer -->
-			<footer class="footer">
+			
 				
-				<!-- Footer Top -->
-				<div class="footer-top">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-lg-3 col-md-6">
-							
-								<!-- Footer Widget -->
-								<div class="footer-widget footer-about">
-									<div class="footer-logo">
-										<img src="{{url('Frontend/assets/img/footer-logo.png')}}" alt="logo">
-									</div>
-									<div class="footer-about-content">
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-										<div class="social-icon">
-											<ul>
-												<li>
-													<a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
-												</li>
-												<li>
-													<a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
-												</li>
-												<li>
-													<a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-												</li>
-												<li>
-													<a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-												</li>
-												<li>
-													<a href="#" target="_blank"><i class="fab fa-dribbble"></i> </a>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								<!-- /Footer Widget -->
-								
-							</div>
-							
-							<div class="col-lg-3 col-md-6">
-							
-								<!-- Footer Widget -->
-								<div class="footer-widget footer-menu">
-									<h2 class="footer-title">For Patients</h2>
-									<ul>
-										<li><a href="{{url('/search')}}"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
-										<li><a href="{{url('/login')}}"><i class="fas fa-angle-double-right"></i> Login</a></li>
-										<li><a href="{{url('/login')}}"><i class="fas fa-angle-double-right"></i> Register</a></li>
-										<li><a href="{{url('/booking')}}"><i class="fas fa-angle-double-right"></i> Booking</a></li>
-										<li><a href="{{url('/patient-dashboard')}}"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
-									</ul>
-								</div>
-								<!-- /Footer Widget -->
-								
-							</div>
-							
-							<div class="col-lg-3 col-md-6">
-							
-								<!-- Footer Widget -->
-								<div class="footer-widget footer-menu">
-									<h2 class="footer-title">For Doctors</h2>
-									<ul>
-										<li><a href="{{url('/appointments')}}"><i class="fas fa-angle-double-right"></i> Appointments</a></li>
-										<li><a href="{{url('/chat')}}"><i class="fas fa-angle-double-right"></i> Chat</a></li>
-										<li><a href="{{url('/login')}}"><i class="fas fa-angle-double-right"></i> Login</a></li>
-										<li><a href="{{url('/doctor-register')}}"><i class="fas fa-angle-double-right"></i> Register</a></li>
-										<li><a href="{{url('/doctor-dashboard')}}"><i class="fas fa-angle-double-right"></i> Doctor Dashboard</a></li>
-									</ul>
-								</div>
-								<!-- /Footer Widget -->
-								
-							</div>
-							
-							<div class="col-lg-3 col-md-6">
-							
-								<!-- Footer Widget -->
-								<div class="footer-widget footer-contact">
-									<h2 class="footer-title">Contact Us</h2>
-									<div class="footer-contact-info">
-										<div class="footer-address">
-											<span><i class="fas fa-map-marker-alt"></i></span>
-											<p> 3556  Beech Street, San Francisco,<br> California, CA 94108 </p>
-										</div>
-										<p>
-											<i class="fas fa-phone-alt"></i>
-											+1 315 369 5943
-										</p>
-										<p class="mb-0">
-											<i class="fas fa-envelope"></i>
-											doccure@example.com
-										</p>
-									</div>
-								</div>
-								<!-- /Footer Widget -->
-								
-							</div>
-							
-						</div>
-					</div>
-				</div>
-				<!-- /Footer Top -->
-				
-				<!-- Footer Bottom -->
-                <div class="footer-bottom">
-					<div class="container-fluid">
-					
-						<!-- Copyright -->
-						<div class="copyright">
-							<div class="row">
-								<div class="col-md-6 col-lg-6">
-									<div class="copyright-text">
-										<p class="mb-0"><a href="templateshub.net">Templates Hub</a></p>
-									</div>
-								</div>
-								<div class="col-md-6 col-lg-6">
-								
-									<!-- Copyright Menu -->
-									<div class="copyright-menu">
-										<ul class="policy-menu">
-											<li><a href="{{url('/term-condition')}}">Terms and Conditions</a></li>
-											<li><a href="{{url('/privacy-policy')}}">Policy</a></li>
-										</ul>
-									</div>
-									<!-- /Copyright Menu -->
-									
-								</div>
-							</div>
-						</div>
-						<!-- /Copyright -->
-						
-					</div>
-				</div>
-				<!-- /Footer Bottom -->
-				
-			</footer>
-			<!-- /Footer -->
-		   
 		</div>
-		<!-- /Main Wrapper -->
-	  
-		<!-- jQuery -->
-		<script src="{{ url('Frontend/assets/js/jquery.min.js') }}"></script>
 		
-		<!-- Bootstrap Core JS -->
-		<script src="{{  url('Frontend/assets/js/popper.min.js') }}"></script>
-		<script src="{{  url('Frontend/assets/js/bootstrap.min.js') }}"></script>
-		
-		<!-- Custom JS -->
-		<script src="{{ url('Frontend/assets/js/script.js') }}"></script>
-		
-	</body>
-
-<!-- doccure/{{url('/forgot-password')}}  30 Nov 2019 04:12:20 GMT -->
-</html>
+@endsection

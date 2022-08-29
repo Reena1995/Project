@@ -60,6 +60,11 @@ class patient_controller extends Controller
 
     public function patientlogin(Request $request)
     {
+        $data=$request->validate([
+            'email' =>'required|email',
+            'password' => 'required|string|min:6',
+           
+        ]);
         $data=patient::where("email","=",$request->email)->first();
         if($data)
         {
@@ -102,7 +107,54 @@ class patient_controller extends Controller
 		return view('patient.profile',["fetch"=>$data]);
     }
 
+    public function resetpassword(Request $request)
+    {
+        $data=$request->validate([
+            'oldpassword' => 'required',
+            'newpassword' => 'required|string|min:6',
+            'confirm_password' => 'required|same:newpassword|min:6',
+        
+        ]);
+        $data=patient::where("id","=",Session('patient_id'))->first();
+        if(Hash::check($request->oldpassword, $data->password))
+           {
+            $data->password=Hash::make($request->newpassword);
+            $data->update();
+            return back()->with('success','Password Change Success');
+           }
+           else
+           {
+            return back()->with('fail','Wrong Old Password');
+           }
+    }
+
+    public function resetcreate()
+    {
+        return view('patient.resetpwd');
+    }
+    public function forgotpwd()
+    {
+        return view('patient.forgot-password');
+    }
+    public function sendotp()
+    {
+        return view('patient.sendotp');
+    }
+    public function confirmpwd()
+    {
+        return view('patient.confirmpwd');
+    }
+
     
+    public function send_forgototp(Request $request)
+    {
+        $email=$request->email;
+        $otp=rand(111111,999999);
+        $request->Session()->put('forgototp',$otp);
+        $data=['email'=>$email,'forgototp'=>Session('forgototp'),'body'=>"For Change Passoword Please Enter OTP firs"];
+        Mail::to($email)->send(new forgotpwdmail($data));
+        return view('doctor.send-otp');
+    }
 
     
     
