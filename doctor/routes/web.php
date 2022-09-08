@@ -297,7 +297,7 @@ Route::get('/contact/{id}',[contact_controller::class,'destroy']);
 Route::get('/admin-add-doctor',[doctor_controller::class,'create']);//show doctor form
 Route::post('/admin-add-doctor',[doctor_controller::class,'store']);//add doctor form
 //get state city
-
+ //uggjj
 
 //Route::post('/getStates',[controller_hospital::class,'getStates']);
 //
