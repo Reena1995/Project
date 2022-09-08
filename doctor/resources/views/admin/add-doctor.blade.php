@@ -1,6 +1,7 @@
 @extends('admin.Layout.main_layout') 	
 @section('main_container')
-			
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>			
 			
 			
 			<!-- Page Wrapper -->
@@ -275,7 +276,7 @@
 													<label class="col-lg-3 col-form-label">State </label>
 													<div class="col-lg-9">
 													
-														<select name="state" class="form-control" value="{{old('state')}}">
+														<select name="state" class="form-control"  id="" value="{{old('state')}}">
                                                         <option value="">Select state</option>
 														<?php foreach($state_id_arr as $data)
 							                              {
@@ -295,35 +296,30 @@
 											</div>
 										</div>
 										
+
 										<div class="row">
 											<div class="col-xl-6">
 												<div class="form-group row">
 													<label class="col-lg-3 col-form-label">City </label>
 													<div class="col-lg-9">
 													
-														<select name="city" class="form-control"  value="{{old('city')}}" >
-                                                        <option value="">Select city</option>
-														<?php foreach($city_id_arr as $data)
-							                              {
-								                        ?>
-                                                        <option value="<?php echo $data->id;?>">
-                                                       <?php echo $data->name;?></option>
-								                       <?php 
-							                              }
-														?>
+														<select name="city" class="form-control" id="" value="{{old('city')}}" >
+                                                        
                                                     </select>
 													@if($errors->has('city'))	
 																		<span class="text-danger" >{{($errors->first('city'))}}</span>
 																	@endif
 													</div>
 												</div>
+												
 												<div class="form-group row">
 													<label class="col-lg-3 col-form-label">Address</label>
 													<div class="col-lg-9">
 														<textarea name="address" rows="4" class="form-control" value="{{old('address')}}"></textarea>
 														@if($errors->has('address'))	
 																		<span class="text-danger" >{{($errors->first('address'))}}</span>
-																	@endif
+
+																		@endif
 													</div>
 												</div>
 												
@@ -333,16 +329,8 @@
 													<label class="col-lg-3 col-form-label">Area</label>
 													<div class="col-lg-9">
 														
-														<select name="area" class="form-control"value="{{old('area')}}" >
-                                                        <option value="">Select Area</option>
-														<?php foreach($area_id_arr as $data)
-							                              {
-								                        ?>
-                                                        <option value="<?php echo $data->id;?>">
-                                                       <?php echo $data->name;?></option>
-								                       <?php 
-							                              }
-														?>
+														<select name="area" class="form-control" id="areaid"value="{{old('area')}}" >
+                                                        
                                                     </select>
 													@if($errors->has('area'))	
 																		<span class="text-danger" >{{($errors->first('area'))}}</span>
@@ -500,6 +488,51 @@
 		
         </div>
 		<!-- /Main Wrapper -->
+
+		<script>
+$('#cid').on('change', function () {
+                var cid = this.value;
+                $('#sid').html('');
+                $.ajax({
+				url:"{{url('/getStates')}}",
+				type: "POST",
+				data: {
+				cid: cid,
+				_token: '{{csrf_token()}}'
+				},
+				
+				success: function(result) {
+                        $('#sid').html('<option value="">Select State</option>');
+                        $.each(result.states, function (key, value) {
+                            $('#sid').append('<option value="' + value.id + '">' + value.snm + '</option>');
+                        });
+                        
+                    }
+                });
+            });
+			
+$('#sid').on('change', function () {
+                var sid = this.value;
+                $('#city_id').html('');
+                $.ajax({
+				url:"{{url('/getCity')}}",
+				type: "POST",
+				data: {
+				sid: sid,
+				_token: '{{csrf_token()}}'
+				},
+				
+				success: function(result) {
+                        $('#city_id').html('<option value="">Select City</option>');
+                        $.each(result.cities, function (key, value) {
+                            $('#city_id').append('<option value="' + value.id + '">' + value.city_name + '</option>');
+                        });
+                        
+                    }
+                });
+            });			
+</script>
+
 		
 		<!-- jQuery -->
         <script src="{{url('Backend/assets/js/jquery-3.2.1.min.js')}}"></script>
@@ -516,7 +549,9 @@
 		
 		<!-- Custom JS -->
 		<script  src="{{url('Backend/assets/js/script.js')}}"></script>
+
 		
+
     </body>
 
 <!-- Mirrored from dreamguys.co.in/demo/doccure/admin/{{url('/admin-form-horizontal')}} by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:55 GMT -->

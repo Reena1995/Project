@@ -26,10 +26,10 @@
 								<div class="row">
 									<div class="col-md-5 col-lg-5">
 										<h4 class="card-title">Add Division</h4>
-										@if(session()->has('succes'))
-											<i class="alert alert-success">{{session('succes')}}</i>
+										@if(session()->has('success'))
+											<i class="alert alert-success">{{session('success')}}</i>
 										@endif
-										<form action="{{url('/')}}" method="post" enctype="multipart/form-data"> 
+										<form action="{{url('/adddivision')}}" method="post" enctype="multipart/form-data"> 
 											@csrf
 											<div class="form-group">
 												<label>Division</label>
@@ -54,19 +54,24 @@
 															</tr>
 														</thead>
 														<tbody>
-															
+															<?php 
+																foreach($division_arr as $data)
+																{
+															?>
 															<tr>
-																<td>1</td>
-																<td>2</td>
+																<td><?php echo $data->id?></td>
+																<td><?php echo $data->division_name?></td>
 																<td class="text-right">
 																	<div class="actions">
-																		<a  href="{{url('')}}" class="btn btn-sm bg-danger-light">
+																		<a  href="{{url('adddivision/'.$data->id)}}" class="btn btn-sm bg-danger-light">
 																			<i class="fe fe-trash"></i> Delete
 																		</a>
 																	</div>
 																</td>
 															</tr>
-																
+															<?php
+															}
+															?>	
 														</tbody>
 													</table>
 												</div>		

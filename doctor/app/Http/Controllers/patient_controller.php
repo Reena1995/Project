@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 
 use App\Models\patient;
-
+use App\Mail\welcome;
+use Mail;
 use Hash;
 use Session;
 
@@ -43,13 +44,24 @@ class patient_controller extends Controller
     public function store(Request $request)
     {
         $data=new patient;
-        $data->name=$request->name;
-        $data->email=$request->email;
+    $name=$data->name=$request->name;
+    $email=$data->email=$request->email;
         $data->password=Hash::make($request->password);
         $data->confirmpwd=Hash::make($request->confirmpwd);
 
         $res=$data->save();
-        return redirect('/login')->with('success','registarion succesfull');
+        if($res)
+		{
+			$details=['title'=>$email,'comment'=>"Welcome to Doccure"];
+	   
+			Mail::to($email)->send(new welcome($details));
+			return back()->with("success","Register Success");
+		}
+		else
+		{
+			alert("Not success");
+		}
+        return redirect('/login');
         
     }
 

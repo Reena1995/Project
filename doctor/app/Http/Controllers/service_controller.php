@@ -13,6 +13,7 @@ class service_controller extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     
      */
     public function index()
     {

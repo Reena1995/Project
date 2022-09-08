@@ -29,6 +29,10 @@ class companie_controller extends Controller
     {
         return view('admin.add-company');
     }
+    public function loginview()
+    {
+        return view('company.login');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -129,6 +133,60 @@ class companie_controller extends Controller
        
 
     }
+    public function companylogin(Request $request)
+    {
+        $data=$request->validate([
+
+            'email' =>'required|email',
+            'password' => 'required|string|min:6',
+           
+        ]);
+        $data=companie::where("email","=",$request->email)->first();
+        if($data)
+        {
+            if(Hash::check($request->password, $data->password))
+           {
+               $status=$data->status;
+               if($status=="Available")
+               {
+                   $request->Session()->put('company_id',$data->id);
+                   $request->Session()->put('email',$data->email);
+                   $request->Session()->put('profile_img',$data->profile_img);
+                   $request->Session()->put('company_name',$data->company_name);
+                  
+                   //echo session('company_name');
+                   //exit();
+                   return redirect('/company-dashbord');
+
+
+               }
+               else
+               {
+                return redirect('/company-login')->with('fail','Login Failed due to Blocked User');
+               }
+           }
+           else
+           {
+            return redirect('/company-login')->with('fail','Login Failed due to Wrong Password');
+           }
+        }
+        else
+        {
+         return redirect('/company-login')->with('fail','Login Failed due to Wrong username');
+        }
+    }
+
+    
+
+
+    public function companylogout()
+    {
+        Session()->pull('company_id');
+        Session()->pull('email');
+        //Session()->pull('profile_img');
+        return redirect('/company-login');
+    }
+
 
     /**
      * Remove the specified resource from storage.

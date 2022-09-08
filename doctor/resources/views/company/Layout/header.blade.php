@@ -170,16 +170,18 @@
 					<!-- User Menu -->
 					<li class="nav-item dropdown has-arrow">
 						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-							<span class="user-img"><img class="rounded-circle" src="{{url('/Backend/assets/img/profiles/avatar-01.jpg')}}" width="31" alt="Ryan Taylor"></span>
+							<span class="user-img"><img class="rounded-circle" src="{{asset('upload/company/'.Session('profile_img'))}}" width="31" alt="Ryan Taylor"></span>
 						</a>
 						<div class="dropdown-menu">
 							<div class="user-header">
 								<div class="avatar avatar-sm">
-									<img src="{{url('/Backend/assets/img/profiles/avatar-01.jpg')}}" alt="User Image" class="avatar-img rounded-circle">
+									<!--<img src="{{url('/Backend/assets/img/profiles/avatar-01.jpg')}}" alt="User Image" class="avatar-img rounded-circle">-->
+									<img src="{{asset('upload/company/'.Session('profile_img'))}}" height="50px" width="50px" class="avatar-img rounded-circle">
+										
 								</div>
 								<div class="user-text">
-									<h6>{{session('name')}}</h6>
-									<p class="text-muted mb-0">Administrator</p>
+									<h6></h6>
+									<p class="text-muted mb-0">{{Session('company_name')}}</p>
 								</div>
 							</div>
 							<a class="dropdown-item" href="{{url('/company-profile')}}">My Profile</a>

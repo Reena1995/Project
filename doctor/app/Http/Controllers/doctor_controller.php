@@ -41,13 +41,28 @@ class doctor_controller extends Controller
     public function create()
     {
         $state_id_arr=state::all();
-        $city_id_arr=citie::all();
-        $area_id_arr=area::all();
+       
         $special_id_arr=specialist::all();
-         return view('admin.add-doctor',["state_id_arr"=>$state_id_arr,"city_id_arr"=>$city_id_arr,"area_id_arr"=>$area_id_arr,"special_id_arr"=>$special_id_arr]);
+         return view('admin.add-doctor',["state_id_arr"=>$state_id_arr,"special_id_arr"=>$special_id_arr]);
          
            
     }
+    
+    public function getStates(Request $request)
+    {
+		$data['states'] =state::where("cid","=",$request->cid)->get();
+        return response()->json($data);	
+        
+    }
+	
+	public function getCity(Request $request)
+    {
+		$data['cities'] =citie::where("sid","=",$request->sid)->get();
+        return response()->json($data);	
+        
+    }
+
+    
 
     public function doctorlogin(Request $request)
     {

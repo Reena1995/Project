@@ -37,9 +37,7 @@
 											<div class="form-group">
 												<label>Medicine</label>
 												<input type="text" class="form-control" name="medicine_name" >
-												@if ($errors->has('medicine_name'))
-            										<span class="text-danger">{{ $errors->first('medicine_name') }}</span>
-       											@endif
+												
 											</div>
 											<div class="submit-section">
 												<button type="submit" class="btn btn-primary submit-btn" name="submit" value="send">Add Medicine</button>
@@ -59,24 +57,19 @@
 															</tr>
 														</thead>
 														<tbody>
-															<?php
-																foreach($medicine as $medicine) 
-																{
-															?>
+															
 															<tr>
-																<td><?php echo $medicine->id?></td>
-																<td><?php echo $medicine->medicine_name?></td>
+																<td>1</td>
+																<td>2</td>
 																<td class="text-right">
 																	<div class="actions">
-																		<a  href="{{url('manageraddmedicine/'. $medicine->id)}}" class="btn btn-sm bg-danger-light">
+																		<a  href="{{url('')}}" class="btn btn-sm bg-danger-light">
 																			<i class="fe fe-trash"></i> Delete
 																		</a>
 																	</div>
 																</td>
 															</tr>
-															<?php
-															}
-															?>	
+															
 														</tbody>
 													</table>
 												</div>		

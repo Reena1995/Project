@@ -38,21 +38,22 @@
 							<div class="login-right-wrap">
 								<h1>Manager Login</h1>
 								<p class="account-subtitle">Access to our dashboard</p>
+								<p>
+									@if(session()->has('fail'))
+									<i class="alert alert-success">{{session('fail')}}</i>
+									@endif
+								</p>
 								
 								<!-- Form -->
-								<form action="{{url('managerlogin')}}" method="post" enctype="multipart/form-data">
+								<form action="{{url('/manager-login')}}" method="post" enctype="multipart/form-data">
 									@csrf
 									<div class="form-group">
 										<input class="form-control" type="text" name="email" placeholder="Email">
-										@if ($errors->has('email'))
-            								<span class="text-danger">{{ $errors->first('email') }}</span>
-       									@endif
+										
 									</div>
 									<div class="form-group">
-										<input class="form-control" type="text" name="password" placeholder="Password">
-										@if ($errors->has('password'))
-            								<span class="text-danger">{{ $errors->first('password') }}</span>
-       									@endif
+										<input class="form-control" type="password" name="password" placeholder="Password">
+										
 									</div>
 									<div class="form-group">
 										<button class="btn btn-primary btn-block" type="submit" name="submit" value="Send">Login</button>

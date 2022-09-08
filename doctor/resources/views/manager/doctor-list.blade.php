@@ -48,30 +48,21 @@
 												</tr>
 											</thead>
 											<tbody>
-												<?php
-													foreach($companydoctor_arr as $data) 
-													{
-												?>
+												
 												<tr>
-												<td><?php echo $data->id?></td>
-												<td><img src="{{asset('upload/doctor/' . $data->profile_img)}}" height="50px" width="50px"/></td>
-												<td><?php echo $data->specialist_id?></td>
-												<td><?php echo $data->first_name?></td>
-												<td><?php echo $data->last_name?></td>
-												<td><?php echo $data->doctor_status ?></td>
+												<td></td>
+												<td><img src="" height="50px" width="50px"/></td>
+												<td>1</td>
+												<td>2</td>
+												<td>3</td>
+												<td>4</td>
 												<td class="text-right">
 														<div class="actions">
-															<a  href="{{url('admin-add-doctor/'. $data->id)}}" class="btn btn-sm bg-danger-light">
+															<a  href="" class="btn btn-sm bg-danger-light">
 																<i class="fe fe-trash"></i> Delete
 															</a>
 														</div>
-												</td>
-												
-												</tr>
-												<?php
-												}
-												?>
-												
+												</td>															
 											
 													
 													

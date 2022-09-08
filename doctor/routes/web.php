@@ -15,6 +15,7 @@ use App\Http\Controllers\specialist_controller;
 use App\Http\Controllers\contact_controller;
 use App\Http\Controllers\medicine_controller;
 use App\Http\Controllers\doc_fav_medicine_controller;
+use App\Http\Controllers\division_controller;
 
 
 
@@ -34,9 +35,19 @@ Route::get('/', function () {
 });
 //company panel
 
-Route::get('/company-login', function (){return view('company.login');});
+//Route::get('/company-login', function (){return view('company.login');});
+Route::get('/company-login',[companie_controller::class,'loginview']);
+Route::post('/company-login',[companie_controller::class,'companylogin']);
+Route::get('/companylogout',[companie_controller::class,'companylogout']);
+
+//
 Route::get('/company-dashbord', function (){return view('company.index');});
-Route::get('/company-divisions-manager', function (){return view('company.divisionsmanage');});
+//Route::get('/company-divisions-manager', function (){return view('company.divisionsmanage');});
+Route::get('/company-divisions-manager',[division_controller::class,'create']);
+Route::post('/adddivision',[division_controller::class,'adddivision']);
+Route::get('/company-divisions-manager',[division_controller::class,'index']);
+Route::get('/adddivision/{id}',[division_controller::class,'destroy']);
+//
 Route::get('/company-medicine-manager', function (){return view('company.medicine-manager');});
 Route::get('/company-doctor', function (){return view('company.doctor-list');});
 Route::get('/company-manager', function (){return view('company.manager');});
@@ -45,6 +56,19 @@ Route::get('/company-mr', function (){return view('company.mr');});
 Route::get('/company-add-mr', function (){return view('company.add-mr');});
 Route::get('/company-add-stockiest', function (){return view('company.add-stockiest');});
 Route::get('/company-stockiest', function (){return view('company.stockiest');});
+//
+
+//Manager
+Route::get('/manager-dashbord', function (){return view('manager.index');});
+//Route::get('/manager-login', function (){return view('manager.login');});
+Route::get('/manager-login',[healthmanager_controller::class,'managerloginview']);
+Route::post('/manager-login',[healthmanager_controller::class,'managerlogin']);
+Route::get('/managerlogout',[healthmanager_controller::class,'managerlogout']);
+//
+Route::get('/manager-medicine-manager', function (){return view('manager.medicine-manager');});
+Route::get('/manager-doctor', function (){return view('manager.doctor-list');});
+Route::get('/manager-mr', function (){return view('manager.mr');});
+Route::get('/manager-add-mr', function (){return view('manager.add-mr');});
 //
 
 // before patient login middleware
@@ -272,6 +296,17 @@ Route::get('/contact/{id}',[contact_controller::class,'destroy']);
 //doctor
 Route::get('/admin-add-doctor',[doctor_controller::class,'create']);//show doctor form
 Route::post('/admin-add-doctor',[doctor_controller::class,'store']);//add doctor form
+//get state city
+
+
+//Route::post('/getStates',[controller_hospital::class,'getStates']);
+//
+Route::post('/getCity',[controller_hospital::class,'getCity']);
+
+
+
+//
+
 Route::get('/admin-doctor',[doctor_controller::class,'index']); //managedoctore
 Route::get('/admin-add-doctor/{id}',[doctor_controller::class,'destroy']);//delte code
 Route::get('/edit/{id}',[doctor_controller::class,'edit']);//edit nu page show  code

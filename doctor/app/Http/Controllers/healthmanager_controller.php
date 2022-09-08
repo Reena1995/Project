@@ -34,6 +34,54 @@ class healthmanager_controller extends Controller
         return view('admin.add-manager',["company_id_arr"=>$company_id_arr]);
 
     }
+    public function managerloginview()
+    {   
+
+        return view('manager.login');
+
+    }
+    public function managerlogin(Request $request)
+    {
+        $data=healthmanager::where("email","=",$request->email)->first();
+        if($data)
+        {
+            if(Hash::check($request->password,$data->password))
+            {
+                $status=$data->status;
+                if($status=="Unblock")
+                {
+                    $request->Session()->put('manager_id',$data->id);
+                    $request->Session()->put('email',$data->email);
+                   
+
+                    return redirect('/manager-dashbord');
+                }
+                else
+                {
+                    return redirect('/manager-login')->with('fail','block user');
+                }
+
+
+            }
+            else
+            {
+                return redirect('/manager-login')->with('fail','wrong password');
+            }
+
+        }
+        else
+        {
+            return redirect('/manager-login')->with('fail','wrong username');
+        }
+        
+    }
+    public function managerlogout()
+    {
+        Session()->pull('manager_id');
+        Session()->pull('email');
+        return redirect('/manager-login');
+        
+    }
     
 
     /**

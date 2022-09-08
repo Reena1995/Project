@@ -38,18 +38,27 @@
 							<div class="login-right-wrap">
 								<h1>Company Login</h1>
 								<p class="account-subtitle">Access to our dashboard</p>
-								
+								<p>@if(session()->has('fail'))
+									<i class="alert alert-success">{{session('fail')}}</i>
+									@endif
+								</p>
 								<!-- Form -->
-								<form action="{{url('/')}}" method="post" enctype="multipart/form-data">
+								<form action="{{url('/company-login')}}" method="post" enctype="multipart/form-data">
 									@csrf
 									<div class="form-group">
-										<input class="form-control" type="text" name="email" placeholder="Email">
+										<input class="form-control" type="text" name="email" placeholder="Email" value="{{old('email')}}">
 										
 									</div>
+									@if($errors->has('email'))	
+										<span class="text-danger" >{{($errors->first('email'))}}</span>
+									@endif
 									<div class="form-group">
-										<input class="form-control" type="text" name="password" placeholder="Password">
+										<input class="form-control" type="password" name="password" placeholder="Password">
 										
 									</div>
+									@if($errors->has('password'))	
+										<span class="text-danger" >{{($errors->first('password'))}}</span>
+									@endif
 									<div class="form-group">
 										<button class="btn btn-primary btn-block" type="submit" name="submit" value="Send">Login</button>
 									</div>

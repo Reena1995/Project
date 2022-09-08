@@ -56,7 +56,7 @@
 		<![endif]-->
     </head>
     <body>
-	@include('sweetalert::alert')
+	
 		<!-- Main Wrapper -->
         <div class="main-wrapper">
 		
@@ -204,7 +204,7 @@
 								<span>Main</span>
 							</li>
 							<li class="active"> 
-								<a href="{{url('/manager')}}"><i class="fe fe-home"></i> <span>Dashboard</span></a>
+								<a href="{{url('/manager-dashbord')}}"><i class="fe fe-home"></i> <span>Dashboard</span></a>
 							</li>
 
 							

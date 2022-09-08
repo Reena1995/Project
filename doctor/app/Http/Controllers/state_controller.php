@@ -98,7 +98,7 @@ class state_controller extends Controller
     {
         //
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
