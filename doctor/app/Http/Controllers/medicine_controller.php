@@ -20,6 +20,11 @@ class medicine_controller extends Controller
         
         return view('doctor.my-medicine',["medi_arr"=>$medi_arr]);
     }
+    public function mediview()
+    {
+       $data=medicine::where("company_id","=",Session('company_id'))->get();
+       return view('company.medicine-manager',["me_arr"=>$data]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -30,6 +35,10 @@ class medicine_controller extends Controller
     {
         $medi_arr=medicine::all();
          return view('doctor.my-medicine',["medi_arr"=>$medi_arr]);
+    }
+    public function medi()
+    {
+         return view('company.medicine-manager');
     }
 
     /**
@@ -45,6 +54,17 @@ class medicine_controller extends Controller
         
         $res=$data->save();
         return redirect('/doctor-my-medicine')->with('succes','add medicine successfull');
+        
+    }
+
+    public function addmedi(Request $request)
+    {
+        $data=new medicine;
+        $data->medicine_name=$request->medicine_name;
+        $data->company_id =Session('company_id');
+        
+        $res=$data->save();
+        return redirect('/company-medicine-manager')->with('success','add medicine successfull');
         
     }
 
@@ -91,5 +111,11 @@ class medicine_controller extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function medidestroy($id)
+    {
+        $data=medicine::find($id);
+        $data->delete();
+        return redirect('/company-medicine-manager')->with('succ','delete succesfully medicine');
     }
 }

@@ -10,10 +10,11 @@
 					<div class="page-header">
 						<div class="row">
 							<div class="col-sm-12">
-								<h3 class="page-title">List of Stockiest</h3>
+								<h3 class="page-title">List of MR</h3>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item"><a href="{{url('/company-dashboard')}}">Dashboard</a></li>
-									<li class="breadcrumb-item"><a href="javascript:(0);">Stockiest</a></li>
+									<li class="breadcrumb-item"><a href="javascript:(0);">MR</a></li>
+									<li class="breadcrumb-item active">Manage MR</li>
 								</ul>
 							</div>
 							@if(session()->has('success'))
@@ -40,25 +41,38 @@
 													<th>Area</th>
 													<th>Address</th>
 													<th>Pincode</th>
-													
+													<th>Action</th>
 													
 												</tr>
 											</thead>
 											<tbody>
+												<?php
+													foreach($sto as $data)
+													{
+												?>
 												
 												<tr>
-													<td>1</td>
-													<td>1</td>
-													<td>1</td>
-													<td>1</td>
-													<td>1</td>
-													<td>1</td>
-													<td>1</td>
-													
+												<td><?php echo $data->id?></td>
+													<td><?php echo $data->name?></td>
+													<td><?php echo $data->state?></td>
+													<td><?php echo $data->city?></td>
+													<td><?php echo $data->area?></td>
+													<td><?php echo $data->address?></td>
+													<td><?php echo $data->pincode?></td>
+
+													<td class="text-right">
+														<div class="actions">
+															<a  href="{{url('company-add-stockiest/'.$data->id)}}" class="btn btn-sm bg-danger-light">
+																<i class="fe fe-trash"></i> Delete
+															</a>
+														</div>
+												    </td>
 													
 												</tr>
 												
-												
+												<?php
+													}
+												?>
 												
 											</tbody>
 										</table>

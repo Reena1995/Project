@@ -34,7 +34,7 @@
 									<h4 class="card-title">Add Stockiest</h4>
 								</div>
 								<div class="card-body">
-									<form action="{{url('')}}" method="post" enctype="multipart/form-data">
+									<form action="{{url('/company-add-stockiest')}}" method="post" enctype="multipart/form-data">
 									@csrf	
 									<div class="row">
 											<div class="col-xl-6">
@@ -50,7 +50,15 @@
 													<label class="col-lg-3 col-form-label">State</label>
 													<div class="col-lg-9">
 														<select class="select"  name="state">
-															<option value="">Select</option>
+															<option value="">Select State</option>
+															<?php 
+																foreach($sta as $data)
+																{
+															?>
+															<option value="<?php echo $data->id?>"><?php echo $data->name?></option>
+															<?php
+																}
+															?>
 															
 														</select>
 														
@@ -60,8 +68,15 @@
 													<label class="col-lg-3 col-form-label">City</label>
 													<div class="col-lg-9">
 														<select class="select"  name="city">
-															<option value="">Select</option>
-															
+															<option value="">Select city</option>
+															<?php 
+																foreach($ci as $data1)
+																{
+															?>
+															<option value="<?php echo $data1->id?>"><?php echo $data1->name?></option>
+															<?php
+																}
+															?>
 														</select>
 														
 													</div>
@@ -70,7 +85,15 @@
 													<label class="col-lg-3 col-form-label">Area</label>
 													<div class="col-lg-9">
 														<select class="select"  name="area">
-														<option value="">Select</option>
+														<option value="">Select Area</option>
+														<?php 
+																foreach($ar as $data2)
+																{
+															?>
+															<option value="<?php echo $data2->id?>"><?php echo $data2->name?></option>
+															<?php
+																}
+															?>
 														</select>
 														
 													</div>

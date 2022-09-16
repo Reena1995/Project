@@ -35,10 +35,10 @@
 											<thead>
 												<tr>
 													<th>MR ID</th>
-													<th>Manager Name</th>
-													<th>Company Name</th>
+													<th>Manager id</th>
+													<th>Company id</th>
+													<th>Company name</th>
 													<th>Profile Img</th>
-													<th>Company Name</th>
 													<th>Email</th>
 													<th>Visiting Card</th>
 													<th>Action</th>
@@ -46,25 +46,30 @@
 												</tr>
 											</thead>
 											<tbody>
+												<?php
+													foreach($mr as $data)
+													{
+												?>
 												
 												<tr>
-													<td></td>
+													<td><?php echo $data->id?></td>
 
-													<td></td>
+													<td><?php echo $data->manager_id ?></td>
 
-													<td></td>
+													<td><?php echo $data->company_id?></td>
+													<td><?php echo $data->company_name?></td>
 
-													<td><img src="" height="50px" width="50px"/></td>
+													<td><img src="{{asset('upload/mr/'.$data->profile_img)}}" height="50px" width="50px"/></td>
 
-													<td></td>
+													
 
-													<td></td>
+													<td><?php echo $data->email?></td>
 
-													<td><img src="" height="50px" width="50px"/></td>
+													<td><img src="{{asset('upload/visitingcard/'.$data->visiting_card)}}" height="50px" width="50px"/></td>
 
 													<td class="text-right">
 														<div class="actions">
-															<a  href="" class="btn btn-sm bg-danger-light">
+															<a  href="{{url('company-mr/'.$data->id)}}" class="btn btn-sm bg-danger-light">
 																<i class="fe fe-trash"></i> Delete
 															</a>
 														</div>
@@ -72,7 +77,9 @@
 													
 												</tr>
 												
-												
+												<?php
+													}
+												?>
 												
 											</tbody>
 										</table>

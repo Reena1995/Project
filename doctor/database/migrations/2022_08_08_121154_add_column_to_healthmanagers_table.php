@@ -23,7 +23,9 @@ return new class extends Migration
             $table->string('password')->after('email');
             $table->string('profile_img')->after('password');
             $table->string('visiting_card')->after('profile_img');
-            $table->enum('status',['Block','Unblock'])->default('Unblock')->after('visiting_card');
+            $table->unsignedBigInteger('division_id');
+            $table->foreign('division_id')->references('id')->on('divisions')->default('null')->after('visiting_card');
+            $table->enum('status',['Block','Unblock'])->default('Unblock')->after('division_id');
             
 
             

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\stockiest;
+use App\Models\stockist;
 use App\Models\state;
 use App\Models\citie;
 use App\Models\area;
@@ -12,7 +12,8 @@ use App\Models\companie;
 use Hash;
 use Session;
 
-class stockiest_controller extends Controller
+
+class stockist_controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,9 +22,13 @@ class stockiest_controller extends Controller
      */
     public function index()
     {
-        $data=stockiest::all();
+        $data=stockist::all();
         return view('admin.stockiest',["stock_arr"=>$data]);
-        
+    }
+    public function managestockist()
+    {
+        $data=stockist::where('company_id','=',Session('company_id'))->get();
+        return view('company.stockiest',["sto"=>$data]);
     }
 
     /**
@@ -33,7 +38,15 @@ class stockiest_controller extends Controller
      */
     public function create()
     {
-        
+        $data=state::all();
+        $data1=citie::all();
+        $data2=area::all();
+        return view('company.add-stockiest',["sta"=>$data,"ci"=>$data1,"ar"=>$data2]);
+    }
+    public function managestockistpage()
+    {
+    
+        return view('company.stockiest');
     }
 
     /**
@@ -44,8 +57,20 @@ class stockiest_controller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=new stockist;
+        $data->company_id=Session('company_id');
+        $data->name=$request->name;
+        $data->state=$request->state;
+        $data->city=$request->city;
+        $data->area=$request->area;
+        $data->address=$request->address;
+        $data->pincode=$request->pincode;
+
+        $res=$data->save();
+        return redirect('/company-add-stockiest')->with('success','add stockist successfully');
+
     }
+    
 
     /**
      * Display the specified resource.
@@ -89,6 +114,12 @@ class stockiest_controller extends Controller
      */
     public function destroy($id)
     {
-       
+        //
+    }
+    public function stockdestroy($id)
+    {
+        $data=stockist::find($id);
+        $data->delete();
+        return redirect('/company-stockiest')->with('success','delete successfully stockist');
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::table('areas', function (Blueprint $table) {
             $table->unsignedBigInteger('citie_id');
 			$table->foreign('citie_id')->references('id')->on('cities')->after('id');
-            $table->string('name')->after('citie_id');
+            $table->string('area_name')->after('citie_id');
             $table->timestamps();
         });
     }

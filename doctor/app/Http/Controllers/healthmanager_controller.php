@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\companie;
 use App\Models\healthmanager;
+use App\Models\division;
 
 use Hash;
 use Session;
@@ -23,6 +24,15 @@ class healthmanager_controller extends Controller
         
     }
 
+    public function health_manage_view()
+    {
+        $data=healthmanager::where('company_id','=',Session('company_id'))->get();
+        return view('company.manager',["heal"=>$data]);
+        
+    }
+
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -38,6 +48,21 @@ class healthmanager_controller extends Controller
     {   
 
         return view('manager.login');
+
+    }
+
+    public function managermanageview()
+    {   
+
+        return view('company.manager');
+
+    }
+
+
+    public function helthmanagerpageview()
+    {   
+        $data=division::all();
+        return view('company.add-manager',["divi"=>$data]);
 
     }
     public function managerlogin(Request $request)
@@ -123,6 +148,46 @@ class healthmanager_controller extends Controller
 
     }
 
+    public function com_add_healthmanager(Request $request)
+    {
+        
+        $data=new healthmanager;
+        $data->first_name=$request->first_name;
+        $data->last_name=$request->last_name;
+        $data->email=$request->email;
+        $data->password=Hash::make($request->password);
+        $data->Manager_name=$request->Manager_name;
+        $data->company_id=Session('company_id');
+        $data->division_id=$request->division_id;;
+        $data->visiting_card=$request->visiting_card;
+        $data->profile_img=$request->profile_img;
+        $file=$request->file('profile_img');
+        $file_name=time()."_profile_img.".$request->file('profile_img')->getClientOriginalExtension();
+        $file->move('upload/healthmanager',$file_name);
+        $data->profile_img=$file_name;
+       
+
+        $file1=$request->file('visiting_card');
+        $file_name1=time()."_visiting_card.".$request->file('visiting_card')->getClientOriginalExtension();
+        $file1->move('upload/visitingcard',$file_name1);
+        $data->visiting_card=$file_name1;
+
+       
+        
+
+        
+       
+       
+
+
+        $res=$data->save();
+        return redirect('/company-add-manager')->with('success','add healthmanager succesfully');
+
+
+
+
+    }
+
     /**
      * Display the specified resource.
      *
@@ -200,5 +265,11 @@ class healthmanager_controller extends Controller
         $data=healthmanager::find($id);
         $data->delete();
         return redirect('admin-manager')->with("success","manager delete successfully");
+    }
+    public function healthdestroy($id)
+    {
+        $data=healthmanager::find($id);
+        $data->delete();
+        return redirect('company-manager')->With('success','delete healthmanager successfully');
     }
 }

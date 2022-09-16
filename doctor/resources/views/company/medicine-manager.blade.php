@@ -30,9 +30,10 @@
 									<div class="col-md-5 col-lg-5">
 										<h4 class="card-title">Add Medicine</h4>
 										@if(session()->has('success'))
-											<i class="alert alert-success">{{session('success')}}</i>
+										<i class="alert alert-success">{{session('success')}}</i>
 										@endif
-										<form action="{{url('/')}}" method="post" enctype="multipart/form-data">
+										
+										<form action="{{url('/addmedi')}}" method="post" enctype="multipart/form-data">
 											@csrf
 											<div class="form-group">
 												<label>Medicine</label>
@@ -44,8 +45,8 @@
 											</div>
 										</form>	
 										<hr>
-										@if(session()->has('suc'))
-											<i class="alert alert-success">{{session('suc')}}</i>
+										@if(session()->has('succ'))
+											<i class="alert alert-success">{{session('succ')}}</i>
 										@endif
 												<div class="table-responsive">
 													<table class="datatable table table-hover table-center mb-0">
@@ -57,19 +58,25 @@
 															</tr>
 														</thead>
 														<tbody>
+															<?php
+																foreach($me_arr as $data)
+																{
+															?>
 															
 															<tr>
-																<td>1</td>
-																<td>2</td>
+																<td><?php echo $data->id?></td>
+																<td><?php echo $data->medicine_name?></td>
 																<td class="text-right">
 																	<div class="actions">
-																		<a  href="{{url('')}}" class="btn btn-sm bg-danger-light">
+																		<a  href="{{url('addmedi/'.$data->id)}}" class="btn btn-sm bg-danger-light">
 																			<i class="fe fe-trash"></i> Delete
 																		</a>
 																	</div>
 																</td>
 															</tr>
-																
+																<?php
+																}
+																?>
 														</tbody>
 													</table>
 												</div>		

@@ -32,9 +32,12 @@
 							<div class="card">
 								<div class="card-header">
 									<h4 class="card-title">Add Manager</h4>
+									
+									
 								</div>
+
 								<div class="card-body">
-									<form action="{{url('/')}}" method="post" enctype="multipart/form-data">
+									<form action="" method="post" enctype="multipart/form-data">
 									@csrf	
 									<div class="row">
 											<div class="col-xl-6">
@@ -42,7 +45,7 @@
 												<div class="form-group row">
 													<label class="col-lg-3 col-form-label">Profile Img</label>
 													<div class="col-lg-9">
-														<input type="file" class="form-control" value="{{old('mprofile_img')}}" name="mprofile_img">
+														<input type="file" class="form-control" value="{{old('mprofile_img')}}" name="profile_img">
 														
 													</div>
 												</div>
@@ -82,11 +85,18 @@
 											        <label class="col-lg-3 col-form-label">Division </label>
 													<div class="col-lg-9">
 													<select class="form-control select" name="division_id" value="{{old('division_id ')}}">
-															<option value="">Select</option>
-															<option value="">1</option>
-															<option value="">2</option>
+															<option>Select Division</option>
+															<?php 
+																foreach($divi as $data)
+																{	
+															?>
+															<option value="<?php echo $data->id;?>">
+															<?php echo $data->division_name;?></option>
+															<?php
+																}
+															?>
 															
-															
+														
 														</select>
 														
 													</div>

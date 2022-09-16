@@ -31,6 +31,7 @@
 							<div class="card">
 								<div class="card-body">
 									<div class="table-responsive">
+										
 										<table id="table" class="table table-hover table-center mb-0">
 											<thead>
 												<tr>
@@ -45,27 +46,30 @@
 												</tr>
 											</thead>
 											<tbody>
-
+												<?php
+													foreach($heal as $data)
+													{
+												?>
 											
 												<tr>
-													<td>1</td>
+													<td><?php echo $data->id?></td>
 
-													<td></td>
+													<td><?php echo $data->company_id ?></td>
 
-													<td><img src="" height="50px" width="50px"/></td>
+													<td><img src="{{asset('upload/healthmanager/'.$data->profile_img)}}" height="50px" width="50px"></td>
 
-													<td></td>
+													<td><?php echo $data->Manager_name?></td>
 													
-													<td></td>
+													<td><?php echo $data->email?></td>
 													
-													<td><img src="" height="50px" width="50px"/></td>
+													<td><img src="{{url('upload/visitingcard/'.$data->visiting_card)}}" height="50px" width="50px"></td>
 
 													<td class="text-right">
 														<div class="actions">
 															<a class="btn btn-sm bg-success-light"  href="{{url('')}}">
 																<i class="fe fe-pencil"></i> Edit
 															</a>
-															<a  href="{{url('')}}" class="btn btn-sm bg-danger-light">
+															<a  href="{{url('company-add-manager/'.$data->id)}}" class="btn btn-sm bg-danger-light">
 																<i class="fe fe-trash"></i> Delete
 															</a>
 														</div>
@@ -73,7 +77,9 @@
 													
 													
 												</tr>
-												
+												<?php
+													}
+												?>
 												
 											</tbody>
 										</table>

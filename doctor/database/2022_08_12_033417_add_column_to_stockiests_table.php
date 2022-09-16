@@ -27,6 +27,7 @@ return new class extends Migration
             $table->foreign('area')->references('id')->on('areas')->after('city');
             $table->string('address')->after('area');
             $table->string('pincode')->after('address');
+			$table->enum('status',['UnBlock','Block'])->default('UnBlock')->after('pincode');
             $table->timestamps();
         });
     }

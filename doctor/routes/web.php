@@ -6,7 +6,7 @@ use App\Http\Controllers\doctor_controller;
 use App\Http\Controllers\companie_controller;
 use App\Http\Controllers\healthmanager_controller;
 use App\Http\Controllers\mr_controller;
-use App\Http\Controllers\stockiest_controller;
+use App\Http\Controllers\stockist_controller;
 use App\Http\Controllers\service_controller;
 use App\Http\Controllers\patient_controller;
 use App\Http\Controllers\drspecialitie_controller;
@@ -42,23 +42,51 @@ Route::get('/companylogout',[companie_controller::class,'companylogout']);
 
 //
 Route::get('/company-dashbord', function (){return view('company.index');});
+//add division view
 //Route::get('/company-divisions-manager', function (){return view('company.divisionsmanage');});
 Route::get('/company-divisions-manager',[division_controller::class,'create']);
 Route::post('/adddivision',[division_controller::class,'adddivision']);
 Route::get('/company-divisions-manager',[division_controller::class,'index']);
 Route::get('/adddivision/{id}',[division_controller::class,'destroy']);
 //
-Route::get('/company-medicine-manager', function (){return view('company.medicine-manager');});
-Route::get('/company-doctor', function (){return view('company.doctor-list');});
-Route::get('/company-manager', function (){return view('company.manager');});
-Route::get('/company-add-manager', function (){return view('company.add-manager');});
-Route::get('/company-mr', function (){return view('company.mr');});
-Route::get('/company-add-mr', function (){return view('company.add-mr');});
-Route::get('/company-add-stockiest', function (){return view('company.add-stockiest');});
-Route::get('/company-stockiest', function (){return view('company.stockiest');});
+//add medicine and view
+//Route::get('/company-medicine-manager', function (){return view('company.medicine-manager');});
+Route::get('/company-medicine-manager',[medicine_controller::class,'medi']);
+Route::post('/addmedi',[medicine_controller::class,'addmedi']);
+Route::get('/company-medicine-manager',[medicine_controller::class,'mediview']);
+Route::get('/addmedi/{id}',[medicine_controller::class,'medidestroy']);
 //
-
-//Manager
+//manage company doctor list
+//Route::get('/company-doctor', function (){return view('company.doctor-list');});
+Route::get('/company-doctor',[doctor_controller::class,'docviewpage']);
+Route::get('/company-doctor',[doctor_controller::class,'com_doc_view']);
+//
+//health manager add and manage
+//Route::get('/company-add-manager', function (){return view('company.add-manager');});
+Route::get('/company-add-manager',[healthmanager_controller::class,'helthmanagerpageview']);
+Route::post('/company-add-manager',[healthmanager_controller::class,'com_add_healthmanager']);
+//Route::get('/company-manager', function (){return view('company.manager');});
+Route::get('/company-manager',[healthmanager_controller::class,'managermanageview']);
+Route::get('/company-manager',[healthmanager_controller::class,'health_manage_view']);
+Route::get('/company-add-manager/{id}',[healthmanager_controller::class,'healthdestroy']);
+//
+//MR MANAGE DELETE 
+//Route::get('/company-mr', function (){return view('company.mr');});
+Route::get('/company-mr',[mr_controller::class,'mrpageview']);
+Route::get('/company-mr',[mr_controller::class,'mr_manage']);
+Route::get('/company-mr/{id}',[mr_controller::class,'destroymr']);
+Route::get('/company-add-mr', function (){return view('company.add-mr');});
+//
+//Route::get('/company-add-stockiest', function (){return view('company.add-stockiest');});
+Route::get('/company-add-stockiest',[stockist_controller::class,'create']);
+Route::post('/company-add-stockiest',[stockist_controller::class,'store']);
+//Route::get('/company-stockiest', function (){return view('company.stockiest');});
+Route::get('/company-stockiest',[stockist_controller::class,'managestockistpage']);
+Route::get('/company-stockiest',[stockist_controller::class,'managestockist']);
+Route::get('/company-add-stockiest/{id}',[stockist_controller::class,'stockdestroy']);
+//
+///////////////////////////////////////////////////////////////////////////
+//Manager panel
 Route::get('/manager-dashbord', function (){return view('manager.index');});
 //Route::get('/manager-login', function (){return view('manager.login');});
 Route::get('/manager-login',[healthmanager_controller::class,'managerloginview']);
@@ -296,12 +324,12 @@ Route::get('/contact/{id}',[contact_controller::class,'destroy']);
 //doctor
 Route::get('/admin-add-doctor',[doctor_controller::class,'create']);//show doctor form
 Route::post('/admin-add-doctor',[doctor_controller::class,'store']);//add doctor form
-//get state city
- //uggjj
-
-//Route::post('/getStates',[controller_hospital::class,'getStates']);
+//get state city and area
+Route::post('/getCity',[doctor_controller::class,'getCity']);
+Route::post('/getArea',[doctor_controller::class,'getArea']);
 //
-Route::post('/getCity',[controller_hospital::class,'getCity']);
+
+
 
 
 
@@ -344,7 +372,7 @@ Route::post('/editmr/{id}',[mr_controller::class,'update']);
 
 //stockiest
     
-Route::get('/admin-stockiest',[stockiest_controller::class,'index']);
+Route::get('/admin-stockiest',[stockist_controller::class,'index']);
 
 //
 

@@ -29,6 +29,15 @@ class doctor_controller extends Controller
         
     }
 
+    public function com_doc_view()
+    {
+        
+        $data=doctor::all();
+        return view('company.doctor-list',["do_arr"=>$data]);
+        
+        
+    }
+
     
 
     
@@ -47,20 +56,14 @@ class doctor_controller extends Controller
          
            
     }
+    public function docviewpage()
+    {
+       return view('company.doctor-list');
+           
+    }
     
-    public function getStates(Request $request)
-    {
-		$data['states'] =state::where("cid","=",$request->cid)->get();
-        return response()->json($data);	
-        
-    }
 	
-	public function getCity(Request $request)
-    {
-		$data['cities'] =citie::where("sid","=",$request->sid)->get();
-        return response()->json($data);	
-        
-    }
+	
 
     
 
@@ -109,9 +112,20 @@ class doctor_controller extends Controller
         return redirect('/doctor');
     }
 
+    public function getCity(Request $request)
+    {
+		$data['cities']=citie::where("sid","=",$request->sid)->get();
+        return response()->json($data);	
+        	
+    }
     
     
-
+    
+	public function getArea(Request $request)
+    {
+		$data['areas']=area::where("citie_id","=",$request->citie_id)->get();
+        return response()->json($data);	
+    }
     
     public function store(Request $request)
     {

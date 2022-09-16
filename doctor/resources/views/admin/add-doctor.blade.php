@@ -1,8 +1,8 @@
 @extends('admin.Layout.main_layout') 	
 @section('main_container')
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>			
 			
+			 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
 			
 			<!-- Page Wrapper -->
             <div class="page-wrapper">
@@ -17,7 +17,11 @@
 									<li class="breadcrumb-item"><a href="{{url('/admin')}}">Dashboard</a></li>
 									<li class="breadcrumb-item active">Horizontal Form</li>
 								</ul>
+								
 							</div>
+							@if(session()->has('success'))
+								<i class="alert alert-success">{{session('success')}}</i>
+							@endif
 						</div>
 					</div>
 					<!-- /Page Header -->
@@ -276,13 +280,13 @@
 													<label class="col-lg-3 col-form-label">State </label>
 													<div class="col-lg-9">
 													
-														<select name="state" class="form-control"  id="" value="{{old('state')}}">
+														<select name="sid" class="form-control"  id="sid" value="{{old('state')}}">
                                                         <option value="">Select state</option>
 														<?php foreach($state_id_arr as $data)
 							                              {
 								                        ?>
                                                         <option value="<?php echo $data->id;?>">
-                                                       <?php echo $data->name;?></option>
+                                                       <?php echo $data->state_name;?></option>
 								                       <?php 
 							                              }
 														?>
@@ -303,8 +307,8 @@
 													<label class="col-lg-3 col-form-label">City </label>
 													<div class="col-lg-9">
 													
-														<select name="city" class="form-control" id="" value="{{old('city')}}" >
-                                                        
+														<select name="citie_id" class="form-control" id="citie_id" value="{{old('city')}}" >
+                                                       
                                                     </select>
 													@if($errors->has('city'))	
 																		<span class="text-danger" >{{($errors->first('city'))}}</span>
@@ -329,8 +333,8 @@
 													<label class="col-lg-3 col-form-label">Area</label>
 													<div class="col-lg-9">
 														
-														<select name="area" class="form-control" id="areaid"value="{{old('area')}}" >
-                                                        
+														<select name="area_id" class="form-control" id="area_id" value="{{old('area')}}" >
+                                                       
                                                     </select>
 													@if($errors->has('area'))	
 																		<span class="text-danger" >{{($errors->first('area'))}}</span>
@@ -457,20 +461,13 @@
 												
 												
 											</div>
-											
-												
-												
-												
-												
-												
-												
+		
 											
 											
 										</div>
 
 										<div class="text-right">
-											<button type="submit" class="btn btn-primary" name="submit" value="send
-											">Submit</button>
+											<button type="submit" class="btn btn-primary" name="submit" value="send">Submit</button>
 										</div>
 									</form>
 								</div>
@@ -479,41 +476,10 @@
 					</div>
 
 
-
-					
-				
-				</div>			
-			</div>
-			<!-- /Main Wrapper -->
-		
-        </div>
-		<!-- /Main Wrapper -->
-
-		<script>
-$('#cid').on('change', function () {
-                var cid = this.value;
-                $('#sid').html('');
-                $.ajax({
-				url:"{{url('/getStates')}}",
-				type: "POST",
-				data: {
-				cid: cid,
-				_token: '{{csrf_token()}}'
-				},
-				
-				success: function(result) {
-                        $('#sid').html('<option value="">Select State</option>');
-                        $.each(result.states, function (key, value) {
-                            $('#sid').append('<option value="' + value.id + '">' + value.snm + '</option>');
-                        });
-                        
-                    }
-                });
-            });
-			
+<script>
 $('#sid').on('change', function () {
                 var sid = this.value;
-                $('#city_id').html('');
+                $('#citie_id').html('');
                 $.ajax({
 				url:"{{url('/getCity')}}",
 				type: "POST",
@@ -523,9 +489,30 @@ $('#sid').on('change', function () {
 				},
 				
 				success: function(result) {
-                        $('#city_id').html('<option value="">Select City</option>');
+                        $('#citie_id').html('<option value="">Select City</option>');
                         $.each(result.cities, function (key, value) {
-                            $('#city_id').append('<option value="' + value.id + '">' + value.city_name + '</option>');
+                            $('#citie_id').append('<option value="' + value.id + '">' + value.city_name + '</option>');
+                        });
+                        
+                    }
+                });
+            });
+			
+$('#citie_id').on('change', function () {
+                var citie_id = this.value;
+                $('#area_id').html('');
+                $.ajax({
+				url:"{{url('/getArea')}}",
+				type: "POST",
+				data: {
+					citie_id: citie_id,
+				_token: '{{csrf_token()}}'
+				},
+				
+				success: function(result) {
+                        $('#area_id').html('<option value="">Select Area</option>');
+                        $.each(result.areas, function (key, value) {
+                            $('#area_id').append('<option value="' + value.id + '">' + value.area_name + '</option>');
                         });
                         
                     }
@@ -533,9 +520,15 @@ $('#sid').on('change', function () {
             });			
 </script>
 
+					
+				
+				</div>			
+			</div>
+			<!-- /Main Wrapper -->
 		
-		<!-- jQuery -->
-        <script src="{{url('Backend/assets/js/jquery-3.2.1.min.js')}}"></script>
+        </div>
+		<!-- /Main Wrapper -->
+		
 		
 		<!-- Bootstrap Core JS -->
         <script src="{{url('Backend/assets/js/popper.min.js')}}"></script>
@@ -549,9 +542,7 @@ $('#sid').on('change', function () {
 		
 		<!-- Custom JS -->
 		<script  src="{{url('Backend/assets/js/script.js')}}"></script>
-
 		
-
     </body>
 
 <!-- Mirrored from dreamguys.co.in/demo/doccure/admin/{{url('/admin-form-horizontal')}} by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:55 GMT -->

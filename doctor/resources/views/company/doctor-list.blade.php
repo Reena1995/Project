@@ -48,14 +48,18 @@
 												</tr>
 											</thead>
 											<tbody>
+												<?php 
+													foreach($do_arr as $data)
+													{
+												?>
 												
 												<tr>
-												<td>1</td>
-												<td><img src="" height="50px" width="50px"/></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
+												<td><?php echo $data->id?></td>
+												<td><img src="{{asset('upload/doctors/'. $data->profile_img)}}" height="50px" width="50px"></td>
+												<td><?php echo $data->specialist_id?></td>
+												<td><?php echo $data->first_name?></td>
+												<td><?php echo $data->last_name?></td>
+												<td><?php echo $data->doctor_status?></td>
 												<td class="text-right">
 														<div class="actions">
 															<a  href="{{url('')}}" class="btn btn-sm bg-danger-light">
@@ -65,10 +69,9 @@
 												</td>
 												
 												</tr>
-												
-												
-											
-													
+												<?php 
+													}
+												?>	
 													
 											</tbody>
 										</table>

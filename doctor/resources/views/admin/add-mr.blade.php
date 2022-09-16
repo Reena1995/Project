@@ -99,6 +99,25 @@
 													
 													</div>
 												</div>
+												<br>
+												<div class="form-group row">
+													<label class="col-lg-3 col-form-label">Manager Id</label>
+													<div class="col-lg-9">
+													
+														<select name="manager_id" class="form-control" >
+                                                        <option value="">Select manager</option>
+														<?php foreach($man as $data)
+							                              {
+								                        ?>
+                                                        <option value="<?php echo $data->id;?>">
+                                                       <?php echo $data->Manager_name;?></option>
+								                       <?php 
+							                              }
+														?>
+                                                    	</select>
+													
+													</div>
+												</div>
 														
 												<div class="form-group row">
 													<label class="col-lg-3 col-form-label">Company Name</label>

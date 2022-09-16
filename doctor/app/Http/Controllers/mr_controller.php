@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\mr;
 use App\Models\companie;
+use App\Models\healthmanager;
 use Hash;
 use Session;
 
@@ -21,6 +22,12 @@ class mr_controller extends Controller
         return view('admin.mr',["mr_arr"=>$data]);
     }
 
+    public function mr_manage()
+    {
+        $data=mr::where('company_id','=',Session('company_id'))->get();
+        return view('company.mr',["mr"=>$data]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -29,7 +36,15 @@ class mr_controller extends Controller
     public function create()
     {   
         $company_id_arr=companie::all();
-        return view('admin.add-mr',["company_id_arr"=>$company_id_arr]);
+        $man=healthmanager::all();
+        
+        return view('admin.add-mr',["company_id_arr"=>$company_id_arr,"man"=>$man]);
+    }
+
+    public function mrpageview()
+    {   
+       
+        return view('company.mr');
     }
 
     /**
@@ -46,6 +61,7 @@ class mr_controller extends Controller
         $data->email=$request->email;
         $data->password=Hash::make($request->password);
         $data->company_id=$request->company_id;
+        $data->manager_id=$request->manager_id;
         $data->company_name=$request->company_name;
         $data->visiting_card=$request->visiting_card;
         $data->profile_img=$request->profile_img;
@@ -146,5 +162,11 @@ class mr_controller extends Controller
         $data=mr::find($id);
         $data->delete();
         return redirect('admin-mr')->with("success","mr delete successfully");
+    }
+    public function destroymr($id)
+    {
+        $data=mr::find($id);
+        $data->delete();
+        return redirect('company-mr')->with("success","mr delete successfully");
     }
 }
