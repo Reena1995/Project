@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h3 style="text-align:center;color:red">Registration Form</h3>
+        <div class="row">
+
+            <div class="col-md-12">
+                <form action="../atorn/task_22_inner_image.html" id="form" >
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="user" placeholder="Enter your username">
+                        <span id="error_1" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="pass" placeholder="Enter Your password">
+                        <span id="error_2" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" placeholder="Enter Your email">
+                        <span id="error_3" class="text-danger"></span>
+                    </div>
+                   <div>
+                        <button type="submit" name="submit" value="submit"  class="btn btn-primary">Submit</button>
+                       
+                   </div> 
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+    <script>
+        
+        form.addEventListener('submit', e => 
+        {
+            e.preventDefault();
+
+            var elements = document.getElementById("form").getElementsByTagName('input');
+
+
+            // console.log(elements);
+                for (let index = 0; index < elements.length; index++) 
+                {
+                    const element = elements[index];
+                    console.log(elements);
+                    if (element.type === 'text') { 
+                    if (element.value == "") {
+                        document.getElementById(`error_${index+1}`).innerHTML="user name is required";
+                        } else {
+                        document.getElementById(`error_${index+1}`).innerHTML=""
+                        }
+                    }
+                    
+                    if (element.type === 'password') {
+                    if (element.value == "") {
+                        document.getElementById(`error_${index+1}`).innerHTML="password name is required";
+                        } else {
+                        document.getElementById(`error_${index+1}`).innerHTML=""
+                        }
+                    }
+                    if (element.type === 'email') {
+                    if (element.value == "") {
+                        document.getElementById(`error_${index+1}`).innerHTML="email is required";
+                        } else {
+                        document.getElementById(`error_${index+1}`).innerHTML=""
+                        }
+                    }
+                   
+
+                    
+                    
+                }
+
+                // console.log(elements,'111');
+                // for (let index = 0; index < elements.length; index++) {
+                //     const element = elements[index];
+                //     if(element.type === 'text' && element.value.trim() == "") {
+                //         document.getElementById(`error_${index+1}`).innerHTML="user name is required"
+                //     } else {
+                //         console.log("else1")
+                //         document.getElementById(`error_${index+1}`).innerHTML=""
+                //     }
+
+                    
+                    
+                // }
+            
+                // for (var i = 0, element; element = elements[i++];) 
+                // console.log(element.type,element.value,"elements")
+                // if (element?.type == "" )
+                // {
+                //     console.log('if');
+
+                   
+                // }
+                // else
+                // {
+                //     // document.getElementById("error").innerHTML ="";
+                //     console.log('else');
+                // }
+               
+
+
+
+
+
+                //  else if (element.type === "password" && element.value === "")
+                // {
+                   
+                //     document.getElementById("error1").innerHTML ="password is required";
+                    
+                // }
+                // else if (element.type === "email" && element.value === "")
+                // {
+                   
+                //     document.getElementById("error2").innerHTML ="email name is required";
+                    
+                // }
+                
+                // else 
+                // {
+                //     // console.log('element');
+                //     // console.log(element);
+                //       document.getElementById("error").innerHTML ="";
+                // }
+                
+                
+                
+
+                
+        });
+
+        
+
+        
+        
+       
+
+    </script>
+    <script src="assets/jquery/jquery.slim.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+</html>

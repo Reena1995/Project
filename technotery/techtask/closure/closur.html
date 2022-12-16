@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- local exapmple -->
+    <!--<script>
+        function init() {
+            var name = 'Mozilla';
+            function displayName() {
+               
+                console.log(name); // use variable declared in the parent function
+            }
+            // name="reena";
+            displayName();
+        }
+        init();
+    </script> -->
+
+
+    <!-- global exapmple -->
+    <!--<script>
+        function init() {
+            var name = 'Mozilla';
+            function displayName() {
+               var name="google"
+                console.log(name); // use variable declared in the parent function
+            }
+          
+            displayName();
+        }
+        init();
+    </script> -->
+
+
+    <!-- closur example -->
+     <!-- <script>
+        var nametwo="Edges";
+        function init() {
+            var name = 'Mozilla';
+            function displayName() {
+              
+                console.log(name);
+                console.log(nametwo);
+            }
+          
+            displayName();
+        }
+        init();
+    </script>  -->
+
+    <script>
+        function makeFunc() {
+            const name = 'Mozilla';
+            function displayName() {
+                console.log(name);
+            }
+            return displayName;
+        }
+
+        const myFunc = makeFunc();
+        
+        myFunc();
+
+    </script>
+</body>
+
+</html>

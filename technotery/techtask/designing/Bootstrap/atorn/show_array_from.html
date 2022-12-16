@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h3 style="text-align:center;color:red">Registration Form</h3>
+        <div class="row">
+
+            <div class="col-md-12">
+                <form action="../atorn/task_22_inner_image.html" id="my-form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="user"  placeholder="Enter your username">
+                        <p id="error_1" class="text-danger"></p>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="pass" placeholder="Enter Your password">
+                        <span id="error_2" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" placeholder="Enter Your email">
+                        <span id="error_3" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <input type="submit" name="submit" value="submit" class="btn btn-primary" onClick="return  validation()">
+                        <!-- <button type="submit" name="submit" value="submit" class="btn btn-primary" onClick="return  validation()">Submit</button> -->
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    function validation() {
+        const form = document.getElementById('my-form')
+        let redirect = true;
+        let error = []
+        Array.from(form.elements).forEach(element => {
+
+            console.log(element.name);
+           
+            console.log(typeof(element.type));
+            // console.log(typeof(element.name));
+
+            if (element.type == "text") {
+                if(element.value == "")
+                {
+                    document.getElementById('error_1').innerHTML = "pls enter your user name";
+                    error.push(element.name)
+                    
+                }
+                else
+                {
+                    document.getElementById('error_1').innerHTML = "";
+                }
+            } 
+            else if (element.type == "password") {
+                if(element.value == "")
+                {
+                    document.getElementById('error_2').innerHTML = "pls enter your password"
+                    error.push(element.name)
+                }
+                else
+                {
+                    document.getElementById('error_2').innerHTML = "";
+                }    
+                
+                    
+            }
+            else if (element.type == "email") {
+                if(element.value == "")
+                {
+                    document.getElementById('error_3').innerHTML = "pls enter your email"
+                    error.push(element.name)
+                }
+                else
+                {
+                    document.getElementById('error_3').innerHTML = "";
+                }    
+                
+                    
+            }
+           
+            
+        });
+        console.log(error,"error")
+        if(error.length) {
+            redirect = false
+        }
+        return redirect;
+
+
+
+    }
+
+
+
+
+</script>
+<script src="assets/jquery/jquery.slim.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+
+</html>

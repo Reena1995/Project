@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let height= prompt("hey what is your height");
+        height= Number.parseFloat(height)
+        let weight = prompt("hey what is your weight ");
+        weight =Number.parseFloat(weight );
+        bmi = weight / (height * height);
+        bmi=Number.parseFloat(bmi);
+        
+        if(bmi<18.5 )
+        {
+            alert(" you're in the under weight range");
+        }
+        else if(bmi>=18.5  && bmi<=24.9 )
+        {
+            alert("you're in the healthy weight range");
+        }
+        else if(bmi>=25 && bmi<=29.9 )
+        {
+            alert(" you're in the overweight range");
+        }
+        else if(bmi>=30 && bmi<=39.9 )
+        {
+            alert(" you're in the obese range");
+        }
+        else
+        {
+            alert("else");
+        }
+        //number na lakhiye to pan ave
+        </script>
+</head>
+<body>
+    
+</body>
+</html>

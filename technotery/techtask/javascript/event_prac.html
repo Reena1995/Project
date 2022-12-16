@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=btn, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>What Can JavaScript Do?</h2>
+
+<p id="demo">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias perspiciatis voluptas ratione quae, 
+    , repellat laudantium quidem minus ad neque ex aliquam? Praesentium quasi, libero natus veritatis reiciendis nostrum facere!</p>
+
+<button type="button" id="btn" onclick="toggleHide()">Click Me!</button>
+
+<script>
+
+let demo=document.getElementById ('demo');
+document.addEventListener('mouseover',function run(){
+    alert("overin");
+});
+
+document.addEventListener('mouseout',function run(){
+    alert("overout");
+});
+function toggleHide()
+{
+	let btn=document.getElementById ('btn');
+    let demo=document.getElementById ('demo');
+    if( demo.style.display!= 'none')
+    {
+      demo.style.display = 'none';
+    }
+    else
+    {
+        demo.style.display = '';
+    }
+}
+
+</script>
+</body>
+</html>

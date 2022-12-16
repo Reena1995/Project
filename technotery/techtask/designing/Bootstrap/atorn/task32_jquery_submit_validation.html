@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="assets/css/style.css">  -->
+
+    <title>Document</title>
+</head>
+<style>
+    form label {
+        display: inline-block;
+        width: 100px;
+    }
+
+    form div {
+        margin-bottom: 10px;
+    }
+
+    .error {
+        color: red;
+        margin-left: 100px;
+    }
+
+    label.error {
+        display: inline;
+    }
+</style>
+
+<body>
+
+    <div class="container">
+        <h3 style="text-align:center;color:red">Registration Form</h3>
+        <div class="row">
+
+            <div class="col-md-12">
+                <form id="first_form" method="post" action="">
+                    <div>
+                        <label for="first_name">First Name:</label>
+                        <input type="text" id="first_name" name="first_name"></input>
+                        <div id="first_name_error"></div>
+                    </div>
+
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email"></input>
+                        <div id="email_error"></div>
+                    </div>
+                    <div>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password"></input>
+                        <div id="password_error"></div>
+                    </div>
+                    <div>
+                        <input type="submit" value="Submit" id="btnsubmit" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="assets/jquery/jquery.slim.min.js"></script>
+    <!-- <script src="assets/js/bootstrap.bundle.min.js"></script> -->
+    <script>
+        $(document).ready(function () {
+
+            // Bind the click event to the function
+            $("#btnsubmit").click(function () {
+
+                $('input[type=text]').each(function (index, element) {
+                    console.log(element);
+                    if (element.value == "") {
+                       
+                        $('#first_name_error').empty();
+                        $('#first_name_error').append('<span class="error">This field is required</span>');
+                        console.log('if')
+
+                    }
+                   
+                    else {
+                          $('#first_name_error').empty();
+                        console.log('else')
+                    }
+
+                })
+                $('input[type=email]').each(function (index, element) {
+                    if (element.value == "") {
+                        $('#email_error').empty();
+                        $('#email_error').append('<span class="error">This field is email required</span>');
+                       
+
+
+                    }
+                    else {
+                        $('#email_error').empty();
+                    }
+
+                })
+                $('input[type=password]').each(function (index, element) {
+                    if (element.value == "") {
+                        $('#password_error').empty();
+                        $('#password_error').append('<span class="error">This field is password required</span>');
+                       
+
+
+                    }
+                    else {
+                        $('#password_error').empty();
+                    }
+
+                })
+                return false;
+
+            })
+        });
+    </script>
+
+</body>
+
+</html>-

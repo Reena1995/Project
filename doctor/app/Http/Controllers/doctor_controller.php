@@ -149,10 +149,10 @@ class doctor_controller extends Controller
             'notification' => 'required|regex:/[a-zA-z0-9\s]+/',
             'consulting_fees' => "required|numeric",
             'followup_fees' => "required|numeric",
-            'state' => 'required',
-            'city' => 'required',
+            'sid' => 'required',
+            'citie_id' => 'required',
             'address' =>  'required|regex:/[a-zA-z0-9\s]+/',
-            'area' => 'required',
+            'area_id' => 'required',
             'pincode' => 'required|digits:6',
             'google_map' =>  'required',
             'profile_img' =>'required',
@@ -222,10 +222,10 @@ class doctor_controller extends Controller
         $data->notification=$request->notification;
         $data->consulting_fees=$request->consulting_fees;
         $data->followup_fees=$request->followup_fees;
-        $data->state=$request->state;
-        $data->city=$request->city;
+        $data->state=$request->sid;
+        $data->city=$request->citie_id;
         $data->address=$request->address;
-        $data->area=$request->area;
+        $data->area=$request->area_id;
         $data->pincode=$request->pincode;
         $data->google_map=$request->google_map;
         

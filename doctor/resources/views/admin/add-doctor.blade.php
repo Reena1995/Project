@@ -272,7 +272,7 @@
 														<input type="text" class="form-control" name="consulting_fees" value="{{old('consulting_fees')}}">
 														@if($errors->has('consulting_fees'))	
 																		<span class="text-danger" >{{($errors->first('consulting_fees'))}}</span>
-																	@endif
+															@endif
 													</div>
 												</div>
 												
@@ -280,7 +280,7 @@
 													<label class="col-lg-3 col-form-label">State </label>
 													<div class="col-lg-9">
 													
-														<select name="sid" class="form-control"  id="sid" value="{{old('state')}}">
+														<select name="sid" class="form-control"  id="sid" value="{{old('sid')}}">
                                                         <option value="">Select state</option>
 														<?php foreach($state_id_arr as $data)
 							                              {
@@ -292,8 +292,8 @@
 														?>
                                    
 								</select>
-													@if($errors->has('state'))	
-																		<span class="text-danger" >{{($errors->first('state'))}}</span>
+													@if($errors->has('sid'))	
+																		<span class="text-danger" >{{($errors->first('sid'))}}</span>
 																	@endif
 													</div>
 												</div>
@@ -307,11 +307,11 @@
 													<label class="col-lg-3 col-form-label">City </label>
 													<div class="col-lg-9">
 													
-														<select name="citie_id" class="form-control" id="citie_id" value="{{old('city')}}" >
+														<select name="citie_id" class="form-control" id="citie_id" value="{{old('citie_id')}}" >
                                                        
                                                     </select>
-													@if($errors->has('city'))	
-																		<span class="text-danger" >{{($errors->first('city'))}}</span>
+													@if($errors->has('citie_id'))	
+																		<span class="text-danger" >{{($errors->first('citie_id'))}}</span>
 																	@endif
 													</div>
 												</div>
@@ -333,11 +333,11 @@
 													<label class="col-lg-3 col-form-label">Area</label>
 													<div class="col-lg-9">
 														
-														<select name="area_id" class="form-control" id="area_id" value="{{old('area')}}" >
+														<select name="area_id" class="form-control" id="area_id" value="{{old('area_id')}}" >
                                                        
                                                     </select>
-													@if($errors->has('area'))	
-																		<span class="text-danger" >{{($errors->first('area'))}}</span>
+													@if($errors->has('area_id'))	
+																		<span class="text-danger" >{{($errors->first('area_id'))}}</span>
 																	@endif
 													</div>
 												</div>

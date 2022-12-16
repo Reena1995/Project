@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var a = ['a1@gmail.com','a2@gmail.com','a3@gmail.com','a4@gmail.com'];
+        var b = ['a4@gmail.com','a1@gmail.com','a6@gmail.com','a7@gmail.com','a5@gmail.com'];
+
+    
+        var c = a.concat(b);
+        console.log(c);
+
+        let result=[...new Set(c)];
+        console.log(result);
+
+        const resultone = {};
+        result.forEach((element, index) => {
+            resultone['key' + index] = element;
+        });
+        console.log(resultone);
+
+
+        const splitKeyValue = obj => {
+        const keys = Object.keys(obj);
+        console.log(keys);
+        const restwo = [];
+        for (let i = 0; i < keys.length; i++){
+            restwo.push({
+                name: obj[keys[i]].split("@")[0],
+                email: obj[keys[i]]
+            });
+        };
+        return restwo;
+        };
+        console.log(splitKeyValue(resultone));
+
+        var arrOfObj = [];
+
+        result.forEach(function(element) {
+            var name = element.split("@")[0];
+            var obj = {
+                name: name,
+                email: element
+            };
+
+            arrOfObj.push(obj);
+        });
+
+        console.log(arrOfObj);
+
+        var newObj = new Object();
+        console.log(newObj);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+

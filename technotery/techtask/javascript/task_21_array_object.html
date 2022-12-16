@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        
+    var a=['a1@gmail.com','a2@gmail.com','a3@gmail.com','a4@gmail.com'];
+    var b=['a4@gmail.com','a1@gmail.com','a6@gmail.com','a7@gmail.com','a5@gmail.com']
+
+   
+    var c=a.concat(b);
+    console.log(c);
+
+    let result=[...new Set(c)];
+    console.log(result);
+
+
+        // var myObj={}
+        // for(i=0;i<a.length;i++)
+        // {
+        //     myObj[i]=result[i]
+        // }
+        // console.log(myObj);
+
+        // let resultthree=Object.entries(result);
+        //  console.log(resultthree);
+
+
+        // let resultfour=[]
+        // result.map(fullname =>{
+        //     let name=fullname.split("@")[0];
+        //     let obj={
+        //         name,
+        //         email:fullname
+        //     }
+        //     resultfour.push(obj);
+        // })
+        // console.log(resultfour,"resultfour")
+        
+        const resultone = {};
+        result.forEach((element, index) => {
+            resultone['key' + index] = element;
+        });
+        console.log(resultone);
+
+
+
+        </script>
+</head>
+<body>
+    
+</body>
+</html>
+
