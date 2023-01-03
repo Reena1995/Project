@@ -17,12 +17,18 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $categories = Category::where('is_active',1)->get(); 
-        // dd($categories);
-        return view("Backend.Category.index",compact('categories'));
+    { 
+        return view("Backend.Category.index");
         
     }
+    public function frontedcategory()
+    {
+        $cats = Category::where('is_active',1)->get(); 
+        // dd($cats);
+        return view("Frontend.index",compact('cats'));
+        
+    }
+
 
     
     /**
@@ -35,6 +41,7 @@ class CategoryController extends Controller
         return view('Backend.Category.category');
     }
 
+    
     /**
      * Store a newly created resource in storage.
      *

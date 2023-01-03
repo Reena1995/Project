@@ -329,6 +329,27 @@ class ProductController extends Controller
 
     }
     ////////////////////////////////////////////////////////////////////
+    public function imageupdate(Request $request)
+    { 
+            $id = $request->input('id');   
+            $image = Image::where('uuid',$id)->first();
+            if($image->id){               
+              
+                $image->is_active = $request->input('status');
+                $image->save();
+                return response()->json(['message'=>'image update successfully saved'],200);
+
+                
+            }
+            else
+            {
+                return  response()->json([
+                    'status'=>404,
+                    'message'=>'studenttttttt not fount',
+                ]);
+            }
+    }
+    ///////////////////////////////////////////////////////////////////
     
     
     public function status($id)
@@ -351,12 +372,6 @@ class ProductController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

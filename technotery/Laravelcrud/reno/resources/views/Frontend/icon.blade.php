@@ -1,0 +1,69 @@
+@extends('Frontend.Partial.master')
+@section('main_container')
+      <!-- banner -->
+      <div class="inner_page-banner one-img">
+      </div>
+      <!--//banner -->
+      <!-- short -->
+      <div class="using-border py-3">
+         <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+               <li>
+                  <a href="index.php">Home</a>
+                  <span>/ /</span>
+               </li>
+               <li>Icons</li>
+            </ul>
+         </div>
+      </div>
+      <!-- //short-->
+      <!--//banner -->
+      <!-- 404 page -->
+      <section class="about-inner py-lg-4 py-md-3 py-sm-3 py-3">
+         <div class="container-fluid py-lg-5 py-md-4 py-sm-4 py-3">
+            <div class="page-not-agile text-center">
+               <h4>404</h4>
+               <div class="sub-text-page">
+                  <p>sorry but the page that you requested doesn't exist</p>
+               </div>
+               <div class="icons-social pt-lg-4 pt-md-3 pt-3">
+                  <ul>
+                     <li><a href="#"><span class="fab fa-facebook-f"></span></a></li>
+                     <li><a href="#"><span class="fas fa-envelope"></span></a></li>
+                     <li><a href="#"><span class="fas fa-rss"></span></a></li>
+                     <li><a href="#"><span class="fab fa-vk"></span></a></li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!--//404 page-->
+      <!--subscribe-address-->
+      <section class="subscribe">
+         <div class="container-fluid">
+         <div class="row">
+            <div class="col-lg-6 col-md-6 map-info-right px-0">
+               <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3150859.767904157!2d-96.62081048651531!3d39.536794757966845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1408111832978"> </iframe>
+            </div>
+            <div class="col-lg-6 col-md-6 address-w3l-right text-center">
+               <div class="address-gried ">
+                  <span class="far fa-map"></span>
+                  <p>25478 Road St.121<br>USA New Hill
+                  <p>
+               </div>
+               <div class="address-gried mt-3">
+                  <span class="fas fa-phone-volume"></span>
+                  <p> +(000)123 4565<br>+(010)123 4565</p>
+               </div>
+               <div class=" address-gried mt-3">
+                  <span class="far fa-envelope"></span>
+                  <p><a href="mailto:info@example.com">info@example1.com</a>
+                     <br><a href="mailto:info@example.com">info@example2.com</a>
+                  </p>
+               </div>
+            </div>
+         </div>
+		 </div>
+      </section>
+      <!--//subscribe-address-->
+	  @endsection

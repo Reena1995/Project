@@ -43,8 +43,9 @@
                         <span>Register Ajax</span>
                     </a>
                     <ul class="sub">
-						<!-- <li><a href="{{route('product.index')}}">Product view</a></li> -->
+						<li><a href="{{route('register.index')}}">Register view</a></li>
 						<li><a href="{{route('register.create')}}">Register Create</a></li>
+                        
 						
                        
                     </ul>

@@ -12,7 +12,11 @@ class Product extends Model
     {
         return $this->hasOne(Category::class,'id','category_id');
     }
-
+    public function allCategory()
+    {
+        $categories = Category::where('is_active',1)->get();
+        return $categories;
+    }
     public function proImages()
     {
         return $this->hasMany(Image::class,'product_id','id');

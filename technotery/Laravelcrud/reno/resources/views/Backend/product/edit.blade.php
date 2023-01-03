@@ -59,7 +59,7 @@
 		</div>--}}
 		////////////////////////////////////////////////////////////////////////////
 		<div class="typo-agile">
-			<form id="product-form" action="{{route('product.update',$product->uuid)}}" method="post" enctype="multipart/form-data">
+			<form id="editproduct_from" action="{{route('product.update',$product->uuid)}}" method="post" enctype="multipart/form-data">
 			@csrf
   				<div class="row">
 							<div class="col-12">
@@ -170,8 +170,10 @@
 							</div>
 								<div class="rightmain">
 									@foreach($product->GalleryImage as $image)
-										<img src="{{asset('Upload/Product/'.$image->image)}}" height="100px" width="100px" style="br">
-										<i class="fa fa-trash overlay" id="trash" aria-hidden="true"></i>
+										<span id="imgWrap{{$image->uuid}}">
+											<img src="{{asset('Upload/Product/'.$image->image)}}" height="100px" width="100px" id="editimageid" name="image"style="br">
+											<i class="fa fa-trash overlay" id="trash" aria-hidden="true" data-id="{{$image->uuid}}"></i>
+										</span>
 									@endforeach	
 								</div>	
 						</div>
@@ -237,9 +239,37 @@
 
 		});
 
+		/////////////////////////image active status change/////////////////
+		$(document).on('click','.overlay', function (e){
+			e.preventDefault();
+			console.log('SDVsdfbvd');
+			// var image_id=$(this).attr('data-id');
+			var image_id=$(this).data('id');
+			console.log(image_id,'image find id');
+			
 
+			$.ajax({
+				headers: {
+          			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         		 },
+				type:'POST',
+				dataType:'JSON',
+				url:'/update-image-status' ,
+				data:{
+					'id':image_id,
+					'status':'0'
+				},
+				dataType:"json",
+				success:function(response) {
+					$('#imgWrap'+image_id).html('');
+					console.log(response,'response');
+					console.log(xxxxx);
+				}
+			});
+		})
 		
 
 </script>
 @endsection
+
 

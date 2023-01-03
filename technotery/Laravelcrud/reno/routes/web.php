@@ -41,9 +41,17 @@ Route::group(['middleware'=>['afterlogin']], function()
     Route::post('/product/update/{id}',[ProductController::class,'update'])->name('product.update');
     Route::get('/product/show/{id}',[ProductController::class,'show'])->name('product.show');
     Route::get('/product/status/{id}',[ProductController::class,'status'])->name('product.status');
+    Route::post('/update-image-status',[ProductController::class,'imageupdate']);
     
 
     Route::get('/register/create',[RegisterController::class,'create'])->name('register.create');
+    Route::post('/register/store',[RegisterController::class,'store'])->name('register.store');
+    Route::get('/register',[RegisterController::class,'index'])->name('register.index');
+    Route::get('/registerindex',[RegisterController::class,'fetchstudent'])->name('ajaxGetRegister');
+    Route::get('registeredit/{id}',[RegisterController::class,'edit']);
+    Route::put('registupdate/{id}',[RegisterController::class,'update']);
+    Route::delete('registerdelete/{id}',[RegisterController::class,'destroy']);
+
    
    
 });
@@ -60,6 +68,23 @@ Route::get('/ajax',[AjaxController::class,'ajaxGet'])->name('ajaxGet');
 
 Route::get('/ajax-json',[AjaxController::class,'ajaxGetUser'])->name('ajaxGetUser');
 
+
+
+////////////////////////////////////////////////////////////////////////////
+
+// Route::get('/home', function () {return view('Frontend.home');})->name('frontend.home');
+Route::get('/home',[CategoryController::class,'frontedcategory'])->name('frontend.home');
+
+Route::get('/about', function () {return view('Frontend.about');})->name('frontend.about');
+Route::get('/checkout', function () {return view('Frontend.checkout');})->name('frontend.checkout');
+Route::get('/icon', function () {return view('Frontend.icon');})->name('frontend.icon');
+Route::get('/contact', function () {return view('Frontend.contact');})->name('frontend.contact');
+Route::get('/products', function () {return view('Frontend.product');})->name('frontend.product');
+Route::get('/service', function () {return view('Frontend.service');})->name('frontend.service');
+Route::get('/shop', function () {return view('Frontend.shop');})->name('frontend.shop');
+Route::get('/single', function () {return view('Frontend.single');})->name('frontend.single');
+Route::get('/typography', function () {return view('Frontend.typography');})->name('frontend.typography');
+Route::get('/payment', function () {return view('Frontend.payment');})->name('frontend.payment');
 
 
 
