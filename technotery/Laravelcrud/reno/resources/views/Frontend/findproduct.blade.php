@@ -8,7 +8,7 @@
                      <div class="slider-img one-img">
                         <div class="container">
                            <div class="slider-info ">
-                              <h5>{{ !empty($categoryName)?ucfirst($categoryName):'All Products'}}</h5>
+                              <h5>Category Wise product</h5>
                               <div class="bottom-info">
                                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Aenean commodo ligula eget dolorL orem ipsum dolor sit amet eget dolor</p>
                               </div>
@@ -62,32 +62,20 @@
       <!-- about -->
       <section class="about py-lg-4 py-md-3 py-sm-3 py-3" id="about">
          <div class="container py-lg-5 py-md-5 py-sm-4 py-4">
-            <h3 class="title text-center mb-lg-5 mb-md-4  mb-sm-4 mb-3">{{ !empty($categoryName)?ucfirst($categoryName):'All Products'}}</h3>
+            <h3 class="title text-center mb-lg-5 mb-md-4  mb-sm-4 mb-3">All Products</h3>
             <div class="row banner-below-w3l">
-            @foreach($allproducts as $allpro)
+            @foreach($findproduct as $find)
                <div class="col-lg-4 col-md-6 col-sm-6 text-center banner-agile-flowers">
-               <a href="{{route('frontend.productdetail',$allpro->uuid)}}"><img src="{{asset('Upload/Product/' . $allpro->isFeatureoneimage[0]->image)}}"   class="img-thumbnail" style="height:250px;width:250px;" alt=""></a>
+               <a href="{{route('frontend.productdetail',$find->uuid)}}"><img src="{{asset('Upload/Product/' . $find->isFeatureoneimage[0]->image)}}"   class="img-thumbnail" style="height:250px;width:250px;" alt=""></a>
                   <div class="banner-right-icon">
-                     <h4 class="pt-3">{{$allpro->name}}</h4>
-                     <h4 class="pt-3" style="color:red;">{{$allpro->proDetail->actualprice}}</h4>
-                     <h4 class="pt-3" style="color:green;">{{$allpro->proDetail->discountprice}}</h4>
-                     
-                     <div class="tagWrapper"><a data-id="{{$allpro->id}}" class="favourite" >
-                        @if(!empty($allpro->favourite) && ($allpro->favourite->is_active == 1))
-                        <a data-id="{{$allpro->id}}" class="unfavourite"> <i class="fa fa-heart heartdel"  style="color:red;font-size:25px;" aria-hidden="true"></i></a>
-                        @else
-                        <a data-id="{{$allpro->id}}" class="favourite"> <i class="far fa-heart tagDelete"  style="color:red;font-size:25px;" aria-hidden="true"></i></a>
-                        @endif 
-                     </a>
-                  </div>
-                     
-                     <p style="color:gery;"><b>Wishlist</b></p>
-
+                     <h4 class="pt-3">{{$find->name}}</h4>
+                     <h4 class="pt-3" style="color:red;">Actual price:{{$find->proDetail->actualprice}}</h4>
+                     <h4 class="pt-3" style="color:red;">Discount Price:{{$find->proDetail->discountprice}}</h4>
                      <br><br>
                   </div>
                </div>
               
-            @endforeach
+             @endforeach 
             </div>
          </div>
       </section>
@@ -128,5 +116,4 @@
       <!--//subscribe-->
 	  @endsection
 	  
-    
-	  
+      

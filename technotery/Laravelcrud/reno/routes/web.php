@@ -6,6 +6,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\FrontendProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,10 @@ Route::get('/', function () {
 
 Route::group(['middleware'=>['afterlogin']], function()
 {
+
+   
+    Route::get('/logout',[LoginController::class,'logout'])->name('Logout');
+
     Route::get('/index', function () {return view('Backend.index');})->name('index');
 
     Route::get('/category/create',[CategoryController::class,'create'])->name('category.create');
@@ -51,14 +57,17 @@ Route::group(['middleware'=>['afterlogin']], function()
     Route::get('registeredit/{id}',[RegisterController::class,'edit']);
     Route::put('registupdate/{id}',[RegisterController::class,'update']);
     Route::delete('registerdelete/{id}',[RegisterController::class,'destroy']);
+    /////////////////////////////////////Frontend///////////////////////////////////////////
+    
+    
+   //////////////////////////////////////////////////////////////////////////////////////////
 
-   
    
 });
 
 // Route::get('/login', function () {return view('Backend.login');});
 
-Route::get('/adminlogin',[LoginController::class,'login'])->name('login-page');
+// Route::get('/adminlogin',[LoginController::class,'login'])->name('login-page');
 Route::get('/adminlogin',[LoginController::class,'login'])->name('login-page');
 Route::post('/login',[LoginController::class,'postLogin'])->name('login');
 
@@ -72,20 +81,28 @@ Route::get('/ajax-json',[AjaxController::class,'ajaxGetUser'])->name('ajaxGetUse
 
 ////////////////////////////////////////////////////////////////////////////
 
-// Route::get('/home', function () {return view('Frontend.home');})->name('frontend.home');
-Route::get('/home',[CategoryController::class,'frontedcategory'])->name('frontend.home');
 
-Route::get('/about', function () {return view('Frontend.about');})->name('frontend.about');
-Route::get('/checkout', function () {return view('Frontend.checkout');})->name('frontend.checkout');
-Route::get('/icon', function () {return view('Frontend.icon');})->name('frontend.icon');
-Route::get('/contact', function () {return view('Frontend.contact');})->name('frontend.contact');
-Route::get('/products', function () {return view('Frontend.product');})->name('frontend.product');
-Route::get('/service', function () {return view('Frontend.service');})->name('frontend.service');
-Route::get('/shop', function () {return view('Frontend.shop');})->name('frontend.shop');
-Route::get('/single', function () {return view('Frontend.single');})->name('frontend.single');
-Route::get('/typography', function () {return view('Frontend.typography');})->name('frontend.typography');
-Route::get('/payment', function () {return view('Frontend.payment');})->name('frontend.payment');
 
+     // Route::get('/productdetail', function () {return view('Frontend.productdetail');})->name('frontend.productdetail');
+     Route::get('/home',[IndexController::class,'frontedcategory'])->name('frontend.home');
+     Route::post('/indexfavourite',[FrontendProductController::class,'favourite'])->name('index.favourite');
+
+     Route::get('/findproduct/{id}',[FrontendProductController::class,'frontedfindproduct'])->name('frontend.findproduct');
+     Route::get('/productdetail/{id}',[FrontendProductController::class,'frontedproduct'])->name('frontend.productdetail');
+     Route::get('/allproduct',[FrontendProductController::class,'frontedallproduct'])->name('frontend.allproduct');
+
+     
+
+     Route::get('/about', function () {return view('Frontend.about');})->name('frontend.about');
+     Route::get('/checkout', function () {return view('Frontend.checkout');})->name('frontend.checkout');
+     Route::get('/icon', function () {return view('Frontend.icon');})->name('frontend.icon');
+     Route::get('/contact', function () {return view('Frontend.contact');})->name('frontend.contact');
+     Route::get('/products', function () {return view('Frontend.product');})->name('frontend.product');
+     Route::get('/service', function () {return view('Frontend.service');})->name('frontend.service');
+     Route::get('/shop', function () {return view('Frontend.shop');})->name('frontend.shop');
+     Route::get('/single', function () {return view('Frontend.single');})->name('frontend.single');
+     Route::get('/typography', function () {return view('Frontend.typography');})->name('frontend.typography');
+     Route::get('/payment', function () {return view('Frontend.payment');})->name('frontend.payment');
 
 
 

@@ -197,19 +197,22 @@
             <!-- user login dropdown start-->
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                    <img alt="" src="{{url('Backend/images/2.png')}}">
-                    <span class="username">John Doe</span>
-                    <b class="caret"></b>
+                    
+                    <!-- <span class="username">My Account</span> 
+                    <b class="caret"></b>  -->
+                  
+                  
                 </a>
-                <ul class="dropdown-menu extended logout">
+                <!-- <ul class="dropdown-menu extended logout">
                     <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
                     <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
                     <li><a href="login.php"><i class="fa fa-key"></i> Log Out</a></li>
-                </ul>
+                </ul> -->
             </li>
             <!-- user login dropdown end -->
-        
+           
         </ul>
+        <a class="btn btn-primary"  href="{{route('Logout')}}">Logout</a>
         <!--search & user info end-->
     </div>
 </header>

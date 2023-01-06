@@ -26,25 +26,39 @@
                   <div class="col-lg-4 single-right-left ">
                      <div class="grid images_3_of_2">
                         <div class="flexslider1">
-                           <ul class="slides">
-                              <li data-thumb="{{url('Frontend/images/f2.jpg')}}">
-                                 <div class="thumb-image"> <img src="{{url('Frontend/images/f2.jpg')}}" data-imagezoom="true" class="img-fluid" alt=" "> </div>
+                           <ul class="slides responsive">
+                          
+                              <!-- @foreach($productts->proImages as $image)
+                              <li data-thumb="{{asset('Upload/Product/'.$image->image)}}">
+                                 <div class="thumb-image"> <img src="{{asset('Upload/Product/'.$image->image)}}"  data-imagezoom="true" class="img-fluid" alt=""> </div>
                               </li>
-                              <li data-thumb="{{url('Frontend/images/f1.jpg')}}">
-                                 <div class="thumb-image"> <img src="{{url('Frontend/images/f1.jpg')}}" data-imagezoom="true" class="img-fluid" alt=" "> </div>
-                              </li>
-                              <li data-thumb="{{url('Frontend/images/f3.jpg')}}">
-                                 <div class="thumb-image"> <img src="{{url('Frontend/images/f3.jpg')}}" data-imagezoom="true" class="img-fluid" alt=" "> </div>
-                              </li>
+                             @endforeach  -->
                            </ul>
+                           <div class="slider-for">
+                              @foreach($productts->proImages as $image)
+                              <div class="slider-items">
+                                 <img src="{{asset('Upload/Product/'.$image->image)}}" style="height:400px;width: 400px;"alt="">
+                              </div>
+                              @endforeach
+                              
+                           </div>
+                           <div class="slider slider-nav">
+                              @foreach($productts->proImages as $image)
+                                 <div class="slider-nav-img">
+                                    <img src="{{asset('Upload/Product/'.$image->image)}}" alt=""alt="">
+                                 </div>
+                              @endforeach
+                              
+                           </div>
                            <div class="clearfix"></div>
                         </div>
                      </div>
                   </div>
                   <div class="col-lg-8 single-right-left simpleCart_shelfItem">
-                     <h3>Soft Teddy Bear (Brown)</h3>
-                     <p><span class="item_price">$650</span>
-                        <del>$1,199</del>
+                 
+                     <h3>{{$productts->name}}</h3>
+                     <p><span class="item_price">{{$productts->proDetail->discountprice}}</span>
+                        <del>{{$productts->proDetail->actualprice}}</del>
                      </p>
                      <div class="rating1">
                         <ul class="stars">
@@ -56,36 +70,30 @@
                         </ul>
                      </div>
                      <div class="description">
-                        <h5>Check delivery, payment options and charges at your location</h5>
+                        
                         <form action="#" method="post">
-                           <input class="form-control" type="text" name="Email" placeholder="Please enter..." required="">
-                           <input type="submit" value="Check">
-                        </form>
+                           <input class="form-control" type="text" name="Email" style="width:17% !important"placeholder="Please enter..." required="">
+                           <h3 style="color:black;">Quantity</h3>
+                           <br>
+                           <!-- <i class="far fa-heart" style="color:red;font-size:25px;" aria-hidden="true"></i> -->
+                           <!-- <div class="tagWrapper">
+                              <a data-id="{{$productts->id}}" class="favourite" >
+                              <i class="far fa-heart tagDelete"  style="color:red;font-size:25px;" aria-hidden="true"></i>
+                              </a>
+                           </div> -->
+
+                        <div class="tagWrapper">
+                              @if(!empty($productts->favourite) && ($productts->favourite->is_active == 1))
+                              <a data-id="{{$productts->id}}" class="unfavourite" > <i class="fa fa-heart heartdel"  style="color:red;font-size:25px;" aria-hidden="true"></i></a>
+                              @else
+                              <a data-id="{{$productts->id}}" class="favourite" >  <i class="far fa-heart tagDelete"  style="color:red;font-size:25px;" aria-hidden="true"></i></a>
+                              @endif 
+                           </a>
+                        </div>
+                     </form>
                      </div>
-                     <div class="color-quality">
-                        <div class="color-quality-right">
-                           <h5>Size :</h5>
-                           <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
-                              <option value="null">2 Feet</option>
-                              <option value="null">3 Feet</option>
-                              <option value="null">4 Feet</option>
-                              <option value="null">5 Feet</option>
-                           </select>
-                        </div>
-                     </div>
-                     <div class="occasional">
-                        <h5>Types :</h5>
-                        <div class="colr ert">
-                           <label class="radio"><input type="radio" name="radio" checked=""><i></i> Soft Teddy Bear (Black)</label>
-                        </div>
-                        <div class="colr">
-                           <label class="radio"><input type="radio" name="radio"><i></i>Soft Teddy Bear (Brown)</label>
-                        </div>
-                        <div class="colr">
-                           <label class="radio"><input type="radio" name="radio"><i></i>Pink Teddy Bear (Pink)</label>
-                        </div>
-                        <div class="clearfix"> </div>
-                     </div>
+                    
+                     
                      <div class="occasion-cart">
                         <div class="toys single-item singlepage">
                            <form action="#" method="post">
@@ -143,17 +151,13 @@
                            <!--/tab_one-->
                            <div class="tab1">
                               <div class="single_page">
-                                 <h6>Lorem ipsum dolor sit amet</h6>
+                                 <h6>About Product</h6>
                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
                                     blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt
                                     ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore
                                     magna aliqua.
                                  </p>
-                                 <p class="para">Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
-                                    blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                                    ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore
-                                    magna aliqua.
-                                 </p>
+                                 
                               </div>
                            </div>
                            <!--//tab_one-->

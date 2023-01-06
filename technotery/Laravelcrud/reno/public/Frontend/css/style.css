@@ -1568,3 +1568,16 @@ h3.typo-main-heading {
 }
 /*--//responsive--*/
 
+/*slider*/
+  .slider-nav-img img
+  {
+    height:100px;
+    width: 100px;
+    padding: 10px;
+  }
+
+
+
+
+  /*login css*/
+  

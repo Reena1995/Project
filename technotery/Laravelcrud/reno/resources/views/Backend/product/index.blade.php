@@ -49,6 +49,7 @@
                         <td>{{$product->name}}</td>
                         <td>
                             <a class="btn btn-primary"  href="{{route('product.edit',$product->uuid)}}"><i class="fe fe-pencil"></i> Edit</a>
+                            
                             <a class="btn btn-info"  href="{{route('product.show',$product->uuid)}}"><i class="fe fe-pencil"></i> Show</a>	
                             <a class="btn btn-warning"  href="{{route('product.status',$product->uuid)}}"><i class="fe fe-pencil"></i>Delete</a>																	
                         </td>

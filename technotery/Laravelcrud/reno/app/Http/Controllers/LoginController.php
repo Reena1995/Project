@@ -31,11 +31,19 @@ class LoginController extends Controller
             if(auth()->user()->role_id == 1){
                 return redirect()->route('index');
             }else{
-                dd("home page");
+                return redirect()->route('frontend.home');
             }
         }
-
         return 'Failure';
     }
+    public function logout()
+    {
+       Auth::logout();
+	    return  redirect()->route('login-page');  
+    }
+
+    
 }
+
+
 

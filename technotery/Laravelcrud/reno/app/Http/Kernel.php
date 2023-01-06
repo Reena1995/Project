@@ -51,6 +51,7 @@ class Kernel extends HttpKernel
         'afterlogin'=>[
             \App\Http\Middleware\afterlogin::class
         ],
+        
     ];
 
     /**

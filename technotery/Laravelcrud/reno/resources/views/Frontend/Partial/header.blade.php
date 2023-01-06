@@ -1,9 +1,4 @@
-<!--A Design by W3layouts
-   Author: W3layout
-   Author URL: http://w3layouts.com
-   License: Creative Commons Attribution 3.0 Unported
-   License URL: http://creativecommons.org/licenses/by/3.0/
-   -->
+
 <!DOCTYPE html>
 <html lang="zxx">
    <head>
@@ -23,6 +18,7 @@
          }
       </script>
       <!--//meta tags ends here-->
+      <meta name="csrf-token" content="{{ csrf_token() }}">
       <!--booststrap-->
       <link href="{{url('Frontend/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" media="all">
       <!--//booststrap end-->
@@ -32,15 +28,26 @@
       <!-- For Clients slider -->
       <link rel="stylesheet" href="{{url('Frontend/css/flexslider.css')}}" type="text/css" media="all" />
       <!--flexs slider-->
-      <link href="{{url('Frontend/css/JiSlider.css')}}" rel="stylesheet">
+      <!-- <link href="{{url('Frontend/css/JiSlider.css')}}" rel="stylesheet"> -->
       <!--Shoping cart-->
+      <link rel="stylesheet" href="{{url('Frontend/css/jquery-ui1.css')}}" type="text/css" />
       <link rel="stylesheet" href="{{url('Frontend/css/shop.css')}}" type="text/css" />
+      <link rel="stylesheet" href="{{url('Frontend/css/easy-responsive-tabs.css')}}" type="text/css" />
+      <link rel="stylesheet" href="{{url('Frontend/css/flexslider.css')}}" type="text/css" /> 
       <!--//Shoping cart-->
       <!--stylesheets-->
       <link href="{{url('Frontend/css/style.css')}}" rel='stylesheet' type='text/css' media="all">
       <!--//stylesheets-->
       <link href="//fonts.googleapis.com/css?family=Sunflower:500,700" rel="stylesheet">
       <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet"> 
+      
+      
+      <!-- slick slider -->
+      <link rel="stylesheet" href="{{url('Frontend/css/slick.css')}}" />
+        <link rel="stylesheet" href="{{url('Frontend/css/slick-theme.css')}}" />
+
+
+
    </head>
 	<body>
 	<body>
@@ -129,9 +136,9 @@
                         </a>
                        
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        
+                        <!-- <a class="nav-link" href="{{route('frontend.allproduct')}}">All Product</a> -->
                         @foreach($productModel->allCategory() as $cat)
-                           <a class="nav-link" href="">{{$cat->name}}</a>
+                           <a class="nav-link" href="{{route('frontend.findproduct',encrypt($cat->id))}}">{{$cat->name}}</a>
                         @endforeach
                         </div>
                        
@@ -141,16 +148,22 @@
                         Product
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                           <a class="nav-link" href="{{route('frontend.product')}}">Kids Toys</a>
-                           <a class="nav-link " href="{{route('frontend.product')}}">Dolls</a>
-                           <a class="nav-link " href="{{route('frontend.product')}}">Key Toys</a>
-                           <a class="nav-link " href="{{route('frontend.product')}}">Boys Toys</a>
+                           
+                              <a class="nav-link" href="{{route('frontend.allproduct')}}">All Product</a>
+                             
                         </div>
                      </li>
                      <li class="nav-item">
                         <a href="{{route('frontend.contact')}}" class="nav-link">Contact</a>
                      </li>
+                     
+                     
                   </ul>
-               </div>
+                  @if(Auth::user())
+                     <a class="btn btn-primary"  href="{{route('Logout')}}">Logout</a>
+                  @else
+                  <a class="btn btn-primary"  href="{{route('login-page')}}">Login</a>
+                  @endif
+                  </div>
             </nav>
          </div>

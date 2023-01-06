@@ -17,28 +17,41 @@ class Product extends Model
         $categories = Category::where('is_active',1)->get();
         return $categories;
     }
+    
     public function proImages()
     {
         return $this->hasMany(Image::class,'product_id','id');
     }
 
+    public function allimages()
+    {
+        return $this->hasMany(Image::class,'product_id','id')->where('is_active',1); 
+    }
+
+    public function isFeatureoneimage()
+    {
+        return $this->proImages()->where('is_active',1)->where('is_feature',1);        
+    }
+
+   
     public function proDetail()
     {
         return $this->hasOne(ProductDetail::class,'product_id','id');
     }
 
-    public function IsFeaturedImage()
+    
+	 public function IsFeaturedImage()
     {
         return $this->proImages()->where('is_feature',1)->where('is_active',1);
     }
-
+	
     public function GalleryImage()
     {
-       
-        
-            return $this->proImages()->where('is_feature',0)->where('is_active',1);
-          
-           
+            return $this->proImages()->where('is_feature',0)->where('is_active',1);  
+    }
+    public function favourite()
+    {
+        return $this->hasOne(Favourite::class,'product_id','id')->where('user_id',auth()->user()->id);
     }
 
 }

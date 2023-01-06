@@ -44,109 +44,58 @@
       <!-- //Modal 1-->
       <!--js working-->
       <script src='{{url('Frontend/js/jquery-2.2.3.min.js')}}'></script>
-      <!--//js working-->
-      <!-- cart-js -->
-      <script src="{{url('Frontend/js/minicart.js')}}"></script>
-      <script>
-         toys.render();
-         
-         toys.cart.on('toys_checkout', function (evt) {
-         	var items, len, i;
-         
-         	if (this.subtotal() > 0) {
-         		items = this.items();
-         
-         		for (i = 0, len = items.length; i < len; i++) {}
-         	}
-         });
-      </script>
+      
+      <script src="{{url('Frontend/js/minicart.js')}}"></script> 
       <!-- //cart-js -->
       <!--responsiveslides banner-->
+      <script src="{{url('Frontend/js/jquery-ui.js')}}"></script>
       <script src="{{url('Frontend/js/responsiveslides.min.js')}}"></script>
-      <script>
-         // You can also use "$(window).load(function() {"
-         $(function () {
-         	// Slideshow 4
-         	$("#slider4").responsiveSlides({
-         		auto: true,
-         		pager:false,
-         		nav:true ,
-         		speed: 900,
-         		namespace: "callbacks",
-         		before: function () {
-         			$('.events').append("<li>before event fired.</li>");
-         		},
-         		after: function () {
-         			$('.events').append("<li>after event fired.</li>");
-         		}
-         	});
-         
-         });
-      </script>
+      <script src="{{url('Frontend/js/imagezoom.js')}}"></script>
+      <script src="{{url('Frontend/js/easy-responsive-tabs.js')}}"></script>
+      <script src="{{url('Frontend/js/jquery.flexslider.js')}}"></script>
+      
       <!--// responsiveslides banner-->	 
       <!--slider flexisel -->
-      <script src="{{url('Frontend/js/jquery.flexisel.js')}}"></script>
-      <script>
-         $(window).load(function() {
-         	$("#flexiselDemo1").flexisel({
-         		visibleItems: 3,
-         		animationSpeed: 3000,
-         		autoPlay:true,
-         		autoPlaySpeed: 2000,    		
-         		pauseOnHover: true,
-         		enableResponsiveBreakpoints: true,
-         		responsiveBreakpoints: { 
-         			portrait: { 
-         				changePoint:480,
-         				visibleItems: 1
-         			}, 
-         			landscape: { 
-         				changePoint:640,
-         				visibleItems:2
-         			},
-         			tablet: { 
-         				changePoint:768,
-         				visibleItems: 2
-         			}
-         		}
-         	});
-         	
-         });
-      </script>
-      <!-- //slider flexisel -->
-      <!-- start-smoth-scrolling -->
+      <script src="{{url('Frontend/js/jquery.flexisel.js')}}"></script> 
       <script src="{{url('Frontend/js/move-top.js')}}"></script>
       <script src="{{url('Frontend/js/easing.js')}}"></script>
-      <script>
-         jQuery(document).ready(function ($) {
-         	$(".scroll").click(function (event) {
-         		event.preventDefault();
-         		$('html,body').animate({
-         			scrollTop: $(this.hash).offset().top
-         		}, 900);
-         	});
-         });
-      </script>
-      <!-- start-smoth-scrolling -->
-      <!-- here stars scrolling icon -->
-      <script>
-         $(document).ready(function () {
-         
-         	var defaults = {
-         		containerID: 'toTop', // fading element id
-         		containerHoverID: 'toTopHover', // fading element hover id
-         		scrollSpeed: 1200,
-         		easingType: 'linear'
-         	};
-         	$().UItoTop({
-         		easingType: 'easeOutQuart'
-         	});
-         
-         });
-      </script>
-      <!-- //here ends scrolling icon -->
-      <!--bootstrap working-->
       <script src="{{url('Frontend/js/bootstrap.min.js')}}"></script>
-      <!-- //bootstrap working-->
+      <script src="{{url('Frontend/js/single.js')}}"></script> 
+
+
+      <!-- 123 -->
+      <!-- slik slider  -->
+        <!-- <script src="{{url('Frontend/js/jquery-3.6.2.min.js')}}"></script>
+        <script src="{{url('Frontend/js/jquery-migrate-1.2.1.min.js')}}"></script> -->
+        <script src="{{url('Frontend/JS/slick.js')}}"></script>
+        <script src="{{url('Frontend/js/slick.min.js')}}"></script>
+
+        <script>
+         $(document).ready(function () {
+            $('.slider-for').slick({
+               slidesToShow: 1,
+               slidesToScroll: 1,
+               arrows: false,
+               // fade: true,
+               asNavFor: '.slider-nav'
+               });
+               $('.slider-nav').slick({
+               slidesToShow: 3,
+               slidesToScroll: 1,
+               asNavFor: '.slider-for',
+               dots: true,
+               centerMode: true,
+               focusOnSelect: true
+            });
+            // $('.slider-img-tag').slick({
+            //    infinite: true,
+            //    slidesToShow: 1,
+            //    slidesToScroll: 1,
+            //    dots: true,
+            //    infinite: true,
+            //    speed: 300,
+            //    });
+            });
+        </script>
    </body>
 </html>

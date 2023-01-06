@@ -314,8 +314,24 @@
                      <p><b>{{$pro->name}}</b></p>
                      <p style="color:red;"><b >{{$pro->proDetail->actualprice}}</b></p>
                      <p style="color:green;"><b>{{$pro->proDetail->discountprice}}</b></p>
-                     <!-- <i class="fa fa-heart" style="color:red;font-size:25px;" aria-hidden="true"></i> -->
-                     <a data-id="{{$pro->id}}"><i class="far fa-heart"  style="color:red;font-size:25px;" aria-hidden="true"></a></i>
+                    
+                     <div class="tagWrapper">
+                        @if(!empty($pro->favourite) && ($pro->favourite->is_active == 1))
+                        <a data-id="{{$pro->id}}" class="unfavourite" > <i class="fa fa-heart heartdel"  style="color:red;font-size:25px;" aria-hidden="true"></i></a>
+                        @else
+                        <a data-id="{{$pro->id}}" class="favourite" >  <i class="far fa-heart tagDelete"  style="color:red;font-size:25px;" aria-hidden="true"></i></a>
+                        @endif 
+                     
+                     </div>
+                     <!-- <div class="tagWrapper">
+                        <a data-id="{{$pro->id}}" class="favourite" >
+                        <i class="far fa-heart tagDelete"  style="color:red;font-size:25px;" aria-hidden="true"></i>
+                        </a>
+                     </div> -->
+                     <!-- <a data-id="{{$pro->id}}" class="favourite" >
+                        <i class="far fa-heart "  style="color:red;font-size:25px;" aria-hidden="true"></i>
+                     </a> -->
+                    
                      <p style="color:gery;"><b>Wishlist</b></p>
                      <div class="clients_more-buttn">
                         <a href="{{route('frontend.productdetail',$pro->uuid)}}">Shop Now</a>
@@ -461,12 +477,5 @@
       </section>
       <!--//subscribe-->
 	  @endsection
-     @section('script')
-     <script>
-      $(document).ready (function (){
-
-      });
-      </script>
-     @endscript
-	  
+    
       

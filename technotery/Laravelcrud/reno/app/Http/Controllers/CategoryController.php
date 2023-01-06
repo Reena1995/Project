@@ -21,13 +21,7 @@ class CategoryController extends Controller
         return view("Backend.Category.index");
         
     }
-    public function frontedcategory()
-    {
-        $cats = Category::where('is_active',1)->get(); 
-        // dd($cats);
-        return view("Frontend.index",compact('cats'));
-        
-    }
+    
 
 
     

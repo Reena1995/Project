@@ -15,13 +15,14 @@ class afterlogin
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
-    {
+    { 
         if(auth()->user())
         {
-            if(auth()->user()->role_id == 1)
-            {
-                return $next($request);
-            }
+            // if(auth()->user()->role_id == 1)
+            // {
+            //     return $next($request);
+            // }
+            return $next($request);
         }else
         {
             return redirect()->route('login-page');
