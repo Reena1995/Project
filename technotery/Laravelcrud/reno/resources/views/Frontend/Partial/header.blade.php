@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="zxx">
    <head>
@@ -45,6 +46,8 @@
       <!-- slick slider -->
       <link rel="stylesheet" href="{{url('Frontend/css/slick.css')}}" />
         <link rel="stylesheet" href="{{url('Frontend/css/slick-theme.css')}}" />
+        <!--sweet alert-->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 
@@ -84,7 +87,7 @@
                      <div class="cart-icons">
                         <ul>
                            <li>
-                              <span class="far fa-heart"></span>
+                              <span class="mainwishlist"><a   class="far fa-heart" href="{{route('index.wishlist')}}"></a></span>
                            </li>
                            <li>
                               <button type="button" data-toggle="modal" data-target="#exampleModal"> <span class="far fa-user"></span></button>

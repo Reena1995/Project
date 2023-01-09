@@ -49,25 +49,65 @@ class FrontendProductController extends Controller
         DB::beginTransaction();
         try{
             $userid=Auth::user()->id;
+            $productId = $request->id;
             // \Log::info($userid);
-            
-
-            $favourite = new Favourite;
-            $favourite->user_id= $userid;
-            $favourite->Product_id= $request->id;
-            $favourite->uuid = \Str::uuid();
-    
-            $res = $favourite->save();
-
-           
-            if(!$res)
+             
+            $favourite = Favourite::where('product_id',$productId)->where('user_id',$userid)->where('is_active',1)->first();
+            \Log::info($favourite);
+            if(is_null($favourite))
             {
-                DB::rollback();
-                return response()->json(['success'=>false,'message'=>'Internal server error.please try again later.'],500);
-               
-            } 
+                $newFavourite = new Favourite();
+                $newFavourite->user_id= $userid;
+                $newFavourite->Product_id= $productId;
+                $newFavourite->uuid = \Str::uuid();
+                $newFavourite->is_active = 1;
+               $res = $newFavourite->save();
+               if(!$res)
+                {
+                    DB::rollback();
+                    return response()->json(['success'=>false,'message'=>'Internal server error.please try again later.'],500);
+                
+                } 
+                $fav = 1;
+               $msg= "add successfully";
+
+                
+            }else{
+                $favourite->is_active = 0;
+                $res = $favourite->update();
+                if(!$res)
+                {
+                    DB::rollback();
+                    return response()->json(['success'=>false,'message'=>'Internal server error.please try again later.'],500);
+                
+                } 
+               $fav = 0;
+               $msg= "remove successfully";
+            }
+            \Log::info($favourite);
+          /*   $fav = '1';
+            $msg = 'Favourite';
+            if(!empty($favourite) && !empty($favourite->id)){
+                if($favourite->is_active == '1'){
+                    $fav = '0';
+                    $msg = 'Un-Favourite';
+                 
+                }
+                
+            }else{
+                $favourite = new Favourite();
+                $favourite->user_id= $userid;
+                $favourite->Product_id= $productId;
+                $favourite->uuid = \Str::uuid();
+            }
+            $favourite->is_active = $fav;
+            $res = $favourite->save(); */
+           
+            
             DB::commit();
-            return response()->json(['success'=>true,'message'=>'Add Favourite successfully'],200);
+            // return response()->json(['success'=>true,'message'=>$msg],200);
+            return response()->json(['success'=>true,'faveriot'=>$fav,'message'=>$msg],200);
+            // Alert::success('Congrats', 'You\'ve Successfully Registered');
              
 
         }
@@ -75,13 +115,14 @@ class FrontendProductController extends Controller
                 \Log::info("ERROR: CODE: " . $exception->getCode());
                 \Log::info("ERROR: Message: " . $exception->getMessage());
                 DB::rollback();
-                return response()->json(['message'=>'Internal server error.please try again later.'],500);
+                return response()->json(['success'=>false,'message'=>'Internal server error.please try again later.'],500);
 
         }
        
        
     }
     
+   
     public function index()
     {
         //

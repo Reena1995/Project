@@ -332,7 +332,9 @@ class ProductController extends Controller
     ////////////////////////////////////////////////////////////////////
     public function imageupdate(Request $request)
     { 
-            $id = $request->input('id');   
+            $id = $request->input('id'); 
+            // \Log::info($id);  
+            
             $image = Image::where('uuid',$id)->first();
             if($image->id){               
               

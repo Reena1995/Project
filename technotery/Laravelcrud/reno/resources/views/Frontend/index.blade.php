@@ -316,13 +316,17 @@
                      <p style="color:green;"><b>{{$pro->proDetail->discountprice}}</b></p>
                     
                      <div class="tagWrapper">
-                        @if(!empty($pro->favourite) && ($pro->favourite->is_active == 1))
-                        <a data-id="{{$pro->id}}" class="unfavourite" > <i class="fa fa-heart heartdel"  style="color:red;font-size:25px;" aria-hidden="true"></i></a>
-                        @else
-                        <a data-id="{{$pro->id}}" class="favourite" >  <i class="far fa-heart tagDelete"  style="color:red;font-size:25px;" aria-hidden="true"></i></a>
-                        @endif 
+                        
+                        <a data-id="{{$pro->id}}"   class="favourite" > 
+                           @if(!empty($pro->favourite) && ($pro->favourite->is_active == '1'))
+                              <i class="fa fa-heart "  style="color:red;font-size:25px;" aria-hidden="true"></i>
+                           @else
+                              <i class="far fa-heart "  style="color:red;font-size:25px;" aria-hidden="true"></i>
+                           @endif
+                        </a>  
                      
                      </div>
+
                      <!-- <div class="tagWrapper">
                         <a data-id="{{$pro->id}}" class="favourite" >
                         <i class="far fa-heart tagDelete"  style="color:red;font-size:25px;" aria-hidden="true"></i>

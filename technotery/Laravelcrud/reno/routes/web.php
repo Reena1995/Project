@@ -86,7 +86,9 @@ Route::get('/ajax-json',[AjaxController::class,'ajaxGetUser'])->name('ajaxGetUse
      // Route::get('/productdetail', function () {return view('Frontend.productdetail');})->name('frontend.productdetail');
      Route::get('/home',[IndexController::class,'frontedcategory'])->name('frontend.home');
      Route::post('/indexfavourite',[FrontendProductController::class,'favourite'])->name('index.favourite');
-
+     Route::get('/wishlist',[IndexController::class,'wishlist'])->name('index.wishlist');
+     Route::post('/unwishlist',[IndexController::class,'unwishlist'])->name('index.unwishlist');
+    
      Route::get('/findproduct/{id}',[FrontendProductController::class,'frontedfindproduct'])->name('frontend.findproduct');
      Route::get('/productdetail/{id}',[FrontendProductController::class,'frontedproduct'])->name('frontend.productdetail');
      Route::get('/allproduct',[FrontendProductController::class,'frontedallproduct'])->name('frontend.allproduct');

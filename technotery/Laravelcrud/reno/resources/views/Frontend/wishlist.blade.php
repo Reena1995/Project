@@ -8,7 +8,7 @@
                      <div class="slider-img one-img">
                         <div class="container">
                            <div class="slider-info ">
-                              <h5>{{ !empty($categoryName)?ucfirst($categoryName):'All Products'}}</h5>
+                              <h5>My Wishlist product</h5>
                               <div class="bottom-info">
                                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Aenean commodo ligula eget dolorL orem ipsum dolor sit amet eget dolor</p>
                               </div>
@@ -62,24 +62,20 @@
       <!-- about -->
       <section class="about py-lg-4 py-md-3 py-sm-3 py-3" id="about">
          <div class="container py-lg-5 py-md-5 py-sm-4 py-4">
-            <h3 class="title text-center mb-lg-5 mb-md-4  mb-sm-4 mb-3">{{ !empty($categoryName)?ucfirst($categoryName):'All Products'}}</h3>
+            <h3 class="title text-center mb-lg-5 mb-md-4  mb-sm-4 mb-3">Whishlist </h3>
             <div class="row banner-below-w3l">
-            @foreach($allproducts as $allpro)
-               <div class="col-lg-4 col-md-6 col-sm-6 text-center banner-agile-flowers">
-               <a href="{{route('frontend.productdetail',$allpro->uuid)}}"><img src="{{asset('Upload/Product/' . $allpro->isFeatureoneimage[0]->image)}}"   class="img-thumbnail" style="height:250px;width:250px;" alt=""></a>
+            @foreach($whishlist as $wish)
+
+               <div class="col-lg-4 col-md-6 col-sm-6 text-center banner-agile-flowers" id="product_wish-{{$wish->id}}">
+                  <a href="{{route('frontend.productdetail',$wish->uuid)}}"><img src="{{asset('Upload/Product/' . $wish->product->isFeatureoneimage[0]->image)}}"   class="img-thumbnail" style="height:250px;width:250px;" alt=""></a>
                   <div class="banner-right-icon">
-                     <h4 class="pt-3">{{$allpro->name}}</h4>
-                     <h4 class="pt-3" style="color:red;">{{$allpro->proDetail->actualprice}}</h4>
-                     <h4 class="pt-3" style="color:green;">{{$allpro->proDetail->discountprice}}</h4>
-                     
+                     <h4 class="pt-3">{{$wish->product->name}}</h4>
+                     <h4 class="pt-3" style="color:red;">{{$wish->product->proDetail->actualprice}}</h4>
+                     <h4 class="pt-3" style="color:green;">{{$wish->product->proDetail->discountprice}}</h4>
                      <div class="tagWrapper">
                         
-                        <a data-id="{{$allpro->id}}"   class="favourite" > 
-                           @if(!empty($allpro->favourite) && ($allpro->favourite->is_active == '1'))
-                              <i class="fa fa-heart heartdel"  style="color:red;font-size:25px;" aria-hidden="true"></i>
-                           @else
-                              <i class="far fa-heart tagDelete"  style="color:red;font-size:25px;" aria-hidden="true"></i>
-                           @endif
+                        <a data-id="{{$wish->id}}"   class="unwished" > 
+                           <i class="fa fa-heart "  style="color:red;font-size:25px;" aria-hidden="true"></i>                          
                         </a>  
                   
                      </div>
@@ -132,6 +128,50 @@
       </section>
       <!--//subscribe-->
 	  @endsection
-	  
+	  @section('script')
+     <script>
+       $(document).ready (function (){
+         $(document).on('click','.unwished', function (e){
+			e.preventDefault();
+            console.log('unwisedddd')
+
+            var wishlistId = $(this).data('id');
+            console.log(wishlistId, 'wishlistId this tag');
+
+
+            $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            });
+
+            $.ajax({
+               type: 'post',
+               url: '/unwishlist',
+               // url: '{{route("index.favourite")}}',
+               data: {
+                     'id': wishlistId,
+               },
+               success: function (response) { 
+                     console.log(response, 'response');
+                     console.log('hhhhhhhh'); 
+                     if (response.success == true) {
+                        console.log(response.success, 'response.status');
+                        
+                        swal.fire(response.message);
+                        $('#product_wish-'+wishlistId).remove();
+                     }
+                     else {
+
+                     }
+               }
+            });
+
+         });
+
+       });
+     </script>
+     
+     @endsection
     
 	  

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\{Category,Product,Favourite};
 use Auth;
+use DB;
 
 class IndexController extends Controller
 {
@@ -30,6 +31,46 @@ class IndexController extends Controller
         
         return view("Frontend.index",compact('cats','productss'));
         
+        
+    }
+
+    public function wishlist()
+     {
+        $whishlist = Favourite::where('user_id',Auth::id())->where('is_active',1)->get(); 
+        // dd($whishlist);
+        return view("Frontend.wishlist",compact('whishlist'));
+        
+    }
+
+    public function unwishlist(Request $request)
+     {
+        DB::beginTransaction();
+        try{
+            $wishId = $request->input('id');
+            // \Log::info($userid);
+             
+            $favourite = Favourite::whereId($wishId)->first();
+            \Log::info(json_encode($favourite));
+            $favourite->is_active = 0;
+            $res = $favourite->update();
+            if(!$res) {
+                DB::rollback();
+                return response()->json(['success'=>false,'message'=>'Internal server error.please try again later.'],500);
+            }
+            \Log::info($favourite);            
+            DB::commit(); 
+            return response()->json(['success'=>true,'message'=>"Product remove from wishlist"],200);
+        }
+        catch (\Exception $exception) {
+                \Log::info("ERROR: CODE: " . $exception->getCode());
+                \Log::info("ERROR: Message: " . $exception->getMessage());
+                DB::rollback();
+                return response()->json(['success'=>false,'message'=>'Internal server error.please try again later.'],500);
+
+        }
+       
+       
+        return view("Frontend.wishlist");
         
     }
     

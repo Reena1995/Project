@@ -83,12 +83,15 @@
                            </div> -->
 
                         <div class="tagWrapper">
-                              @if(!empty($productts->favourite) && ($productts->favourite->is_active == 1))
-                              <a data-id="{{$productts->id}}" class="unfavourite" > <i class="fa fa-heart heartdel"  style="color:red;font-size:25px;" aria-hidden="true"></i></a>
+                        
+                           <a data-id="{{$productts->id}}"   class="favourite" > 
+                              @if(!empty($productts->favourite) && ($productts->favourite->is_active == '1'))
+                                 <i class="fa fa-heart heartdel"  style="color:red;font-size:25px;" aria-hidden="true"></i>
                               @else
-                              <a data-id="{{$productts->id}}" class="favourite" >  <i class="far fa-heart tagDelete"  style="color:red;font-size:25px;" aria-hidden="true"></i></a>
-                              @endif 
-                           </a>
+                                 <i class="far fa-heart tagDelete"  style="color:red;font-size:25px;" aria-hidden="true"></i>
+                              @endif
+                           </a>  
+                     
                         </div>
                      </form>
                      </div>
