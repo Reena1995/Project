@@ -130,46 +130,87 @@
 	  @endsection
 	  @section('script')
      <script>
-       $(document).ready (function (){
-         $(document).on('click','.unwished', function (e){
-			e.preventDefault();
-            console.log('unwisedddd')
+        $(document).on('click','.unwished', function (e){
+           e.preventDefault();
+           console.log('unwisedddd')
+           
+           if(isLogin)
+            {
+                  var wishlistId = $(this).data('id');
+                  console.log(wishlistId, 'wishlistId this tag');
 
-            var wishlistId = $(this).data('id');
-            console.log(wishlistId, 'wishlistId this tag');
 
+                  $.ajaxSetup({
+                  headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+                  });
 
-            $.ajaxSetup({
-            headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-            });
+                  
+                  $.ajax({
+                     type: 'post',
+                     url: '/unwishlist',
+                     data: {
+                           'id': wishlistId,
+                     },
+                     success: function (response) { 
+                           console.log(response, 'responsesssssssss');
+                           console.log('hhhhhhhh'); 
+                           if (response.success == true) {
+                              console.log(response.success, 'response.status');
+                              
+                              swal.fire(response.message);
+                              $('#product_wish-'+wishlistId).remove();
+                           }
+                           else {
+                              console.log("reeor");
+                              swal.fire(response.message);
+                           }
 
-            $.ajax({
-               type: 'post',
-               url: '/unwishlist',
-               // url: '{{route("index.favourite")}}',
-               data: {
-                     'id': wishlistId,
-               },
-               success: function (response) { 
-                     console.log(response, 'response');
-                     console.log('hhhhhhhh'); 
-                     if (response.success == true) {
-                        console.log(response.success, 'response.status');
+                     }, 
+                     error: function(xhr, exception) {
+                        console.log('xhr',xhr);
+                        var error = false;
+                        var msg = '';
                         
-                        swal.fire(response.message);
-                        $('#product_wish-'+wishlistId).remove();
-                     }
-                     else {
+                        if(xhr.status === 0)
+                        {
+                           msg = 'Not connected.',
+                           error = true;
+                           $('.headercategories').html(msg);
 
-                     }
-               }
-            });
+                        }else if(xhr.status == 404){
+                           msg = 'Page not found.',
+                           error = true;
+                           $('.headercategories').html(msg);
 
-         });
+                        }else if(xhr.status === 500){
+                           msg = 'Internal server errorrrr.',
+                           error = true;
+                           $('.headercategories').html(msg);
+                           // swal.fire(exception.success);
 
-       });
+                        }else{
+                           msg="something went wrong".
+                           error = true;
+                        }
+                        swal.fire(msg);
+
+                        
+                     },
+
+                  });
+            
+                        
+            }
+            else{
+                      console.log('checkkkkk');
+                     window.location.href="{{route('login-page')}}";
+            }
+           
+
+
+        });
      </script>
      
      @endsection

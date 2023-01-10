@@ -52,7 +52,7 @@ class Product extends Model
     public function favourite()
     {
         $userId = auth()->user()->id ?? 0;
-        return $this->hasOne(Favourite::class,'product_id','id')->where('user_id',$userId);
+        return $this->hasOne(Favourite::class,'product_id','id')->where('user_id',$userId)->orderBY('id','DESC');
     }
 
 }

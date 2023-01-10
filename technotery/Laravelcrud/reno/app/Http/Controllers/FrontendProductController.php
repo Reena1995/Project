@@ -48,6 +48,7 @@ class FrontendProductController extends Controller
 
         DB::beginTransaction();
         try{
+            
             $userid=Auth::user()->id;
             $productId = $request->id;
             // \Log::info($userid);
@@ -73,7 +74,7 @@ class FrontendProductController extends Controller
 
                 
             }else{
-                $favourite->is_active = 0;
+                $favourite->is_actives = 0;
                 $res = $favourite->update();
                 if(!$res)
                 {
@@ -85,29 +86,12 @@ class FrontendProductController extends Controller
                $msg= "remove successfully";
             }
             \Log::info($favourite);
-          /*   $fav = '1';
-            $msg = 'Favourite';
-            if(!empty($favourite) && !empty($favourite->id)){
-                if($favourite->is_active == '1'){
-                    $fav = '0';
-                    $msg = 'Un-Favourite';
-                 
-                }
-                
-            }else{
-                $favourite = new Favourite();
-                $favourite->user_id= $userid;
-                $favourite->Product_id= $productId;
-                $favourite->uuid = \Str::uuid();
-            }
-            $favourite->is_active = $fav;
-            $res = $favourite->save(); */
-           
+         
             
             DB::commit();
-            // return response()->json(['success'=>true,'message'=>$msg],200);
+          
             return response()->json(['success'=>true,'faveriot'=>$fav,'message'=>$msg],200);
-            // Alert::success('Congrats', 'You\'ve Successfully Registered');
+           
              
 
         }

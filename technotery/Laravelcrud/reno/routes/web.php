@@ -57,8 +57,9 @@ Route::group(['middleware'=>['afterlogin']], function()
     Route::get('registeredit/{id}',[RegisterController::class,'edit']);
     Route::put('registupdate/{id}',[RegisterController::class,'update']);
     Route::delete('registerdelete/{id}',[RegisterController::class,'destroy']);
-    /////////////////////////////////////Frontend///////////////////////////////////////////
-    
+    /////////////////////////////////////Frontend side pages///////////////////////////////////////////
+    Route::get('/wishlist',[IndexController::class,'wishlist'])->name('index.wishlist');
+    Route::post('/unwishlist',[IndexController::class,'unwishlist'])->name('index.unwishlist');
     
    //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -79,15 +80,14 @@ Route::get('/ajax-json',[AjaxController::class,'ajaxGetUser'])->name('ajaxGetUse
 
 
 
-////////////////////////////////////////////////////////////////////////////
+/////////////////////////////frontend///////////////////////////////////////////////
 
 
 
      // Route::get('/productdetail', function () {return view('Frontend.productdetail');})->name('frontend.productdetail');
      Route::get('/home',[IndexController::class,'frontedcategory'])->name('frontend.home');
      Route::post('/indexfavourite',[FrontendProductController::class,'favourite'])->name('index.favourite');
-     Route::get('/wishlist',[IndexController::class,'wishlist'])->name('index.wishlist');
-     Route::post('/unwishlist',[IndexController::class,'unwishlist'])->name('index.unwishlist');
+     
     
      Route::get('/findproduct/{id}',[FrontendProductController::class,'frontedfindproduct'])->name('frontend.findproduct');
      Route::get('/productdetail/{id}',[FrontendProductController::class,'frontedproduct'])->name('frontend.productdetail');

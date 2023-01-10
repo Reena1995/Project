@@ -38,8 +38,19 @@ class LoginController extends Controller
     }
     public function logout()
     {
-       Auth::logout();
-	    return  redirect()->route('login-page');  
+        if(auth()->user()->role_id == 1)
+        {
+            
+            Auth::logout();
+            return  redirect()->route('login-page');  
+        }
+        else
+        {
+            Auth::logout();
+            return  redirect()->route('frontend.home');  
+        }
+            
+	    
     }
 
     

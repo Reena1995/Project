@@ -49,7 +49,7 @@ class IndexController extends Controller
             $wishId = $request->input('id');
             // \Log::info($userid);
              
-            $favourite = Favourite::whereId($wishId)->first();
+            $favourite = Favourite::where('id',$wishId)->first();
             \Log::info(json_encode($favourite));
             $favourite->is_active = 0;
             $res = $favourite->update();
@@ -65,7 +65,7 @@ class IndexController extends Controller
                 \Log::info("ERROR: CODE: " . $exception->getCode());
                 \Log::info("ERROR: Message: " . $exception->getMessage());
                 DB::rollback();
-                return response()->json(['success'=>false,'message'=>'Internal server error.please try again later.'],500);
+                return response()->json(['success'=>false,'message1'=>'Internal server error.please try again later.'],500);
 
         }
        

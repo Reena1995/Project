@@ -132,6 +132,100 @@
       </section>
       <!--//subscribe-->
 	  @endsection
+     
+     @section('script')
+     <script>
+        $(document).on('click','.favourite', function (e){
+           e.preventDefault();
+
+            if(isLogin)
+            {
+               console.log('xxxxxxxxxxxx');
+               var Product_id = $(this).data('id');
+               console.log(Product_id, 'product id find');
+               var favTag = $(this);
+               console.log(favTag, 'fav tag');
+            
+                     $.ajaxSetup({
+                           headers: {
+                              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                           }
+                     });
+                  
+                     $.ajax({
+                           type: 'post',
+                           url: '{{route("index.favourite")}}',
+                           // url: '{{route("index.favourite")}}',
+                           data: {
+                              'id': Product_id,
+                           },
+                           success: function (response) { 
+                              console.log(response, 'response');
+                              console.log('hhhhhhhh'); 
+                              if (response.success == true) {
+                                 console.log(response.success, 'response.status');
+                                 // swal.fire(response.message);
+                                 if (response.faveriot == 1) {
+                                       favTag.find('.fa-heart').removeClass('far').addClass('fa');
+                                 //    swal.fire('Product added succesfully.');
+                                          swal.fire(response.message)
+                                    
+                                    
+                                       
+                                 } else {
+                                       favTag.find('.fa-heart').removeClass('fa').addClass('far');
+                                       swal.fire(response.message)
+                                 }
+                              }
+                              else{
+                                 console.log('121');
+                                 swal.fire(response.message);
+                              }
+                           },
+                           error: function(xhr, exception) {
+                              console.log('xhr',xhr);
+                           var error = false;
+                           var msg = '';
+                           
+                              if(xhr.status === 0)
+                              {
+                                 msg = 'Not connected.',
+                                 error = true;
+                                 $('.headercategories').html(msg);
+                  
+                              }else if(xhr.status == 404){
+                                 msg = 'Page not found.',
+                                 error = true;
+                                 $('.headercategories').html(msg);
+                  
+                              }else if(xhr.status === 500){
+                                 msg = 'Internal server errorrrrreena.',
+                                 error = true;
+                                 $('.headercategories').html(msg);
+                              // swal.fire(exception.success);
+                  
+                              }else{
+                              msg="something went wrong".
+                                 error = true;
+                              }
+                              swal.fire(msg);
+                  
+                           
+                           },
+                     });
+                  
+                  }
+                  else{
+                     console.log('checkkkkk');
+                     window.location.href="{{route('login-page')}}";
+                  }
+                  
+
+         });
+     </script>
+     
+     @endsection
+    
 	  
     
 	  

@@ -49,7 +49,7 @@
         <!--sweet alert-->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
+        <script>var isLogin = "{{ !empty(Auth::user())?true:false}}";</script>
 
    </head>
 	<body>
@@ -87,7 +87,9 @@
                      <div class="cart-icons">
                         <ul>
                            <li>
+                              
                               <span class="mainwishlist"><a   class="far fa-heart" href="{{route('index.wishlist')}}"></a></span>
+                              
                            </li>
                            <li>
                               <button type="button" data-toggle="modal" data-target="#exampleModal"> <span class="far fa-user"></span></button>
@@ -170,3 +172,4 @@
                   </div>
             </nav>
          </div>
+       
