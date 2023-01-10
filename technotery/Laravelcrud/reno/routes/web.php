@@ -8,6 +8,7 @@ use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\FrontendProductController;
+use App\Http\Controllers\Frontend\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,12 +88,11 @@ Route::get('/ajax-json',[AjaxController::class,'ajaxGetUser'])->name('ajaxGetUse
      // Route::get('/productdetail', function () {return view('Frontend.productdetail');})->name('frontend.productdetail');
      Route::get('/home',[IndexController::class,'frontedcategory'])->name('frontend.home');
      Route::post('/indexfavourite',[FrontendProductController::class,'favourite'])->name('index.favourite');
-     
-    
      Route::get('/findproduct/{id}',[FrontendProductController::class,'frontedfindproduct'])->name('frontend.findproduct');
      Route::get('/productdetail/{id}',[FrontendProductController::class,'frontedproduct'])->name('frontend.productdetail');
      Route::get('/allproduct',[FrontendProductController::class,'frontedallproduct'])->name('frontend.allproduct');
 
+     Route::post('/addtocart',[CartController::class,'addtocart'])->name('frontend.addtocart');
      
 
      Route::get('/about', function () {return view('Frontend.about');})->name('frontend.about');

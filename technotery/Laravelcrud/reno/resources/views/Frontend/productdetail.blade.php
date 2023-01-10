@@ -72,8 +72,8 @@
                      <div class="description">
                         
                         <form action="#" method="post">
-                           <input class="form-control" type="text" name="Email" style="width:17% !important"placeholder="Please enter..." required="">
-                           <h3 style="color:black;">Quantity</h3>
+                           <!-- <input class="form-control" type="number" name="Email" style="width:17% !important"placeholder="Please enter..." required="">
+                           <h3 style="color:black;">Quantity</h3> -->
                            <br>
                            <!-- <i class="far fa-heart" style="color:red;font-size:25px;" aria-hidden="true"></i> -->
                            <!-- <div class="tagWrapper">
@@ -93,23 +93,22 @@
                            </a>  
                      
                         </div>
+                        <button type="submit" data-id="{{$productts->id}}" class="toys-cart ptoys-cart add addtocart">Add to Cart</button>
                      </form>
                      </div>
                     
                      
-                     <div class="occasion-cart">
+                     <!-- <div class="occasion-cart">
                         <div class="toys single-item singlepage">
                            <form action="#" method="post">
                               <input type="hidden" name="cmd" value="_cart">
                               <input type="hidden" name="add" value="1">
                               <input type="hidden" name="toys_item" value="Farenheit">
                               <input type="hidden" name="amount" value="575.00">
-                              <button type="submit" class="toys-cart ptoys-cart add">
-                              Add to Cart
-                              </button>
+                              <button type="submit" data-id="{{$productts->id}}" class="toys-cart ptoys-cart add addtocart">Add to Cart</button>
                            </form>
                         </div>
-                     </div>
+                     </div> -->
                      <ul class="footer-social text-left mt-lg-4 mt-3">
                         <li>Share On : </li>
                         <li class="mx-1">
@@ -342,6 +341,43 @@
                   
 
          });
+         /////////////Add to cart///////////
+         $(document).on('click','.addtocart', function (){
+           
+           console.log('add to cart button click');
+
+           var Product_id = $(this).data('id');
+            console.log(Product_id, 'product id find');
+
+               $.ajaxSetup({
+                  headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+               });
+               $.ajax({
+                           type: 'post',
+                           url: '{{route("frontend.addtocart")}}',
+                          
+                           data: {
+                              'id': Product_id,
+                           },
+                           success: function (response) { 
+                              console.log(response, 'response');
+                              console.log('hhhhhhhh'); 
+                              if (response.success == true) {
+                                 console.log(response.success, 'response.status');
+                               
+                              }
+                              else{
+                                 console.log(response.success, 'response.status');
+                              }
+                           },
+                          
+                  });
+                  
+
+               ///////////////////////
+         })
      </script>
      
      @endsection
