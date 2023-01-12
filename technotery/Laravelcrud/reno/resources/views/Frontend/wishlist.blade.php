@@ -177,17 +177,17 @@
                         {
                            msg = 'Not connected.',
                            error = true;
-                           $('.headercategories').html(msg);
+                          
 
                         }else if(xhr.status == 404){
                            msg = 'Page not found.',
                            error = true;
-                           $('.headercategories').html(msg);
+                           
 
                         }else if(xhr.status === 500){
                            msg = 'Internal server errorrrr.',
                            error = true;
-                           $('.headercategories').html(msg);
+                          
                            // swal.fire(exception.success);
 
                         }else{

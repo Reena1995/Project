@@ -61,6 +61,9 @@ Route::group(['middleware'=>['afterlogin']], function()
     /////////////////////////////////////Frontend side pages///////////////////////////////////////////
     Route::get('/wishlist',[IndexController::class,'wishlist'])->name('index.wishlist');
     Route::post('/unwishlist',[IndexController::class,'unwishlist'])->name('index.unwishlist');
+
+    Route::get('/addtocart',[CartController::class,'addcartview'])->name('addtocart');
+    Route::post('/removecart',[CartController::class,'removecartview'])->name('carttrash');
     
    //////////////////////////////////////////////////////////////////////////////////////////
 

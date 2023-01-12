@@ -74,7 +74,7 @@ class FrontendProductController extends Controller
 
                 
             }else{
-                $favourite->is_actives = 0;
+                $favourite->is_active = 0;
                 $res = $favourite->update();
                 if(!$res)
                 {
@@ -99,8 +99,8 @@ class FrontendProductController extends Controller
                 \Log::info("ERROR: CODE: " . $exception->getCode());
                 \Log::info("ERROR: Message: " . $exception->getMessage());
                 DB::rollback();
-                return response()->json(['success'=>false,'message'=>'Internal server error.please try again later.'],500);
-
+                // return response()->json(['success'=>false,'message'=>'Internal server error.please try again later.'],500);
+                return response()->json(['success'=>false,'message'=>$exception->getMessage()],500);
         }
        
        

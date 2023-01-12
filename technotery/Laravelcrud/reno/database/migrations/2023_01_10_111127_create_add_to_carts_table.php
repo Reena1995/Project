@@ -13,7 +13,7 @@ class CreateAddToCartsTable extends Migration
      */
     public function up()
     {
-        Schema::create('add_to_carts', function (Blueprint $table) {
+        Schema::create('addtocarts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('userss');

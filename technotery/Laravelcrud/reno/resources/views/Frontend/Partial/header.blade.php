@@ -94,15 +94,16 @@
                            <li>
                               <button type="button" data-toggle="modal" data-target="#exampleModal"> <span class="far fa-user"></span></button>
                            </li>
-                           <li class="toyscart toyscart2 cart cart box_1">
+                           <li><span class=""><a  class="fas fa-cart-arrow-down" href="{{route('addtocart')}}"></a></span></li>
+                           <!-- <li class="toyscart toyscart2 cart cart box_1">
                               <form action="#" method="post" class="last">
                                  <input type="hidden" name="cmd" value="_cart">
                                  <input type="hidden" name="display" value="1">
                                  <button class="top_toys_cart" type="submit" name="submit" value="">
-                                 <span class="fas fa-cart-arrow-down"></span>
+                                 <span class="fas fa-cart-arrow-down"><a   href=""></a></span>
                                  </button>
                               </form>
-                           </li>
+                           </li> -->
                         </ul>
                      </div>
                   </div>

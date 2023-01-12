@@ -325,15 +325,24 @@
                         </a>  
                      
                      </div>
-
-                     <!-- <div class="tagWrapper">
-                        <a data-id="{{$pro->id}}" class="favourite" >
-                        <i class="far fa-heart tagDelete"  style="color:red;font-size:25px;" aria-hidden="true"></i>
-                        </a>
+                     <!-- <div class="mainaddcart">
+                        @if(!auth()->user())
+                           <i class="fas fa-shopping-cart addtocart" data-id="{{$pro->id}}"  aria-hidden="true"></i>
+                        @elseif (!empty($pro->activeCartItem) && $pro->activeCartItem->productcart->user_id == auth()->user()->id)
+                           <a class="eye-icon" href="{{route('addtocart')}}"><i class="fas fa-eye addtocart" aria-hidden="true"></i></a>
+                        @else
+                        <i class="fas fa-shopping-cart addtocart" data-id="{{$pro->id}}" style="font-size:25px;" aria-hidden="true"></i>
+                        @endif
                      </div> -->
-                     <!-- <a data-id="{{$pro->id}}" class="favourite" >
-                        <i class="far fa-heart "  style="color:red;font-size:25px;" aria-hidden="true"></i>
-                     </a> -->
+                     <div class="mainaddcart">
+                        @if(!auth()->user())
+                           <i class="fas fa-shopping-cart " data-id="{{$pro->id}}"  aria-hidden="true"></i>
+                        @elseif (!empty($pro->activeCartItem) && $pro->activeCartItem->productcart->user_id == auth()->user()->id)
+                           <a class="eye-icon" href="{{route('addtocart')}}"><i class="fas fa-eye " aria-hidden="true"></i></a>
+                        @else
+                        <i class="fas fa-shopping-cart " data-id="{{$pro->id}}" style="font-size:25px;" aria-hidden="true"></i>
+                        @endif
+                     </div>
                     
                      <p style="color:gery;"><b>Wishlist</b></p>
                      <div class="clients_more-buttn">
@@ -571,6 +580,88 @@
                   }
                   
 
+         });
+         /////////////////////////////////////////
+        
+
+         $(document).on('click','.fa-shopping-cart', function (){
+           
+           console.log('add to cart button click');
+
+           var Product_id = $(this).data('id');
+           console.log(Product_id, 'product id find');
+
+           var Qunatityvalue = $('#quantity').val();
+           console.log(Qunatityvalue, 'quantity value');
+
+           var addTag = $(this);
+           console.log(addTag, 'add tag');
+
+               $.ajaxSetup({
+                  headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+               });
+               $.ajax({
+                           type: 'post',
+                           url: '{{route("frontend.addtocart")}}',
+                          
+                           data: {
+                              'id': Product_id,
+                              'quantity_val': 1,
+                           },
+                           success: function (response) { 
+                              console.log(response, 'response');
+                              console.log('hhhhhhhh'); 
+                              if (response.success == true) {
+                                 console.log(response.success, 'response.status');
+                                 // swal.fire(response.message);
+                                 
+                                 addTag.removeClass('fa-shopping-cart');
+                                 addTag.addClass('fa-eye');
+                                 
+                              }
+                              else{
+                                 console.log(response.success, 'response.status');
+                                 swal.fire(response.msg);
+                              }
+                           },
+                           error: function(xhr, exception) {
+                              console.log('xhr',xhr);
+                              var error = false;
+                              var msg = '';
+                              
+                              if(xhr.status === 0)
+                              {
+                                 msg = 'Not connected.',
+                                 error = true;
+                                 
+
+                              }else if(xhr.status == 404){
+                                 msg = 'Page not found.',
+                                 error = true;
+                                
+
+                              }else if(xhr.status === 500){
+                                 msg = 'Internal server errorrrr.',
+                                 error = true;
+                                
+                                 // swal.fire(exception.success);
+
+                              }else{
+                                 msg="something went wrong".
+                                 error = true;
+                              }
+                              swal.fire(msg);
+
+                        
+                           },
+
+                          
+                  });
+                  
+
+              
          });
      </script>
      

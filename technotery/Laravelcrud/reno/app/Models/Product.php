@@ -54,6 +54,15 @@ class Product extends Model
         $userId = auth()->user()->id ?? 0;
         return $this->hasOne(Favourite::class,'product_id','id')->where('user_id',$userId)->orderBY('id','DESC');
     }
+    public function addcart()
+    {
+        return $this->hasOne(Addtocart::class,'product_id','id');
+    }
+    public function activeCartItem()
+    {
+        return $this->addcart()->where('is_active',1);
+        // return $this->hasMany('App\Model\Frontend\Wishlist', 'product_id', 'id');
+    }
 
 }
 

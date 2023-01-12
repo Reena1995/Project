@@ -72,28 +72,38 @@
                      <div class="description">
                         
                         <form action="#" method="post">
-                           <!-- <input class="form-control" type="number" name="Email" style="width:17% !important"placeholder="Please enter..." required="">
-                           <h3 style="color:black;">Quantity</h3> -->
+                           <input class="form-control quantity" type="number" name="quantity" id="quantity" min="1" value="1" style="width:17% !important"  required="">
+                           <h3 style="color:black;">Quantity</h3>
                            <br>
-                           <!-- <i class="far fa-heart" style="color:red;font-size:25px;" aria-hidden="true"></i> -->
-                           <!-- <div class="tagWrapper">
-                              <a data-id="{{$productts->id}}" class="favourite" >
-                              <i class="far fa-heart tagDelete"  style="color:red;font-size:25px;" aria-hidden="true"></i>
-                              </a>
-                           </div> -->
+                           
+                           
 
-                        <div class="tagWrapper">
+                           <div class="tagWrapper">
+                           
+                              <a data-id="{{$productts->id}}"   class="favourite" > 
+                                 @if(!empty($productts->favourite) && ($productts->favourite->is_active == '1'))
+                                    <i class="fa fa-heart heartdel"  style="color:red;font-size:25px;" aria-hidden="true"></i>
+                                 @else
+                                    <i class="far fa-heart tagDelete"  style="color:red;font-size:25px;" aria-hidden="true"></i>
+                                 @endif
+                              </a>  
                         
-                           <a data-id="{{$productts->id}}"   class="favourite" > 
-                              @if(!empty($productts->favourite) && ($productts->favourite->is_active == '1'))
-                                 <i class="fa fa-heart heartdel"  style="color:red;font-size:25px;" aria-hidden="true"></i>
+                           </div>
+                           <!-- <div class="mainaddcart">
+                              <i class="fas fa-shopping-cart addtocart" data-id="{{$productts->id}}" style="font-size:25px;" aria-hidden="true"></i>
+                            </div> -->
+
+                           
+                           
+                           <div class="mainaddcart">
+                              @if(!auth()->user())
+                                 <i class="fas fa-shopping-cart " data-id="{{$productts->id}}"  aria-hidden="true"></i>
+                              @elseif (!empty($productts->activeCartItem) && $productts->activeCartItem->productcart->user_id == auth()->user()->id)
+                                 <a class="eye-icon" href="{{route('addtocart')}}"><i class="fas fa-eye " aria-hidden="true"></i></a>
                               @else
-                                 <i class="far fa-heart tagDelete"  style="color:red;font-size:25px;" aria-hidden="true"></i>
+                              <i class="fas fa-shopping-cart " data-id="{{$productts->id}}" style="font-size:25px;" aria-hidden="true"></i>
                               @endif
-                           </a>  
-                     
-                        </div>
-                        <button type="submit" data-id="{{$productts->id}}" class="toys-cart ptoys-cart add addtocart">Add to Cart</button>
+                           </div>
                      </form>
                      </div>
                     
@@ -341,13 +351,19 @@
                   
 
          });
-         /////////////Add to cart///////////
-         $(document).on('click','.addtocart', function (){
+            /////////////Add to cart///////////
+            $(document).on('click','.fa-shopping-cart', function (){
            
            console.log('add to cart button click');
 
            var Product_id = $(this).data('id');
-            console.log(Product_id, 'product id find');
+           console.log(Product_id, 'product id find');
+
+           var Qunatityvalue = $('#quantity').val();
+           console.log(Qunatityvalue, 'quantity value');
+
+           var addTag = $(this);
+           console.log(addTag, 'add tag');
 
                $.ajaxSetup({
                   headers: {
@@ -360,24 +376,61 @@
                           
                            data: {
                               'id': Product_id,
+                              'quantity_val': 1,
                            },
                            success: function (response) { 
                               console.log(response, 'response');
                               console.log('hhhhhhhh'); 
                               if (response.success == true) {
                                  console.log(response.success, 'response.status');
-                               
+                                 // swal.fire(response.message);
+                                 
+                                 addTag.removeClass('fa-shopping-cart');
+                                 addTag.addClass('fa-eye');
+                                 
                               }
                               else{
                                  console.log(response.success, 'response.status');
+                                 swal.fire(response.msg);
                               }
                            },
+                           error: function(xhr, exception) {
+                              console.log('xhr',xhr);
+                              var error = false;
+                              var msg = '';
+                              
+                              if(xhr.status === 0)
+                              {
+                                 msg = 'Not connected.',
+                                 error = true;
+                                 
+
+                              }else if(xhr.status == 404){
+                                 msg = 'Page not found.',
+                                 error = true;
+                                
+
+                              }else if(xhr.status === 500){
+                                 msg = 'Internal server errorrrr.',
+                                 error = true;
+                                
+                                 // swal.fire(exception.success);
+
+                              }else{
+                                 msg="something went wrong".
+                                 error = true;
+                              }
+                              swal.fire(msg);
+
+                        
+                           },
+
                           
                   });
                   
 
-               ///////////////////////
-         })
+              
+         });
      </script>
      
      @endsection

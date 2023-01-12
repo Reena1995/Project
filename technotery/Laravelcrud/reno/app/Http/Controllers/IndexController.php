@@ -35,7 +35,7 @@ class IndexController extends Controller
     }
 
     public function wishlist()
-     {
+    {
         $whishlist = Favourite::where('user_id',Auth::id())->where('is_active',1)->get(); 
         // dd($whishlist);
         return view("Frontend.wishlist",compact('whishlist'));

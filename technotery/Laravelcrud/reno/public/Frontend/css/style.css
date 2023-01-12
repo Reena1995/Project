@@ -1576,8 +1576,37 @@ h3.typo-main-heading {
     padding: 10px;
   }
 
-
-
+  .form-bottom-input .form-control 
+  {
+    width: 100%;
+  }
+  
+  .form-bottom-input
+  {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  .form-bottom-input label
+  {
+    white-space: nowrap;
+    margin: 0px !important;
+    padding-right: 5px;
+  }
+  .total 
+  {
+    width:120px;
+  }
+  .addtocart
+  {
+    font-size:25px;
+  }
+  
+  .eye-icon i {
+    
+    color: black;
+}
+ 
 
   /*login css*/
   
