@@ -65,7 +65,7 @@ Route::group(['middleware'=>['afterlogin']], function()
     Route::get('/addtocart',[CartController::class,'addcartview'])->name('addtocart');
     Route::post('/removecart',[CartController::class,'removecartview'])->name('carttrash');
     
-   //////////////////////////////////////////////////////////////////////////////////////////
+   ///////////////////////////////////////////////////xdgndthsthsrt//////////////////////////////////////////////////
 
    
 });
