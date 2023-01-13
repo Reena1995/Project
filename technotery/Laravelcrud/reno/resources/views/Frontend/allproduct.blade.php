@@ -271,7 +271,8 @@
                                  // swal.fire(response.message);
                                  
                                  addTag.removeClass('fa-shopping-cart');
-                                 addTag.addClass('fa-eye');
+                                 // addTag.addClass('fa-eye');
+                                 addTag.append('<a class="eye-icon" href="'+ '{{route("addtocart")}}' + '"><i class="fas fa-eye "></i></a>');
                                  
                               }
                               else{

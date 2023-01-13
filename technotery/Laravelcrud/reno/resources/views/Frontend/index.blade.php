@@ -307,10 +307,10 @@
                @foreach($productss as $pro)
                <div class="col-lg-6 img-toy-w3l-left">
                   <div class="">
-                     <img src="{{asset('Upload/Product/' . $pro->isFeatureoneimage[0]->image)}}" alt=" " height="200px" style="object-fit:cover;width:400px;height:250px;" class="img-fluid" />
+                     <a href="{{route('frontend.productdetail',$pro->uuid)}}"><img src="{{asset('Upload/Product/' . $pro->isFeatureoneimage[0]->image)}}"  alt=" " height="200px" style="object-fit:cover;width:400px;height:250px;" class="img-fluid" /></a>
                   </div>
-                  <div class="mt-lg-4 mt-3 product-info-img">
-                     <!-- <p>{{$pro->proDetail->description}}</p> -->
+                  <div class="mt-lg-4 mt-3 product-info-img productmain">
+                     
                      <p><b>{{$pro->name}}</b></p>
                      <p style="color:red;"><b >{{$pro->proDetail->actualprice}}</b></p>
                      <p style="color:green;"><b>{{$pro->proDetail->discountprice}}</b></p>
@@ -325,30 +325,18 @@
                         </a>  
                      
                      </div>
-                     <!-- <div class="mainaddcart">
-                        @if(!auth()->user())
-                           <i class="fas fa-shopping-cart addtocart" data-id="{{$pro->id}}"  aria-hidden="true"></i>
-                        @elseif (!empty($pro->activeCartItem) && $pro->activeCartItem->productcart->user_id == auth()->user()->id)
-                           <a class="eye-icon" href="{{route('addtocart')}}"><i class="fas fa-eye addtocart" aria-hidden="true"></i></a>
-                        @else
-                        <i class="fas fa-shopping-cart addtocart" data-id="{{$pro->id}}" style="font-size:25px;" aria-hidden="true"></i>
-                        @endif
-                     </div> -->
+                   
                      <div class="mainaddcart">
                         @if(!auth()->user())
-                           <i class="fas fa-shopping-cart " data-id="{{$pro->id}}"  aria-hidden="true"></i>
+                           <a ><i class="fas fa-shopping-cart " data-id="{{$pro->id}}"  aria-hidden="true"></i></a>
                         @elseif (!empty($pro->activeCartItem) && $pro->activeCartItem->productcart->user_id == auth()->user()->id)
                            <a class="eye-icon" href="{{route('addtocart')}}"><i class="fas fa-eye " aria-hidden="true"></i></a>
                         @else
-                        <i class="fas fa-shopping-cart " data-id="{{$pro->id}}" style="font-size:25px;" aria-hidden="true"></i>
+                        <a ><i class="fas fa-shopping-cart " data-id="{{$pro->id}}" style="font-size:25px;" aria-hidden="true"></i></a>
                         @endif
                      </div>
                     
-                     <p style="color:gery;"><b>Wishlist</b></p>
-                     <div class="clients_more-buttn">
-                        <a href="{{route('frontend.productdetail',$pro->uuid)}}">Shop Now</a>
-                        
-                     </div>
+                    
                   </div>
                </div>
                @endforeach
@@ -617,8 +605,11 @@
                                  console.log(response.success, 'response.status');
                                  // swal.fire(response.message);
                                  
+                                
                                  addTag.removeClass('fa-shopping-cart');
-                                 addTag.addClass('fa-eye');
+                                 addTag.append('<a class="eye-icon" href="'+ '{{route("addtocart")}}' + '"><i class="fas fa-eye "></i></a>');
+                                
+                                
                                  
                               }
                               else{

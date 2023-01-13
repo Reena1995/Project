@@ -72,7 +72,7 @@
                      <div class="description">
                         
                         <form action="#" method="post">
-                           <input class="form-control quantity" type="number" name="quantity" id="quantity" min="1" value="1" style="width:17% !important"  required="">
+                           <input class="form-control quantity" type="number" name="quantity" id="quantity" min="1" value="1" style="width:17% !important"  required="" >   
                            <h3 style="color:black;">Quantity</h3>
                            <br>
                            
@@ -89,13 +89,11 @@
                               </a>  
                         
                            </div>
-                           <!-- <div class="mainaddcart">
-                              <i class="fas fa-shopping-cart addtocart" data-id="{{$productts->id}}" style="font-size:25px;" aria-hidden="true"></i>
-                            </div> -->
+                           
 
                            
                            
-                           <div class="mainaddcart">
+                           <!-- <div class="mainaddcart">
                               @if(!auth()->user())
                                  <i class="fas fa-shopping-cart " data-id="{{$productts->id}}"  aria-hidden="true"></i>
                               @elseif (!empty($productts->activeCartItem) && $productts->activeCartItem->productcart->user_id == auth()->user()->id)
@@ -103,7 +101,8 @@
                               @else
                               <i class="fas fa-shopping-cart " data-id="{{$productts->id}}" style="font-size:25px;" aria-hidden="true"></i>
                               @endif
-                           </div>
+                           </div> -->
+                           <button type="button" data-id="{{$productts->id}}" class="toys-cart ptoys-cart add addtocart" data-qty="{{$productts->proDetail->quantity ?? 0}}">Add to Cart</button>
                      </form>
                      </div>
                     
@@ -352,11 +351,12 @@
 
          });
             /////////////Add to cart///////////
-            $(document).on('click','.fa-shopping-cart', function (){
+      $(document).on('click','.addtocart', function (){
            
            console.log('add to cart button click');
 
            var Product_id = $(this).data('id');
+           var maxQty = $(this).attr('data-qty');
            console.log(Product_id, 'product id find');
 
            var Qunatityvalue = $('#quantity').val();
@@ -364,69 +364,67 @@
 
            var addTag = $(this);
            console.log(addTag, 'add tag');
-
+           if(parseInt(maxQty) >= parseInt(Qunatityvalue)){ 
                $.ajaxSetup({
                   headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                   }
                });
                $.ajax({
-                           type: 'post',
-                           url: '{{route("frontend.addtocart")}}',
-                          
-                           data: {
-                              'id': Product_id,
-                              'quantity_val': 1,
-                           },
-                           success: function (response) { 
-                              console.log(response, 'response');
-                              console.log('hhhhhhhh'); 
-                              if (response.success == true) {
-                                 console.log(response.success, 'response.status');
-                                 // swal.fire(response.message);
-                                 
-                                 addTag.removeClass('fa-shopping-cart');
-                                 addTag.addClass('fa-eye');
-                                 
-                              }
-                              else{
-                                 console.log(response.success, 'response.status');
-                                 swal.fire(response.msg);
-                              }
-                           },
-                           error: function(xhr, exception) {
-                              console.log('xhr',xhr);
-                              var error = false;
-                              var msg = '';
+                     type: 'post',
+                     url: '{{route("frontend.addtocart")}}',
+                     
+                     data: {
+                        'id': Product_id,
+                        'quantity_val': Qunatityvalue,
+                     },
+                     success: function (response) { 
+                        console.log(response, 'response');
+                        console.log('hhhhhhhh'); 
+                        if (response.success == true) {
+                           console.log(response.success, 'response.status');
+                           swal.fire(response.message);
                               
-                              if(xhr.status === 0)
-                              {
-                                 msg = 'Not connected.',
-                                 error = true;
-                                 
-
-                              }else if(xhr.status == 404){
-                                 msg = 'Page not found.',
-                                 error = true;
-                                
-
-                              }else if(xhr.status === 500){
-                                 msg = 'Internal server errorrrr.',
-                                 error = true;
-                                
-                                 // swal.fire(exception.success);
-
-                              }else{
-                                 msg="something went wrong".
-                                 error = true;
-                              }
-                              swal.fire(msg);
-
+                           
+                        }
+                        else{
+                           console.log(response.success, 'response.status');
+                           swal.fire(response.msg);
+                        }
+                     },
+                     error: function(xhr, exception) {
+                        console.log('xhr',xhr);
+                        var error = false;
+                        var msg = '';
                         
-                           },
+                        if(xhr.status === 0)
+                        {
+                           msg = 'Not connected.',
+                           error = true;
+                           
 
-                          
+                        }else if(xhr.status == 404){
+                           msg = 'Page not found.',
+                           error = true;
+                           
+
+                        }else if(xhr.status === 500){
+                           msg = 'Internal server errorrrr.',
+                           error = true;
+                           
+                           // swal.fire(exception.success);
+
+                        }else{
+                           msg="something went wrong".
+                           error = true;
+                        }
+                        swal.fire(msg); 
+                     },  
                   });
+               }else{
+                  $("#quantity").val(maxQty);
+                  swal.fire('Out of stock');
+               } 
                   
 
               

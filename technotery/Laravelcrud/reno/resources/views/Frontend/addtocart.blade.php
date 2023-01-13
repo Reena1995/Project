@@ -59,22 +59,22 @@
                               <input type="hidden" class="productID" value="{{$add->product->id}}">
                                 <button class="btn btn-link px-2"
                                 onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                <i class="fas fa-minus minuss"></i>
+                                <i class="fas fa-minus minuss" data-id="{{$add->id}}" data-qty="{{$add->product->proDetail->quantity ?? 0}}"></i>
                                 </button>
 
-                                <input id="form1" min="1" name="quantity"   value="{{$add->quantity}}" type="number"
-                                class="form-control form-control-sm quantity" />
+                                <input min="1" name="quantity"   value="{{$add->quantity}}" type="number"
+                                class="form-control form-control-sm quantity" id="quantity_{{$add->id}}" readonly/>
 
                                 <button class="btn btn-link px-2"
-                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                <i class="fas fa-plus pluss"></i>
+                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()" >
+                                <i class="fas fa-plus add_qty" data-id="{{$add->id}}" data-qty="{{$add->product->proDetail->quantity ?? 0}}"></i>
                                 </button>
                             </div>
                             <div class="col-md-2 col-lg-2 col-xl-2">
-                                <h5 class="mb-0">${{$add->price}}</h5>
+                                <h5 class="mb-0">$<span id="prod_price_{{$add->id}}">{{$add->price}}</span></h5>
                             </div>
                             <div class="col-md-2 col-lg-2 col-xl-2 maintotal">
-                                <h5 class="mb-0"><input type="input"value="{{$add->productcart->total}}" class="total"></input></h5>
+                                <h5 class="mb-0"><input type="input"value="{{$add->total}}" class="total" id="total_{{$add->id}}"></input></h5>
                             </div>
                             <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                                 <a href="#!"  data-id="{{$add->id}}" class="text-danger removecart"><i class="fas fa-trash fa-lg "></i></a>
@@ -91,7 +91,7 @@
                                         Total amount:
                                     </label>
                             
-                                        <input type="input" class="form-control"></input>
+                                        <input type="input" value="{{$add->productcart->total ?? 0}}" class="form-control" id="final_total"></input>
                                 
                                  </div>
                               </div>
@@ -145,28 +145,120 @@
 
      @section('script')
      <script>
-      function addTocart(Product_id,Qunatityvalue){
-         $.ajaxSetup({
-                  headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                  }
-               });
-               $.ajax({
+      // function addTocart(id,Qunatityvalue,price)
+      // {
+      //    $.ajaxSetup({
+      //                   headers: {
+      //                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      //                   }
+      //             });
+
+      //             $.ajax({
+      //                type: 'post',
+      //                url: '{{ route("plusqty")}}',
+                    
+      //                data: {
+      //                      'qty_val': Qunatityvalue,
+      //                      'id':id,
+      //                      'price':price,
+      //                },
+      //                success: function (response) { 
+      //                      console.log(response, 'responsesssssssss');
+      //                      console.log('hhhhhhhh'); 
+      //                      if (response.success == true) {
+      //                         console.log(response.success, 'response.status');
+      //                         $('#total_'+id).val(total);
+      //                         // swal.fire(response.message);
+                            
+      //                      }
+      //                      else {
+      //                         console.log("reeor");
+      //                         swal.fire(response.message);
+      //                      }
+
+      //                }, 
+      //                error: function(xhr, exception) {
+      //                   // console.log('xhr',xhr);
+      //                   var error = false;
+      //                   var msg = '';
+                        
+      //                   if(xhr.status === 0)
+      //                   {
+      //                      msg = 'Not connected.',
+      //                      error = true;
+                          
+
+      //                   }else if(xhr.status == 404){
+      //                      msg = 'Page not found.',
+      //                      error = true;
+                           
+
+      //                   }else if(xhr.status === 500){
+      //                      msg = 'Internal server errorrrr.',
+      //                      error = true;
+                          
+                          
+
+      //                   }else{
+      //                      msg="something went wrong".
+      //                      error = true;
+      //                   }
+      //                   swal.fire(msg);
+
+                        
+      //                },
+
+      //             });
+
+
+      // }
+
+      $(document).on('click', '.add_qty', function () {
+         console.log(".plusssss");
+        
+
+            var id = $(this).attr('data-id');
+            var maxQty = $(this).attr('data-qty');
+            var quantityplusvalue=$("#quantity_"+id).val();
+            console.log(quantityplusvalue,'plus value');
+            console.log('id',id);
+            var price = $("#prod_price_"+id).html();
+            var total = (parseInt(price) * parseInt(quantityplusvalue));
+            console.log('total'+total);
+            if(parseInt(maxQty) >= parseInt(quantityplusvalue)){ 
+                  $.ajaxSetup({
+                        headers: {
+                           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                  });
+                  $.ajax({
                      type: 'post',
-                     url: '{{route("frontend.addtocart")}}',
-                     
+                     url: '{{ route("plusqty")}}',
+                    
                      data: {
-                        'id': Product_id,
-                        'quantity_val': Qunatityvalue,
+                           'qty_val': quantityplusvalue,
+                           'id':id,
+                           'price':price,
+                           'type':'1',
                      },
                      success: function (response) { 
-                        console.log(response, 'response');
-                        console.log('hhhhhhhh'); 
-                        swal.fire(response.message);
-                       
-                     },
+                           console.log(response, 'responsesssssssss');
+                           console.log('hhhhhhhh'); 
+                           if (response.success == true) {
+                              console.log(response.success, 'response.status');
+                              $('#total_'+id).val(total);
+                              $('#final_total').val(response.total);
+                              //
+                            
+                           }
+                           else {
+                              console.log("reeor");
+                              swal.fire(response.message);
+                           }
+
+                     }, 
                      error: function(xhr, exception) {
-                        console.log('xhr',xhr);
+                        // console.log('xhr',xhr);
                         var error = false;
                         var msg = '';
                         
@@ -174,7 +266,83 @@
                         {
                            msg = 'Not connected.',
                            error = true;
-                           
+                        }else if(xhr.status == 404){
+                           msg = 'Page not found.',
+                           error = true;
+                        }else if(xhr.status === 500){
+                           msg = 'Internal server errorrrr.',
+                           error = true;   
+                        }else{
+                           msg="something went wrong".
+                           error = true;
+                        }
+                        swal.fire(msg);
+
+                        
+                     },
+
+                  });
+               }else{
+                  $("#quantity_"+id).val(maxQty);
+                  swal.fire('Out of stock');
+               }           
+      });
+      ///////////////////////////////////////////////
+      $(document).on('click', '.minuss', function () {
+         console.log("minus");
+
+         var id = $(this).attr('data-id');
+            
+            var quantityplusvalue=$("#quantity_"+id).val();
+            console.log(quantityplusvalue,'plus value');
+            console.log('id',id);
+            var price = $("#prod_price_"+id).html();
+            var total = (parseInt(price) * parseInt(quantityplusvalue));
+            console.log('total'+total);
+            //  addTocart(id,quantityplusvalue,price);
+
+            $.ajaxSetup({
+                        headers: {
+                           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                  });
+
+                  $.ajax({
+                     type: 'post',
+                     url: '{{ route("plusqty")}}',
+                    
+                     data: {
+                           'qty_val': quantityplusvalue,
+                           'id':id,
+                           'price':price,
+                           'type':'0',
+                     },
+                     success: function (response) { 
+                           console.log(response, 'responsesssssssss');
+                           console.log('hhhhhhhh'); 
+                           if (response.success == true) {
+                              console.log(response.success, 'response.status');
+                              $('#total_'+id).val(total);
+                              $('#final_total').val(response.total);
+                              // swal.fire(response.message);
+                            
+                           }
+                           else {
+                              console.log("reeor");
+                              swal.fire(response.message);
+                           }
+
+                     }, 
+                     error: function(xhr, exception) {
+                        // console.log('xhr',xhr);
+                        var error = false;
+                        var msg = '';
+                        
+                        if(xhr.status === 0)
+                        {
+                           msg = 'Not connected.',
+                           error = true;
+                          
 
                         }else if(xhr.status == 404){
                            msg = 'Page not found.',
@@ -184,8 +352,8 @@
                         }else if(xhr.status === 500){
                            msg = 'Internal server errorrrr.',
                            error = true;
-                           
-                           // swal.fire(exception.success);
+                          
+                          
 
                         }else{
                            msg="something went wrong".
@@ -193,38 +361,18 @@
                         }
                         swal.fire(msg);
 
-                  
+                        
                      },
 
-                     
-               });
-      }
+                  });
 
-      $(document).on('click', '.pluss', function () {
-         console.log(".plusssss");
-         // console.log($(this).parents('.increment').find('.quantity').val());
-            quantityvalue=$(this).parents('.increment').find('.quantity').val();
-            console.log(quantityvalue,'plus value');
 
-            var product_id = $(this).parents('.increment').find('.productID').val();
-            console.log('product_id',product_id);
-            addTocart(product_id,quantityvalue)
 
 
            
+            
       });
-      ///////////////////////////////////////////////
-      $(document).on('click', '.minuss', function () {
-         console.log(".plusssss");
-
-         quantityvalue=$(this).parents('.increment').find('.quantity').val();
-            console.log(quantityvalue,'minus value');
-            addTocart(Product_id,Qunatityvalue)
-      });
-      /////////////////////////////////////////////////////
-     
-    
-
+      //////////////////////remover item in cart///////////////////////////////
       $(document).on('click', '.removecart', function () {
          console.log("remove cart button");
 

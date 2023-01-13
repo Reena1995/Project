@@ -1605,7 +1605,11 @@ h3.typo-main-heading {
   .eye-icon i {
     
     color: black;
-}
+    font-size:30px;
+    
+    }
+   .prod-qty{width: 53px;}
+    
  
 
   /*login css*/

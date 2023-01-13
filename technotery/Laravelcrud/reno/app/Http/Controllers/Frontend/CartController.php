@@ -18,59 +18,81 @@ class CartController extends Controller
         try{
                 $productId = $request->id;
                 $product = Product::where('id',$productId)->where('is_active',1)->first();
+                            
                 
-               
                 $Qunatity = $request->quantity_val;
-                $totalval=$product->proDetail->discountprice;
-                $totalfinal=$totalval*$Qunatity;
+                // $totalval=$product->proDetail->discountprice;
+                // $totalfinal=$totalval*$Qunatity;
                 $userid=Auth::user()->id;
 
+              
 
-
-                    $newProductcart = new Productcart();
-                    $newProductcart->user_id= $userid;
-                    $newProductcart->uuid = Str::uuid();
-                    $newProductcart->total =0;
-                    $res = $newProductcart->save();
+                    // $newProductcart = new Productcart();
+                    // $newProductcart->user_id= $userid;
+                    // $newProductcart->uuid = Str::uuid();
+                    // $newProductcart->total =0;
+                    // $res = $newProductcart->save();
+                    $priceval = $product->proDetail->discountprice;
                 
-                // $checkproductcart = Productcart::where('user_id',$userid)->where('is_active',1)->first();
-
-                // if(is_null($checkproductcart))
-                // {
-                //     $newProductcart = new Productcart();
-                //     $newProductcart->user_id= $userid;
-                //     $newProductcart->uuid = Str::uuid();
-                //     $newProductcart->total =0;
-                //     $result = $newProductcart->save();
-                // }
-                // else
-                // {
+                $totalOfCart = Productcart::where('user_id',$userid)->where('is_active',1)->first();
+           
+                if(is_null($totalOfCart))
+                {
+                    $totalOfCart = new Productcart();
+                    $totalOfCart->user_id= $userid;
+                    $totalOfCart->uuid = Str::uuid();
+                    $totalOfCart->total =($priceval * $Qunatity);
+                    $res = $totalOfCart->save();
+                }else{
+                    $totalPrice = (($totalOfCart->total)  + ($priceval * $Qunatity));
+                    \Log::info($totalOfCart);
+                    $totalOfCart->total = $totalPrice;
                     
-                //     return response()->json(['success'=>false,'message'=>'already user enter.'],500);
-                // }
+                    $totalOfCart->update();
+                }
+                
                         
-                // // \Log::info($res);
-                ///////////////////////////////
-                $priceval = $product->proDetail->discountprice;
-                // $productId = $request->id;
-                    // $productId = $request->id;
-                    $newAddcart = new Addtocart(); 
-                    $newAddcart->user_id= $userid;
-                    $newAddcart->product_id= $productId;
-                    $newAddcart->uuid = Str::uuid();
-                    $newAddcart->quantity= $Qunatity;
-                    $newAddcart->price= $priceval;
-                    $newAddcart->cart_id= $newProductcart->id;
-                    $res =$newAddcart->save(); 
-
-                    if(!$res)
-                    {
-                        DB::rollback();
-                        return response()->json(['success'=>false,'message'=>'Internal server error.please try again later.'],500);
                 
-                    } 
+                ///////////////////////////////
+                $totaval=$priceval*$Qunatity;
+                $checkcart = Addtocart::where('product_id',$productId)->where('user_id',$userid)->where('is_active',1)->first();
+                  if(is_null($checkcart))
+                  {
+
+                      $newAddcart = new Addtocart(); 
+                      $newAddcart->user_id= $userid;
+                      $newAddcart->product_id= $productId;
+                      $newAddcart->uuid = Str::uuid();
+                      $newAddcart->quantity= $Qunatity;
+                      $newAddcart->price= $priceval;
+                      $newAddcart->total= $totaval;
+                      $newAddcart->cart_id= $totalOfCart->id;
+                      $res =$newAddcart->save(); 
+  
+                      if(!$res)
+                      {
+                          DB::rollback();
+                          return response()->json(['success'=>false,'message'=>'Internal server error.please try again later.'],500);
+                  
+                      } 
+                  }else{
+                    $checkcart->quantity= $Qunatity;
+                    $checkcart->price= $priceval;
+                    $checkcart->total= $totaval;
+                    $res =$checkcart->update(); 
                     
-                // $checkcart = Addtocart::where('product_id',$productId)->where('user_id',$userid)->where('is_active',1)->first();
+                    $finalCartPrice = Addtocart::where('user_id',$userid)->where('is_active',1)->get()->sum('total'); 
+                    $totalOfCart->total = $finalCartPrice;
+                    $totalOfCart->update();
+                      if(!$res)
+                      {
+                          DB::rollback();
+                          return response()->json(['success'=>false,'message'=>'Internal server error.please try again later.'],500);
+                  
+                      } 
+
+                  }
+                    
                 
                 
                 
@@ -104,13 +126,23 @@ class CartController extends Controller
         DB::beginTransaction();
         try
         {
+            //
+           
+            
+
             $cartId = $request->input('id');
-            // \Log::info($userid);
-             
+            
             $addcart = Addtocart::where('id',$cartId)->first();
-            // \Log::info(json_encode($favourite));
+           
             $addcart->is_active = 0;
             $res = $addcart->update();
+
+            $total_val = $addcart->total;
+            $pcartId = $addcart->cart_id; 
+            $findcart= Productcart::where('id',$pcartId)->first();
+            $findcart->total=( $findcart->total -$total_val);
+            $res = $findcart->update();
+
             if(!$res) {
                 DB::rollback();
                 return response()->json(['success'=>false,'message'=>'Internal server error.please try again later.'],500);
@@ -129,6 +161,55 @@ class CartController extends Controller
         }
         return view("Frontend.addtocart");
     }
+
+    public function plusupdate(Request $request)
+    {
+        DB::beginTransaction();
+        try
+        {
+            $id = $request->input('id');
+            $qtyvalue = $request->input('qty_val');
+            $price = $request->input('price');
+            $type = $request->input('type');
+            
+             
+            $addcart = Addtocart::where('id',$id)->first();
+            
+            $addcart->quantity = $qtyvalue;
+            $addcart->total = ($qtyvalue * $price);
+            $res = $addcart->update();
+
+             
+            $pcartId = $addcart->cart_id; 
+            $findcart= Productcart::where('id',$pcartId)->first();
+            if($type == 1){
+                $findcart->total=( $findcart->total  + $price);
+            }else{
+                
+                $findcart->total=( $findcart->total  - $price);
+            }
+            $res = $findcart->update();
+            if(!$res) {
+                DB::rollback();
+                return response()->json(['success'=>false,'message'=>'$exception->getMessage()'],500);
+            }
+
+            DB::commit(); 
+            return response()->json(['success'=>true,'message'=>"Product qty success",'total'=>$findcart->total],200);
+        }
+        catch (\Exception $exception) 
+        {
+            \Log::info("ERROR: CODE: " . $exception->getCode());
+            \Log::info("ERROR: Message: " . $exception->getMessage());
+            DB::rollback();
+            // return response()->json(['success'=>false,'message1'=>'Internal server error.please try again later.'],500);
+            return response()->json(['success'=>false,'message'=>$exception->getMessage()],500);
+
+        }
+        // return view("Frontend.addtocart");
+
+    }
+    
     public function index()
     {
         //
