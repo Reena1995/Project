@@ -45,6 +45,7 @@
                     </div>
                    
                      <div class="card rounded-3 mb-4">
+                        
                      @foreach($addcart as $add)
                         <div class="card-body p-4" id="product_add-{{$add->id}}">
                             <div class="row d-flex justify-content-between align-items-center">
@@ -72,6 +73,9 @@
                             </div>
                             <div class="col-md-2 col-lg-2 col-xl-2">
                                 <h5 class="mb-0">$<span id="prod_price_{{$add->id}}">{{$add->price}}</span></h5>
+                            </div>
+                            <div class="col-md-1 col-lg-1 col-xl-1">
+                               <button type ="button" class="btn btn-primary updatecard" data-id="{{$add->id}}" data-qty="{{$add->product->proDetail->quantity ?? 0}}">update</button>
                             </div>
                             <div class="col-md-2 col-lg-2 col-xl-2 maintotal">
                                 <h5 class="mb-0"><input type="input"value="{{$add->total}}" class="total" id="total_{{$add->id}}"></input></h5>
@@ -213,11 +217,254 @@
 
       // }
 
-      $(document).on('click', '.add_qty', function () {
-         console.log(".plusssss");
+      // $(document).on('click', '.add_qty', function () {
+      //    console.log(".plusssss");
         
 
-            var id = $(this).attr('data-id');
+      //       var id = $(this).attr('data-id');
+      //       var maxQty = $(this).attr('data-qty');
+      //       var quantityplusvalue=$("#quantity_"+id).val();
+      //       console.log(quantityplusvalue,'plus value');
+      //       console.log('id',id);
+      //       var price = $("#prod_price_"+id).html();
+      //       var total = (parseInt(price) * parseInt(quantityplusvalue));
+      //       console.log('total'+total);
+      //       if(parseInt(maxQty) >= parseInt(quantityplusvalue)){ 
+      //             $.ajaxSetup({
+      //                   headers: {
+      //                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      //                   }
+      //             });
+      //             $.ajax({
+      //                type: 'post',
+      //                url: '{{ route("plusqty")}}',
+                    
+      //                data: {
+      //                      'qty_val': quantityplusvalue,
+      //                      'id':id,
+      //                      'price':price,
+      //                      'type':'1',
+      //                },
+      //                success: function (response) { 
+      //                      console.log(response, 'responsesssssssss');
+      //                      console.log('hhhhhhhh'); 
+      //                      if (response.success == true) {
+      //                         console.log(response.success, 'response.status');
+      //                         $('#total_'+id).val(total);
+      //                         $('#final_total').val(response.total);
+      //                         //
+                            
+      //                      }
+      //                      else {
+      //                         console.log("reeor");
+      //                         swal.fire(response.message);
+      //                      }
+
+      //                }, 
+      //                error: function(xhr, exception) {
+      //                   // console.log('xhr',xhr);
+      //                   var error = false;
+      //                   var msg = '';
+                        
+      //                   if(xhr.status === 0)
+      //                   {
+      //                      msg = 'Not connected.',
+      //                      error = true;
+      //                   }else if(xhr.status == 404){
+      //                      msg = 'Page not found.',
+      //                      error = true;
+      //                   }else if(xhr.status === 500){
+      //                      msg = 'Internal server errorrrr.',
+      //                      error = true;   
+      //                   }else{
+      //                      msg="something went wrong".
+      //                      error = true;
+      //                   }
+      //                   swal.fire(msg);
+
+                        
+      //                },
+
+      //             });
+      //          }else{
+      //             $("#quantity_"+id).val(maxQty);
+      //             swal.fire('Out of stock');
+      //          }           
+      // });
+      ///////////////////////////////////////////////
+      // $(document).on('click', '.minuss', function () {
+      //    console.log("minus");
+
+      //    var id = $(this).attr('data-id');
+            
+      //       var quantityplusvalue=$("#quantity_"+id).val();
+      //       console.log(quantityplusvalue,'plus value');
+      //       console.log('id',id);
+      //       var price = $("#prod_price_"+id).html();
+      //       var total = (parseInt(price) * parseInt(quantityplusvalue));
+      //       console.log('total'+total);
+      //       //  addTocart(id,quantityplusvalue,price);
+
+      //       $.ajaxSetup({
+      //                   headers: {
+      //                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      //                   }
+      //             });
+
+      //             $.ajax({
+      //                type: 'post',
+      //                url: '{{ route("plusqty")}}',
+                    
+      //                data: {
+      //                      'qty_val': quantityplusvalue,
+      //                      'id':id,
+      //                      'price':price,
+      //                      'type':'0',
+      //                },
+      //                success: function (response) { 
+      //                      console.log(response, 'responsesssssssss');
+      //                      console.log('hhhhhhhh'); 
+      //                      if (response.success == true) {
+      //                         console.log(response.success, 'response.status');
+      //                         $('#total_'+id).val(total);
+      //                         $('#final_total').val(response.total);
+      //                         // swal.fire(response.message);
+                            
+      //                      }
+      //                      else {
+      //                         console.log("reeor");
+      //                         swal.fire(response.message);
+      //                      }
+
+      //                }, 
+      //                error: function(xhr, exception) {
+      //                   // console.log('xhr',xhr);
+      //                   var error = false;
+      //                   var msg = '';
+                        
+      //                   if(xhr.status === 0)
+      //                   {
+      //                      msg = 'Not connected.',
+      //                      error = true;
+                          
+
+      //                   }else if(xhr.status == 404){
+      //                      msg = 'Page not found.',
+      //                      error = true;
+                           
+
+      //                   }else if(xhr.status === 500){
+      //                      msg = 'Internal server errorrrr.',
+      //                      error = true;
+                          
+                          
+
+      //                   }else{
+      //                      msg="something went wrong".
+      //                      error = true;
+      //                   }
+      //                   swal.fire(msg);
+
+                        
+      //                },
+
+      //             });
+
+
+
+
+           
+            
+      // });
+      //////////////////////remover item in cart///////////////////////////////
+      $(document).on('click', '.removecart', function () {
+         console.log("remove cart button");
+
+         
+
+         if(isLogin)
+            {
+               var removeId = $(this).data('id');
+               console.log(removeId, 'removeid this tag');
+
+
+                  $.ajaxSetup({
+                  headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+                  });
+
+                  
+                  $.ajax({
+                     type: 'post',
+                     url: '{{route("carttrash")}}',
+                    
+                     data: {
+                           'id': removeId,
+                     },
+                     success: function (response) { 
+                           console.log(response, 'responsesssssssss');
+                           console.log('hhhhhhhh'); 
+                           if (response.success == true) {
+                              console.log(response.success, 'response.status');
+                              
+                              swal.fire(response.message);
+                              $('#product_add-'+removeId).remove();
+                           }
+                           else {
+                              console.log("reeor");
+                              swal.fire(response.message);
+                           }
+
+                     }, 
+                     error: function(xhr, exception) {
+                        console.log('xhr',xhr);
+                        var error = false;
+                        var msg = '';
+                        
+                        if(xhr.status === 0)
+                        {
+                           msg = 'Not connected.',
+                           error = true;
+                          
+
+                        }else if(xhr.status == 404){
+                           msg = 'Page not found.',
+                           error = true;
+                           
+
+                        }else if(xhr.status === 500){
+                           msg = 'Internal server errorrrr.',
+                           error = true;
+                          
+                           // swal.fire(exception.success);
+
+                        }else{
+                           msg="something went wrong".
+                           error = true;
+                        }
+                        swal.fire(msg);
+
+                        
+                     },
+
+                  });
+            
+                        
+            }
+            else{
+                      console.log('checkkkkk');
+                     window.location.href="{{route('login-page')}}";
+            }
+           
+
+         
+      });  
+      //////////////////////update card////////////////////////
+      $(document).on('click', '.updatecard', function () {
+         console.log('update card button');
+
+         var id = $(this).attr('data-id');
             var maxQty = $(this).attr('data-qty');
             var quantityplusvalue=$("#quantity_"+id).val();
             console.log(quantityplusvalue,'plus value');
@@ -285,178 +532,7 @@
                }else{
                   $("#quantity_"+id).val(maxQty);
                   swal.fire('Out of stock');
-               }           
+               }
       });
-      ///////////////////////////////////////////////
-      $(document).on('click', '.minuss', function () {
-         console.log("minus");
-
-         var id = $(this).attr('data-id');
-            
-            var quantityplusvalue=$("#quantity_"+id).val();
-            console.log(quantityplusvalue,'plus value');
-            console.log('id',id);
-            var price = $("#prod_price_"+id).html();
-            var total = (parseInt(price) * parseInt(quantityplusvalue));
-            console.log('total'+total);
-            //  addTocart(id,quantityplusvalue,price);
-
-            $.ajaxSetup({
-                        headers: {
-                           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                  });
-
-                  $.ajax({
-                     type: 'post',
-                     url: '{{ route("plusqty")}}',
-                    
-                     data: {
-                           'qty_val': quantityplusvalue,
-                           'id':id,
-                           'price':price,
-                           'type':'0',
-                     },
-                     success: function (response) { 
-                           console.log(response, 'responsesssssssss');
-                           console.log('hhhhhhhh'); 
-                           if (response.success == true) {
-                              console.log(response.success, 'response.status');
-                              $('#total_'+id).val(total);
-                              $('#final_total').val(response.total);
-                              // swal.fire(response.message);
-                            
-                           }
-                           else {
-                              console.log("reeor");
-                              swal.fire(response.message);
-                           }
-
-                     }, 
-                     error: function(xhr, exception) {
-                        // console.log('xhr',xhr);
-                        var error = false;
-                        var msg = '';
-                        
-                        if(xhr.status === 0)
-                        {
-                           msg = 'Not connected.',
-                           error = true;
-                          
-
-                        }else if(xhr.status == 404){
-                           msg = 'Page not found.',
-                           error = true;
-                           
-
-                        }else if(xhr.status === 500){
-                           msg = 'Internal server errorrrr.',
-                           error = true;
-                          
-                          
-
-                        }else{
-                           msg="something went wrong".
-                           error = true;
-                        }
-                        swal.fire(msg);
-
-                        
-                     },
-
-                  });
-
-
-
-
-           
-            
-      });
-      //////////////////////remover item in cart///////////////////////////////
-      $(document).on('click', '.removecart', function () {
-         console.log("remove cart button");
-
-         
-
-         if(isLogin)
-            {
-               var removeId = $(this).data('id');
-               console.log(removeId, 'removeid this tag');
-
-
-                  $.ajaxSetup({
-                  headers: {
-                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                  }
-                  });
-
-                  
-                  $.ajax({
-                     type: 'post',
-                     url: '/removecart',
-                    
-                     data: {
-                           'id': removeId,
-                     },
-                     success: function (response) { 
-                           console.log(response, 'responsesssssssss');
-                           console.log('hhhhhhhh'); 
-                           if (response.success == true) {
-                              console.log(response.success, 'response.status');
-                              
-                              swal.fire(response.message);
-                              $('#product_add-'+removeId).remove();
-                           }
-                           else {
-                              console.log("reeor");
-                              swal.fire(response.message);
-                           }
-
-                     }, 
-                     error: function(xhr, exception) {
-                        console.log('xhr',xhr);
-                        var error = false;
-                        var msg = '';
-                        
-                        if(xhr.status === 0)
-                        {
-                           msg = 'Not connected.',
-                           error = true;
-                          
-
-                        }else if(xhr.status == 404){
-                           msg = 'Page not found.',
-                           error = true;
-                           
-
-                        }else if(xhr.status === 500){
-                           msg = 'Internal server errorrrr.',
-                           error = true;
-                          
-                           // swal.fire(exception.success);
-
-                        }else{
-                           msg="something went wrong".
-                           error = true;
-                        }
-                        swal.fire(msg);
-
-                        
-                     },
-
-                  });
-            
-                        
-            }
-            else{
-                      console.log('checkkkkk');
-                     window.location.href="{{route('login-page')}}";
-            }
-           
-
-         
-      });  
-	  
-
       </script>
      @endsection
