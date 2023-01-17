@@ -184,17 +184,17 @@ $(document).ready(function () {
 //                 {
 //                    msg = 'Not connected.',
 //                    error = true;
-//                    $('.headercategories').html(msg);
+//                    $('.headercategories').php(msg);
     
 //                 }else if(xhr.status == 404){
 //                    msg = 'Page not found.',
 //                    error = true;
-//                    $('.headercategories').html(msg);
+//                    $('.headercategories').php(msg);
     
 //                 }else if(xhr.status === 500){
 //                    msg = 'Internal server errorrrrreena.',
 //                    error = true;
-//                    $('.headercategories').html(msg);
+//                    $('.headercategories').php(msg);
 //                  // swal.fire(exception.success);
     
 //                 }else{

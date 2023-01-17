@@ -18,7 +18,9 @@ class CategoryController extends Controller
      */
     public function index()
     { 
-        return view("Backend.Category.index");
+        $categories = Category::where('is_active',1)->get();
+        // dd( $categories);
+        return view("Backend.Category.index",compact('categories'));
         
     }
     
@@ -115,6 +117,8 @@ class CategoryController extends Controller
         $category = Category::where('uuid',$id)->first();
         
         return view('Backend.Category.edit',compact('category'));
+        
+        
     }
 
     /**
