@@ -17,11 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () { return view('Backend.index');
-});
+Route::get('/home', function () { return view('Backend.index');})->name('pharmahome');
 
-Route::get('/chartjs', function () { return view('Backend.chartjs');
-});
+Route::get('/chartjs', function () { return view('Backend.chartjs');})->name('pharmachart');
+
 
 Route::get('/basic_table', function () { return view('Backend.basic_table');
 });

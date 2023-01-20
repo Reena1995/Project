@@ -257,7 +257,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
                 <li>
-                    <a class="active" href="index.php">
+                    <a class="active" href="{{route('pharmahome')}}">
                         <i class="fa fa-dashboard"></i>
                         <span>Dashboard</span>
                     </a>
@@ -317,7 +317,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Charts</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="chartjs.php">Chart js</a></li>
+                        <li><a href="{{route('pharmachart')}}">Chart js</a></li>
                         <li><a href="flot_chart.php">Flot Charts</a></li>
                     </ul>
                 </li>
