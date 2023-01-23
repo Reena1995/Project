@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Jobs\sendEmailJob;
-use App\Http\Controllers\RegisterController;
 use App\Jobs\sendDataJob;
+use App\Models\Register;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,16 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-// Route::get('/sendmail',[RegisterController::class,'mail']);
-Route::get('/register',[RegisterController::class,'create']);
-Route::post('/registeradd',[RegisterController::class,'store'])->name('register.store');
-
-
-// Route::get('practice', function () {
-//     dispatch(new sendEmailJob($res));
-//     // return view('prac');
-// });
-
-
-
+Route::get('/home', function () {
+    dispatch(new sendDataJob());
+    return view('prac');
+});

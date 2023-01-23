@@ -110,4 +110,7 @@ class RegisterController extends Controller
     {
         //
     }
+    public function pratice(){
+        dd('1212');
+    }
 }
