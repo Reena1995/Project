@@ -34,7 +34,7 @@ class sendDataJob implements ShouldQueue
     {
         $faker=Faker::create();
 
-        for($i=1;$i<=3000;$i++)
+        for($i=1;$i<=10;$i++)
         { 
             $register = new Register;
             $register->name =$faker->name;

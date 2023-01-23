@@ -26,10 +26,7 @@ Route::get('/register',[RegisterController::class,'create']);
 Route::post('/registeradd',[RegisterController::class,'store'])->name('register.store');
 
 
-// Route::get('practice', function () {
-//     dispatch(new sendEmailJob($res));
-//     // return view('prac');
-// });
+
 
 
 
