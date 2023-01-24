@@ -62,9 +62,8 @@ class ProductController extends Controller
 
         ]); 
     
-        
+        DB::beginTransaction();
         try{
-			DB::beginTransaction();
             $product = new Product;
             $product->name = $request->name;
             $product->category_id = $request->category_id;
