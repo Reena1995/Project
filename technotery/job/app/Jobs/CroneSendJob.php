@@ -18,6 +18,7 @@ class CroneSendJob implements ShouldQueue
     public function __construct($file_name)
     {
         $this->fileName=$file_name;
+        
     }
 
     
