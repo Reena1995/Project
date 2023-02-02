@@ -1,0 +1,54 @@
+PS C:\xampp\htdocs\Reena\Practice> git add.
+
+PS C:\xampp\htdocs\Reena\Practice> git config --global user.name "Reena"
+PS C:\xampp\htdocs\Reena\Practice> git config --global user.email "riyavalekar19@gmai.com"
+PS C:\xampp\htdocs\Reena\Practice> git config user.name
+Reena
+PS C:\xampp\htdocs\Reena\Practice> git status
+On branch main
+PS C:\xampp\htdocs\Reena\Practice> git branch
+* main
+
+PS C:\xampp\htdocs\Reena\Practice> git status
+On branch main
+nothing to commit, working tree clean
+PS C:\xampp\htdocs\Reena\Practice> git commit -m "commit message reena practice"
+On branch main
+nothing to commit, working tree clean
+PS C:\xampp\htdocs\Reena\Practice> git branch - r
+fatal: '-' is not a valid branch name.
+PS C:\xampp\htdocs\Reena\Practice> git checkout main
+fatal: No configured push destination.
+Either specify the URL from the command-line or configure a remote repository using
+    git remote add <name> <url>
+
+and then push using the remote name
+
+    git push <name>
+PS C:\xampp\htdocs\Reena\Practice> git remote add origin https://github.com/Reena1995/Project.git
+PS C:\xampp\htdocs\Reena\Practice> git status
+On branch main
+nothing to commit, working tree clean
+PS C:\xampp\htdocs\Reena\Practice> git push
+fatal: The current branch main has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin main
+
+PS C:\xampp\htdocs\Reena\Practice> git push --set-upstream origin main
+info: please complete authentication in your browser...
+Enumerating objects: 159, done.
+Counting objects: 100% (159/159), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (138/138), done.
+Writing objects: 100% (159/159), 105.73 KiB | 1.65 MiB/s, done.
+Total 159 (delta 34), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (34/34), done.
+remote: 
+remote: Create a pull request for 'main' on GitHub by visiting:
+remote:      https://github.com/Reena1995/Project/pull/new/main
+remote:
+To https://github.com/Reena1995/Project.git
+ * [new branch]      main -> main
+Branch 'main' set up to track remote branch 'main' from 'origin'.
+PS C:\xampp\htdocs\Reena\Practice> 
