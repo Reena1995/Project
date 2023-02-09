@@ -1,3 +1,4 @@
 composer global require laravel/installer 
 php artisan --version
 composer create-project laravel/laravel dom
+php  artisan make:model Reena -m 

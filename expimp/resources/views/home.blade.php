@@ -36,18 +36,28 @@
   <h1 style="text-align:center">Index Page</h1>
   <br>
   <br>
+        @if(Session::has('success'))
+            <div class="alert alert-success">
+                {{Session::get('success')}}
+            </div>
+        @else(Session::has('error'))
+            <div class="alert alert-danger">
+            {{Session::get('error')}}
+            </div>
+        @endif
   <div class="row">
     <div class="col-md-1">
     
     </div>
+    
     <div class="col-md-10">
-       
-        <form action="" method="post"  enctype="multipart/form-data">
+    
+        <form  action="{{route('home.add')}}" method="post"  enctype="multipart/form-data">
         @csrf
         <div class="main">
             <div class="form-group d-flex ">
-                <input id="file" type="file" name="file" class="form-control">
-                <button type="button" class="btn btn-primary ml-2">Import File</button>  
+                <input id="file" type="file" name="importfile" class="form-control">
+                <button type="submit" name="submit" class="btn btn-primary ml-2">Import File</button>  
             </div>
         
             

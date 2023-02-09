@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ImportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +21,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
-});
 
 Route::get('/Registrationview',[RegisterController::class,'create'])->name('register');
 Route::post('/Registrationadd',[RegisterController::class,'store'])->name('Registrationadd');
 
 Route::get('/loginview',[LoginController::class,'create'])->name('Loginview');
 Route::post('/login',[LoginController::class,'login'])->name('Login');
+
+
+
+Route::get('/home',[ImportController::class,'create']);
+Route::post('/homeadd',[ImportController::class,'store'])->name('home.add');
