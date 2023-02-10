@@ -15,15 +15,15 @@ class CreateEmpJobProDetHistoriesTable extends Migration
     {
         Schema::create('emp_job_pro_det_histories', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid');
+            $table->uuid('uuid');
             $table->unsignedBigInteger('emp_job_profile_id');
             $table->string('company_email');
             $table->string('company_employee_id');
             $table->string('company_emp_device_id');
-            $table->unsignedBigInteger('departments_id');
-            $table->unsignedBigInteger('designations_id');
-            $table->unsignedBigInteger('organization_roles_id');
-            $table->unsignedBigInteger('users_id');
+            $table->unsignedBigInteger('department_id');
+            $table->unsignedBigInteger('designation_id');
+            $table->unsignedBigInteger('organization_role_id');
+            $table->unsignedBigInteger('user_id');
             $table->boolean('is_active')->default(1);
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();

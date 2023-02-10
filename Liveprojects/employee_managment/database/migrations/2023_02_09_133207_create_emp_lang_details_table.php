@@ -15,19 +15,19 @@ class CreateEmpLangDetailsTable extends Migration
     {
         Schema::create('emp_lang_details', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid');
-            $table->unsignedBigInteger('langauges_id');
+            $table->uuid('uuid');
+            $table->unsignedBigInteger('langauge_id');
             $table->string('read');
             $table->string('write');
             $table->string('speak');
-            $table->unsignedBigInteger('users_id');
+            $table->unsignedBigInteger('user_id');
 			$table->boolean('is_active')->default(1);
 			$table->string('created_by');
 			$table->string('updated_by')->nullable();
             $table->timestamps();
 
-            $table->foreign('langauges_id')->references('id')->on('langauges');
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('langauge_id')->references('id')->on('langauges');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -15,15 +15,15 @@ class CreateStatesTable extends Migration
     {
         Schema::create('states', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid');
+            $table->uuid('uuid');
             $table->string('name');
-            $table->unsignedBigInteger('countries_id');
+            $table->unsignedBigInteger('country _id');
             $table->boolean('is_active')->default(1);
             $table->string('created_by');
             $table->string('updated_by')->nullable();
             $table->timestamps();
 
-            $table->foreign('countries_id')->references('id')->on('countries');
+            $table->foreign('country _id')->references('id')->on('countries');
         });
     }
 

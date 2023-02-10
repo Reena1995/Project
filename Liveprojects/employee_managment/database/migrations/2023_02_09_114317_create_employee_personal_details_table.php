@@ -15,43 +15,43 @@ class CreateEmployeePersonalDetailsTable extends Migration
     {
         Schema::create('employee_personal_details', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid');
+            $table->uuid('uuid');
             $table->unsignedBigInteger('user_id');
-            $table->string('dob');
+            $table->date('dob');
             $table->string('gender');
             $table->string('marital_status');
             $table->string('image');
-            $table->string('mobile');
-            $table->string('alternate_no');
+            $table->integer('mobile');
+            $table->integer('alternate_no');
             $table->string('blood_group');
             $table->unsignedBigInteger('current_residence_type_id');
-            $table->string('deatils_of_disability');
+            $table->string('details_of_disability');
             $table->string('total_of_experience');
 
-            $table->string('current_address');
+            $table->longText('current_address');
             $table->unsignedBigInteger('current_country_id');
             $table->unsignedBigInteger('current_state_id');
             $table->unsignedBigInteger('current_city_id');
             $table->string('current_pincode');
 
-            $table->string('permanent_address');
+            $table->longText('permanent_address');
             $table->unsignedBigInteger('permanent_country_id');
             $table->unsignedBigInteger('permanent_state_id');
             $table->unsignedBigInteger('permanent_city_id');
             $table->string('permanent_pincode');
 
-            $table->unsignedBigInteger('mode_of_transportations_id');
-            $table->unsignedBigInteger('users_id');
+            $table->unsignedBigInteger('mode_of_transportation_id');
+           
             $table->boolean('is_active')->default(1);
             $table->string('created_by');
             $table->string('updated_by')->nullable();
             $table->timestamps();
 
 
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('current_residence_type_id')->references('id')->on('current_residence_types');
-            $table->foreign('mode_of_transportations_id')->references('id')->on('mode_of_transportations');
-            $table->foreign('users_id')->references('id')->on('users');
-
+            $table->foreign('mode_of_transportation_id')->references('id')->on('mode_of_transportations');
+           
             $table->foreign('current_country_id')->references('id')->on('countries');
             $table->foreign('current_state_id')->references('id')->on('states');
             $table->foreign('current_city_id')->references('id')->on('cities');

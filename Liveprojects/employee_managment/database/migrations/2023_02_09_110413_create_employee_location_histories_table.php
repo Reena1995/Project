@@ -15,8 +15,8 @@ class CreateEmployeeLocationHistoriesTable extends Migration
     {
         Schema::create('employee_location_histories', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid');
-            $table->string('name');
+            $table->uuid('uuid');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('company_location_id');
             $table->unsignedBigInteger('company_location_type_id');
             $table->boolean('is_active')->default(1);
@@ -25,6 +25,7 @@ class CreateEmployeeLocationHistoriesTable extends Migration
             $table->timestamps();
 
 
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('company_location_id')->references('id')->on('company_locations');
             $table->foreign('company_location_type_id')->references('id')->on('company_location_types');
         });

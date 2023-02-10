@@ -16,7 +16,7 @@ class CreateOrganizationRolesTable extends Migration
         Schema::create('organization_roles', function (Blueprint $table) {
             
             $table->id();
-            $table->string('uuid');
+            $table->uuid('uuid');
             $table->string('name');
             $table->unsignedBigInteger('department_id');
             $table->unsignedBigInteger('designation_id');

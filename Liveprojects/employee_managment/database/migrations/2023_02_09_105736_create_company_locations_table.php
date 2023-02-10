@@ -15,7 +15,7 @@ class CreateCompanyLocationsTable extends Migration
     {
         Schema::create('company_locations', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid');
+            $table->uuid('uuid');
             $table->string('name');
             $table->boolean('is_active')->default(1);
             $table->string('created_by');

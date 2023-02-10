@@ -15,15 +15,15 @@ class CreateDesignationsTable extends Migration
     {
         Schema::create('designations', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid');
+            $table->uuid('uuid');
             $table->string('name');
-            $table->unsignedBigInteger('designation_id');
+            $table->unsignedBigInteger('department_id');
             $table->boolean('is_active')->default(1);
             $table->string('created_by');
             $table->string('updated_by')->nullable();
             $table->timestamps();
 
-            $table->foreign('designation_id')->references('id')->on('departments');
+            $table->foreign('department_id')->references('id')->on('departments');
         });
     }
 
