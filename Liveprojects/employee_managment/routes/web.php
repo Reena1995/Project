@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/add-employee', function () {return view('Console.Modules.employee.add-employees');});
+
+Route::get('/dashboard', function () {return view('Console.Modules.dashboard');});

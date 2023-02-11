@@ -17,7 +17,7 @@ class CreateAssetSubTypesTable extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->unsignedBigInteger('asset_type_id');
-			$table->string('name');
+			$table->string('type');
 			$table->boolean('is_active')->default(1);
 			$table->string('created_by');
 			$table->string('updated_by')->nullable();
