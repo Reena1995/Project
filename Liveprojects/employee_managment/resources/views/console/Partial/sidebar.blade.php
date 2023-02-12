@@ -1,7 +1,7 @@
  <aside class="admin-sidebar">
             <div class="admin-sidebar-brand">
                 <!-- begin sidebar branding-->
-                <img class="admin-brand-logo" src="console/assets/img/logo.svg" width="40" alt="hci Logo" />
+                <img class="admin-brand-logo" src="{{asset('console/assets/img/logo.svg')}}" width="40" alt="hci Logo" />
                 <span class="admin-brand-content"><a href="index.html"> hci</a></span>
                 <!-- end sidebar branding-->
                 <div class="ml-auto">

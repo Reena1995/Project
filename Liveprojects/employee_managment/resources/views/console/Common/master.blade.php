@@ -7,16 +7,16 @@
         <meta name="apple-touch-fullscreen" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <title>Dashboard | Admin Portal</title>
-        <link rel="icon" type="image/x-icon" href="console/assets/img/favicon.png" />
-        <link rel="icon" href="console/assets/img/favicon.png" type="image/png" sizes="16x16" />
+        <link rel="icon" type="image/x-icon" href="{{asset('console/assets/img/favicon.png')}}" />
+        <link rel="icon" href="{{asset('console/assets/img/favicon.png')}}" type="image/png" sizes="16x16" />
         <!--PAGE-->
-        <link rel="stylesheet" type="text/css" href="console/assets/js/jquery-scrollbar/jquery.scrollbar.css" />
-        <link rel="stylesheet" href="console/assets/js/jquery-ui/jquery-ui.min.css" />
+        <link rel="stylesheet" type="text/css" href="{{asset('console/assets/js/jquery-scrollbar/jquery.scrollbar.css')}}" />
+        <link rel="stylesheet" href="{{asset('console/assets/js/jquery-ui/jquery-ui.min.css')}}" />
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,600" rel="stylesheet" />
         <!--Material Icons-->
-        <link rel="stylesheet" type="text/css" href="console/assets/fonts/materialdesignicons/materialdesignicons.min.css" />
+        <link rel="stylesheet" type="text/css" href="{{asset('console/assets/fonts/materialdesignicons/materialdesignicons.min.css')}}" />
         <!--Hci Admin CSS-->
-        <link rel="stylesheet" type="text/css" href="console/assets/css/tbs.css" />
+        <link rel="stylesheet" type="text/css" href="{{asset('console/assets/css/tbs.css')}}" />
         <!-- Additional library for page -->
     </head>
     <!--body with default sidebar pinned -->
