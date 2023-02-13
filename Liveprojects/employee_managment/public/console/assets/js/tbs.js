@@ -27,7 +27,7 @@
         if (windowWidth >= 1200) {
             $(this).addClass("sidebar-show");
         }
-    });
+    }); 
     $(document).on("mouseleave", "body:not(.sidebar-pinned) .admin-sidebar", function (e) {
         if (windowWidth >= 1200) {
             $(this).removeClass("sidebar-show");
@@ -67,7 +67,7 @@
      * @requires jQuery
      */
     $(document).on("click", ".open-dropdown", function (e) {
-        e.preventDefault();
+        e.preventDefault(); 
         if (!$(this).next().is(":visible")) {
             //opens the adjacent list to the target
             $(this).next().slideDown();

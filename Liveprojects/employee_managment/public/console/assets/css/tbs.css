@@ -11817,6 +11817,8 @@ span.notification-counter {
     background-color: #f7bc06;
 }
 
+
+
 .show .event-type.info {
     border-color: #19b5fe;
     background-color: #19b5fe;
@@ -15748,3 +15750,11 @@ table .employee-image
 }
 /*Leave Application CSS :: END*/
 .datepicker{ z-index:9999 !important; }
+
+
+/* own css add   start*/
+.errr-validation
+{
+    color:red;
+}
+/* own css add   end*/
