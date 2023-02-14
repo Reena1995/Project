@@ -13,7 +13,7 @@ class LoginController extends Controller
 {
     public function create()
     {
-        return view('role.login');
+        return view('login.login');
     }
 
     public function login(Request $request)

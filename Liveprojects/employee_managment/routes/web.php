@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrganizationRoleController;
 
 
 
@@ -18,11 +19,11 @@ Route::group(['middleware'=>['afterlogin']], function()
 {
     
     Route::get('/logout',[LoginController::class,'logout'])->name('Logout');
-    Route::get('/employee-dashboard', function () {return view('role.employee.modules.dashboard');})->name('employee.dashboard');
+    Route::get('/employee-dashboard', function () {return view('employee.modules.dashboard');})->name('employee.dashboard');
 
-    Route::get('/add-employee', function () {return view('role.admin.modules.employee.add-employees');})->name('employee.create');
+    Route::get('/add-employee', function () {return view('employee.modules.employee.add-employees');})->name('employee.create');
 
-    Route::get('/admin-dashboard', function () {return view('role.admin.modules.dashboard');})->name('admin.dashboard');
+    Route::get('/admin-dashboard', function () {return view('admin.modules.dashboard');})->name('admin.dashboard');
 
     /* ----------------- ----------   department start  -------------------------*/
     Route::get('/department-create',[DepartmentController::class,'create'])->name('department.create');
@@ -44,4 +45,13 @@ Route::group(['middleware'=>['afterlogin']], function()
     Route::get('/designation/status/{id}',[DesignationController::class,'status'])->name('designation.status');
     /* ----------------- ----------   designation end  -------------------------*/
 
+     /* ----------------- ----------   Organization_Role start  -------------------------*/
+     Route::get('/organization_role-create',[OrganizationRoleController::class,'create'])->name('organization_role.create');
+     Route::post('/organization_role-store',[OrganizationRoleController::class,'store'])->name('organization_role.add');
+     Route::get('/organization_role-index',[OrganizationRoleController::class,'index'])->name('organization_role.index');
+     Route::get('/organization_role/show/{id}',[OrganizationRoleController::class,'show'])->name('organization_role.show');
+     Route::get('/organization_role/edit/{id}',[OrganizationRoleController::class,'edit'])->name('organization_role.edit');
+     Route::post('/organization_role/update/{id}',[OrganizationRoleController::class,'update'])->name('organization_role.update');
+     Route::get('/organization_role/status/{id}',[OrganizationRoleController::class,'status'])->name('organization_role.status');
+     /* ----------------- ----------   Organization_Role end  -------------------------*/
 });

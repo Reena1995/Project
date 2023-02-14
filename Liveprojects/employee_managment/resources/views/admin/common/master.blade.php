@@ -28,12 +28,12 @@
 
     <body class="sidebar-pinned">
        
-			  @include('partial.sidebar')
+			  @include('admin.partial.sidebar')
         
 
         <main class="admin-main">
            
-             @include('partial.header')
+             @include('admin.partial.header')
              @foreach(['error','success'] as $msg)
                     @if(Session::has($msg))
                     <div class="alert alert-{{$msg}}" role="alert">
@@ -44,7 +44,7 @@
              @yield('content')
             
         </main>
-		 @include('partial.footer')
+		 @include('admin.partial.footer')
     </body>
     @stack('scripts')
 </html>

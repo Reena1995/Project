@@ -15,7 +15,7 @@ class DepartmentController extends Controller
    
     public function create()
     {
-       return view('role.admin.modules.department.add');
+       return view('admin.modules.department.add');
     }
 
     
@@ -67,21 +67,21 @@ class DepartmentController extends Controller
     public function index()
     {
         $department = Department::where('is_active',1)->get();
-        return view('role.admin.modules.department.index',compact('department'));
+        return view('admin.modules.department.index',compact('department'));
     }   
 
 
     public function show($id)
     {
         $department = Department::where('uuid',$id)->first();
-        return view('role.admin.modules.department.show',compact('department'));
+        return view('admin.modules.department.show',compact('department'));
     }
 
     
     public function edit($id)
     {
         $department = Department::where('uuid',$id)->first();
-        return view('role.admin.modules.department.edit',compact('department'));
+        return view('admin.modules.department.edit',compact('department'));
     }
 
    

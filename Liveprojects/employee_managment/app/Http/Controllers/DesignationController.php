@@ -15,7 +15,7 @@ class DesignationController extends Controller
     public function create()
     {  
         $department=Department::orderBy('name', 'ASC')->get();
-       return view('role.admin.modules.designation.add',compact('department'));
+       return view('admin.modules.designation.add',compact('department'));
     }
 
     
@@ -69,7 +69,7 @@ class DesignationController extends Controller
     public function index()
     {
         $designation = Designation::where('is_active',1)->get();
-        return view('role.admin.modules.designation.index',compact('designation'));
+        return view('admin.modules.designation.index',compact('designation'));
     }   
 
 
@@ -77,7 +77,7 @@ class DesignationController extends Controller
     {
         $department=Department::orderBy('name', 'ASC')->get();
         $designation = Designation::where('uuid',$id)->first();
-        return view('role.admin.modules.designation.show',compact('designation','department'));
+        return view('admin.modules.designation.show',compact('designation','department'));
     }
    
     
@@ -87,7 +87,7 @@ class DesignationController extends Controller
     {
         $department=Department::orderBy('name', 'ASC')->get();
         $designation = Designation::where('uuid',$id)->first();
-        return view('role.admin.modules.designation.edit',compact('designation','department'));
+        return view('admin.modules.designation.edit',compact('designation','department'));
     }
 
    

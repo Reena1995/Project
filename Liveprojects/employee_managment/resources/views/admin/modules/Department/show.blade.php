@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('admin.common.master')
 @section('content')
 <section class="admin-content">
                 <!-- BEGIN PlACE PAGE CONTENT HERE -->
@@ -31,7 +31,7 @@
                                        
                                        
                                     </ul>
-                                    <form id="department_form_edit" action="{{route('department.update',$department->uuid)}}" method="post" enctype="multipart/form-data">
+                                    <form id="department_form" action="{{route('department.add',$department->uuid)}}" method="post" enctype="multipart/form-data">
                                         @csrf  
                                         <div class="tab-content" id="myTabContent1">
                                             <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
@@ -57,19 +57,19 @@
                                                    
                                                 </div>
                                             </div>
-                                            <div class="card-footer p-t-20 text-right">
-                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <button class="theme-btn-outline text-white">canel</button>
-                                                </div>
-                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Update</button>
-                                                </div>
-                                            </div>
+                                           
                                             
                                         </div>
                                     </form>
                                 </div>
-                              
+                                <!-- <div class="card-footer p-t-20 text-right">
+                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                        <button class="theme-btn-outline text-white">canel</button>
+                                    </div>
+                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                        <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
+                                    </div>
+                                </div> -->
                             </div>
                             <!--card ends-->
                         </div>
@@ -81,19 +81,6 @@
        	@endsection
  @push('scripts')
     <script>
-         $(document).ready(function(){
-            $('#department_form_edit').validate({
-                rules : {
-                    name : "required",                    
-                },
-                messages : {
-                    name : "Please enter a department name",
-                    
-                },
-                submitHandler : function(form){
-                    form.submit();
-                }
-            });
-        });
+        
     </script>      
  @endpush
