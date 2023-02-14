@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\LoginController;
 
 
@@ -32,5 +33,15 @@ Route::group(['middleware'=>['afterlogin']], function()
     Route::post('/department/update/{id}',[DepartmentController::class,'update'])->name('department.update');
     Route::get('/department/status/{id}',[DepartmentController::class,'status'])->name('department.status');
     /* ----------------- ----------   department end  -------------------------*/
+
+    /* ----------------- ----------   designation start  -------------------------*/
+    Route::get('/designation-create',[DesignationController::class,'create'])->name('designation.create');
+    Route::post('/designation-store',[DesignationController::class,'store'])->name('designation.add');
+    Route::get('/designation-index',[DesignationController::class,'index'])->name('designation.index');
+    Route::get('/designation/show/{id}',[DesignationController::class,'show'])->name('designation.show');
+    Route::get('/designation/edit/{id}',[DesignationController::class,'edit'])->name('designation.edit');
+    Route::post('/designation/update/{id}',[DesignationController::class,'update'])->name('designation.update');
+    Route::get('/designation/status/{id}',[DesignationController::class,'status'])->name('designation.status');
+    /* ----------------- ----------   designation end  -------------------------*/
 
 });

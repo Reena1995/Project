@@ -7,7 +7,7 @@
             <div class="container-fluid p-t-20">
                 <div class="row d-flex align-items-center">
                     <div class="col-lg-6 col-md-6 col-sm-12 m-b-20">
-                        <h3>Departments</h3>
+                        <h3>Designation</h3>
                     </div>
                    
                 </div>
@@ -17,7 +17,7 @@
                         <!--card begins-->
                         <div class="card m-b-0">
                             <div class="card-header">
-                                <div class="card-title">Departments List</div>
+                                <div class="card-title">Designation List</div>
                             </div>
                             <div class="card-body pt-0">
                                 <div class="row">
@@ -28,24 +28,26 @@
                                                 <tr>
                                                     <th class="border-bottom-0 w-5">No</th>
                                                     <th class="border-bottom-0 w-5">Department_Name</th>
+                                                    <th class="border-bottom-0 w-5">Designation_Name</th>
                                                     <th class="border-bottom-0">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($department as $dep)
+                                            @foreach($designation as $desi)
                                                 <tr>
-                                                    <td>{{$dep->id}}</td>
-                                                    <td>{{$dep->name}}</td>
+                                                    <td>{{$desi->id}}</td>
+                                                    <td>{{$desi->department->name}}</td>
+                                                    <td>{{$desi->name}}</td>
                                                     <td>
-                                                        <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('department.show',$dep->uuid)}}" >
+                                                        <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('designation.show',$desi->uuid)}}" >
                                                             <i class="mdi mdi-eye" data-toggle="tooltip" data-original-title="view"></i>
                                                         </a>
                                                        
-                                                        <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('department.edit',$dep->uuid)}}" >
+                                                        <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('designation.edit',$desi->uuid)}}" >
                                                             <i class="mdi mdi-pen" data-toggle="tooltip"
                                                                 data-original-title="Edit"></i>
                                                         </a>
-                                                        <a class="btn btn-danger btn-icon btn-sm text-white" href="{{route('department.status',$dep->uuid)}}" 
+                                                        <a class="btn btn-danger btn-icon btn-sm text-white" href="{{route('designation.status',$desi->uuid)}}" 
                                                             data-toggle="tooltip" data-original-title="Delete"><i
                                                                 class="mdi mdi-delete"></i></a>
                                                     </td>
