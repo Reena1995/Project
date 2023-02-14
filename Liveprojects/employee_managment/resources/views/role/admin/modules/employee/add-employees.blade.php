@@ -1,4 +1,4 @@
-@extends('Console.Common.master')
+@extends('layout.master')
 @section('content')
             <section class="admin-content">
                 <!-- BEGIN PlACE PAGE CONTENT HERE -->

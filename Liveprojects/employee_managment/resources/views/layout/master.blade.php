@@ -15,6 +15,11 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,600" rel="stylesheet" />
         <!--Material Icons-->
         <link rel="stylesheet" type="text/css" href="{{asset('console/assets/fonts/materialdesignicons/materialdesignicons.min.css')}}" />
+        <link rel="stylesheet" type="text/css" href="{{asset('console/assets/css/font-awesome.min.css')}}" />
+        <!--Page Specific CSS-->
+        <link rel="stylesheet" type="text/css" href="{{asset('console/assets/js/bootstrap-datepicker/css/bootstrap-datepicker.min.css')}}" />
+        <link rel="stylesheet" type="text/css" href="{{asset('console/assets/js/DataTables/datatables.min.css')}}" />
+        <link rel="stylesheet" type="text/css" href="{{asset('console/assets/js/select2/css/select2.min.css')}}" />
         <!--Hci Admin CSS-->
         <link rel="stylesheet" type="text/css" href="{{asset('console/assets/css/tbs.css')}}" />
         <!-- Additional library for page -->
@@ -41,4 +46,5 @@
         </main>
 		 @include('partial.footer')
     </body>
+    @stack('scripts')
 </html>

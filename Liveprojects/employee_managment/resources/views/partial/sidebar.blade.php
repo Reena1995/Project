@@ -53,7 +53,7 @@
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="view-employees.html" class="menu-link">
+                                <a href="department.index" class="menu-link">
                                     <span class="menu-label">
                                         <span class="menu-name">View Employees</span>
                                     </span>
@@ -63,7 +63,7 @@
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="add-employees.html" class="menu-link">
+                                <a href="{{route('employee.create')}}" class="menu-link">
                                     <span class="menu-label">
                                         <span class="menu-name">Add Employees</span>
                                     </span>
@@ -102,7 +102,7 @@
                             </li>
                             
                             <li class="menu-item">
-                                <a href="view-employees.html" class="menu-link">
+                                <a href="{{route('department.index')}}" class="menu-link">
                                     <span class="menu-label">
                                         <span class="menu-name">View Department</span>
                                     </span>
@@ -112,16 +112,7 @@
                                 </a>
                             </li>
 
-                            <li class="menu-item">
-                                <a href="all-employees.html" class="menu-link">
-                                    <span class="menu-label">
-                                        <span class="menu-name">Edit Department</span>
-                                    </span>
-                                    <span class="menu-icon">
-                                        <i class="icon-placeholder mdi mdi-format-list-bulleted"></i>
-                                    </span>
-                                </a>
-                            </li>
+                           
                             
                         </ul>
                     </li>
