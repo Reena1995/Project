@@ -9,6 +9,7 @@ use App\Http\Controllers\OrganizationRoleController;
 
 
 
+
 Route::get('login',[LoginController::class,'create'])->name('login');
 Route::post('authnication',[LoginController::class,'login'])->name('authnication');
 
@@ -54,4 +55,14 @@ Route::group(['middleware'=>['afterlogin']], function()
      Route::post('/organization_role/update/{id}',[OrganizationRoleController::class,'update'])->name('organization_role.update');
      Route::get('/organization_role/status/{id}',[OrganizationRoleController::class,'status'])->name('organization_role.status');
      /* ----------------- ----------   Organization_Role end  -------------------------*/
+
+     /* ----------------- ----------  company location start  -------------------------*/
+     Route::get('/department-create',[DepartmentController::class,'create'])->name('department.create');
+     Route::post('/department-store',[DepartmentController::class,'store'])->name('department.add');
+     Route::get('/department-index',[DepartmentController::class,'index'])->name('department.index');
+     Route::get('/department/show/{id}',[DepartmentController::class,'show'])->name('department.show');
+     Route::get('/department/edit/{id}',[DepartmentController::class,'edit'])->name('department.edit');
+     Route::post('/department/update/{id}',[DepartmentController::class,'update'])->name('department.update');
+     Route::get('/department/status/{id}',[DepartmentController::class,'status'])->name('department.status');
+     /* ----------------- ----------   company location end  -------------------------*/
 });

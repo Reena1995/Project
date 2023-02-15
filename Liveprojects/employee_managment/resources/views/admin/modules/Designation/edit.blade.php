@@ -21,7 +21,7 @@
                             <!--card begins-->
                             <div class="card m-b-30">
                                 <div class="card-header">
-                                    <div class="card-title">Edit Designation  Details</div>
+                                    <div class="card-title">Edit designation Details</div>
                                 </div>
                                 <div class="card-body">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -36,42 +36,45 @@
                                         <div class="tab-content" id="myTabContent1">
                                             <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
                                                 <h5 class="font-weight-semibold p-t-20 m-b-20">Basic</h5>
-                                                <div class="form-row">
-                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                        <label>Designation Name</label>
-                                                        <input type="text" id="name" name="name" value="{{$designation->name}}" class="form-control form-control-lg" placeholder="Enter First Name" />
-                                                        @if ($errors->has('name'))
-        								                    <span class="errr-validation">{{ $errors->first('name') }}</span>
-       								                    @endif
-                                                    </div>
-                                                    <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
-                                                        <label>Select Deaprtment</label>
-                                                        <select class="form-control" name="department_id"  id="department_id">
-                                                            <option selected value="">Choose...</option>
-                                                            @foreach($department as $dept)
-                                                                @if($dept->id == $designation->department_id)
-                                                                    <option value="{{$dept->id}}" selected>{{$dept->name}} </option>
-                                                                @else    
-                                                                    <option value="{{$dept->id}}">{{$dept->name}} </option>
-                                                                @endif    
-													        @endforeach
-                                                        </select>
-                                                        @if ($errors->has('department_id'))
-        								                    <span class="errr-validation">{{ $errors->first('department_id') }}</span>
-       								                    @endif
-                                                    </div>
-
-                                                   
+                                                <div class="row">
+                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="form-group floating-label ">
+                                                            <label>Designation Name</label>
+                                                            <input type="text" id="name" name="name" value="{{$designation->name}}" class="form-control form-control-lg" placeholder="Enter First Name" />
+                                                            @if ($errors->has('name'))
+                                                                <span class="errr-validation">{{ $errors->first('name') }}</span>
+                                                            @endif
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="form-group floating-label show-label ">
+                                                            <label>Select Deaprtment</label>
+                                                            <select class="form-control" name="department_id"  id="department_id">
+                                                                <option selected value="">Choose...</option>
+                                                                @foreach($department as $dept)
+                                                                    @if($dept->id == $designation->department_id)
+                                                                        <option value="{{$dept->id}}" selected>{{$dept->name}} </option>
+                                                                    @else    
+                                                                        <option value="{{$dept->id}}">{{$dept->name}} </option>
+                                                                    @endif    
+                                                                @endforeach
+                                                            </select>
+                                                            @if ($errors->has('department_id'))
+                                                                <span class="errr-validation">{{ $errors->first('department_id') }}</span>
+                                                            @endif
+                                                            </div>
+                                                        <div>
+                                                        <div class="card-footer p-t-20 text-right">
+                                                            <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                            <button class="theme-btn-outline text-white">canel</button>
+                                                        </div>
+                                                        <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                            <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
+                                                        </div>
                                                 </div>
+                                               
                                             </div>
-                                            <div class="card-footer p-t-20 text-right">
-                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <button class="theme-btn-outline text-white">canel</button>
-                                                </div>
-                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Update</button>
-                                                </div>
-                                            </div>
+                                            
                                             
                                         </div>
                                     </form>
@@ -88,7 +91,7 @@
        	@endsection
  @push('scripts')
     <script>
-          $(document).ready(function(){
+         $(document).ready(function(){
             $("form[name='form']").validate({
                 rules : {
                     name : "required",  
@@ -98,6 +101,17 @@
                     name : "Please enter a designation name",
                     department_id : "Please select department ",  
                     
+                },
+                errorClass: "custom-error",
+                errorElement: "div",
+                errorPlacement: function(error, element) {
+                    var placement = $(element).data('error');
+                    if (placement) {
+                        $(element).append(error)
+                    } else {
+                        console.log(element.prev());
+                        error.insertAfter(element);
+                    }
                 },
                 submitHandler : function(form){
                     form.submit();

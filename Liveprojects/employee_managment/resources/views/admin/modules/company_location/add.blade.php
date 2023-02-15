@@ -31,7 +31,7 @@
                                        
                                        
                                     </ul>
-                                    <form name="form" action="{{route('department.add')}}" method="post" enctype="multipart/form-data">
+                                    <form id="department_form" action="{{route('department.add')}}" method="post" enctype="multipart/form-data">
                                         @csrf  
                                         <div class="tab-content" id="myTabContent1">
                                             <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
@@ -90,7 +90,7 @@
  @push('scripts')
     <script>
          $(document).ready(function(){
-            $("form[name='form']").validate({
+            $('#department_form').validate({
                 rules : {
                     name : "required",                    
                 },

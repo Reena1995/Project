@@ -6,7 +6,7 @@
                 <div class="container-fluid p-t-20">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 m-b-20">
-                            <h3>Add Department</h3>
+                            <h3>Edit Department</h3>
                         </div>
                         <div class="col-6 m-b-20 text-right pl-3 small-button">
                             <a href="all-employees.html"><button type="button" class="btn text-white add-new-emp">View Employee</button></a>
@@ -21,7 +21,7 @@
                             <!--card begins-->
                             <div class="card m-b-30">
                                 <div class="card-header">
-                                    <div class="card-title">Add Department Details</div>
+                                    <div class="card-title">Edit Department Details</div>
                                 </div>
                                 <div class="card-body">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">

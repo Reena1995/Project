@@ -37,49 +37,54 @@
                                             <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
                                                 <h5 class="font-weight-semibold p-t-20 m-b-20">Basic</h5>
                                                 <div class="form-row">
-                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                    <label>Organization Role Name</label>
-                                                        <input type="text" id="name" name="name" value="{{$org_role->name}}" class="form-control form-control-lg"  />
-                                                        <span class="errordisplay"></span>
-                                                        @if ($errors->has('name'))
-        								                    <span class="errr-validation">{{ $errors->first('name') }}</span>
-       								                    @endif
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="form-group floating-label">
+                                                        <label>Organization Role Name</label>
+                                                            <input type="text" id="name" name="name" value="{{$org_role->name}}" class="form-control form-control-lg"  />
+                                                        
+                                                            @if ($errors->has('name'))
+                                                                <span class="errr-validation">{{ $errors->first('name') }}</span>
+                                                            @endif
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
-                                                        <label>Select Deaprtment</label>
-                                                        <select class="form-control" name="department_id"  id="department_id">
-                                                            <option selected value="">Choose...</option>
-                                                            @foreach($department as $dept)
-                                                                @if($dept->id == $org_role->department_id)
-                                                                    <option value="{{$dept->id}}" selected>{{$dept->name}} </option>
-                                                                @else    
-                                                                    <option value="{{$dept->id}}">{{$dept->name}} </option>
-                                                                @endif    
-													        @endforeach
-                                                        </select>
-                                                        <span class="errordisplay"></span>
-                                                        @if ($errors->has('department_id'))
-        								                    <span class="errr-validation">{{ $errors->first('department_id') }}</span>
-       								                    @endif
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="form-group floating-label show-label">
+                                                            <label>Select Deaprtment</label>
+                                                            <select class="form-control" name="department_id"  id="department_id">
+                                                                <option selected value="">Choose...</option>
+                                                                @foreach($department as $dept)
+                                                                    @if($dept->id == $org_role->department_id)
+                                                                        <option value="{{$dept->id}}" selected>{{$dept->name}} </option>
+                                                                    @else    
+                                                                        <option value="{{$dept->id}}">{{$dept->name}} </option>
+                                                                    @endif    
+                                                                @endforeach
+                                                            </select>
+                                                            
+                                                            @if ($errors->has('department_id'))
+                                                                <span class="errr-validation">{{ $errors->first('department_id') }}</span>
+                                                            @endif
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
-                                                        <label>Select Designation</label>
-                                                        <select class="form-control" name="designation_id"  id="designation_id">
-                                                            <option selected value="">Choose...</option>
-                                                            @foreach($designation as $desi)
-                                                                @if($desi->id == $org_role->designation_id)
-                                                                    <option value="{{$desi->id}}" selected>{{$desi->name}} </option>
-                                                                @else    
-                                                                    <option value="{{$desi->id}}">{{$desi->name}} </option>
-                                                                @endif    
-													        @endforeach
-                                                        </select>
-                                                        <span class="errordisplay"></span>
-                                                        @if ($errors->has('designation_id'))
-        								                    <span class="errr-validation">{{ $errors->first('designation_id') }}</span>
-       								                    @endif
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="form-group floating-label show-label">
+                                                            <label>Select Designation</label>
+                                                            <select class="form-control" name="designation_id"  id="designation_id">
+                                                                <option selected value="">Choose...</option>
+                                                                @foreach($designation as $desi)
+                                                                    @if($desi->id == $org_role->designation_id)
+                                                                        <option value="{{$desi->id}}" selected>{{$desi->name}} </option>
+                                                                    @else    
+                                                                        <option value="{{$desi->id}}">{{$desi->name}} </option>
+                                                                    @endif    
+                                                                @endforeach
+                                                            </select>
+                                                        
+                                                            @if ($errors->has('designation_id'))
+                                                                <span class="errr-validation">{{ $errors->first('designation_id') }}</span>
+                                                            @endif
+                                                        </div>
                                                     </div>
-
                                                    
                                                 </div>
                                             </div>
@@ -119,6 +124,17 @@
                     department_id : "Please select department ",  
                     designation_id : "Please select designation", 
                     
+                },
+                errorClass: "custom-error",
+                errorElement: "div",
+                errorPlacement: function(error, element) {
+                    var placement = $(element).data('error');
+                    if (placement) {
+                        $(element).append(error)
+                    } else {
+                        console.log(element.prev());
+                        error.insertAfter(element);
+                    }
                 },
                 submitHandler : function(form){
                     form.submit();

@@ -23,13 +23,13 @@ class OrganizationRoleController extends Controller
     
     public function store(Request $request)
     {
-        Log::info('aaaaaaa');
-         $department = $request->validate([
-            'name'=>'required|alpha',
-            'department_id' =>'required',
-            'designation_id' =>'required'
+        // Log::info('aaaaaaa');
+        //  $department = $request->validate([
+        //     'name'=>'required|alpha',
+        //     'department_id' =>'required',
+        //     'designation_id' =>'required'
 
-        ]); 
+        // ]); 
         
         try{
 

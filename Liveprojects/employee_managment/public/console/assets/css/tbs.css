@@ -15757,7 +15757,11 @@ table .employee-image
 {
     color:red;
 }
-.errordisplay
+.error
+{
+    color:red;
+}
+.custom-error
 {
     color:red;
 }

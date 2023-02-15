@@ -31,7 +31,7 @@
                                        
                                        
                                     </ul>
-                                    <form name="form" action="{{route('department.add')}}" method="post" enctype="multipart/form-data">
+                                    <form name="form" action="{{route('department.update',$department->uuid)}}" method="post" enctype="multipart/form-data">
                                         @csrf  
                                         <div class="tab-content" id="myTabContent1">
                                             <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
@@ -39,8 +39,7 @@
                                                 <div class="form-row">
                                                     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                                         <label>Department Name</label>
-                                                        <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control form-control-lg" placeholder="Enter First Name" />
-                                                        <span class="error"></span>
+                                                        <input type="text" id="name" name="name" value="{{$department->name}}" class="form-control form-control-lg" placeholder="Enter First Name" />
                                                         @if ($errors->has('name'))
         								                    <span class="errr-validation">{{ $errors->first('name') }}</span>
        								                    @endif
@@ -63,21 +62,14 @@
                                                     <button class="theme-btn-outline text-white">canel</button>
                                                 </div>
                                                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
+                                                    <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Update</button>
                                                 </div>
                                             </div>
                                             
                                         </div>
                                     </form>
                                 </div>
-                                <!-- <div class="card-footer p-t-20 text-right">
-                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                        <button class="theme-btn-outline text-white">canel</button>
-                                    </div>
-                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                        <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
-                                    </div>
-                                </div> -->
+                              
                             </div>
                             <!--card ends-->
                         </div>
