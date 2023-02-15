@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrganizationRoleController;
 use App\Http\Controllers\CompanyLocationController;
 use App\Http\Controllers\CompanyLocationTypeController;
+use App\Http\Controllers\MediumOfInstructionController;
 
 
 
@@ -60,25 +61,37 @@ Route::group(['middleware'=>['afterlogin']], function()
 
      /* ----------------- ----------  company location start  -------------------------*/
         Route::group(['prefix'=>'company-location/','middleware'=>[],'as'=>'company_location.'], function(){
-        Route::get('/create',[CompanyLocationController::class,'create'])->name('create');
-        Route::post('/store',[CompanyLocationController::class,'store'])->name('add');
-        Route::get('/',[CompanyLocationController::class,'index'])->name('index');
-        Route::get('/show/{id}',[CompanyLocationController::class,'show'])->name('show');
-        Route::get('/edit/{id}',[CompanyLocationController::class,'edit'])->name('edit');
-        Route::post('/update/{id}',[CompanyLocationController::class,'update'])->name('update');
-        Route::get('/status/{id}',[CompanyLocationController::class,'status'])->name('status');
+            Route::get('/create',[CompanyLocationController::class,'create'])->name('create');
+            Route::post('/store',[CompanyLocationController::class,'store'])->name('add');
+            Route::get('/',[CompanyLocationController::class,'index'])->name('index');
+            Route::get('/show/{id}',[CompanyLocationController::class,'show'])->name('show');
+            Route::get('/edit/{id}',[CompanyLocationController::class,'edit'])->name('edit');
+            Route::post('/update/{id}',[CompanyLocationController::class,'update'])->name('update');
+            Route::get('/status/{id}',[CompanyLocationController::class,'status'])->name('status');
      });
      /* ----------------- ----------   company location end  -------------------------*/
 
       /* ----------------- ---------- company location type start  -------------------------*/
         Route::group(['prefix'=>'company-location-type/','middleware'=>[],'as'=>'company_location_type.'], function(){
-        Route::get('/create',[CompanyLocationTypeController::class,'create'])->name('create');
-        Route::post('/store',[CompanyLocationTypeController::class,'store'])->name('add');
-        Route::get('/',[CompanyLocationTypeController::class,'index'])->name('index');
-        Route::get('/show/{id}',[CompanyLocationTypeController::class,'show'])->name('show');
-        Route::get('/edit/{id}',[CompanyLocationTypeController::class,'edit'])->name('edit');
-        Route::post('/update/{id}',[CompanyLocationTypeController::class,'update'])->name('update');
-        Route::get('/status/{id}',[CompanyLocationTypeController::class,'status'])->name('status');
+            Route::get('/create',[CompanyLocationTypeController::class,'create'])->name('create');
+            Route::post('/store',[CompanyLocationTypeController::class,'store'])->name('add');
+            Route::get('/',[CompanyLocationTypeController::class,'index'])->name('index');
+            Route::get('/show/{id}',[CompanyLocationTypeController::class,'show'])->name('show');
+            Route::get('/edit/{id}',[CompanyLocationTypeController::class,'edit'])->name('edit');
+            Route::post('/update/{id}',[CompanyLocationTypeController::class,'update'])->name('update');
+            Route::get('/status/{id}',[CompanyLocationTypeController::class,'status'])->name('status');
      });
      /* ----------------- ---------- company  location type end  -------------------------*/
+
+     /* ----------------- ---------- company location type start  -------------------------*/
+     Route::group(['prefix'=>'medium-instruction-type/','middleware'=>[],'as'=>'medium_instruction.'], function(){
+        Route::get('/create',[MediumOfInstructionController::class,'create'])->name('create');
+        Route::post('/store',[MediumOfInstructionController::class,'store'])->name('add');
+        Route::get('/',[MediumOfInstructionController::class,'index'])->name('index');
+        Route::get('/show/{id}',[MediumOfInstructionController::class,'show'])->name('show');
+        Route::get('/edit/{id}',[MediumOfInstructionController::class,'edit'])->name('edit');
+        Route::post('/update/{id}',[MediumOfInstructionController::class,'update'])->name('update');
+        Route::get('/status/{id}',[MediumOfInstructionController::class,'status'])->name('status');
+ });
+ /* ----------------- ---------- company  location type end  -------------------------*/
 });
