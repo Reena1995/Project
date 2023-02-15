@@ -13,14 +13,14 @@ class CompanyLocationController extends Controller
 {
     public function create()
     {
-       return view('admin.modules.department.add');
+       return view('admin.modules.company_location.add');
     }
 
     
     public function store(Request $request)
     {
         Log::info('aaaaaaa');
-         $department = $request->validate([
+         $location = $request->validate([
             'name'=>'required|alpha',
             
 
@@ -30,11 +30,11 @@ class CompanyLocationController extends Controller
 
             Log::info('bbbbbbb');
             DB::beginTransaction();
-            $department = new Department;
-            $department->name = $request->name;
-            $department->uuid = \Str::uuid();
+            $location = new CompanyLocation;
+            $location->name = $request->name;
+            $location->uuid = \Str::uuid();
           
-            $res = $department->save();
+            $res = $location->save();
 
             if(!$res)
             {
@@ -45,8 +45,8 @@ class CompanyLocationController extends Controller
                 return redirect()->back();
             }
             DB::commit();
-            Session::flash('success','department create successfully');
-            return redirect()->route('department.index');
+            Session::flash('success','location create successfully');
+            return redirect()->route('company_location.index');
            
 
 
@@ -64,29 +64,29 @@ class CompanyLocationController extends Controller
    
     public function index()
     {
-        $department = Department::where('is_active',1)->get();
-        return view('admin.modules.department.index',compact('department'));
+        $location = CompanyLocation::where('is_active',1)->get();
+        return view('admin.modules.company_location.index',compact('location'));
     }   
 
 
     public function show($id)
     {
-        $department = Department::where('uuid',$id)->first();
-        return view('admin.modules.department.show',compact('department'));
+        $location = CompanyLocation::where('uuid',$id)->first();
+        return view('admin.modules.company_location.show',compact('location'));
     }
 
     
     public function edit($id)
     {
-        $department = Department::where('uuid',$id)->first();
-        return view('admin.modules.department.edit',compact('department'));
+        $location = CompanyLocation::where('uuid',$id)->first();
+        return view('admin.modules.company_location.edit',compact('location'));
     }
 
    
     public function update(Request $request, $id)
     {
         Log::info('dddddddd');
-         $department = $request->validate([
+         $location = $request->validate([
             'name'=>'required|alpha',
             
 
@@ -95,9 +95,9 @@ class CompanyLocationController extends Controller
 
             Log::info('eeeeeeee');
             DB::beginTransaction();
-            $department = Department::where('uuid',$id)->first();
-            $department->name = $request->name;
-            $res = $department->save();
+            $location = CompanyLocation::where('uuid',$id)->first();
+            $location->name = $request->name;
+            $res = $location->save();
 
             if(!$res)
             {
@@ -108,8 +108,8 @@ class CompanyLocationController extends Controller
                 return redirect()->back();
             }
             DB::commit();
-            Session::flash('success','department updatesuccessfully');
-            return redirect()->route('department.index');
+            Session::flash('success','location update successfully');
+            return redirect()->route('company_location.index');
            
 
 
@@ -131,9 +131,9 @@ class CompanyLocationController extends Controller
 
            Log::info('hbjjhbdjhqw');
            DB::beginTransaction();
-           $department = Department::where('uuid',$id)->first();
-           $department->is_active = 0;
-           $res = $department->update();
+           $location = CompanyLocation::where('uuid',$id)->first();
+           $location->is_active = 0;
+           $res = $location->update();
 
            if(!$res)
            {
@@ -144,8 +144,8 @@ class CompanyLocationController extends Controller
                return redirect()->back();
            }
            DB::commit();
-           Session::flash('success','department delete successfully');
-           return redirect()->route('department.index');
+           Session::flash('success','location delete successfully');
+           return redirect()->route('company_location.index');
           
 
 

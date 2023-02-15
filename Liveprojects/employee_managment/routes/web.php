@@ -5,6 +5,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrganizationRoleController;
+use App\Http\Controllers\CompanyLocationController;
 
 
 
@@ -57,12 +58,14 @@ Route::group(['middleware'=>['afterlogin']], function()
      /* ----------------- ----------   Organization_Role end  -------------------------*/
 
      /* ----------------- ----------  company location start  -------------------------*/
-     Route::get('/department-create',[DepartmentController::class,'create'])->name('department.create');
-     Route::post('/department-store',[DepartmentController::class,'store'])->name('department.add');
-     Route::get('/department-index',[DepartmentController::class,'index'])->name('department.index');
-     Route::get('/department/show/{id}',[DepartmentController::class,'show'])->name('department.show');
-     Route::get('/department/edit/{id}',[DepartmentController::class,'edit'])->name('department.edit');
-     Route::post('/department/update/{id}',[DepartmentController::class,'update'])->name('department.update');
-     Route::get('/department/status/{id}',[DepartmentController::class,'status'])->name('department.status');
+     Route::group(['prefix'=>'company-location/','middleware'=>[],'as'=>'company_location.'], function(){
+        Route::get('/create',[CompanyLocationController::class,'create'])->name('create');
+        Route::post('/store',[CompanyLocationController::class,'store'])->name('add');
+        Route::get('/',[CompanyLocationController::class,'index'])->name('index');
+        Route::get('/show/{id}',[CompanyLocationController::class,'show'])->name('show');
+        Route::get('/edit/{id}',[CompanyLocationController::class,'edit'])->name('edit');
+        Route::post('/update/{id}',[CompanyLocationController::class,'update'])->name('update');
+        Route::get('/status/{id}',[CompanyLocationController::class,'status'])->name('status');
+     });
      /* ----------------- ----------   company location end  -------------------------*/
 });

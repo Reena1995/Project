@@ -6,7 +6,7 @@
                 <div class="container-fluid p-t-20">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 m-b-20">
-                            <h3>Add Department</h3>
+                            <h3>Add Company_Location</h3>
                         </div>
                         <div class="col-6 m-b-20 text-right pl-3 small-button">
                             <a href="all-employees.html"><button type="button" class="btn text-white add-new-emp">View Employee</button></a>
@@ -21,41 +21,31 @@
                             <!--card begins-->
                             <div class="card m-b-30">
                                 <div class="card-header">
-                                    <div class="card-title">Add Department Details</div>
+                                    <div class="card-title">Add Company_Location Details</div>
                                 </div>
                                 <div class="card-body">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active" id="personal-details-tab-z" data-toggle="tab" href="#personal-details" role="tab" aria-controls="personal-details" aria-selected="true">Department Details</a>
+                                            <a class="nav-link active" id="personal-details-tab-z" data-toggle="tab" href="#personal-details" role="tab" aria-controls="personal-details" aria-selected="true">Company_Location Details</a>
                                         </li>
                                        
                                        
                                     </ul>
-                                    <form id="department_form" action="{{route('department.add')}}" method="post" enctype="multipart/form-data">
+                                    <form name="form" action="{{route('company_location.add')}}" method="post" enctype="multipart/form-data">
                                         @csrf  
                                         <div class="tab-content" id="myTabContent1">
                                             <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
                                                 <h5 class="font-weight-semibold p-t-20 m-b-20">Basic</h5>
                                                 <div class="form-row">
                                                     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                        <label>Department Name</label>
-                                                        <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control form-control-lg" placeholder="Enter First Name" />
-                                                        <span class="error"></span>
+                                                        <label>Location Name</label>
+                                                        <input type="text" id="name" name="name"  class="form-control form-control-lg" placeholder="Enter Location" />
+                                                       
                                                         @if ($errors->has('name'))
         								                    <span class="errr-validation">{{ $errors->first('name') }}</span>
        								                    @endif
                                                     </div>
-                                                    <!-- <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                        <label>Last Name</label>
-                                                        <input type="text" class="form-control form-control-lg" placeholder="Enter Last Name" />
-                                                    </div> -->
-                                                   
-                                                    
-                                                   
-                                                    
-                                                  
-                                                   
-                                                   
+   
                                                 </div>
                                             </div>
                                             <div class="card-footer p-t-20 text-right">
@@ -70,14 +60,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <!-- <div class="card-footer p-t-20 text-right">
-                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                        <button class="theme-btn-outline text-white">canel</button>
-                                    </div>
-                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                        <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
-                                    </div>
-                                </div> -->
+                               
                             </div>
                             <!--card ends-->
                         </div>
@@ -90,12 +73,12 @@
  @push('scripts')
     <script>
          $(document).ready(function(){
-            $('#department_form').validate({
+            $("form[name='form']").validate({
                 rules : {
                     name : "required",                    
                 },
                 messages : {
-                    name : "Please enter a department name",
+                    name : "Please enter a location  name",
                     
                 },
                 submitHandler : function(form){
