@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CompanyLocation extends Model
 {
     use HasFactory;
+    
     protected static function boot(){
         parent::boot();
         self::creating(function($query){

@@ -119,7 +119,7 @@
                         <a href="#" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
-                                    Organization_Role
+                                    Organization Role
                                     <span class="menu-arrow"></span>
                                 </span>
                             </span>
@@ -132,7 +132,7 @@
                             <li class="menu-item">
                                     <a href="{{route('organization_role.create')}}"   class="menu-link">
                                         <span class="menu-label">
-                                            <span class="menu-name">Add Organization_Role</span>
+                                            <span class="menu-name">Add Organization Role</span>
                                         </span>
                                         <span class="menu-icon">
                                             <i class="icon-placeholder mdi mdi-account-plus"></i>
@@ -143,7 +143,7 @@
                             <li class="menu-item">
                                 <a href="{{route('organization_role.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View Organization_Role</span>
+                                        <span class="menu-name">View Organization Role</span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -158,7 +158,7 @@
                         <a href="#" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
-                                    Company_Location
+                                    Company Location
                                     <span class="menu-arrow"></span>
                                 </span>
                             </span>
@@ -171,7 +171,7 @@
                             <li class="menu-item">
                                     <a href="{{route('company_location.create')}}"   class="menu-link">
                                         <span class="menu-label">
-                                            <span class="menu-name">Add Company_Location</span>
+                                            <span class="menu-name">Add Company Location</span>
                                         </span>
                                         <span class="menu-icon">
                                             <i class="icon-placeholder mdi mdi-account-plus"></i>
@@ -182,7 +182,7 @@
                             <li class="menu-item">
                                 <a href="{{route('company_location.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View  Company_Location</span>
+                                        <span class="menu-name">View  Company Location</span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -192,6 +192,46 @@
                         </ul>
                     </li>
                     <!--list item company location  module ends-->
+
+                      <!--list item company location Type module  begins-->
+                      <li class="menu-item">
+                        <a href="#" class="open-dropdown menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">
+                                    Company Location Type
+                                    <span class="menu-arrow"></span>
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="icon-placeholder mdi mdi-account"></i>
+                            </span>
+                        </a>
+                        <!--submenu-->
+                        <ul class="sub-menu">
+                            <li class="menu-item">
+                                    <a href="{{route('company_location_type.create')}}"   class="menu-link">
+                                        <span class="menu-label">
+                                            <span class="menu-name">Add Company Location Type</span>
+                                        </span>
+                                        <span class="menu-icon">
+                                            <i class="icon-placeholder mdi mdi-account-plus"></i>
+                                        </span>
+                                    </a>
+                            </li>
+                            
+                            <li class="menu-item">
+                                <a href="{{route('company_location_type.index')}}" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">View  Company Location Type</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="icon-placeholder mdi mdi-eye-outline"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--list item company location Type  module ends-->
                     
 
                     <!--list item begins-->

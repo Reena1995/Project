@@ -6,7 +6,7 @@
                 <div class="container-fluid p-t-20">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 m-b-20">
-                            <h3>Add Company Location</h3>
+                            <h3>Show Company Location Type</h3>
                         </div>
                         <div class="col-6 m-b-20 text-right pl-3 small-button">
                             <a href="all-employees.html"><button type="button" class="btn text-white add-new-emp">View Employee</button></a>
@@ -21,7 +21,7 @@
                             <!--card begins-->
                             <div class="card m-b-30">
                                 <div class="card-header">
-                                    <div class="card-title">Add Company Location Details</div>
+                                    <div class="card-title">Show Company Location Type Details</div>
                                 </div>
                                 <div class="card-body">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -31,33 +31,32 @@
                                        
                                        
                                     </ul>
-                                    <form name="form" action="{{route('company_location.add')}}" method="post" enctype="multipart/form-data">
+                                    <form name="form" action="" method="post" enctype="multipart/form-data">
                                         @csrf  
                                         <div class="tab-content" id="myTabContent1">
                                             <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
                                                 <h5 class="font-weight-semibold p-t-20 m-b-20">Basic</h5>
                                                 <div class="form-row">
                                                     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                        <label>Location Name</label>
-                                                        <input type="text" id="name" name="name"  class="form-control form-control-lg" placeholder="Enter Location" />
-                                                       
-                                                        @if ($errors->has('name'))
-        								                    <span class="errr-validation">{{ $errors->first('name') }}</span>
+                                                        <label>Comapny Location Type Name</label>
+                                                        <input type="text" id="type" name="type" value="{{$location_type->type}}" class="form-control form-control-lg" readonly />
+                                                        @if ($errors->has('type'))
+        								                    <span class="errr-validation">{{ $errors->first('type') }}</span>
        								                    @endif
                                                     </div>
-   
+                                                 
+                                            
                                                 </div>
                                             </div>
                                             <div class="card-footer p-t-20 text-right">
                                                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <a href="{{route('company_location.index')}}" class="theme-btn-outline text-white">
+                                                    <a href="{{route('company_location_type.index')}}" class="theme-btn-outline text-white">
                                                         cancel
                                                     </a>
                                                 </div>
-                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
-                                                </div>
+                                               
                                             </div>
+                                           
                                             
                                         </div>
                                     </form>
@@ -74,19 +73,6 @@
        	@endsection
  @push('scripts')
     <script>
-         $(document).ready(function(){
-            $("form[name='form']").validate({
-                rules : {
-                    name : "required",                    
-                },
-                messages : {
-                    name : "Please enter a location  name",
-                    
-                },
-                submitHandler : function(form){
-                    form.submit();
-                }
-            });
-        });
+        
     </script>      
  @endpush

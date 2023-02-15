@@ -6,6 +6,7 @@ use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrganizationRoleController;
 use App\Http\Controllers\CompanyLocationController;
+use App\Http\Controllers\CompanyLocationTypeController;
 
 
 
@@ -58,7 +59,7 @@ Route::group(['middleware'=>['afterlogin']], function()
      /* ----------------- ----------   Organization_Role end  -------------------------*/
 
      /* ----------------- ----------  company location start  -------------------------*/
-     Route::group(['prefix'=>'company-location/','middleware'=>[],'as'=>'company_location.'], function(){
+        Route::group(['prefix'=>'company-location/','middleware'=>[],'as'=>'company_location.'], function(){
         Route::get('/create',[CompanyLocationController::class,'create'])->name('create');
         Route::post('/store',[CompanyLocationController::class,'store'])->name('add');
         Route::get('/',[CompanyLocationController::class,'index'])->name('index');
@@ -68,4 +69,16 @@ Route::group(['middleware'=>['afterlogin']], function()
         Route::get('/status/{id}',[CompanyLocationController::class,'status'])->name('status');
      });
      /* ----------------- ----------   company location end  -------------------------*/
+
+      /* ----------------- ---------- company location type start  -------------------------*/
+        Route::group(['prefix'=>'company-location-type/','middleware'=>[],'as'=>'company_location_type.'], function(){
+        Route::get('/create',[CompanyLocationTypeController::class,'create'])->name('create');
+        Route::post('/store',[CompanyLocationTypeController::class,'store'])->name('add');
+        Route::get('/',[CompanyLocationTypeController::class,'index'])->name('index');
+        Route::get('/show/{id}',[CompanyLocationTypeController::class,'show'])->name('show');
+        Route::get('/edit/{id}',[CompanyLocationTypeController::class,'edit'])->name('edit');
+        Route::post('/update/{id}',[CompanyLocationTypeController::class,'update'])->name('update');
+        Route::get('/status/{id}',[CompanyLocationTypeController::class,'status'])->name('status');
+     });
+     /* ----------------- ---------- company  location type end  -------------------------*/
 });
