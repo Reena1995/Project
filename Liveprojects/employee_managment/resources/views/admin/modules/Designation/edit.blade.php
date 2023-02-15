@@ -31,7 +31,7 @@
                                        
                                        
                                     </ul>
-                                    <form id="designation_form_edit" action="{{route('designation.update',$designation->uuid)}}" method="post" enctype="multipart/form-data">
+                                    <form name="form" action="{{route('designation.update',$designation->uuid)}}" method="post" enctype="multipart/form-data">
                                         @csrf  
                                         <div class="tab-content" id="myTabContent1">
                                             <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
@@ -89,7 +89,7 @@
  @push('scripts')
     <script>
           $(document).ready(function(){
-            $('#designation_form_edit').validate({
+            $("form[name='form']").validate({
                 rules : {
                     name : "required",  
                     department_id : "required",                    

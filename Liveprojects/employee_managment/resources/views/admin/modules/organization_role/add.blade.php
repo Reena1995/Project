@@ -46,6 +46,7 @@
 														        <option value="{{$dept->id}}">{{$dept->name}} </option>
 													        @endforeach
                                                         </select>
+                                                        <br>
                                                         <span class="error"></span>
                                                         @if ($errors->has('department_id'))
         								                    <span class="errr-validation">{{ $errors->first('department_id') }}</span>
@@ -61,6 +62,7 @@
 														        <option value="{{$desi->id}}">{{$desi->name}} </option>
 													        @endforeach
                                                         </select>
+                                                        <br>
                                                         <span class="error"></span>
                                                         @if ($errors->has('designation_id'))
         								                    <span class="errr-validation">{{ $errors->first('designation_id') }}</span>

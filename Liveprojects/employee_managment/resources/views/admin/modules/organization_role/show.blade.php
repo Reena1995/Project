@@ -6,7 +6,7 @@
                 <div class="container-fluid p-t-20">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 m-b-20">
-                            <h3>Show Designation</h3>
+                            <h3>Show  Organization_Role</h3>
                         </div>
                         <div class="col-6 m-b-20 text-right pl-3 small-button">
                             <a href="all-employees.html"><button type="button" class="btn text-white add-new-emp">View Employee</button></a>
@@ -21,7 +21,7 @@
                             <!--card begins-->
                             <div class="card m-b-30">
                                 <div class="card-header">
-                                    <div class="card-title">Show Designation Details</div>
+                                    <div class="card-title">Show Organization_Role Details</div>
                                 </div>
                                 <div class="card-body">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -31,28 +31,28 @@
                                        
                                        
                                     </ul>
-                                    <form id="designation_form" action="{{route('designation.add',$designation->uuid)}}" method="post" enctype="multipart/form-data">
+                                    <form id="" action="" method="post" enctype="multipart/form-data">
                                         @csrf  
                                         <div class="tab-content" id="myTabContent1">
                                             <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
                                                 <h5 class="font-weight-semibold p-t-20 m-b-20">Basic</h5>
                                                 <div class="form-row">
                                                     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                        <label>Designation Name</label>
-                                                        <input type="text" id="name" name="name" value="{{$designation->name}}" class="form-control form-control-lg" placeholder="Enter First Name" />
+                                                        <label>Organization Role Name</label>
+                                                        <input type="text" id="name" name="name" value="{{$org_role->name}}" class="form-control form-control-lg" readonly />
                                                     </div>
                                                    
                                                     <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
-                                                        <label>Select Deaprtment</label>
-                                                        <select class="form-control" name="department_id"  id="department_id">
-                                                            <option selected value="">Choose...</option>
-                                                            @foreach($department as $dept)
-                                                                @if($dept->id == $designation->department_id)
-                                                                    <option value="{{$dept->id}}" selected>{{$dept->name}} </option>
-                                                                @else    
-                                                                    <option value="{{$dept->id}}">{{$dept->name}} </option>
-                                                                @endif    
-													        @endforeach
+                                                        <label>Select Department</label>
+                                                        <select class="form-control" name="department_id"  id="department_id" selected>
+                                                            <option selected value="{{$department->id}}" >{{$department->name}}</option>
+                                                           
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
+                                                        <label>Select Designation</label>
+                                                        <select class="form-control" name="department_id"  id="department_id" >
+                                                            <option selected value="{{$designation->id}}" selected>{{$designation->name}} </option>
                                                         </select>
                                                     </div>
                                                    

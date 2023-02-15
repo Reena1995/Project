@@ -39,7 +39,7 @@
                                                 <div class="form-row">
                                                     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                                         <label>Department Name</label>
-                                                        <input type="text" id="name" name="name" value="{{$department->name}}" class="form-control form-control-lg" placeholder="Enter First Name" />
+                                                        <input type="text" id="name" name="name" value="{{$department->name}}" class="form-control form-control-lg" readonly />
                                                         @if ($errors->has('name'))
         								                    <span class="errr-validation">{{ $errors->first('name') }}</span>
        								                    @endif

@@ -75,7 +75,7 @@ class DesignationController extends Controller
 
     public function show($id)
     {
-        $department=Department::orderBy('name', 'ASC')->get();
+        $department=Department::orderBy('name', 'ASC')->first();
         $designation = Designation::where('uuid',$id)->first();
         return view('admin.modules.designation.show',compact('designation','department'));
     }

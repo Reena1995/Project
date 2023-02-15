@@ -39,20 +39,13 @@
                                                 <div class="form-row">
                                                     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                                         <label>Designation Name</label>
-                                                        <input type="text" id="name" name="name" value="{{$designation->name}}" class="form-control form-control-lg" placeholder="Enter First Name" />
+                                                        <input type="text" id="name" name="name" value="{{$designation->name}}" class="form-control form-control-lg" readonly />
                                                     </div>
                                                    
                                                     <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
                                                         <label>Select Deaprtment</label>
                                                         <select class="form-control" name="department_id"  id="department_id">
-                                                            <option selected value="">Choose...</option>
-                                                            @foreach($department as $dept)
-                                                                @if($dept->id == $designation->department_id)
-                                                                    <option value="{{$dept->id}}" selected>{{$dept->name}} </option>
-                                                                @else    
-                                                                    <option value="{{$dept->id}}">{{$dept->name}} </option>
-                                                                @endif    
-													        @endforeach
+                                                            <option selected value="{{$department->id}}">{{$department->name}}</option>  
                                                         </select>
                                                     </div>
                                                    

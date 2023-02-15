@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Designation;
 use App\Models\Department;
+use App\Models\OrganizationRole;
 
 use Illuminate\Http\Request;
 use DB;
@@ -25,7 +26,8 @@ class OrganizationRoleController extends Controller
         Log::info('aaaaaaa');
          $department = $request->validate([
             'name'=>'required|alpha',
-            
+            'department_id' =>'required',
+            'designation_id' =>'required'
 
         ]); 
         
@@ -33,12 +35,13 @@ class OrganizationRoleController extends Controller
 
             Log::info('bbbbbbb');
             DB::beginTransaction();
-            $designation = new Designation;
-            $designation->name = $request->name;
-            $designation->department_id = $request->department_id;
-            $designation->uuid = \Str::uuid();
+            $org_role = new OrganizationRole;
+            $org_role->name = $request->name;
+            $org_role->department_id = $request->department_id;
+            $org_role->designation_id = $request->designation_id;
+            $org_role->uuid = \Str::uuid();
           
-            $res = $designation->save();
+            $res = $org_role->save();
 
             if(!$res)
             {
@@ -49,8 +52,7 @@ class OrganizationRoleController extends Controller
                 return redirect()->back();
             }
             DB::commit();
-            Session::flash('success','designation create successfully');
-           
+            Session::flash('success','organization role create successfully');
             return redirect()->route('organization_role.index');
            
 
@@ -69,16 +71,17 @@ class OrganizationRoleController extends Controller
    
     public function index()
     {
-        $designation = Designation::where('is_active',1)->get();
-        return view('admin.modules.organization_role.index',compact('designation'));
+        $org_role = OrganizationRole::where('is_active',1)->get();
+        return view('admin.modules.organization_role.index',compact('org_role'));
     }   
 
 
     public function show($id)
     {
-        $department=Department::orderBy('name', 'ASC')->get();
-        $designation = Designation::where('uuid',$id)->first();
-        return view('admin.modules.organization_role.show',compact('designation','department'));
+        $department=Department::orderBy('name', 'ASC')->first();
+        $designation=Designation::orderBy('name', 'ASC')->first();
+        $org_role = OrganizationRole::where('uuid',$id)->first();
+        return view('admin.modules.organization_role.show',compact('department','designation','org_role'));
     }
    
     
@@ -87,28 +90,31 @@ class OrganizationRoleController extends Controller
     public function edit($id)
     {
         $department=Department::orderBy('name', 'ASC')->get();
-        $designation = Designation::where('uuid',$id)->first();
-        return view('admin.modules.organization_role.edit',compact('designation','department'));
+        $designation=Designation::orderBy('name', 'ASC')->get();
+        $org_role = OrganizationRole::where('uuid',$id)->first();
+        return view('admin.modules.organization_role.edit',compact('department','designation','org_role'));
     }
 
    
     public function update(Request $request, $id)
     {
-        Log::info('dddddddd');
-         $designation = $request->validate([
-            'name'=>'required|alpha',
-            'department_id'=>'required',
+        // Log::info('dddddddd');
+        //  $designation = $request->validate([
+        //     'name'=>'required|alpha',
+        //     'department_id'=>'required',
+        //     'designation_id'=>'required',
             
 
-        ]); 
+        // ]); 
         try{
 
             Log::info('eeeeeeee');
             DB::beginTransaction();
-            $designation = Designation::where('uuid',$id)->first();
-            $designation->name = $request->name;
-            $designation->department_id = $request->department_id;
-            $res = $designation->save();
+            $org_role = OrganizationRole::where('uuid',$id)->first();
+            $org_role->name = $request->name;
+            $org_role->department_id = $request->department_id;
+            $org_role->designation_id = $request->designation_id;
+            $res = $org_role->save();
 
             if(!$res)
             {
@@ -119,7 +125,7 @@ class OrganizationRoleController extends Controller
                 return redirect()->back();
             }
             DB::commit();
-            Session::flash('success','designation update  successfully');
+            Session::flash('success','organization role update  successfully');
             return redirect()->route('organization_role.index');
            
 
@@ -142,9 +148,9 @@ class OrganizationRoleController extends Controller
 
            Log::info('hbjjhbdjhqw');
            DB::beginTransaction();
-           $designation = Designation::where('uuid',$id)->first();
-           $designation->is_active = 0;
-           $res = $designation->update();
+           $org_role = OrganizationRole::where('uuid',$id)->first();
+           $org_role->is_active = 0;
+           $res = $org_role->update();
 
            if(!$res)
            {

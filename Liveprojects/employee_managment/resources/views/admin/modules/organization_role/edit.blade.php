@@ -6,7 +6,7 @@
                 <div class="container-fluid p-t-20">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 m-b-20">
-                            <h3>Edit Designation</h3>
+                            <h3>Edit  Organization_Role</h3>
                         </div>
                         <div class="col-6 m-b-20 text-right pl-3 small-button">
                             <a href="all-employees.html"><button type="button" class="btn text-white add-new-emp">View Employee</button></a>
@@ -21,7 +21,7 @@
                             <!--card begins-->
                             <div class="card m-b-30">
                                 <div class="card-header">
-                                    <div class="card-title">Edit Designation  Details</div>
+                                    <div class="card-title">Edit Organization_Role  Details</div>
                                 </div>
                                 <div class="card-body">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -31,15 +31,16 @@
                                        
                                        
                                     </ul>
-                                    <form id="designation_form_edit" action="{{route('designation.update',$designation->uuid)}}" method="post" enctype="multipart/form-data">
+                                    <form name="form"  action="{{route('organization_role.update',$org_role->uuid)}}" method="post" enctype="multipart/form-data">
                                         @csrf  
                                         <div class="tab-content" id="myTabContent1">
                                             <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
                                                 <h5 class="font-weight-semibold p-t-20 m-b-20">Basic</h5>
                                                 <div class="form-row">
                                                     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                        <label>Designation Name</label>
-                                                        <input type="text" id="name" name="name" value="{{$designation->name}}" class="form-control form-control-lg" placeholder="Enter First Name" />
+                                                    <label>Organization Role Name</label>
+                                                        <input type="text" id="name" name="name" value="{{$org_role->name}}" class="form-control form-control-lg"  />
+                                                        <span class="errordisplay"></span>
                                                         @if ($errors->has('name'))
         								                    <span class="errr-validation">{{ $errors->first('name') }}</span>
        								                    @endif
@@ -49,15 +50,33 @@
                                                         <select class="form-control" name="department_id"  id="department_id">
                                                             <option selected value="">Choose...</option>
                                                             @foreach($department as $dept)
-                                                                @if($dept->id == $designation->department_id)
+                                                                @if($dept->id == $org_role->department_id)
                                                                     <option value="{{$dept->id}}" selected>{{$dept->name}} </option>
                                                                 @else    
                                                                     <option value="{{$dept->id}}">{{$dept->name}} </option>
                                                                 @endif    
 													        @endforeach
                                                         </select>
+                                                        <span class="errordisplay"></span>
                                                         @if ($errors->has('department_id'))
         								                    <span class="errr-validation">{{ $errors->first('department_id') }}</span>
+       								                    @endif
+                                                    </div>
+                                                    <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
+                                                        <label>Select Designation</label>
+                                                        <select class="form-control" name="designation_id"  id="designation_id">
+                                                            <option selected value="">Choose...</option>
+                                                            @foreach($designation as $desi)
+                                                                @if($desi->id == $org_role->designation_id)
+                                                                    <option value="{{$desi->id}}" selected>{{$desi->name}} </option>
+                                                                @else    
+                                                                    <option value="{{$desi->id}}">{{$desi->name}} </option>
+                                                                @endif    
+													        @endforeach
+                                                        </select>
+                                                        <span class="errordisplay"></span>
+                                                        @if ($errors->has('designation_id'))
+        								                    <span class="errr-validation">{{ $errors->first('designation_id') }}</span>
        								                    @endif
                                                     </div>
 
@@ -89,14 +108,16 @@
  @push('scripts')
     <script>
           $(document).ready(function(){
-            $('#designation_form_edit').validate({
+            $("form[name='form']").validate({
                 rules : {
                     name : "required",  
-                    department_id : "required",                    
+                    department_id : "required", 
+                    designation_id : "required",                    
                 },
                 messages : {
-                    name : "Please enter a designation name",
+                    name : "Please enter a ornazation role name",
                     department_id : "Please select department ",  
+                    designation_id : "Please select designation", 
                     
                 },
                 submitHandler : function(form){
