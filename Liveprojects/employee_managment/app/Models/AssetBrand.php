@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AssetBrand extends Model
 {
     use HasFactory;
-
+    
     protected static function boot(){
         parent::boot();
         self::creating(function($query){

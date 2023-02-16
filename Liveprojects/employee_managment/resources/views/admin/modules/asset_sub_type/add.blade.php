@@ -6,7 +6,7 @@
                 <div class="container-fluid p-t-20">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 m-b-20">
-                            <h3>Add Designation</h3>
+                            <h3>Add Asset Sub Type</h3>
                         </div>
                         <div class="col-6 m-b-20 text-right pl-3 small-button">
                             <a href="all-employees.html"><button type="button" class="btn text-white add-new-emp">View Employee</button></a>
@@ -21,17 +21,17 @@
                             <!--card begins-->
                             <div class="card m-b-30">
                                 <div class="card-header">
-                                    <div class="card-title">Add designation Details</div>
+                                    <div class="card-title">Add Asset Sub Type Details</div>
                                 </div>
                                 <div class="card-body">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active" id="personal-details-tab-z" data-toggle="tab" href="#personal-details" role="tab" aria-controls="personal-details" aria-selected="true">Deignation Details</a>
+                                            <a class="nav-link active" id="personal-details-tab-z" data-toggle="tab" href="#personal-details" role="tab" aria-controls="personal-details" aria-selected="true">Asset Sub Type Details</a>
                                         </li>
                                        
                                        
                                     </ul>
-                                    <form name="form" action="{{route('designation.add')}}" method="post" enctype="multipart/form-data">
+                                    <form name="form" action="{{route('asset_sub_type.add')}}" method="post" enctype="multipart/form-data">
                                         @csrf  
                                         <div class="tab-content" id="myTabContent1">
                                             <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
@@ -39,33 +39,36 @@
                                                 <div class="row">
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group floating-label ">
-                                                                <label>designation Name</label>
-                                                                <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="Enter First Name" />
-                                                                @if ($errors->has('name'))
-                                                                    <span class="errr-validation">{{ $errors->first('name') }}</span>
+                                                                <label>Asset Sub Type </label>
+                                                                <input type="text" id="type" name="type" class="form-control form-control-lg" placeholder="Enter asset_sub_type" />
+                                                                @if ($errors->has('type'))
+                                                                    <span class="errr-validation">{{ $errors->first('type') }}</span>
                                                                 @endif
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group floating-label show-label ">
-                                                                <label>Select Deaprtment</label>
-                                                                <select class="form-control" name="department_id"  id="department_id">
+                                                                <label>Select Asset Type</label>
+                                                                <select class="form-control" name="asset_type_id"  id="asset_type_id">
                                                                     <option selected value="">Choose...</option>
-                                                                    @foreach($department as $dept)
-                                                                        <option value="{{$dept->id}}">{{$dept->name}} </option>
+                                                                    @foreach($asstype as $ass)
+                                                                        <option value="{{$ass->id}}">{{$ass->type}} </option>
                                                                     @endforeach
                                                                 </select>
-                                                                @if ($errors->has('department'))
-                                                                    <span class="errr-validation">{{ $errors->first('department') }}</span>
+                                                                @if ($errors->has('asset_type_id'))
+                                                                    <span class="errr-validation">{{ $errors->first('asset_type_id') }}</span>
                                                                 @endif
                                                             </div>
                                                         <div>
                                                         <div class="card-footer p-t-20 text-right">
                                                             <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                            <button class="theme-btn-outline text-white">canel</button>
-                                                        </div>
-                                                        <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                            <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
+                                                                <a href="{{route('asset_sub_type.index')}}" class="theme-btn-outline text-white">
+                                                                    cancel
+                                                                </a>
+                                                            </div>
+                                                            <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                                <button type="submit"  value="send" name="submit"class="theme-btn text-white">Save</button>
+                                                            </div>
                                                         </div>
                                                 </div>
                                                
@@ -90,12 +93,12 @@
          $(document).ready(function(){
             $("form[name='form']").validate({
                 rules : {
-                    name : "required",  
-                    department_id : "required",                    
+                    type : "required",  
+                    asset_type_id  : "required",                    
                 },
                 messages : {
-                    name : "Please enter a designation name",
-                    department_id : "Please select department ",  
+                    type : "Please enter asset sub type name",
+                    asset_type_id  : "Please select asset_sub type ",  
                     
                 },
                 errorClass: "custom-error",
