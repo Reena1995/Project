@@ -12,6 +12,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\EducationLevelController;
 use App\Http\Controllers\DocumentTypeController;
 use App\Http\Controllers\AssetBrandController;
+use App\Http\Controllers\AssetTypeController;
 
 
 
@@ -147,4 +148,16 @@ Route::group(['middleware'=>['afterlogin']], function()
       Route::get('/status/{id}',[AssetBrandController::class,'status'])->name('status');
    });
   /* ----------------- ----------  Asset Brand end  -------------------------*/
+
+  /* ----------------- ---------- Asset Type  start  -------------------------*/
+  Route::group(['prefix'=>'asset-type/','middleware'=>[],'as'=>'asset_type.'], function(){
+   Route::get('/create',[AssetTypeController::class,'create'])->name('create');
+   Route::post('/store',[AssetTypeController::class,'store'])->name('add');
+   Route::get('/',[AssetTypeController::class,'index'])->name('index');
+   Route::get('/show/{id}',[AssetTypeController::class,'show'])->name('show');
+   Route::get('/edit/{id}',[AssetTypeController::class,'edit'])->name('edit');
+   Route::post('/update/{id}',[AssetTypeController::class,'update'])->name('update');
+   Route::get('/status/{id}',[AssetTypeController::class,'status'])->name('status');
+});
+/* ----------------- ----------  Asset  Type end  -------------------------*/
 });
