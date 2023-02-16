@@ -11,6 +11,7 @@ use App\Http\Controllers\MediumOfInstructionController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\EducationLevelController;
 use App\Http\Controllers\DocumentTypeController;
+use App\Http\Controllers\AssetBrandController;
 
 
 
@@ -122,7 +123,7 @@ Route::group(['middleware'=>['afterlogin']], function()
      });
     /* ----------------- ---------- Education Level end  -------------------------*/
 
-     /* ----------------- ---------- Education Level start  -------------------------*/
+     /* ----------------- ---------- Document Type start  -------------------------*/
      Route::group(['prefix'=>'document-type/','middleware'=>[],'as'=>'document_type.'], function(){
       Route::get('/create',[DocumentTypeController::class,'create'])->name('create');
       Route::post('/store',[DocumentTypeController::class,'store'])->name('add');
@@ -132,5 +133,18 @@ Route::group(['middleware'=>['afterlogin']], function()
       Route::post('/update/{id}',[DocumentTypeController::class,'update'])->name('update');
       Route::get('/status/{id}',[DocumentTypeController::class,'status'])->name('status');
    });
-  /* ----------------- ---------- Education Level end  -------------------------*/
+  /* ----------------- ---------- Document Type end  -------------------------*/
+
+  
+     /* ----------------- ---------- Asset Brand start  -------------------------*/
+     Route::group(['prefix'=>'asset-brand/','middleware'=>[],'as'=>'asset_brand.'], function(){
+      Route::get('/create',[AssetBrandController::class,'create'])->name('create');
+      Route::post('/store',[AssetBrandController::class,'store'])->name('add');
+      Route::get('/',[AssetBrandController::class,'index'])->name('index');
+      Route::get('/show/{id}',[AssetBrandController::class,'show'])->name('show');
+      Route::get('/edit/{id}',[AssetBrandController::class,'edit'])->name('edit');
+      Route::post('/update/{id}',[AssetBrandController::class,'update'])->name('update');
+      Route::get('/status/{id}',[AssetBrandController::class,'status'])->name('status');
+   });
+  /* ----------------- ----------  Asset Brand end  -------------------------*/
 });
