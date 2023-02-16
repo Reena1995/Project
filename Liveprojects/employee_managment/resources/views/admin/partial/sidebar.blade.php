@@ -315,6 +315,46 @@
                     </li>
                     <!--list item  Language  module ends-->
 
+                     <!--list item Education Level module  begins-->
+                     <li class="menu-item">
+                        <a href="#" class="open-dropdown menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">
+                                    Education Level
+                                    <span class="menu-arrow"></span>
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="icon-placeholder mdi mdi-account"></i>
+                            </span>
+                        </a>
+                        <!--submenu-->
+                        <ul class="sub-menu">
+                            <li class="menu-item">
+                                    <a href="{{route('education_level.create')}}"   class="menu-link">
+                                        <span class="menu-label">
+                                            <span class="menu-name">Add Education Level</span>
+                                        </span>
+                                        <span class="menu-icon">
+                                            <i class="icon-placeholder mdi mdi-account-plus"></i>
+                                        </span>
+                                    </a>
+                            </li>
+                            
+                            <li class="menu-item">
+                                <a href="{{route('education_level.index')}}" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">View   Education Level</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="icon-placeholder mdi mdi-eye-outline"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--list item  Language  module ends-->
+
                     <!--list item begins-->
                     <li class="menu-item">
                         <a href="#" class="open-dropdown menu-link">
@@ -422,7 +462,7 @@
                         </ul>
                     </li>
                     <!--list item ends-->
-
+                    
                     <!--list item begins-->
                     <li class="menu-item">
                         <a href="list-holidays.html" class="menu-link">

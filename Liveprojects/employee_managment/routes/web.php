@@ -9,6 +9,7 @@ use App\Http\Controllers\CompanyLocationController;
 use App\Http\Controllers\CompanyLocationTypeController;
 use App\Http\Controllers\MediumOfInstructionController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\EducationLevelController;
 
 
 
@@ -107,4 +108,16 @@ Route::group(['middleware'=>['afterlogin']], function()
         Route::get('/status/{id}',[LanguageController::class,'status'])->name('status');
      });
     /* ----------------- ----------Langauge end  -------------------------*/
+
+    /* ----------------- ---------- Education Level start  -------------------------*/
+    Route::group(['prefix'=>'education-level/','middleware'=>[],'as'=>'education_level.'], function(){
+        Route::get('/create',[EducationLevelController::class,'create'])->name('create');
+        Route::post('/store',[EducationLevelController::class,'store'])->name('add');
+        Route::get('/',[EducationLevelController::class,'index'])->name('index');
+        Route::get('/show/{id}',[EducationLevelController::class,'show'])->name('show');
+        Route::get('/edit/{id}',[EducationLevelController::class,'edit'])->name('edit');
+        Route::post('/update/{id}',[EducationLevelController::class,'update'])->name('update');
+        Route::get('/status/{id}',[EducationLevelController::class,'status'])->name('status');
+     });
+    /* ----------------- ---------- Education Level end  -------------------------*/
 });
