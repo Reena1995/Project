@@ -10,6 +10,7 @@ use App\Http\Controllers\CompanyLocationTypeController;
 use App\Http\Controllers\MediumOfInstructionController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\EducationLevelController;
+use App\Http\Controllers\DocumentTypeController;
 
 
 
@@ -120,4 +121,16 @@ Route::group(['middleware'=>['afterlogin']], function()
         Route::get('/status/{id}',[EducationLevelController::class,'status'])->name('status');
      });
     /* ----------------- ---------- Education Level end  -------------------------*/
+
+     /* ----------------- ---------- Education Level start  -------------------------*/
+     Route::group(['prefix'=>'document-type/','middleware'=>[],'as'=>'document_type.'], function(){
+      Route::get('/create',[DocumentTypeController::class,'create'])->name('create');
+      Route::post('/store',[DocumentTypeController::class,'store'])->name('add');
+      Route::get('/',[DocumentTypeController::class,'index'])->name('index');
+      Route::get('/show/{id}',[DocumentTypeController::class,'show'])->name('show');
+      Route::get('/edit/{id}',[DocumentTypeController::class,'edit'])->name('edit');
+      Route::post('/update/{id}',[DocumentTypeController::class,'update'])->name('update');
+      Route::get('/status/{id}',[DocumentTypeController::class,'status'])->name('status');
+   });
+  /* ----------------- ---------- Education Level end  -------------------------*/
 });
