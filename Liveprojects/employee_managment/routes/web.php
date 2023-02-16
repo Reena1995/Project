@@ -8,6 +8,7 @@ use App\Http\Controllers\OrganizationRoleController;
 use App\Http\Controllers\CompanyLocationController;
 use App\Http\Controllers\CompanyLocationTypeController;
 use App\Http\Controllers\MediumOfInstructionController;
+use App\Http\Controllers\LanguageController;
 
 
 
@@ -80,10 +81,10 @@ Route::group(['middleware'=>['afterlogin']], function()
             Route::get('/edit/{id}',[CompanyLocationTypeController::class,'edit'])->name('edit');
             Route::post('/update/{id}',[CompanyLocationTypeController::class,'update'])->name('update');
             Route::get('/status/{id}',[CompanyLocationTypeController::class,'status'])->name('status');
-     });
+        });
      /* ----------------- ---------- company  location type end  -------------------------*/
 
-     /* ----------------- ---------- company location type start  -------------------------*/
+     /* ----------------- ---------- medium of instruction type start  -------------------------*/
      Route::group(['prefix'=>'medium-instruction-type/','middleware'=>[],'as'=>'medium_instruction.'], function(){
         Route::get('/create',[MediumOfInstructionController::class,'create'])->name('create');
         Route::post('/store',[MediumOfInstructionController::class,'store'])->name('add');
@@ -92,6 +93,18 @@ Route::group(['middleware'=>['afterlogin']], function()
         Route::get('/edit/{id}',[MediumOfInstructionController::class,'edit'])->name('edit');
         Route::post('/update/{id}',[MediumOfInstructionController::class,'update'])->name('update');
         Route::get('/status/{id}',[MediumOfInstructionController::class,'status'])->name('status');
- });
- /* ----------------- ---------- company  location type end  -------------------------*/
+     });
+    /* ----------------- ----------medium of instruction type end  -------------------------*/
+
+    /* ----------------- ---------- Langauge start  -------------------------*/
+     Route::group(['prefix'=>'language/','middleware'=>[],'as'=>'language.'], function(){
+        Route::get('/create',[LanguageController::class,'create'])->name('create');
+        Route::post('/store',[LanguageController::class,'store'])->name('add');
+        Route::get('/',[LanguageController::class,'index'])->name('index');
+        Route::get('/show/{id}',[LanguageController::class,'show'])->name('show');
+        Route::get('/edit/{id}',[LanguageController::class,'edit'])->name('edit');
+        Route::post('/update/{id}',[LanguageController::class,'update'])->name('update');
+        Route::get('/status/{id}',[LanguageController::class,'status'])->name('status');
+     });
+    /* ----------------- ----------Langauge end  -------------------------*/
 });

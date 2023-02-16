@@ -6,7 +6,7 @@
                 <div class="container-fluid p-t-20">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 m-b-20">
-                            <h3>Show Medium Of Instruction</h3>
+                            <h3>Show Language</h3>
                         </div>
                         <div class="col-6 m-b-20 text-right pl-3 small-button">
                             <a href="all-employees.html"><button type="button" class="btn text-white add-new-emp">View Employee</button></a>
@@ -21,12 +21,12 @@
                             <!--card begins-->
                             <div class="card m-b-30">
                                 <div class="card-header">
-                                    <div class="card-title">Show Medium Of Instruction</div>
+                                    <div class="card-title">Show Language</div>
                                 </div>
                                 <div class="card-body">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active" id="personal-details-tab-z" data-toggle="tab" href="#personal-details" role="tab" aria-controls="personal-details" aria-selected="true">Company Location Details</a>
+                                            <a class="nav-link active" id="personal-details-tab-z" data-toggle="tab" href="#personal-details" role="tab" aria-controls="personal-details" aria-selected="true">Language Details</a>
                                         </li>
                                        
                                        
@@ -38,8 +38,8 @@
                                                 <h5 class="font-weight-semibold p-t-20 m-b-20">Basic</h5>
                                                 <div class="form-row">
                                                     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                        <label>Location Name</label>
-                                                        <input type="text" id="name" name="name" value="{{$medium->name}}" class="form-control form-control-lg" readonly />
+                                                        <label>Language Name</label>
+                                                        <input type="text" id="name" name="name" value="{{$language->name}}" class="form-control form-control-lg" readonly />
                                                         @if ($errors->has('name'))
         								                    <span class="errr-validation">{{ $errors->first('name') }}</span>
        								                    @endif
@@ -50,7 +50,7 @@
                                             </div>
                                             <div class="card-footer p-t-20 text-right">
                                                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <a href="{{route('medium_instruction.index')}}" class="theme-btn-outline text-white">
+                                                    <a href="{{route('language.index')}}" class="theme-btn-outline text-white">
                                                         cancel
                                                     </a>
                                                 </div>
