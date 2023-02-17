@@ -17,7 +17,7 @@ use App\Http\Controllers\AssetSubTypeController;
 use App\Http\Controllers\CurrentResidenceTypeController;
 
 /* */
-
+/**/ 
 
 
 Route::get('login',[LoginController::class,'create'])->name('login');
