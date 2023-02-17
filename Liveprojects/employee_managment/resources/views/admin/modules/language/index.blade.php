@@ -17,7 +17,7 @@
                         <!--card begins-->
                         <div class="card m-b-0">
                             <div class="card-header">
-                                <div class="card-title">Language List</div>
+                                <div class="card-title">Languages List</div>
                             </div>
                             <div class="card-body pt-0">
                                 <div class="row">

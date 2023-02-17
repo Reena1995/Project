@@ -85,18 +85,19 @@
 
     $(document).on("input", ".floating-label input", function (e) {
         var item = $(this).parents(".floating-label");
-        $(this).val() ? item.addClass("show-label") : item.removeClass("show-label");
+        item.addClass("show-label");
     });
 
-    $(document).on("blur", ".floating-label input", function (e) {
+    $(document).on("blur", ".floating-label input", function (e) { 
+        /* $(this).val() ? item.addClass("show-label") : item.removeClass("show-label"); */
         var item = $(this).parents(".floating-label");
-        $(this).val() ? item.addClass("show-label") : item.removeClass("show-label");
+        item.addClass("show-label");
     });
 
     //checking for pre-filled forms
     $(".floating-label input").each(function () {
         var item = $(this).parents(".floating-label");
-        $(this).val() ? item.addClass("show-label") : item.removeClass("show-label");
+        item.addClass("show-label");
     });
 
     //Floating Form Floating label :: END

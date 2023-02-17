@@ -14,7 +14,7 @@ class AssetSubTypeController extends Controller
 {
     public function create()
     {  
-        $asstype=AssetType::orderBy('type', 'ASC')->get();
+        $asstype=AssetType::where('is_active',1)->orderBy('type', 'ASC')->get();
         return view('admin.modules.asset_sub_type.add',compact('asstype'));
     }
 
@@ -77,7 +77,7 @@ class AssetSubTypeController extends Controller
     {
         Log::info('$id');
         Log::info($id);
-        $ass_type=AssetType::orderBy('type', 'ASC')->first();
+        $ass_type=AssetType::where('is_active',1)->orderBy('type', 'ASC')->first();
         $ass_sub_type=AssetSubType::where('uuid',$id)->first();
         return view('admin.modules.asset_sub_type.show',compact('ass_type','ass_sub_type'));
     }

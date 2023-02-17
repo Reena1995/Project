@@ -41,29 +41,31 @@
                                                         <label>Designation Name</label>
                                                         <input type="text" id="name" name="name" value="{{$designation->name}}" class="form-control form-control-lg" readonly />
                                                     </div>
-                                                   
-                                                    <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
-                                                        <label>Select Deaprtment</label>
-                                                        <select class="form-control" name="department_id"  id="department_id">
-                                                            <option selected value="{{$department->id}}">{{$department->name}}</option>  
-                                                        </select>
+
+                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12 show-label">
+                                                        <label>Deaprtment Name</label>
+                                                        <input type="text" id="ename" type="text" value="{{ $designation->department->name ?? ''}}" class="form-control form-control-lg"  readonly/>
                                                     </div>
+                                                   
+                                                    
                                                    
                                                 </div>
                                             </div>
-                                           
+                                            <div class="card-footer p-t-20 text-right">
+                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                    <a href="{{route('designation.index')}}" class="theme-btn-outline text-white">
+                                                        cancel
+                                                    </a>
+                                                </div>
+                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                    <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
+                                                </div>
+                                            </div>
                                             
                                         </div>
                                     </form>
                                 </div>
-                                <!-- <div class="card-footer p-t-20 text-right">
-                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                        <button class="theme-btn-outline text-white">canel</button>
-                                    </div>
-                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                        <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
-                                    </div>
-                                </div> -->
+                                
                             </div>
                             <!--card ends-->
                         </div>

@@ -40,7 +40,7 @@
                                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                                         <div class="form-group floating-label">
                                                         <label>Organization Role Name</label>
-                                                            <input type="text" id="name" name="name" value="" class="form-control form-control-lg"  />
+                                                            <input type="text" id="name" name="name" value="" class="form-control form-control-lg" placeholder="Enter organization role" />
                                                         
                                                             @if ($errors->has('name'))
                                                                 <span class="errr-validation">{{ $errors->first('name') }}</span>
@@ -82,10 +82,12 @@
                                             </div>
                                             <div class="card-footer p-t-20 text-right">
                                                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <button class="theme-btn-outline text-white">canel</button>
+                                                    <a href="{{route('organization_role.index')}}" class="theme-btn-outline text-white">
+                                                        cancel
+                                                    </a>
                                                 </div>
                                                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Update</button>
+                                                    <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
                                                 </div>
                                             </div>
                                             

@@ -44,32 +44,23 @@
         								                    <span class="errr-validation">{{ $errors->first('name') }}</span>
        								                    @endif
                                                     </div>
-                                                    <!-- <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                        <label>Last Name</label>
-                                                        <input type="text" class="form-control form-control-lg" placeholder="Enter Last Name" />
-                                                    </div> -->
-                                                   
-                                                    
-                                                   
-                                                    
-                                                  
-                                                   
-                                                   
                                                 </div>
                                             </div>
-                                           
+                                            <div class="card-footer p-t-20 text-right">
+                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                    <a href="{{route('department.index')}}" class="theme-btn-outline text-white">
+                                                        cancel
+                                                    </a>
+                                                </div>
+                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                    <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
+                                                </div>
+                                            </div>
                                             
                                         </div>
                                     </form>
                                 </div>
-                                <!-- <div class="card-footer p-t-20 text-right">
-                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                        <button class="theme-btn-outline text-white">canel</button>
-                                    </div>
-                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                        <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
-                                    </div>
-                                </div> -->
+                               
                             </div>
                             <!--card ends-->
                         </div>

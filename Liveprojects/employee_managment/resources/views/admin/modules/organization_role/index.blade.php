@@ -38,8 +38,8 @@
                                                 <tr>
                                                     <td>{{$role->id}}</td>
                                                     <td>{{$role->name}}</td>
-                                                    <td>{{$role->department->name}}</td>
-                                                    <td>{{$role->designation->name}}</td>
+                                                    <td>{{$role->department->name ?? ''}}</td>
+                                                    <td>{{$role->designation->name ?? ''}}</td>
                                                     <td>
                                                         <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('organization_role.show',$role->uuid)}}" >
                                                             <i class="mdi mdi-eye" data-toggle="tooltip" data-original-title="view"></i>

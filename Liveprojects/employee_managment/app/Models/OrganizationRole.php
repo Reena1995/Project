@@ -12,11 +12,11 @@ class OrganizationRole extends Model
       /* ORM */ 
       public function department()
       {
-              return $this->hasOne(Department::class,'id','department_id');
+              return $this->hasOne(Department::class,'id','department_id')->where('is_active',1);
       }
       public function designation()
       {
-              return $this->hasOne(Designation::class,'id','designation_id');
+              return $this->hasOne(Designation::class,'id','designation_id')->where('is_active',1);
       }
       /* ORM end */ 
 

@@ -36,7 +36,7 @@
                                             @foreach($designation as $desi)
                                                 <tr>
                                                     <td>{{$desi->id}}</td>
-                                                    <td>{{$desi->department->name}}</td>
+                                                    <td>{{$desi->department->name ?? ''}}</td>
                                                     <td>{{$desi->name}}</td>
                                                     <td>
                                                         <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('designation.show',$desi->uuid)}}" >

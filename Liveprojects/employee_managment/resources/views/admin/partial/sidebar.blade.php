@@ -38,7 +38,7 @@
                                 </span>
                             </span>
                             <span class="menu-icon">
-                                <i class="icon-placeholder mdi mdi-account"></i>
+                                <i class="icon-placeholder mdi  mdi-account-group"></i>
                             </span>
                         </a>
                         <!--submenu-->
@@ -124,7 +124,7 @@
                                 </span>
                             </span>
                             <span class="menu-icon">
-                                <i class="icon-placeholder mdi mdi-account"></i>
+                                <i class="icon-placeholder mdi mdi-account-check"></i>
                             </span>
                         </a>
                         <!--submenu-->
@@ -159,12 +159,12 @@
                         <a href="#" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
-                                    Company Location
+                                    Location
                                     <span class="menu-arrow"></span>
                                 </span>
                             </span>
                             <span class="menu-icon">
-                                <i class="icon-placeholder mdi mdi-account"></i>
+                                <i class="icon-placeholder  fa fa-map-marker"></i>
                             </span>
                         </a>
                         <!--submenu-->
@@ -172,7 +172,7 @@
                             <li class="menu-item">
                                     <a href="{{route('company_location.create')}}"   class="menu-link">
                                         <span class="menu-label">
-                                            <span class="menu-name">Add Company Location</span>
+                                            <span class="menu-name">Add Location</span>
                                         </span>
                                         <span class="menu-icon">
                                             <i class="icon-placeholder mdi mdi-account-plus"></i>
@@ -183,7 +183,7 @@
                             <li class="menu-item">
                                 <a href="{{route('company_location.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View  Company Location</span>
+                                        <span class="menu-name">View Location</span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -194,17 +194,17 @@
                     </li>
                     <!--list item company location  module ends-->
 
-                      <!--list item company location Type module  begins-->
-                      <li class="menu-item">
+                    <!--list item company location Type module  begins-->
+                    <li class="menu-item">
                         <a href="#" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
-                                    Company Location Type
+                                    Location Type
                                     <span class="menu-arrow"></span>
                                 </span>
                             </span>
                             <span class="menu-icon">
-                                <i class="icon-placeholder mdi mdi-account"></i>
+                                <i class="icon-placeholder  mdi mdi-account-network"></i>
                             </span>
                         </a>
                         <!--submenu-->
@@ -212,7 +212,7 @@
                             <li class="menu-item">
                                     <a href="{{route('company_location_type.create')}}"   class="menu-link">
                                         <span class="menu-label">
-                                            <span class="menu-name">Add Company Location Type</span>
+                                            <span class="menu-name">Add Location Type</span>
                                         </span>
                                         <span class="menu-icon">
                                             <i class="icon-placeholder mdi mdi-account-plus"></i>
@@ -223,7 +223,7 @@
                             <li class="menu-item">
                                 <a href="{{route('company_location_type.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View  Company Location Type</span>
+                                        <span class="menu-name">View Location Type</span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -231,20 +231,20 @@
                                 </a>
                             </li>
                         </ul>
-                        </li>
-                        <!--list item company location Type  module ends-->
+                    </li>
+                    <!--list item company location Type  module ends-->
                     
                      <!--list item medium of instruction module  begins-->
                      <li class="menu-item">
                         <a href="#" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
-                                    Medium Of Instruction
+                                    Medium 
                                     <span class="menu-arrow"></span>
                                 </span>
                             </span>
                             <span class="menu-icon">
-                                <i class="icon-placeholder mdi mdi-account"></i>
+                                <i class="icon-placeholder fa fa-book"></i>
                             </span>
                         </a>
                         <!--submenu-->
@@ -252,7 +252,7 @@
                             <li class="menu-item">
                                     <a href="{{route('medium_instruction.create')}}"   class="menu-link">
                                         <span class="menu-label">
-                                            <span class="menu-name">Add Medium Of Instruction</span>
+                                            <span class="menu-name">Add Medium </span>
                                         </span>
                                         <span class="menu-icon">
                                             <i class="icon-placeholder mdi mdi-account-plus"></i>
@@ -263,7 +263,7 @@
                             <li class="menu-item">
                                 <a href="{{route('medium_instruction.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View   Medium Of Instruction</span>
+                                        <span class="menu-name">View Medium </span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -285,7 +285,8 @@
                                 </span>
                             </span>
                             <span class="menu-icon">
-                                <i class="icon-placeholder mdi mdi-account"></i>
+                                <i class="icon-placeholder fa fa-language"></i>
+
                             </span>
                         </a>
                         <!--submenu-->
@@ -325,7 +326,7 @@
                                 </span>
                             </span>
                             <span class="menu-icon">
-                                <i class="icon-placeholder mdi mdi-account"></i>
+                                <i class="icon-placeholder fa fa-graduation-cap"></i>
                             </span>
                         </a>
                         <!--submenu-->
@@ -336,7 +337,7 @@
                                             <span class="menu-name">Add Education Level</span>
                                         </span>
                                         <span class="menu-icon">
-                                            <i class="icon-placeholder mdi mdi-account-plus"></i>
+                                            <i class="icon-placeholder fa fa-graduation-cap"></i>
                                         </span>
                                     </a>
                             </li>
@@ -365,7 +366,7 @@
                                 </span>
                             </span>
                             <span class="menu-icon">
-                                <i class="icon-placeholder mdi mdi-account"></i>
+                                <i class="icon-placeholder fa fa-file-pdf-o"></i>
                             </span>
                         </a>
                         <!--submenu-->
@@ -405,7 +406,7 @@
                                 </span>
                             </span>
                             <span class="menu-icon">
-                                <i class="icon-placeholder mdi mdi-account"></i>
+                                <i class="icon-placeholder mdi mdi-crown"></i>
                             </span>
                         </a>
                         <!--submenu-->
@@ -445,7 +446,7 @@
                                 </span>
                             </span>
                             <span class="menu-icon">
-                                <i class="icon-placeholder mdi mdi-account"></i>
+                                <i class="icon-placeholder mdi mdi-responsive"></i>
                             </span>
                         </a>
                         <!--submenu-->
@@ -485,7 +486,7 @@
                                 </span>
                             </span>
                             <span class="menu-icon">
-                                <i class="icon-placeholder mdi mdi-account"></i>
+                                <i class="icon-placeholder fa fa-keyboard-o"></i>
                             </span>
                         </a>
                         <!--submenu-->
@@ -520,12 +521,12 @@
                         <a href="#" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
-                                    Current Residence Type 
+                                    Residence Type 
                                     <span class="menu-arrow"></span>
                                 </span>
                             </span>
                             <span class="menu-icon">
-                                <i class="icon-placeholder mdi mdi-account"></i>
+                                <i class="icon-placeholder fa fa-home"></i>
                             </span>
                         </a>
                         <!--submenu-->
@@ -533,10 +534,10 @@
                             <li class="menu-item">
                                     <a href="{{route('current_residence_type.create')}}"   class="menu-link">
                                         <span class="menu-label">
-                                            <span class="menu-name">Add  Current Residence Type </span>
+                                            <span class="menu-name">Add Residence Type </span>
                                         </span>
                                         <span class="menu-icon">
-                                            <i class="icon-placeholder mdi mdi-account-plus"></i>
+                                            <i class="icon-placeholder fa fa-home"></i>
                                         </span>
                                     </a>
                             </li>
@@ -544,7 +545,7 @@
                             <li class="menu-item">
                                 <a href="{{route('current_residence_type.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View  Current Residence Type </span>
+                                        <span class="menu-name">View Residence Type </span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -560,12 +561,12 @@
                         <a href="#" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
-                                    Mode Of Transportation 
+                                    Transportation 
                                     <span class="menu-arrow"></span>
                                 </span>
                             </span>
                             <span class="menu-icon">
-                                <i class="icon-placeholder mdi mdi-account"></i>
+                                <i class="icon-placeholder fa fa-taxi"></i>
                             </span>
                         </a>
                         <!--submenu-->
@@ -573,10 +574,10 @@
                             <li class="menu-item">
                                     <a href="{{route('mode_of_transportation.create')}}"   class="menu-link">
                                         <span class="menu-label">
-                                            <span class="menu-name">Add   Mode Of Transportation </span>
+                                            <span class="menu-name">Add Transportation </span>
                                         </span>
                                         <span class="menu-icon">
-                                            <i class="icon-placeholder mdi mdi-account-plus"></i>
+                                            <i class="icon-placeholder fa fa-taxi"></i>
                                         </span>
                                     </a>
                             </li>
@@ -584,7 +585,7 @@
                             <li class="menu-item">
                                 <a href="{{route('mode_of_transportation.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View    Mode Of Transportation </span>
+                                        <span class="menu-name">View Transportation </span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -595,7 +596,7 @@
                     </li>
                     <!--list item    mode Of Transportation   module ends-->
 
-                     <!--list item    mode Of Transportation  module  begins-->
+                     <!--list item    Leave Type  module  begins-->
                      <li class="menu-item">
                         <a href="#" class="open-dropdown menu-link">
                             <span class="menu-label">
@@ -605,7 +606,7 @@
                                 </span>
                             </span>
                             <span class="menu-icon">
-                                <i class="icon-placeholder mdi mdi-account"></i>
+                                <i class="icon-placeholder mdi mdi-calendar"></i>
                             </span>
                         </a>
                         <!--submenu-->
@@ -616,7 +617,7 @@
                                             <span class="menu-name">Add Leave Type </span>
                                         </span>
                                         <span class="menu-icon">
-                                            <i class="icon-placeholder mdi mdi-account-plus"></i>
+                                            <i class="icon-placeholder mdi mdi-calendar-text"></i>
                                         </span>
                                     </a>
                             </li>
@@ -633,130 +634,9 @@
                             </li>
                         </ul>
                     </li>
-                    <!--list item    mode Of Transportation   module ends-->
+                    <!--list item    Leave Type   module ends-->
 
-                    <!--list item begins-->
-                    <li class="menu-item">
-                        <a href="#" class="open-dropdown menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">
-                                    Attendance
-                                    <span class="menu-arrow"></span>
-                                </span>
-                                <!-- <span class="menu-info">Contains submenu</span> -->
-                            </span>
-                            <span class="menu-icon">
-                                <i class="icon-placeholder mdi mdi-calendar"></i>
-                            </span>
-                        </a>
-                        <!--submenu-->
-                        <ul class="sub-menu">
-                            <li class="menu-item">
-                                <a href="attendance-list.html" class="menu-link">
-                                    <span class="menu-label">
-                                        <span class="menu-name">Attendance List</span>
-                                    </span>
-                                    <span class="menu-icon">
-                                        <i class="icon-placeholder mdi mdi-calendar-text"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="attendance-list.html" class="menu-link">
-                                    <span class="menu-label">
-                                        <span class="menu-name">
-                                            Attendance By User
-                                        </span>
-                                    </span>
-                                    <span class="menu-icon">
-                                        <i class="icon-placeholder mdi mdi-account-box-outline"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="attendance-view.html" class="menu-link">
-                                    <span class="menu-label">
-                                        <span class="menu-name">
-                                            Attendance View
-                                        </span>
-                                    </span>
-                                    <span class="menu-icon">
-                                        <i class="icon-placeholder mdi mdi-calendar-check"></i>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!--list item ends-->
-
-                    <!--list item begins-->
-                    <li class="menu-item">
-                        <a href="#" class="open-dropdown menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">
-                                    Leave
-                                    <span class="menu-arrow"></span>
-                                </span>
-                                <!-- <span class="menu-info">Contains submenu</span> -->
-                            </span>
-                            <span class="menu-icon">
-                                <i class="icon-placeholder mdi mdi-calendar"></i>
-                            </span>
-                        </a>
-                        <!--submenu-->
-                        <ul class="sub-menu">
-                            <li class="menu-item">
-                                <a href="leave-settings.html" class="menu-link">
-                                    <span class="menu-label">
-                                        <span class="menu-name">Leave Setting</span>
-                                    </span>
-                                    <span class="menu-icon">
-                                        <i class="icon-placeholder mdi mdi-calendar-text"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="leave-applications.html" class="menu-link">
-                                    <span class="menu-label">
-                                        <span class="menu-name">
-                                            Leave Applications
-                                        </span>
-                                    </span>
-                                    <span class="menu-icon">
-                                        <i class="icon-placeholder mdi mdi-account-box-outline"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="recent-reave-applications.html" class="menu-link">
-                                    <span class="menu-label">
-                                        <span class="menu-name">
-                                            Recent Leaves
-                                        </span>
-                                    </span>
-                                    <span class="menu-icon">
-                                        <i class="icon-placeholder mdi mdi-calendar-check"></i>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!--list item ends-->
                     
-                    <!--list item begins-->
-                    <li class="menu-item">
-                        <a href="list-holidays.html" class="menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">
-                                    Holidays
-                                </span>
-                            </span>
-                            <span class="menu-icon">
-                                <i class="icon-placeholder mdi mdi-account"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <!--list item ends-->
 
                 </ul>
                 <!-- Menu List Ends-->

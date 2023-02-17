@@ -14,7 +14,7 @@ class DesignationController extends Controller
 {
     public function create()
     {  
-        $department=Department::orderBy('name', 'ASC')->get();
+        $department=Department::where('is_active',1)->orderBy('name', 'ASC')->get();
        return view('admin.modules.designation.add',compact('department'));
     }
 
@@ -75,7 +75,7 @@ class DesignationController extends Controller
 
     public function show($id)
     {
-        $department=Department::orderBy('name', 'ASC')->first();
+        $department=Department::where('is_active',1)->orderBy('name', 'ASC')->first();
         $designation = Designation::where('uuid',$id)->first();
         return view('admin.modules.designation.show',compact('designation','department'));
     }
@@ -85,7 +85,7 @@ class DesignationController extends Controller
     
     public function edit($id)
     {
-        $department=Department::orderBy('name', 'ASC')->get();
+        $department=Department::where('is_active',1)->orderBy('name', 'ASC')->get();
         $designation = Designation::where('uuid',$id)->first();
         return view('admin.modules.designation.edit',compact('designation','department'));
     }

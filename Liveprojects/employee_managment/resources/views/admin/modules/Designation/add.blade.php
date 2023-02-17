@@ -40,7 +40,7 @@
                                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                                             <div class="form-group floating-label ">
                                                                 <label>designation Name</label>
-                                                                <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="Enter First Name" />
+                                                                <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="Enter designation" />
                                                                 @if ($errors->has('name'))
                                                                     <span class="errr-validation">{{ $errors->first('name') }}</span>
                                                                 @endif
@@ -62,10 +62,13 @@
                                                         <div>
                                                         <div class="card-footer p-t-20 text-right">
                                                             <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                            <button class="theme-btn-outline text-white">canel</button>
-                                                        </div>
-                                                        <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                            <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
+                                                                <a href="{{route('designation.index')}}" class="theme-btn-outline text-white">
+                                                                    cancel
+                                                                </a>
+                                                            </div>
+                                                            <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                                <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
+                                                            </div>
                                                         </div>
                                                 </div>
                                                

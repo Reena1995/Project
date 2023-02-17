@@ -15,21 +15,21 @@ class OrganizationRoleController extends Controller
 {
     public function create()
     {  
-        $department=Department::orderBy('name', 'ASC')->get();
-        $designation=Designation::orderBy('name', 'ASC')->get();
+        $department=Department::where('is_active',1)->orderBy('name', 'ASC')->get();
+        $designation=Designation::where('is_active',1)->orderBy('name', 'ASC')->get();
        return view('admin.modules.organization_role.add',compact('department','designation'));
     }
 
     
     public function store(Request $request)
     {
-        // Log::info('aaaaaaa');
-        //  $department = $request->validate([
-        //     'name'=>'required|alpha',
-        //     'department_id' =>'required',
-        //     'designation_id' =>'required'
+        Log::info('aaaaaaa');
+         $department = $request->validate([
+            'name'=>'required|alpha',
+            'department_id' =>'required',
+            'designation_id' =>'required'
 
-        // ]); 
+        ]); 
         
         try{
 
@@ -78,8 +78,8 @@ class OrganizationRoleController extends Controller
 
     public function show($id)
     {
-        $department=Department::orderBy('name', 'ASC')->first();
-        $designation=Designation::orderBy('name', 'ASC')->first();
+        $department=Department::where('is_active',1)->orderBy('name', 'ASC')->first();
+        $designation=Designation::where('is_active',1)->orderBy('name', 'ASC')->first();
         $org_role = OrganizationRole::where('uuid',$id)->first();
         return view('admin.modules.organization_role.show',compact('department','designation','org_role'));
     }
@@ -89,8 +89,8 @@ class OrganizationRoleController extends Controller
     
     public function edit($id)
     {
-        $department=Department::orderBy('name', 'ASC')->get();
-        $designation=Designation::orderBy('name', 'ASC')->get();
+        $department=Department::where('is_active',1)->orderBy('name', 'ASC')->get();
+        $designation=Designation::where('is_active',1)->orderBy('name', 'ASC')->get();
         $org_role = OrganizationRole::where('uuid',$id)->first();
         return view('admin.modules.organization_role.edit',compact('department','designation','org_role'));
     }
@@ -98,14 +98,14 @@ class OrganizationRoleController extends Controller
    
     public function update(Request $request, $id)
     {
-        // Log::info('dddddddd');
-        //  $designation = $request->validate([
-        //     'name'=>'required|alpha',
-        //     'department_id'=>'required',
-        //     'designation_id'=>'required',
+        Log::info('dddddddd');
+         $designation = $request->validate([
+            'name'=>'required|alpha',
+            'department_id'=>'required',
+            'designation_id'=>'required',
             
 
-        // ]); 
+        ]); 
         try{
 
             Log::info('eeeeeeee');
