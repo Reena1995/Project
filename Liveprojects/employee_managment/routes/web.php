@@ -16,8 +16,8 @@ use App\Http\Controllers\AssetTypeController;
 use App\Http\Controllers\AssetSubTypeController;
 use App\Http\Controllers\CurrentResidenceTypeController;
 
-/* */
-/**/ 
+/* xfbzdfbzdfbgzdf*/
+/**/ /**avadvd */
 
 
 Route::get('login',[LoginController::class,'create'])->name('login');
