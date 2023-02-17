@@ -15,9 +15,9 @@ use App\Http\Controllers\AssetBrandController;
 use App\Http\Controllers\AssetTypeController;
 use App\Http\Controllers\AssetSubTypeController;
 use App\Http\Controllers\CurrentResidenceTypeController;
+use App\Http\Controllers\ModeOfTransportationController;
 
-/* xfbzdfbzdfbgzdf*/
-/**/ /**avadvd */
+
 
 
 Route::get('login',[LoginController::class,'create'])->name('login');
@@ -187,4 +187,16 @@ Route::group(['middleware'=>['afterlogin']], function()
    Route::get('/status/{id}',[CurrentResidenceTypeController::class,'status'])->name('status');
 });
 /* ----------------- ----------  current-residence-type end  -------------------------*/
+
+/* ----------------- ---------- mode of transportation   start  -------------------------*/
+Route::group(['prefix'=>'mode-of-transportation/','middleware'=>[],'as'=>'mode_of_transportation.'], function(){
+   Route::get('/create',[ModeOfTransportationController::class,'create'])->name('create');
+   Route::post('/store',[ModeOfTransportationController::class,'store'])->name('add');
+   Route::get('/',[ModeOfTransportationController::class,'index'])->name('index');
+   Route::get('/show/{id}',[ModeOfTransportationController::class,'show'])->name('show');
+   Route::get('/edit/{id}',[ModeOfTransportationController::class,'edit'])->name('edit');
+   Route::post('/update/{id}',[ModeOfTransportationController::class,'update'])->name('update');
+   Route::get('/status/{id}',[ModeOfTransportationController::class,'status'])->name('status');
+});
+/* ----------------- ----------  mode of transportation end  -------------------------*/
 });
