@@ -515,6 +515,46 @@
                     </li>
                     <!--list item    Asset Sub Type   module ends-->
 
+                    <!--list item    Current Residence Type  module  begins-->
+                    <li class="menu-item">
+                        <a href="#" class="open-dropdown menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">
+                                    Current Residence Type 
+                                    <span class="menu-arrow"></span>
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="icon-placeholder mdi mdi-account"></i>
+                            </span>
+                        </a>
+                        <!--submenu-->
+                        <ul class="sub-menu">
+                            <li class="menu-item">
+                                    <a href="{{route('current_residence_type.create')}}"   class="menu-link">
+                                        <span class="menu-label">
+                                            <span class="menu-name">Add  Current Residence Type </span>
+                                        </span>
+                                        <span class="menu-icon">
+                                            <i class="icon-placeholder mdi mdi-account-plus"></i>
+                                        </span>
+                                    </a>
+                            </li>
+                            
+                            <li class="menu-item">
+                                <a href="{{route('current_residence_type.index')}}" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">View  Current Residence Type </span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="icon-placeholder mdi mdi-eye-outline"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--list item    current Residence Type   module ends-->
+
                     <!--list item begins-->
                     <li class="menu-item">
                         <a href="#" class="open-dropdown menu-link">

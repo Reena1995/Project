@@ -14,6 +14,7 @@ use App\Http\Controllers\DocumentTypeController;
 use App\Http\Controllers\AssetBrandController;
 use App\Http\Controllers\AssetTypeController;
 use App\Http\Controllers\AssetSubTypeController;
+use App\Http\Controllers\CurrentResidenceTypeController;
 
 
 
@@ -174,4 +175,16 @@ Route::group(['middleware'=>['afterlogin']], function()
    Route::get('/status/{id}',[AssetSubTypeController::class,'status'])->name('status');
 });
 /* ----------------- ----------  Asset sub  Type end  -------------------------*/
+
+ /* ----------------- ---------- current-residence-type   start  -------------------------*/
+ Route::group(['prefix'=>'current-residence-type/','middleware'=>[],'as'=>'current_residence_type.'], function(){
+   Route::get('/create',[CurrentResidenceTypeController::class,'create'])->name('create');
+   Route::post('/store',[CurrentResidenceTypeController::class,'store'])->name('add');
+   Route::get('/',[CurrentResidenceTypeController::class,'index'])->name('index');
+   Route::get('/show/{id}',[CurrentResidenceTypeController::class,'show'])->name('show');
+   Route::get('/edit/{id}',[CurrentResidenceTypeController::class,'edit'])->name('edit');
+   Route::post('/update/{id}',[CurrentResidenceTypeController::class,'update'])->name('update');
+   Route::get('/status/{id}',[CurrentResidenceTypeController::class,'status'])->name('status');
+});
+/* ----------------- ----------  current-residence-type end  -------------------------*/
 });
