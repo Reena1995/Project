@@ -52,3 +52,34 @@ To https://github.com/Reena1995/Project.git
  * [new branch]      main -> main
 Branch 'main' set up to track remote branch 'main' from 'origin'.
 PS C:\xampp\htdocs\Reena\Practice> 
+
+
+/*     git command */
+
+Git ma code push krva mate
+
+1) Check File status
+	git status
+2) New File add krva mate	
+	git add -- .
+
+3) Commit time koy pn comment lakhva mate
+	git commit -am 'comment'
+
+4) Git ma code push krva mate
+	git push origin 'branch_name'
+	
+5) Git ma new branch create krva mate
+	git checkout -b 'branch_name'
+	
+6) Other branch mathi pull leva mate
+	git pull origin 'branch_name'
+
+7) badhi file checkout krva mate
+	git checkout -- .
+
+8) Prticuler file checkout krva mate
+	git checkout 'file_path'
+
+9) Ek branch mathi biji branch ma java mate
+	git checkout 'branch_name'

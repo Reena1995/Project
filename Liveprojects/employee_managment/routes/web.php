@@ -16,6 +16,7 @@ use App\Http\Controllers\AssetTypeController;
 use App\Http\Controllers\AssetSubTypeController;
 use App\Http\Controllers\CurrentResidenceTypeController;
 use App\Http\Controllers\ModeOfTransportationController;
+use App\Http\Controllers\LeaveTypeController;
 
 
 
@@ -199,4 +200,16 @@ Route::group(['prefix'=>'mode-of-transportation/','middleware'=>[],'as'=>'mode_o
    Route::get('/status/{id}',[ModeOfTransportationController::class,'status'])->name('status');
 });
 /* ----------------- ----------  mode of transportation end  -------------------------*/
+
+/* -----------------==---------- Leave Type  start--------------------------*/
+Route::group(['prefix'=>'leave-type/','middleware'=>[],'as'=>'leave_type.'], function(){
+   Route::get('/create',[LeaveTypeController::class,'create'])->name('create');
+   Route::post('/store',[LeaveTypeController::class,'store'])->name('add');
+   Route::get('/',[LeaveTypeController::class,'index'])->name('index');
+   Route::get('/show/{id}',[LeaveTypeController::class,'show'])->name('show');
+   Route::get('/edit/{id}',[LeaveTypeController::class,'edit'])->name('edit');
+   Route::post('/update/{id}',[LeaveTypeController::class,'update'])->name('update');
+   Route::get('/status/{id}',[LeaveTypeController::class,'status'])->name('status');
+});
+/* ------------------------------- Leave Type  end  ---------------------------*/
 });
