@@ -22,7 +22,7 @@
         color:red;
         font-size:28px;
         fomt-weight:normal;
-        cursor:pointer;
+        cursor:pointer;    
        
     }
 </style>
