@@ -36,7 +36,7 @@
                                             @foreach($ass_sub_type as $asubtype)
                                                 <tr>
                                                     <td>{{$asubtype->id}}</td>
-                                                    <td>{{$asubtype->ass_type->type}}</td>
+                                                    <td>{{$asubtype->ass_type->type ?? ''}}</td>
                                                     <td>{{$asubtype->type}}</td>
                                                     <td>
                                                         <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('asset_sub_type.show',$asubtype->uuid)}}" >

@@ -17,6 +17,7 @@ use App\Http\Controllers\AssetSubTypeController;
 use App\Http\Controllers\CurrentResidenceTypeController;
 use App\Http\Controllers\ModeOfTransportationController;
 use App\Http\Controllers\LeaveTypeController;
+use App\Http\Controllers\ImageController;
 
 
 
@@ -212,4 +213,10 @@ Route::group(['prefix'=>'leave-type/','middleware'=>[],'as'=>'leave_type.'], fun
    Route::get('/status/{id}',[LeaveTypeController::class,'status'])->name('status');
 });
 /* ------------------------------- Leave Type  end  ---------------------------*/
+
+/* image upload practice start*/ 
+Route::get('/image-upload',[ImageController::class,'create'])->name('image.create');
+Route::post('/image-store',[ImageController::class,'store'])->name('image.store');
+Route::get('/gallery',[ImageController::class,'gallery'])->name('gallery.create');
+/* image upload practice end*/ 
 });
