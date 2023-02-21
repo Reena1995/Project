@@ -214,9 +214,5 @@ Route::group(['prefix'=>'leave-type/','middleware'=>[],'as'=>'leave_type.'], fun
 });
 /* ------------------------------- Leave Type  end  ---------------------------*/
 
-/* image upload practice start*/ 
-Route::get('/image-upload',[ImageController::class,'create'])->name('image.create');
-Route::post('/image-store',[ImageController::class,'store'])->name('image.store');
-Route::get('/gallery',[ImageController::class,'gallery'])->name('gallery.create');
-/* image upload practice end*/ 
+
 });

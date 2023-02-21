@@ -67,7 +67,7 @@ Git ma code push krva mate
 	git commit -am 'comment'
 
 4) Git ma code push krva mate
-	git push origin 'branch_name'
+	git push origin branch_name
 	
 5) Git ma new branch create krva mate
 	git checkout -b 'branch_name'

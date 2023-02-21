@@ -2,29 +2,28 @@
 @section('content')
 
 <style  type="text/css">
+ 
     .image_container
     {
-        height:120px;
-        width:200px;
-        border-radius:10px;
+        height:98px;
+        width:98px;
         overflow:hidden;
+        margin:5px;
     }
-    .image_container img 
+    .look
     {
-        height : 100%;
-        width : auto;
+        width: 100%;
         object-fit:cover;
+        border-radius:8px;
+        position:relative;
     }
-    .image_container span
+    .image_container i
     {
-        top : -6px;
-        right : 8px;
-        color:red;
-        font-size:28px;
-        fomt-weight:normal;
-        cursor:pointer;    
-       
-    }
+        position: absolute;
+        right: 3px;
+        color:#950909;
+        cursor: pointer;
+    } 
 </style>
 
 
@@ -59,7 +58,7 @@
                                        
                                        
                                     </ul>
-                                    <form name="form" id="form" action="{{route('image.store')}}" method="post" enctype="multipart/form-data">
+                                    <form name="form" id="form" action="" method="post" enctype="multipart/form-data">
                                         @csrf  
                                         <div class="tab-content" id="myTabContent1">
                                             <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
@@ -67,18 +66,17 @@
                                                 <div class="form-row">
                                                     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                                       
-                                                        <input type="file" id="image" name="images"   class="form-control form-control-lg"/>
-                                                           
+                                                        <input type="file" id="gallery" name="images"   class="d-none" multiple/>
+                                                        <button type="button" class="btn btn-primary" id="filebutton">
+                                                            <span id="filetext">Choose File</span>
+                                                        </button>
                                                     </div>
                                                    
    
                                                 </div>
 
-                                                <div id="showimage" class="car-body d-flex flex-wrap justify-content-start">
-                                                    <div class="image_container d-flex justify-content-center position-relative"> 
-                                                            <image src="{{asset('console/gallery/images.jfif')}}" alt="image">  
-                                                            <span class="position-absolute"></span>  
-                                                    </div>    
+                                                <div id="showimages" class="car-body d-flex flex-wrap justify-content-start">
+                                                    
                                                 </div>
                                                 
                                             </div>
@@ -108,6 +106,79 @@
        	@endsection
  @push('scripts')
     <script>
-       
+       $(document).ready(function(){
+        
+            $('#filebutton').click(function(){
+                $('#gallery').click();
+            });
+
+            $('#gallery').change(function(){
+
+                var name=$(this).val().split('\\').pop();
+                var file=$(this)[0].files;
+                if(name != ''){
+                    if(file.length >=2){
+                        $('#filetext').html(file.length + 'files ready to upload');
+                    }
+                    else{
+                        $('#filetext').html(name);
+                    }
+                }
+            });
+
+            $('#gallery').on("change",previewImages);
+
+            $(document).on('click','.trash', function (e){
+			e.preventDefault();
+			        console.log('trash button');
+                    $(this).parent().attr('data-file');
+                $(this).parent('.image_container').remove();
+			// // var image_id=$(this).attr('data-id');
+			// var image_id=$(this).data('id');
+			// console.log(image_id,'image find id');
+			
+
+			// $.ajax({
+			// 	headers: {
+          	// 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         	// 	 },
+			// 	type:'POST',
+			// 	dataType:'JSON',
+			// 	url:'/update-image-status' ,
+			// 	data:{
+			// 		'id':image_id,
+			// 		'status':'0'
+			// 	},
+			// 	dataType:"json",
+			// 	success:function(response) {
+			// 		$('#imgWrap'+image_id).html('');
+			// 		console.log(response,'response');
+			// 		console.log(xxxxx);
+			// 	}
+			// });
+		})
+       });
+
+            function previewImages() {
+                
+                var $preview = $('#showimages');
+                if(this.files) $.each(this.files, readAndPreview);
+
+                function readAndPreview(i,file) {
+
+                    // if(!/\.(jpg?g|ong|gif)$/i.test(file.name)){
+
+                    //     return alert(file.name +" is not an image");
+                    // }else
+
+                    var reader=new FileReader();
+
+                    $(reader).on("load",function (){
+                        $preview.append('<div class="image_container d-flex justify-content-center position-relative" data-file="'+file.name+'" ><img src="' + this.result +'" alt="image" class="look"><i class="fa fa-times trash" id="trash" aria-hidden="true"></i></div>');
+                    });
+
+                    reader.readAsDataURL(file);
+                }
+            }
     </script>      
  @endpush
