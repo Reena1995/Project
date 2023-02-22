@@ -17,7 +17,7 @@ use App\Http\Controllers\AssetSubTypeController;
 use App\Http\Controllers\CurrentResidenceTypeController;
 use App\Http\Controllers\ModeOfTransportationController;
 use App\Http\Controllers\LeaveTypeController;
-use App\Http\Controllers\ImageController;
+
 
 
 
