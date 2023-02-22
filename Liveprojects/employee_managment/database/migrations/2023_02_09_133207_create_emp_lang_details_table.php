@@ -17,17 +17,20 @@ class CreateEmpLangDetailsTable extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->unsignedBigInteger('language_id');
-            $table->string('read');
-            $table->string('write');
-            $table->string('speak');
+            $table->boolean('read');
+            $table->boolean('write');
+            $table->boolean('speak');
             $table->unsignedBigInteger('user_id');
 			$table->boolean('is_active')->default(1);
-			$table->string('created_by');
-			$table->string('updated_by')->nullable();
+			$table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
 
             $table->foreign('language_id')->references('id')->on('languages');
             $table->foreign('user_id')->references('id')->on('users');
+
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 

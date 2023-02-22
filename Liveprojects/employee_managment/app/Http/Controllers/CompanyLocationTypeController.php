@@ -8,6 +8,7 @@ use DB;
 use Session;
 use Log;
 use Validate;
+use Auth;
 
 class CompanyLocationTypeController extends Controller
 {
@@ -21,7 +22,7 @@ class CompanyLocationTypeController extends Controller
     {
         Log::info('aaaaaaa');
          $location_type = $request->validate([
-            'type'=>'required|alpha',
+            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -32,6 +33,7 @@ class CompanyLocationTypeController extends Controller
             DB::beginTransaction();
             $location_type = new CompanyLocationType;
             $location_type->type = $request->type;
+            $location_type->created_by = Auth::id();
             $location_type->uuid = \Str::uuid();
           
             $res = $location_type->save();
@@ -88,7 +90,7 @@ class CompanyLocationTypeController extends Controller
     {
         Log::info('dddddddd');
         $location_type = $request->validate([
-            'type'=>'required|alpha',
+            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -98,6 +100,7 @@ class CompanyLocationTypeController extends Controller
             DB::beginTransaction();
             $location_type = CompanyLocationType::where('uuid',$id)->first();;
             $location_type -> type = $request->type;
+            $location_type->updated_by = Auth::id();
             $res = $location_type ->save();
             
             if(!$res)
@@ -137,6 +140,7 @@ class CompanyLocationTypeController extends Controller
            DB::beginTransaction();
            $location_type = CompanyLocationType::where('uuid',$id)->first();
            $location_type->is_active = 0;
+           $location_type->updated_by = Auth::id();
            $res = $location_type->update();
 
            if(!$res)

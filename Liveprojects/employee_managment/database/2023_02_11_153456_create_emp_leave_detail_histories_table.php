@@ -26,12 +26,12 @@ class CreateEmpLeaveDetailHistoriesTable extends Migration
             $table->string('half_day_date');
             $table->date('return_date');
             $table->longText('leave_reason');
-            $table->string('is_approved');
+            $table->boolean('is_approved');
             $table->longText('remarks');
-            $table->string('is_cancelled');
+            $table->boolean('is_cancelled');
 			$table->boolean('is_active')->default(1);
-			$table->string('created_by');
-			$table->string('updated_by')->nullable();
+			$table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
 
 

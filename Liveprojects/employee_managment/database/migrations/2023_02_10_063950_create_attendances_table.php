@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmpProTraDetailsTable extends Migration
+class CreateAttendancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,25 @@ class CreateEmpProTraDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('emp_pro_tra_details', function (Blueprint $table) {
+        Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
             $table->unsignedBigInteger('user_id');
-			$table->string('name_of_institute');
-            $table->longText('address');
-            $table->date('to');
-            $table->date('from');
-            $table->longText('description');
-            $table->string('certificate_pdf');
+			$table->date('attendance_date');
+            $table->time('check_in');
+            $table->time('check_out');
+            $table->string('half_day');
+            $table->string('last_check_in');
 			$table->boolean('is_active')->default(1);
-			$table->string('created_by');
-			$table->string('updated_by')->nullable();
+			$table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
 
 
             $table->foreign('user_id')->references('id')->on('users');
+
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 
@@ -40,6 +42,6 @@ class CreateEmpProTraDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('emp_pro_tra_details');
+        Schema::dropIfExists('attendances');
     }
 }

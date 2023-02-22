@@ -43,8 +43,8 @@ class CreateEmployeePersonalDetailsTable extends Migration
             $table->unsignedBigInteger('mode_of_transportation_id');
            
             $table->boolean('is_active')->default(1);
-            $table->string('created_by');
-            $table->string('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
 
 
@@ -59,6 +59,9 @@ class CreateEmployeePersonalDetailsTable extends Migration
             $table->foreign('permanent_country_id')->references('id')->on('countries');
             $table->foreign('permanent_state_id')->references('id')->on('states');
             $table->foreign('permanent_city_id')->references('id')->on('cities');
+
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
 
         });
     }

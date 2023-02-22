@@ -17,21 +17,24 @@ class CreateEmpEducationDetailsTable extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('edu_level_id');
-            $table->unsignedBigInteger('med_inst_id');
+            $table->unsignedBigInteger('education_level_id');
+            $table->unsignedBigInteger('medium_instruction_id');
 			$table->string('university_name');
             $table->string('percentage');
             $table->string('specilaization');
             $table->integer('passing_year');
 			$table->boolean('is_active')->default(1);
-			$table->string('created_by');
-			$table->string('updated_by')->nullable();
+			$table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
 
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('edu_level_id')->references('id')->on('education_levels');
-            $table->foreign('med_inst_id')->references('id')->on('medium_of_instructions');
+            $table->foreign('education_level_id')->references('id')->on('education_levels');
+            $table->foreign('medium_instruction_id')->references('id')->on('medium_of_instructions');
+
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 

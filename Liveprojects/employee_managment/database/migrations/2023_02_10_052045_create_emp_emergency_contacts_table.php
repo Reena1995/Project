@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmpDocumentsTable extends Migration
+class CreateEmpEmergencyContactsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,24 @@ class CreateEmpDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('emp_documents', function (Blueprint $table) {
+        Schema::create('emp_emergency_contacts', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('doc_id');
-			$table->string('file');
+			$table->string('name',255);
+            $table->longText('address');
+            $table->string('relationship',255);
+            $table->integer('contact_no');
 			$table->boolean('is_active')->default(1);
-			$table->string('created_by');
-			$table->string('updated_by')->nullable();
+			$table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
 
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('doc_id')->references('id')->on('document_types');
+
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 
@@ -37,6 +41,6 @@ class CreateEmpDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('emp_documents');
+        Schema::dropIfExists('emp_emergency_contacts');
     }
 }

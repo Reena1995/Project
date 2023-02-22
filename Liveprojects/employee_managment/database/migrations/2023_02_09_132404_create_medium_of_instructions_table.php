@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAssetTypesTable extends Migration
+class CreateMediumOfInstructionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,17 @@ class CreateAssetTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('asset_types', function (Blueprint $table) {
+        Schema::create('medium_of_instructions', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
-			$table->string('type');
+			$table->string('name',255);
 			$table->boolean('is_active')->default(1);
-			$table->string('created_by');
-			$table->string('updated_by')->nullable();
+			$table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 
@@ -31,6 +34,6 @@ class CreateAssetTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('asset_types');
+        Schema::dropIfExists('medium_of_instructions');
     }
 }

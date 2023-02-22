@@ -84,7 +84,10 @@
          $(document).ready(function(){
             $("form[name='form']").validate({
                 rules : {
-                    name : "required",                    
+                    name : {
+                        required:true,
+                        lettersonly:true
+                    },                    
                 },
                 messages : {
                     name : "Please enter a department name",

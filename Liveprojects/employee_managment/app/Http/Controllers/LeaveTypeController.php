@@ -8,7 +8,7 @@ use DB;
 use Session;
 use Log;
 use Validate;
-
+use Auth;
 
 class LeaveTypeController extends Controller
 {
@@ -22,7 +22,7 @@ class LeaveTypeController extends Controller
     {
         Log::info('aaaaaaa');
          $leavetype= $request->validate([
-            'type'=>'required|alpha',
+            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -33,6 +33,7 @@ class LeaveTypeController extends Controller
             DB::beginTransaction();
             $leavetype = new LeaveType;
             $leavetype->type = $request->type;
+            $leavetype->created_by = Auth::id();
             $leavetype->uuid = \Str::uuid();
           
             $res = $leavetype->save();
@@ -88,7 +89,7 @@ class LeaveTypeController extends Controller
     {
         Log::info('dddddddd');
         $leavetype = $request->validate([
-            'type'=>'required|alpha',
+            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -98,6 +99,7 @@ class LeaveTypeController extends Controller
             DB::beginTransaction();
             $leavetype = LeaveType::where('uuid',$id)->first();;
             $leavetype -> type = $request->type;
+            $leavetype->updated_by = Auth::id();
             $res = $leavetype ->save();
             
             if(!$res)
@@ -137,6 +139,7 @@ class LeaveTypeController extends Controller
            DB::beginTransaction();
            $leavetype = LeaveType::where('uuid',$id)->first();
            $leavetype->is_active = 0;
+           $leavetype->updated_by = Auth::id();
            $res = $leavetype->update();
 
            if(!$res)

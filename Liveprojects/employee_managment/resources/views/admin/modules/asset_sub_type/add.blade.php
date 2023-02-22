@@ -93,8 +93,11 @@
          $(document).ready(function(){
             $("form[name='form']").validate({
                 rules : {
-                    type : "required",  
-                    asset_type_id  : "required",                    
+                    type : {
+                        required:true,
+                        lettersonly:true
+                    }, 
+                    asset_type_id  : "required",                     
                 },
                 messages : {
                     type : "Please enter asset sub type name",

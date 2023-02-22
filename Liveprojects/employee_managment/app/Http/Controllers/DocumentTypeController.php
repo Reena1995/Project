@@ -8,6 +8,7 @@ use DB;
 use Session;
 use Log;
 use Validate;
+use Auth;
 
 class DocumentTypeController extends Controller
 {
@@ -21,7 +22,7 @@ class DocumentTypeController extends Controller
     {
         Log::info('aaaaaaa');
          $doctype= $request->validate([
-            'type'=>'required|alpha',
+            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -32,6 +33,7 @@ class DocumentTypeController extends Controller
             DB::beginTransaction();
             $doctype = new DocumentType;
             $doctype->type = $request->type;
+            $doctype->created_by = Auth::id();
             $doctype->uuid = \Str::uuid();
           
             $res = $doctype->save();
@@ -87,7 +89,7 @@ class DocumentTypeController extends Controller
     {
         Log::info('dddddddd');
         $doctype = $request->validate([
-            'type'=>'required|alpha',
+            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -97,6 +99,7 @@ class DocumentTypeController extends Controller
             DB::beginTransaction();
             $doctype = DocumentType::where('uuid',$id)->first();;
             $doctype -> type = $request->type;
+            $doctype->updated_by = Auth::id();
             $res = $doctype ->save();
             
             if(!$res)
@@ -136,6 +139,7 @@ class DocumentTypeController extends Controller
            DB::beginTransaction();
            $doctype = DocumentType::where('uuid',$id)->first();
            $doctype->is_active = 0;
+           $doctype->updated_by = Auth::id();
            $res = $doctype->update();
 
            if(!$res)

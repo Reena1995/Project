@@ -8,6 +8,7 @@ use DB;
 use Session;
 use Log;
 use Validate;
+use Auth;
 
 class DepartmentController extends Controller
 {
@@ -23,7 +24,7 @@ class DepartmentController extends Controller
     {
         Log::info('aaaaaaa');
          $department = $request->validate([
-            'name'=>'required|alpha',
+            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -35,6 +36,7 @@ class DepartmentController extends Controller
             $department = new Department;
             $department->name = $request->name;
             $department->uuid = \Str::uuid();
+            $department->created_by = Auth::id();
           
             $res = $department->save();
 
@@ -89,7 +91,7 @@ class DepartmentController extends Controller
     {
         Log::info('dddddddd');
          $department = $request->validate([
-            'name'=>'required|alpha',
+            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -99,6 +101,7 @@ class DepartmentController extends Controller
             DB::beginTransaction();
             $department = Department::where('uuid',$id)->first();
             $department->name = $request->name;
+            $department->updated_by  = Auth::id();
             $res = $department->save();
 
             if(!$res)
@@ -135,6 +138,7 @@ class DepartmentController extends Controller
            DB::beginTransaction();
            $department = Department::where('uuid',$id)->first();
            $department->is_active = 0;
+           $department->updated_by  = Auth::id();
            $res = $department->update();
 
            if(!$res)

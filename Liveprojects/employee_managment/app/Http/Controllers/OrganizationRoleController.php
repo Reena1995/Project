@@ -10,6 +10,7 @@ use DB;
 use Session;
 use Log;
 use Validate;
+use Auth;
 
 class OrganizationRoleController extends Controller
 {
@@ -25,7 +26,7 @@ class OrganizationRoleController extends Controller
     {
         Log::info('aaaaaaa');
          $department = $request->validate([
-            'name'=>'required|alpha',
+            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             'department_id' =>'required',
             'designation_id' =>'required'
 
@@ -39,6 +40,7 @@ class OrganizationRoleController extends Controller
             $org_role->name = $request->name;
             $org_role->department_id = $request->department_id;
             $org_role->designation_id = $request->designation_id;
+            $org_role->created_by = Auth::id();
             $org_role->uuid = \Str::uuid();
           
             $res = $org_role->save();
@@ -100,7 +102,7 @@ class OrganizationRoleController extends Controller
     {
         Log::info('dddddddd');
          $designation = $request->validate([
-            'name'=>'required|alpha',
+            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             'department_id'=>'required',
             'designation_id'=>'required',
             
@@ -114,6 +116,7 @@ class OrganizationRoleController extends Controller
             $org_role->name = $request->name;
             $org_role->department_id = $request->department_id;
             $org_role->designation_id = $request->designation_id;
+            $org_role->updated_by = Auth::id();
             $res = $org_role->save();
 
             if(!$res)
@@ -150,6 +153,7 @@ class OrganizationRoleController extends Controller
            DB::beginTransaction();
            $org_role = OrganizationRole::where('uuid',$id)->first();
            $org_role->is_active = 0;
+           $org_role->updated_by = Auth::id();
            $res = $org_role->update();
 
            if(!$res)

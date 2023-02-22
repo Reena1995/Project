@@ -20,14 +20,17 @@ class CreateEmployeeLocationHistoriesTable extends Migration
             $table->unsignedBigInteger('company_location_id');
             $table->unsignedBigInteger('company_location_type_id');
             $table->boolean('is_active')->default(1);
-            $table->string('created_by');
-            $table->string('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
 
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('company_location_id')->references('id')->on('company_locations');
             $table->foreign('company_location_type_id')->references('id')->on('company_location_types');
+
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmpEmploymentDetailHistoriesTable extends Migration
+class CreateEmpEmploymentDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,24 @@ class CreateEmpEmploymentDetailHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('emp_employment_detail_histories', function (Blueprint $table) {
+        Schema::create('emp_employment_details', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
-            $table->unsignedBigInteger('emp_employment_detail_id');
             $table->date('date_of_joining');
             $table->date('date_of_resigning')->nullable();
             $table->date('date_of_leaving')->nullable();
-            $table->longText('reason_for')->nullable();
+            $table->longText('reason_for_leaving')->nullable();
             $table->string('resign_letter_pdf')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->boolean('is_active')->default(1);
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
 
-            $table->foreign('emp_employment_detail_id')->references('id')->on('emp_employment_details');
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 
@@ -39,6 +41,6 @@ class CreateEmpEmploymentDetailHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('emp_employment_detail_histories');
+        Schema::dropIfExists('emp_employment_details');
     }
 }

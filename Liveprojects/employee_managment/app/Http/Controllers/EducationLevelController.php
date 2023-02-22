@@ -8,6 +8,7 @@ use DB;
 use Session;
 use Log;
 use Validate;
+use Auth;
 
 class EducationLevelController extends Controller
 {
@@ -21,7 +22,7 @@ class EducationLevelController extends Controller
     {
         Log::info('aaaaaaa');
          $edulevel= $request->validate([
-            'name'=>'required|alpha',
+            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -32,6 +33,7 @@ class EducationLevelController extends Controller
             DB::beginTransaction();
             $edulevel = new EducationLevel;
             $edulevel->name = $request->name;
+            $edulevel->created_by = Auth::id();
             $edulevel->uuid = \Str::uuid();
           
             $res = $edulevel->save();
@@ -87,7 +89,7 @@ class EducationLevelController extends Controller
     {
         Log::info('dddddddd');
         $medium = $request->validate([
-            'name'=>'required|alpha',
+            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -97,6 +99,7 @@ class EducationLevelController extends Controller
             DB::beginTransaction();
             $edulevel = EducationLevel::where('uuid',$id)->first();;
             $edulevel -> name = $request->name;
+            $edulevel->updated_by = Auth::id();
             $res = $edulevel ->save();
             
             if(!$res)
@@ -136,6 +139,7 @@ class EducationLevelController extends Controller
            DB::beginTransaction();
            $edulevel = EducationLevel::where('uuid',$id)->first();
            $edulevel->is_active = 0;
+           $edulevel->updated_by = Auth::id();
            $res = $edulevel->update();
 
            if(!$res)

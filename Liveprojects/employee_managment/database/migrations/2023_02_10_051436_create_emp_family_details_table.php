@@ -17,19 +17,22 @@ class CreateEmpFamilyDetailsTable extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->unsignedBigInteger('user_id');
-			$table->string('name');
-            $table->string('relationship');
-            $table->string('profession');
+			$table->string('name',255);
+            $table->string('relationship',255);
+            $table->string('profession',255);
             $table->string('age');
             $table->integer('contact_no');
-            $table->string('dependent_y/n');
+            $table->boolean('is_dependent');
 			$table->boolean('is_active')->default(1);
-			$table->string('created_by');
-			$table->string('updated_by')->nullable();
+			$table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
 
 
             $table->foreign('user_id')->references('id')->on('users');
+
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 

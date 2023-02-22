@@ -9,6 +9,7 @@ use DB;
 use Session;
 use Log;
 use Validate;
+use Auth;
 
 class DesignationController extends Controller
 {
@@ -23,7 +24,7 @@ class DesignationController extends Controller
     {
         Log::info('aaaaaaa');
          $department = $request->validate([
-            'name'=>'required|alpha',
+            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -35,6 +36,7 @@ class DesignationController extends Controller
             $designation = new Designation;
             $designation->name = $request->name;
             $designation->department_id = $request->department_id;
+            $designation->created_by = Auth::id();
             $designation->uuid = \Str::uuid();
           
             $res = $designation->save();
@@ -95,7 +97,7 @@ class DesignationController extends Controller
     {
         Log::info('dddddddd');
          $designation = $request->validate([
-            'name'=>'required|alpha',
+            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             'department_id'=>'required',
             
 
@@ -107,6 +109,7 @@ class DesignationController extends Controller
             $designation = Designation::where('uuid',$id)->first();
             $designation->name = $request->name;
             $designation->department_id = $request->department_id;
+            $designation->updated_by = Auth::id();
             $res = $designation->save();
 
             if(!$res)
@@ -143,6 +146,7 @@ class DesignationController extends Controller
            DB::beginTransaction();
            $designation = Designation::where('uuid',$id)->first();
            $designation->is_active = 0;
+           $designation->updated_by = Auth::id();
            $res = $designation->update();
 
            if(!$res)

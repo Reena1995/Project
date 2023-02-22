@@ -17,7 +17,7 @@ class CreateEmpAssetDetailsTable extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('brand_id');
+            $table->unsignedBigInteger('asset_brand_id');
             $table->unsignedBigInteger('asset_sub_type_id');
 			$table->string('serial_no');
             $table->date('purchased_dn');
@@ -25,16 +25,20 @@ class CreateEmpAssetDetailsTable extends Migration
             $table->string('warranty_period');
             $table->string('organization_asset_code');
             $table->string('invoice_no');
-            $table->string('asset_image');
+            $table->string('asset_image',255);
 			$table->boolean('is_active')->default(1);
-			$table->string('created_by');
-			$table->string('updated_by')->nullable();
+			$table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
 
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('brand_id')->references('id')->on('asset_brands');
+            $table->foreign('asset_brand_id')->references('id')->on('asset_brands');
             $table->foreign('asset_sub_type_id')->references('id')->on('asset_sub_types');
+
+
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         
         });
     }

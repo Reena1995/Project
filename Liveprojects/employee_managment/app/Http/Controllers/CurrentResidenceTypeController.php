@@ -8,6 +8,7 @@ use DB;
 use Session;
 use Log;
 use Validate;
+use Auth;
 
 class CurrentResidenceTypeController extends Controller
 {
@@ -21,7 +22,7 @@ class CurrentResidenceTypeController extends Controller
     {
         Log::info('aaaaaaa');
          $resitype= $request->validate([
-            'type'=>'required|alpha',
+            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -32,6 +33,7 @@ class CurrentResidenceTypeController extends Controller
             DB::beginTransaction();
             $resitype = new CurrentResidenceType;
             $resitype->type = $request->type;
+            $resitype->created_by = Auth::id();
             $resitype->uuid = \Str::uuid();
           
             $res = $resitype->save();
@@ -87,7 +89,7 @@ class CurrentResidenceTypeController extends Controller
     {
         Log::info('dddddddd');
         $resitype = $request->validate([
-            'type'=>'required|alpha',
+            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -97,6 +99,7 @@ class CurrentResidenceTypeController extends Controller
             DB::beginTransaction();
             $resitype = CurrentResidenceType::where('uuid',$id)->first();;
             $resitype -> type = $request->type;
+            $resitype->updated_by = Auth::id();
             $res = $resitype ->save();
             
             if(!$res)
@@ -136,6 +139,7 @@ class CurrentResidenceTypeController extends Controller
            DB::beginTransaction();
            $resitype = CurrentResidenceType::where('uuid',$id)->first();
            $resitype->is_active = 0;
+           $resitype->updated_by = Auth::id();
            $res = $resitype->update();
 
            if(!$res)

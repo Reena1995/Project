@@ -17,18 +17,21 @@ class CreateEmpBankDetailsTable extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->unsignedBigInteger('user_id');
-			$table->string('ac_holder_name');
-            $table->string('bank_name');
-            $table->string('branch_name');
-            $table->string('account_no');
+			$table->string('ac_holder_name',255);
+            $table->string('bank_name',255);
+            $table->string('branch_name',255);
+            $table->string('account_no',255);
             $table->string('ifsc_code');
 			$table->boolean('is_active')->default(1);
-			$table->string('created_by');
-			$table->string('updated_by')->nullable();
+			$table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
 
 
             $table->foreign('user_id')->references('id')->on('users');
+
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 

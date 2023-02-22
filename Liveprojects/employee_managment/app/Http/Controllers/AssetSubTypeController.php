@@ -9,6 +9,7 @@ use DB;
 use Session;
 use Log;
 use Validate;
+use Auth;
 
 class AssetSubTypeController extends Controller
 {
@@ -23,7 +24,7 @@ class AssetSubTypeController extends Controller
     {
         Log::info('aaaaaaa');
          $ass_sub_type = $request->validate([
-            'type'=>'required|alpha',
+            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             'asset_type_id'=>'required'
 
         ]);
@@ -36,7 +37,7 @@ class AssetSubTypeController extends Controller
             $ass_sub_type->type = $request->type;
             $ass_sub_type->asset_type_id = $request->asset_type_id;
             $ass_sub_type->uuid = \Str::uuid();
-          
+            $ass_sub_type->created_by = Auth::id();
             $res = $ass_sub_type->save();
 
             if(!$res)
@@ -97,7 +98,7 @@ class AssetSubTypeController extends Controller
     {
         Log::info('dddddddd');
          $designation = $request->validate([
-            'type'=>'required|alpha',
+            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             'asset_type_id'=>'required',
             
 
@@ -109,6 +110,7 @@ class AssetSubTypeController extends Controller
             $ass_sub_type = AssetSubType::where('uuid',$id)->first();
             $ass_sub_type->type = $request->type;
             $ass_sub_type->asset_type_id = $request->asset_type_id;
+            $ass_sub_type->updated_by  = Auth::id();
             $res = $ass_sub_type->save();
 
             if(!$res)
@@ -145,6 +147,7 @@ class AssetSubTypeController extends Controller
            DB::beginTransaction();
            $ass_sub_type = AssetSubType::where('uuid',$id)->first();
            $ass_sub_type->is_active = 0;
+           $ass_sub_type->updated_by  = Auth::id();
            $res = $ass_sub_type->update();
 
            if(!$res)

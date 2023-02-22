@@ -8,6 +8,7 @@ use DB;
 use Session;
 use Log;
 use Validate;
+use Auth;
 
 
 class ModeOfTransportationController extends Controller
@@ -23,7 +24,7 @@ class ModeOfTransportationController extends Controller
     {
         Log::info('aaaaaaa');
          $modetype= $request->validate([
-            'type'=>'required|alpha',
+            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -34,6 +35,7 @@ class ModeOfTransportationController extends Controller
             DB::beginTransaction();
             $modetype = new ModeOfTransportation;
             $modetype->type = $request->type;
+            $modetype->created_by = Auth::id();
             $modetype->uuid = \Str::uuid();
           
             $res = $modetype->save();
@@ -89,7 +91,7 @@ class ModeOfTransportationController extends Controller
     {
         Log::info('dddddddd');
         $modetype = $request->validate([
-            'type'=>'required|alpha',
+            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -99,6 +101,7 @@ class ModeOfTransportationController extends Controller
             DB::beginTransaction();
             $modetype = ModeOfTransportation::where('uuid',$id)->first();;
             $modetype -> type = $request->type;
+            $modetype->updated_by = Auth::id();
             $res = $modetype ->save();
             
             if(!$res)
@@ -138,6 +141,7 @@ class ModeOfTransportationController extends Controller
            DB::beginTransaction();
            $modetype = ModeOfTransportation::where('uuid',$id)->first();
            $modetype->is_active = 0;
+           $modetype->updated_by = Auth::id();
            $res = $modetype->update();
 
            if(!$res)

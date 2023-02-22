@@ -8,6 +8,7 @@ use DB;
 use Session;
 use Log;
 use Validate;
+use Auth;
 
 class AssetBrandController extends Controller
 {
@@ -21,7 +22,7 @@ class AssetBrandController extends Controller
     {
         Log::info('aaaaaaa');
          $assbrand= $request->validate([
-            'name'=>'required|alpha',
+            'name'=> 'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -33,6 +34,7 @@ class AssetBrandController extends Controller
             $assbrand = new AssetBrand;
             $assbrand->name = $request->name;
             $assbrand->uuid = \Str::uuid();
+            $assbrand->created_by = Auth::id();
           
             $res = $assbrand->save();
 
@@ -87,7 +89,7 @@ class AssetBrandController extends Controller
     {
         Log::info('dddddddd');
         $assbrand = $request->validate([
-            'name'=>'required|alpha',
+            'name'=> 'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -97,6 +99,7 @@ class AssetBrandController extends Controller
             DB::beginTransaction();
             $assbrand = AssetBrand::where('uuid',$id)->first();;
             $assbrand -> name = $request->name;
+            $assbrand->updated_by  = Auth::id();
             $res = $assbrand ->save();
             
             if(!$res)
@@ -136,6 +139,7 @@ class AssetBrandController extends Controller
            DB::beginTransaction();
            $assbrand = AssetBrand::where('uuid',$id)->first();
            $assbrand->is_active = 0;
+           $assbrand->updated_by  = Auth::id();
            $res = $assbrand->update();
 
            if(!$res)

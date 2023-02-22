@@ -6,6 +6,7 @@ use DB;
 use Session;
 use Log;
 use Validate;
+use Auth;
 
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class CompanyLocationController extends Controller
     {
         Log::info('aaaaaaa');
          $location = $request->validate([
-            'name'=>'required|alpha',
+            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -32,6 +33,7 @@ class CompanyLocationController extends Controller
             DB::beginTransaction();
             $location = new CompanyLocation;
             $location->name = $request->name;
+            $location->created_by = Auth::id();
             $location->uuid = \Str::uuid();
           
             $res = $location->save();
@@ -87,7 +89,7 @@ class CompanyLocationController extends Controller
     {
         Log::info('dddddddd');
          $location = $request->validate([
-            'name'=>'required|alpha',
+            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -97,6 +99,7 @@ class CompanyLocationController extends Controller
             DB::beginTransaction();
             $location = CompanyLocation::where('uuid',$id)->first();
             $location->name = $request->name;
+            $location->updated_by  = Auth::id();
             $res = $location->save();
 
             if(!$res)
@@ -133,6 +136,7 @@ class CompanyLocationController extends Controller
            DB::beginTransaction();
            $location = CompanyLocation::where('uuid',$id)->first();
            $location->is_active = 0;
+           $location->updated_by  = Auth::id();
            $res = $location->update();
 
            if(!$res)

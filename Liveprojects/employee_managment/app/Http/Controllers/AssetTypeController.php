@@ -8,6 +8,7 @@ use DB;
 use Session;
 use Log;
 use Validate;
+use Auth;
 
 class AssetTypeController extends Controller
 {
@@ -21,7 +22,7 @@ class AssetTypeController extends Controller
     {
         Log::info('aaaaaaa');
          $asstype= $request->validate([
-            'type'=>'required|alpha',
+            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -33,6 +34,7 @@ class AssetTypeController extends Controller
             $asstype = new AssetType;
             $asstype->type = $request->type;
             $asstype->uuid = \Str::uuid();
+            $asstype->created_by = Auth::id();
           
             $res = $asstype->save();
 
@@ -87,7 +89,7 @@ class AssetTypeController extends Controller
     {
         Log::info('dddddddd');
         $asstype = $request->validate([
-            'type'=>'required|alpha',
+            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -97,6 +99,7 @@ class AssetTypeController extends Controller
             DB::beginTransaction();
             $asstype = AssetType::where('uuid',$id)->first();;
             $asstype -> type = $request->type;
+            $asstype->updated_by = Auth::id();
             $res = $asstype ->save();
             
             if(!$res)
@@ -136,6 +139,7 @@ class AssetTypeController extends Controller
            DB::beginTransaction();
            $asstype = AssetType::where('uuid',$id)->first();
            $asstype->is_active = 0;
+           $asstype->updated_by = Auth::id();
            $res = $asstype->update();
 
            if(!$res)

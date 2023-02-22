@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmpEmergencyContactsTable extends Migration
+class CreateEmpDocumentDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,23 @@ class CreateEmpEmergencyContactsTable extends Migration
      */
     public function up()
     {
-        Schema::create('emp_emergency_contacts', function (Blueprint $table) {
+        Schema::create('emp_document_details', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
             $table->unsignedBigInteger('user_id');
-			$table->string('name');
-            $table->longText('address');
-            $table->string('relationship');
-            $table->integer('contact_no');
+            $table->unsignedBigInteger('document_type_id');
+			$table->string('file',255);
 			$table->boolean('is_active')->default(1);
-			$table->string('created_by');
-			$table->string('updated_by')->nullable();
+			$table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
 
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('document_type_id')->references('id')->on('document_types');
+
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 
@@ -38,6 +40,6 @@ class CreateEmpEmergencyContactsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('emp_emergency_contacts');
+        Schema::dropIfExists('emp_document_details');
     }
 }

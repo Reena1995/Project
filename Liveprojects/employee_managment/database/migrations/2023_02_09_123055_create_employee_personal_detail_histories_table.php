@@ -16,7 +16,7 @@ class CreateEmployeePersonalDetailHistoriesTable extends Migration
         Schema::create('employee_personal_detail_histories', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
-            $table->unsignedBigInteger('emp_per_detail_id');
+            $table->unsignedBigInteger('emp_personal_dtl_id');
             $table->unsignedBigInteger('user_id');
             $table->date('dob');
             $table->string('gender');
@@ -44,14 +44,14 @@ class CreateEmployeePersonalDetailHistoriesTable extends Migration
             $table->unsignedBigInteger('mode_of_transportation_id');
            
             $table->boolean('is_active')->default(1);
-            $table->string('created_by');
-            $table->string('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
 
 
 
 
-            $table->foreign('emp_per_detail_id')->references('id')->on('employee_personal_details');
+            $table->foreign('emp_personal_dtl_id')->references('id')->on('employee_personal_details');
         });
     }
 

@@ -8,6 +8,7 @@ use DB;
 use Session;
 use Log;
 use Validate;
+use Auth;
 
 class LanguageController extends Controller
 {
@@ -21,7 +22,7 @@ class LanguageController extends Controller
     {
         Log::info('aaaaaaa');
          $language= $request->validate([
-            'name'=>'required|alpha',
+            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -32,6 +33,7 @@ class LanguageController extends Controller
             DB::beginTransaction();
             $language = new Language;
             $language->name = $request->name;
+            $language->created_by = Auth::id();
             $language->uuid = \Str::uuid();
           
             $res = $language->save();
@@ -87,7 +89,7 @@ class LanguageController extends Controller
     {
         Log::info('dddddddd');
         $medium = $request->validate([
-            'name'=>'required|alpha',
+            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -97,6 +99,7 @@ class LanguageController extends Controller
             DB::beginTransaction();
             $language = Language::where('uuid',$id)->first();;
             $language -> name = $request->name;
+            $language->updated_by = Auth::id();
             $res = $language ->save();
             
             if(!$res)
@@ -136,6 +139,7 @@ class LanguageController extends Controller
            DB::beginTransaction();
            $language = Language::where('uuid',$id)->first();
            $language->is_active = 0;
+           $language->updated_by = Auth::id();
            $res = $language->update();
 
            if(!$res)

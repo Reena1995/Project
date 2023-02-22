@@ -8,6 +8,7 @@ use DB;
 use Session;
 use Log;
 use Validate;
+use Auth;
 
 class MediumOfInstructionController extends Controller
 {
@@ -21,7 +22,7 @@ class MediumOfInstructionController extends Controller
     {
         Log::info('aaaaaaa');
          $medium= $request->validate([
-            'name'=>'required|alpha',
+            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -32,6 +33,7 @@ class MediumOfInstructionController extends Controller
             DB::beginTransaction();
             $medium = new MediumOfInstruction;
             $medium->name = $request->name;
+            $medium->created_by = Auth::id();
             $medium->uuid = \Str::uuid();
           
             $res = $medium->save();
@@ -88,7 +90,7 @@ class MediumOfInstructionController extends Controller
     {
         Log::info('dddddddd');
         $medium = $request->validate([
-            'name'=>'required|alpha',
+            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -98,6 +100,7 @@ class MediumOfInstructionController extends Controller
             DB::beginTransaction();
             $medium = MediumOfInstruction::where('uuid',$id)->first();;
             $medium -> name = $request->name;
+            $medium->updated_by = Auth::id();
             $res = $medium ->save();
             
             if(!$res)
@@ -137,6 +140,7 @@ class MediumOfInstructionController extends Controller
            DB::beginTransaction();
            $medium = MediumOfInstruction::where('uuid',$id)->first();
            $medium->is_active = 0;
+           $medium->updated_by = Auth::id();
            $res = $medium->update();
 
            if(!$res)
