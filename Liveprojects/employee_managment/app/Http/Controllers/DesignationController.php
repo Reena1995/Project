@@ -70,7 +70,7 @@ class DesignationController extends Controller
    
     public function index()
     {
-        $designation = Designation::where('is_active',1)->get();
+        $designation = Designation::where('is_active',1)->paginate(5);
         return view('admin.modules.designation.index',compact('designation'));
     }   
 

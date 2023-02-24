@@ -33,29 +33,44 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($ass_sub_type as $asubtype)
-                                                <tr>
-                                                    <td>{{$asubtype->id}}</td>
-                                                    <td>{{$asubtype->ass_type->type ?? ''}}</td>
-                                                    <td>{{$asubtype->type}}</td>
-                                                    <td>
-                                                        <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('asset_sub_type.show',$asubtype->uuid)}}" >
-                                                            <i class="mdi mdi-eye" data-toggle="tooltip" data-original-title="view"></i>
-                                                        </a>
-                                                       
-                                                        <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('asset_sub_type.edit',$asubtype->uuid)}}" >
-                                                            <i class="mdi mdi-pen" data-toggle="tooltip"
-                                                                data-original-title="Edit"></i>
-                                                        </a>
-                                                        <a class="btn btn-danger btn-icon btn-sm text-white" href="{{route('asset_sub_type.status',$asubtype->uuid)}}" 
-                                                            data-toggle="tooltip" data-original-title="Delete"><i
-                                                                class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                               
+                                                @if(!empty($ass_sub_type) && $ass_sub_type->count())
+                                                    @foreach($ass_sub_type as $index => $asubtype)
+                                                        <tr>
+                                                            <td>{{ $ass_sub_type->firstItem() + $index}}</td>
+                                                            <td>{{$asubtype->ass_type->type ?? ''}}</td>
+                                                            <td>{{$asubtype->type}}</td>
+                                                            <td>
+                                                                <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('asset_sub_type.show',$asubtype->uuid)}}" >
+                                                                    <i class="mdi mdi-eye" data-toggle="tooltip" data-original-title="view"></i>
+                                                                </a>
+                                                            
+                                                                <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('asset_sub_type.edit',$asubtype->uuid)}}" >
+                                                                    <i class="mdi mdi-pen" data-toggle="tooltip"
+                                                                        data-original-title="Edit"></i>
+                                                                </a>
+                                                                <a class="btn btn-danger btn-icon btn-sm text-white" href="{{route('asset_sub_type.status',$asubtype->uuid)}}" 
+                                                                    data-toggle="tooltip" data-original-title="Delete"><i
+                                                                        class="mdi mdi-delete"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    @else
+                                                        <tr>
+                                                            <td colspan="3" class="emptydata">There is no Data</td>
+                                                        </tr>  
+
+                                                @endif      
                                             </tbody>
                                         </table>
+                                        <div class="row  align-items-center">
+                                            <div class="col-6">showing {{$ass_sub_type->firstItem()}} - {{$ass_sub_type->lastitem()}} of  {{$ass_sub_type->total()}}</div>
+                                            <div class="col-6">
+                                                <div class="custom-pagination">
+                                                            {{$ass_sub_type->links()}}
+                                                </div>
+                                            </div>      
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -67,42 +82,16 @@
             <!-- END PLACE PAGE CONTENT HERE -->
         </section>
     </main>
-    <!-- Holiday Modal -->
-    <div class="modal fade" id="holidaymodal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add Holidays</h5>
-                    <button class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group floating-label col-12">
-                        <label>Select Date</label>
-                        <input type="text" class="form-control form-control-lg theme-date-picker" placeholder="Select Date" />
-                    </div>
-                    <div class="form-group floating-label col-12">
-                        <label>Enter Occasion</label>
-                        <input type="text" class="form-control form-control-lg" placeholder="Enter Enter Occasion" />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="theme-btn-modal-outline" data-dismiss="modal">Close</button>
-                    <button class="theme-btn-modal">Add Holiday</button>
-                </div>
-            </div>
-        </div>
-    </div>
+   
    @endsection
    @push('scripts')
     <script>
 	/*page own css start*/
-        $(document).ready(function () {
-            $("#listholiday").DataTable();
-            $(".dropdown-select2").select2();
-            $(".theme-date-picker").datepicker();
-        });
+        // $(document).ready(function () {
+        //     $("#listholiday").DataTable();
+        //     $(".dropdown-select2").select2();
+        //     $(".theme-date-picker").datepicker();
+        // });
 	/*page own css end*/	
 		
     </script>

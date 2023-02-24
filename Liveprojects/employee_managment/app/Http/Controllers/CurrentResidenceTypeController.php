@@ -66,7 +66,7 @@ class CurrentResidenceTypeController extends Controller
    
     public function index()
     {
-        $resitype = CurrentResidenceType::where('is_active',1)->get();
+        $resitype = CurrentResidenceType::where('is_active',1)->paginate(5);
         return view('admin.modules.current_residence_type.index',compact('resitype'));
     }   
 

@@ -68,7 +68,7 @@ class DepartmentController extends Controller
    
     public function index()
     {
-        $department = Department::where('is_active',1)->get();
+        $department = Department::where('is_active',1)->paginate(5);
         return view('admin.modules.department.index',compact('department'));
     }   
 

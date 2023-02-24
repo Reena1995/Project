@@ -67,7 +67,7 @@ class MediumOfInstructionController extends Controller
    
     public function index()
     {
-        $medium = MediumOfInstruction::where('is_active',1)->get();
+        $medium = MediumOfInstruction::where('is_active',1)->paginate(5);
         return view('admin.modules.medium_instruction.index',compact('medium'));
     }   
 

@@ -69,7 +69,7 @@ class AssetSubTypeController extends Controller
    
     public function index()
     {
-        $ass_sub_type = AssetSubType::where('is_active',1)->get();
+        $ass_sub_type = AssetSubType::where('is_active',1)->paginate(5);
         return view('admin.modules.asset_sub_type.index',compact('ass_sub_type'));
     }   
 

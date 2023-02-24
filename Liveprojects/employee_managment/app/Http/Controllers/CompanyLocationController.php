@@ -66,7 +66,7 @@ class CompanyLocationController extends Controller
    
     public function index()
     {
-        $location = CompanyLocation::where('is_active',1)->get();
+        $location = CompanyLocation::where('is_active',1)->paginate(5);
         return view('admin.modules.company_location.index',compact('location'));
     }   
 

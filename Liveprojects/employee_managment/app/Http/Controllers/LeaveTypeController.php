@@ -66,7 +66,7 @@ class LeaveTypeController extends Controller
    
     public function index()
     {
-        $leavetype = LeaveType::where('is_active',1)->get();
+        $leavetype = LeaveType::where('is_active',1)->paginate(5);
         return view('admin.modules.leave_type.index',compact('leavetype'));
     }   
 

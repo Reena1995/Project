@@ -66,7 +66,7 @@ class LanguageController extends Controller
    
     public function index()
     {
-        $language = Language::where('is_active',1)->get();
+        $language = Language::where('is_active',1)->paginate(5);
         return view('admin.modules.language.index',compact('language'));
     }   
 

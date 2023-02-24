@@ -66,7 +66,7 @@ class AssetBrandController extends Controller
    
     public function index()
     {
-        $assbrand = AssetBrand::where('is_active',1)->get();
+        $assbrand = AssetBrand::where('is_active',1)->paginate(5);
         return view('admin.modules.asset_brand.index',compact('assbrand'));
     }   
 

@@ -66,7 +66,7 @@ class EducationLevelController extends Controller
    
     public function index()
     {
-        $edulevel = EducationLevel::where('is_active',1)->get();
+        $edulevel = EducationLevel::where('is_active',1)->paginate(5);
         return view('admin.modules.education_level.index',compact('edulevel'));
     }   
 

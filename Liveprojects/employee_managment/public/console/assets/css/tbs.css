@@ -15302,7 +15302,7 @@ img {
 
 .theme-btn-outline,
 .theme-btn {
-    min-width: 120px;
+    min-width: 100px;
     width: fit-content;
     margin: 0;
     padding: 0;
@@ -15765,4 +15765,14 @@ table .employee-image
 {
     color:red;
 }
+.emptydata
+{
+    text-align:center;
+    font-size: 18px;
+}
 /* own css add   end*/
+
+.custom-pagination .pagination 
+{
+    justify-content: end;
+}

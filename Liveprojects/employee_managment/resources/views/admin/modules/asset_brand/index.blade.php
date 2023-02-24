@@ -32,28 +32,41 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($assbrand as $brand)
-                                                <tr>
-                                                    <td>{{$brand->id}}</td>
-                                                    <td>{{$brand->name}}</td>
-                                                    <td>
-                                                        <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('asset_brand.show',$brand->uuid)}}" >
-                                                            <i class="mdi mdi-eye" data-toggle="tooltip" data-original-title="view"></i>
-                                                        </a>
-                                                       
-                                                        <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('asset_brand.edit',$brand->uuid)}}" >
-                                                            <i class="mdi mdi-pen" data-toggle="tooltip"
-                                                                data-original-title="Edit"></i>
-                                                        </a>
-                                                        <a class="btn btn-danger btn-icon btn-sm text-white" href="{{route('asset_brand.status',$brand->uuid)}}" 
-                                                            data-toggle="tooltip" data-original-title="Delete"><i
-                                                                class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                               
+                                                @if(!empty($assbrand) && $assbrand->count())
+                                                    @foreach($assbrand as  $index => $brand)
+                                                        <tr>
+                                                            <td>{{ $assbrand->firstItem() + $index}}</td>
+                                                            <td>{{$brand->name}}</td>
+                                                            <td>
+                                                                <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('asset_brand.show',$brand->uuid)}}" >
+                                                                    <i class="mdi mdi-eye" data-toggle="tooltip" data-original-title="view"></i>
+                                                                </a>
+                                                            
+                                                                <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('asset_brand.edit',$brand->uuid)}}" >
+                                                                    <i class="mdi mdi-pen" data-toggle="tooltip"
+                                                                        data-original-title="Edit"></i>
+                                                                </a>
+                                                                <a class="btn btn-danger btn-icon btn-sm text-white" href="{{route('asset_brand.status',$brand->uuid)}}" 
+                                                                    data-toggle="tooltip" data-original-title="Delete"><i
+                                                                        class="mdi mdi-delete"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                @else
+                                                    <tr>
+                                                        <td colspan="3" class="emptydata">There is no Data</td>
+                                                    </tr>        
+                                                @endif     
                                             </tbody>
                                         </table>
+                                        <div class="row align-items-center">
+                                            <div class="col-6">showing {{$assbrand->firstItem()}} - {{$assbrand->lastitem()}} of  {{$assbrand->total()}}</div>
+                                            <div class="col-6"> 
+                                                <div class="custom-pagination">
+                                                        {{$assbrand->links()}}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -65,42 +78,16 @@
             <!-- END PLACE PAGE CONTENT HERE -->
         </section>
     </main>
-    <!-- Holiday Modal -->
-    <div class="modal fade" id="holidaymodal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add Holidays</h5>
-                    <button class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group floating-label col-12">
-                        <label>Select Date</label>
-                        <input type="text" class="form-control form-control-lg theme-date-picker" placeholder="Select Date" />
-                    </div>
-                    <div class="form-group floating-label col-12">
-                        <label>Enter Occasion</label>
-                        <input type="text" class="form-control form-control-lg" placeholder="Enter Enter Occasion" />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="theme-btn-modal-outline" data-dismiss="modal">Close</button>
-                    <button class="theme-btn-modal">Add Holiday</button>
-                </div>
-            </div>
-        </div>
-    </div>
+  
    @endsection
    @push('scripts')
     <script>
 	/*page own css start*/
-        $(document).ready(function () {
-            $("#listholiday").DataTable();
-            $(".dropdown-select2").select2();
-            $(".theme-date-picker").datepicker();
-        });
+        // $(document).ready(function () {
+        //     $("#listholiday").DataTable();
+        //     $(".dropdown-select2").select2();
+        //     $(".theme-date-picker").datepicker();
+        // });
 	/*page own css end*/	
 		
     </script>

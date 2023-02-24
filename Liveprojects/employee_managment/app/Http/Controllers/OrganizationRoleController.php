@@ -73,7 +73,7 @@ class OrganizationRoleController extends Controller
    
     public function index()
     {
-        $org_role = OrganizationRole::where('is_active',1)->get();
+        $org_role = OrganizationRole::where('is_active',1)->paginate(5);
         return view('admin.modules.organization_role.index',compact('org_role'));
     }   
 

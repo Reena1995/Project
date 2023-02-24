@@ -66,7 +66,7 @@ class DocumentTypeController extends Controller
    
     public function index()
     {
-        $doctype = DocumentType::where('is_active',1)->get();
+        $doctype = DocumentType::where('is_active',1)->paginate(5);
         return view('admin.modules.document_type.index',compact('doctype'));
     }   
 
