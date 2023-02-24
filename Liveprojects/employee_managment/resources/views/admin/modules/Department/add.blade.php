@@ -62,14 +62,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <!-- <div class="card-footer p-t-20 text-right">
-                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                        <button class="theme-btn-outline text-white">canel</button>
-                                    </div>
-                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                        <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
-                                    </div>
-                                </div> -->
+                              
                             </div>
                             <!--card ends-->
                         </div>

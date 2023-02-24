@@ -23,6 +23,8 @@
         <!--Hci Admin CSS-->
         <link rel="stylesheet" type="text/css" href="{{asset('console/assets/css/tbs.css')}}" />
         <!-- Additional library for page -->
+        <!-- jquery ajax cdn -->
+        <script src="{{asset('console/assets/js/jquery-ajax/jquery.min.js')}}"></script>
     </head>
     <!--body with default sidebar pinned -->
 

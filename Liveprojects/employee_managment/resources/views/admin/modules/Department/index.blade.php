@@ -1,6 +1,7 @@
 @extends('admin.common.master')
 @section('content')
 
+
         <section class="admin-content">
             <!-- BEGIN PlACE PAGE CONTENT HERE -->
             <!--  container or container-fluid as per your need           -->
@@ -20,6 +21,14 @@
                                 <div class="card-title">Departments List</div>
                             </div>
                             <div class="card-body pt-0">
+                                <div class="row">
+                                    <div class="col-8"></div>
+                                    <div class="col-4">               
+                                        <input  type="search" id="search" name="search" placeholder="search here....."size="30" />
+                                        <br>
+                                    </div>
+                                </div>
+                                <br>
                                 <div class="row">
                                     <div class="col-12">
                                         <table class="table  table-vcenter text-nowrap table-bordered border-bottom"
@@ -83,13 +92,34 @@
    @endsection
    @push('scripts')
     <script>
-	/*page own css start*/
+	/*page own datatable serching jsstart*/
         // $(document).ready(function () {
         //     $("#listholiday").DataTable();
         //     $(".dropdown-select2").select2();
         //     $(".theme-date-picker").datepicker();
         // });
-	/*page own css end*/	
+	/*page own datatable serching js end*/	
+
+    /*key press searching in ajax start */
+    $('document').ready(function (){
+
+        $('#search').on('keyup',function(){
+
+            var value= $(this).val();
+
+            $.ajax({
+
+                url:"{{route('department.index')}}",
+                data:{'xxx':value},
+                success:function(department){
+                    console.log(department);
+
+                }
+            });
+
+        });
+    });
+    /*key press searching in ajax end */
 		
     </script>
 	 

@@ -66,10 +66,27 @@ class DepartmentController extends Controller
     }
 
    
-    public function index()
+    // public function index()
+    // {
+
+    //     $department = Department::where('is_active',1)->paginate(5);
+    //     return view('admin.modules.department.index',compact('department'));
+    // }   
+
+    public function index(Request $request)
     {
-        $department = Department::where('is_active',1)->paginate(5);
-        return view('admin.modules.department.index',compact('department'));
+        $query = Department::query();
+        if($request->ajax()){
+            $department = $query->where('name','LIKE','%'.$request->xxx.'%')->get();
+            return response()->json(['department'=> $department]);
+        }
+        else
+        {
+            $department = $query->where('is_active',1)->paginate(5);
+            return view('admin.modules.department.index',compact('department'));
+        }
+       
+        
     }   
 
 
