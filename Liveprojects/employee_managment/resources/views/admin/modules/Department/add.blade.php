@@ -8,13 +8,7 @@
                         <div class="col-6 m-b-20">
                             <h3>Add Department</h3>
                         </div>
-                        <div class="col-6 m-b-20 text-right pl-3 small-button">
-                            <a href="all-employees.html"><button type="button" class="btn text-white add-new-emp">View Employee</button></a>
-                            <div class="btn-group" role="group" aria-label="Third group">
-                                <button type="button" class="btn btn-secondary"><i class="mdi mdi-18px mdi-email-open-outline"></i></button>
-                                <button type="button" class="btn btn-secondary ml-2"><i class="mdi mdi-18px mdi-phone"></i></button>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-lg-10 col-md-12 col-12 m-b-30">
@@ -35,7 +29,7 @@
                                         @csrf  
                                         <div class="tab-content" id="myTabContent1">
                                             <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
-                                                <h5 class="font-weight-semibold p-t-20 m-b-20">Basic</h5>
+                                                <h5 class="font-weight-semibold p-t-20 m-b-20"></h5>
                                                 <div class="form-row">
                                                     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                                         <label>Department Name</label>

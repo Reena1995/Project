@@ -25,6 +25,9 @@
         <!-- Additional library for page -->
         <!-- jquery ajax cdn -->
         <script src="{{asset('console/assets/js/jquery-ajax/jquery.min.js')}}"></script>
+        <script>
+            var app_url = '{{ url('/') }}';
+        </script>
     </head>
     <!--body with default sidebar pinned -->
 

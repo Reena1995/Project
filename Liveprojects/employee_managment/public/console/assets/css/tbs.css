@@ -15776,3 +15776,39 @@ table .employee-image
 {
     justify-content: end;
 }
+input[type="search"] 
+{
+    border-color: #8080804f;
+    border-radius: 5px;
+    justify-content: end;
+}
+.showw
+{
+    margin:2px;
+}
+.editt
+{
+    margin:2px;
+}
+.statuss
+{
+    margin:2px;
+}
+
+/* #tab1, #tab2, #tab3{
+    background-color:grey;
+    color:white;
+    padding:5px 10px;
+    display:grid;
+    width:100px;
+    border-bottom:1px solid;
+  } */
+  
+  #tab1:hover, #tab2:hover, #tab3:hover{
+    background-color:darkgrey;
+  }
+
+
+
+
+/*  */

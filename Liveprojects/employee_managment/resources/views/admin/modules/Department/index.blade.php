@@ -22,9 +22,9 @@
                             </div>
                             <div class="card-body pt-0">
                                 <div class="row">
-                                    <div class="col-8"></div>
-                                    <div class="col-4">               
-                                        <input  type="search" id="search" name="search" placeholder="search here....."size="30" />
+                                    <div class="col-6"></div>
+                                    <div class="col-6 searchlook text-right">               
+                                        <input  type="search" id="search" class="search" name="search" placeholder="search here....."size="30" />
                                         <br>
                                     </div>
                                 </div>
@@ -40,7 +40,7 @@
                                                     <th class="border-bottom-0">Actions</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="tablebody">
                                             @if(!empty($department) && $department->count())
                                                 @foreach($department as $index => $dep)
                                                     <tr>
@@ -111,9 +111,41 @@
 
                 url:"{{route('department.index')}}",
                 data:{'xxx':value},
-                success:function(department){
-                    console.log(department);
+                success:function(yyy){
+                    // console.log(yyy);
+                    var department= yyy.department;
+                    var html= '';
+                    if(department.length > 0)
+                    {
+                        for(let i=0 ; i < department.length ; i++){
+                            var id = department[i]['uuid'];
+                            html +='<tr>';
+                                html +='<td>'+department[i]['id']+'</td>';
+                                html +='<td>'+department[i]['name']+'</td>';
+                                html +='<td>';
+                                    html +='<a class="btn btn-primary btn-icon btn-sm text-white showw" href="'+app_url+'/department/show/'+id+'" >';
+                                        html +='<i class="mdi mdi-eye" data-toggle="tooltip" data-original-title="view"></i>';
+                                    html +='</a>';
+                                    
+                                    html +='<a class="btn btn-primary btn-icon btn-sm text-white editt" href="'+app_url+'/department/edit/'+id+'" >';
+                                        html +='<i class="mdi mdi-pen" data-toggle="tooltip" data-original-title="Edit"></i>';
+                                    html +='</a>';
+                                    html +='<a class="btn btn-danger btn-icon btn-sm text-white statuss" href="'+app_url+'/department/status/'+id+'" data-toggle="tooltip" data-original-title="Delete">';
+                                        html +='<i class="mdi mdi-delete"></i>';
+                                    html +='</a>';
+                                html +='</td>'; 
+                            html +='</tr>';
+                        }
+                    }
+                    else{
 
+                        html +='<tr>\
+                                    <td colspan="3"> Data Not Found <td>\
+                                </tr>';
+
+                    }
+
+                    $('#tablebody').html(html);
                 }
             });
 

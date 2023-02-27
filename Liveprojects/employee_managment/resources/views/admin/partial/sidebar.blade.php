@@ -1,3 +1,4 @@
+
  <aside class="admin-sidebar">
             <div class="admin-sidebar-brand">
                 <!-- begin sidebar branding-->
@@ -11,11 +12,31 @@
                     <a href="#" class="admin-close-sidebar"></a>
                 </div>
             </div>
+            
             <div class="admin-sidebar-wrapper js-scrollbar">
                 <!-- Menu List Begins-->
-                <ul class="menu">
+                <!-- <div id="nav-mobile">
+                    <a href="#" id="tab1">Products</a>
+                    <ul style="display: none;">
+                        <li><a href="index.php">Home</a></li>
+                        <li><a href="#">Why Us</a></li>
+                        <li><a href="#">Our Work</a></li>
+                    </ul>
+                    <a href="#" id="tab2">About</a>
+                    <ul style="display: none;">
+                        <li><a href="#">Our Equipment</a></li>
+                        <li><a href="#">Video Production</a></li>
+                    </ul>
+                    <a href="#" id="tab3">Contact</a>
+                    <ul style="display: none;">
+                        <li id="last-child"><a href="#">Contact</a></li>
+                        <li id="last-child"><a href="#">Social Media</a></li>
+                    </ul>
+
+                </div> -->
+                <ul class="menu">   
                     <!--list item begins-->
-                    <li class="menu-item active">
+                    <li class="menu-item active" >
                         <a href="{{route('admin.dashboard')}}" class="menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">Dashboard </span>
@@ -26,10 +47,10 @@
                         </a>
                     </li>
                     <!--list item ends-->
-
+                    
                    
                      <!--list item department  module  begins-->
-                     <li class="menu-item">
+                     <li class="menu-item {{ (Request::is('department-create') || Request::is('department-index'))?'opened':'' }}">
                         <a href="#" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
@@ -42,9 +63,9 @@
                             </span>
                         </a>
                         <!--submenu-->
-                        <ul class="sub-menu">
+                        <ul class="sub-menu" style="display:{{ (Request::is('department-create') || Request::is('department-index'))?'block':'none' }}">
                             <li class="menu-item">
-                                    <a href="{{route('department.create')}}"   class="menu-link">
+                                    <a href="{{route('department.create')}}" class="menu-link">
                                         <span class="menu-label">
                                             <span class="menu-name">Add Department</span>
                                         </span>
@@ -642,3 +663,5 @@
                 <!-- Menu List Ends-->
             </div>
         </aside>
+       
+       

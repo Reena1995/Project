@@ -66,9 +66,13 @@
      * @param {(Element|jQuery)} [context] - A DOM Element, Document, or jQuery to use as context.
      * @requires jQuery
      */
-    $(document).on("click", ".open-dropdown", function (e) {
-        e.preventDefault(); 
-        if (!$(this).next().is(":visible")) {
+    $(document).on("click", ".menu-item", function () {
+        
+        $('.menu-item').removeClass('opened');
+        $(this).addClass('opened');
+        $('.sub-menu').hide();
+        $(this).children('.sub-menu').show();
+                /* if (!$(this).next().is(":visible")) {
             //opens the adjacent list to the target
             $(this).next().slideDown();
             $(this).parent().addClass("opened");
@@ -76,10 +80,16 @@
             //closes the adjacent list to the target
             $(this).next().slideUp();
             $(this).parent().removeClass("opened");
-        }
+        } */
     });
 
     // light and dark theme setting js END
+
+
+    $('.nav-list').click(function() {
+        $('.nav-list li.active').removeClass('active');
+        $(this).addClass('active');
+    });
 
     //Floating Form Floating label :: START
 
@@ -101,4 +111,35 @@
     });
 
     //Floating Form Floating label :: END
+
+    $(document).ready(function() {
+        $('#nav-mobile ul').hide();
+        $('#nav-mobile a').click(function(e) {
+            e.preventDefault();
+            var $menuItem = $(this).next('ul');
+            $menuItem.slideToggle();
+            $('#nav-mobile ul').not($menuItem).slideUp();
+        });
+    });
+
+    // $('.menu-link').click(function(e) {
+    //     if( $(this).hasClass("opened"))
+    //      {
+    //         $('.sub-menu').addClass('hideElement');
+    //         console.log("open");
+    //      }  
+    //      else  
+    //     {
+    
+    //         $('.sub-menu').addClass('showElement');
+    //         console.log("close");
+    //     }
+
+    //  });    
+
+
+
 })(window.jQuery);
+
+
+
