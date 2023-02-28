@@ -44,9 +44,8 @@
                                             </div>
                                             <div class="card-footer p-t-20 text-right">
                                                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <a href="{{route('department.index')}}" class="theme-btn-outline text-white">
-                                                        cancel
-                                                    </a>
+                                                    <a href="{{route('department.index')}}" class="theme-btn-outline">cancel
+                                                        </a>
                                                 </div>
                                                 <div class="btn-group mr-2" role="group" aria-label="Second group">
                                                     <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>

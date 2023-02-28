@@ -7,7 +7,7 @@
             <div class="container-fluid p-t-20">
                 <div class="row d-flex align-items-center">
                     <div class="col-lg-6 col-md-6 col-sm-12 m-b-20">
-                        <h3>Company_Location</h3>
+                        <h3>Company Location</h3>
                     </div>
                    
                 </div>
@@ -17,7 +17,7 @@
                         <!--card begins-->
                         <div class="card m-b-0">
                             <div class="card-header">
-                                <div class="card-title">Company_Locations List</div>
+                                <div class="card-title">Company Locations List</div>
                             </div>
                             <div class="card-body pt-0">
                                 <div class="row">

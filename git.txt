@@ -83,3 +83,7 @@ Git ma code push krva mate
 
 9) Ek branch mathi biji branch ma java mate
 	git checkout 'branch_name'
+
+
+vendor error mathi aa folder resource view ma copy karva
+ php artisan vendor:publish --tag=laravel-errors

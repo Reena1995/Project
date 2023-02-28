@@ -25,6 +25,9 @@
         <!-- Additional library for page -->
         <!-- jquery ajax cdn -->
         <script src="{{asset('console/assets/js/jquery-ajax/jquery.min.js')}}"></script>
+         <!-- boostrap-->
+         <link rel="stylesheet" type="text/css" href="{{asset('console/assets/js/bootstrap/css/bootstrap.min.css')}}" />
+        
         <script>
             var app_url = '{{ url('/') }}';
         </script>
@@ -52,4 +55,5 @@
 		 @include('admin.partial.footer')
     </body>
     @stack('scripts')
+   
 </html>

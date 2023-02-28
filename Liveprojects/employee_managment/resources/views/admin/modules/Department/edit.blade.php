@@ -42,7 +42,7 @@
                                             </div>
                                             <div class="card-footer p-t-20 text-right">
                                                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <a href="{{route('department.index')}}" class="theme-btn-outline text-white">
+                                                    <a href="{{route('department.index')}}" class="theme-btn-outline ">
                                                         cancel
                                                     </a>
                                                 </div>

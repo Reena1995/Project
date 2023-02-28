@@ -6,7 +6,7 @@
                 <div class="container-fluid p-t-20">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 m-b-20">
-                            <h3>Add Department</h3>
+                            <h3>Show Department</h3>
                         </div>
                        
                     </div>
@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30">
                                 <div class="card-header">
-                                    <div class="card-title">Add Department Details</div>
+                                    <div class="card-title">Show Department Details</div>
                                 </div>
                                 <div class="card-body">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -42,7 +42,7 @@
                                             </div>
                                             <div class="card-footer p-t-20 text-right">
                                                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <a href="{{route('department.index')}}" class="theme-btn-outline text-white">
+                                                    <a href="{{route('department.index')}}" class="theme-btn-outline ">
                                                         cancel
                                                     </a>
                                                 </div>

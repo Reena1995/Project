@@ -7,7 +7,7 @@
             <div class="container-fluid p-t-20">
                 <div class="row d-flex align-items-center">
                     <div class="col-lg-6 col-md-6 col-sm-12 m-b-20">
-                        <h3> Organization Role</h3>
+                        <h3> Organization Roles</h3>
                     </div>
                    
                 </div>

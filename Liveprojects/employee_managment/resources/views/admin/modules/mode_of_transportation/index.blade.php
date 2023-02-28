@@ -17,7 +17,7 @@
                         <!--card begins-->
                         <div class="card m-b-0">
                             <div class="card-header">
-                                <div class="card-title">Mode Of Transportation List</div>
+                                <div class="card-title">Mode Of Transportations List</div>
                             </div>
                             <div class="card-body pt-0">
                                 <div class="row">

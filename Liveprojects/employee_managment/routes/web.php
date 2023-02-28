@@ -37,42 +37,49 @@ Route::group(['middleware'=>['afterlogin']], function()
     Route::get('/add-employee', function () {return view('employee.modules.employee.add-employees');})->name('employee.create');
 
     Route::get('/admin-dashboard', function () {return view('admin.modules.dashboard');})->name('admin.dashboard');
+    
 
     /* ----------------- ----------   department start  -------------------------*/
-    Route::get('/department-create',[DepartmentController::class,'create'])->name('department.create');
-    Route::post('/department-store',[DepartmentController::class,'store'])->name('department.add');
-    Route::get('/department-index',[DepartmentController::class,'index'])->name('department.index');
-    Route::get('/department/show/{id}',[DepartmentController::class,'show'])->name('department.show');
-    Route::get('/department/edit/{id}',[DepartmentController::class,'edit'])->name('department.edit');
-    Route::post('/department/update/{id}',[DepartmentController::class,'update'])->name('department.update');
-    Route::get('/department/status/{id}',[DepartmentController::class,'status'])->name('department.status');
+    Route::group(['prefix'=>'department/','middleware'=>[],'as'=>'department.'], function(){
+      Route::get('/add',[DepartmentController::class,'create'])->name('create');
+      Route::post('/save',[DepartmentController::class,'store'])->name('add');
+      Route::get('list',[DepartmentController::class,'index'])->name('index');
+      Route::get('/show/{id}',[DepartmentController::class,'show'])->name('show');
+      Route::get('/edit/{id}',[DepartmentController::class,'edit'])->name('edit');
+      Route::post('/update/{id}',[DepartmentController::class,'update'])->name('update');
+      Route::get('/status/{id}',[DepartmentController::class,'status'])->name('status');
+    });
     /* ----------------- ----------   department end  -------------------------*/
 
     /* ----------------- ----------   designation start  -------------------------*/
-    Route::get('/designation-create',[DesignationController::class,'create'])->name('designation.create');
-    Route::post('/designation-store',[DesignationController::class,'store'])->name('designation.add');
-    Route::get('/designation-index',[DesignationController::class,'index'])->name('designation.index');
-    Route::get('/designation/show/{id}',[DesignationController::class,'show'])->name('designation.show');
-    Route::get('/designation/edit/{id}',[DesignationController::class,'edit'])->name('designation.edit');
-    Route::post('/designation/update/{id}',[DesignationController::class,'update'])->name('designation.update');
-    Route::get('/designation/status/{id}',[DesignationController::class,'status'])->name('designation.status');
+    Route::group(['prefix'=>'designation/','middleware'=>[],'as'=>'designation.'], function(){
+      Route::get('/add',[DesignationController::class,'create'])->name('create');
+      Route::post('/save',[DesignationController::class,'store'])->name('add');
+      Route::get('/list',[DesignationController::class,'index'])->name('index');
+      Route::get('/show/{id}',[DesignationController::class,'show'])->name('show');
+      Route::get('/edit/{id}',[DesignationController::class,'edit'])->name('edit');
+      Route::post('/update/{id}',[DesignationController::class,'update'])->name('update');
+      Route::get('/status/{id}',[DesignationController::class,'status'])->name('status');
+    }); 
     /* ----------------- ----------   designation end  -------------------------*/
 
      /* ----------------- ----------   Organization_Role start  -------------------------*/
-     Route::get('/organization_role-create',[OrganizationRoleController::class,'create'])->name('organization_role.create');
-     Route::post('/organization_role-store',[OrganizationRoleController::class,'store'])->name('organization_role.add');
-     Route::get('/organization_role-index',[OrganizationRoleController::class,'index'])->name('organization_role.index');
-     Route::get('/organization_role/show/{id}',[OrganizationRoleController::class,'show'])->name('organization_role.show');
-     Route::get('/organization_role/edit/{id}',[OrganizationRoleController::class,'edit'])->name('organization_role.edit');
-     Route::post('/organization_role/update/{id}',[OrganizationRoleController::class,'update'])->name('organization_role.update');
-     Route::get('/organization_role/status/{id}',[OrganizationRoleController::class,'status'])->name('organization_role.status');
+      Route::group(['prefix'=>'organization-role/','middleware'=>[],'as'=>'organization_role.'],function(){
+         Route::get('/add',[OrganizationRoleController::class,'create'])->name('create');
+         Route::post('/save',[OrganizationRoleController::class,'store'])->name('add');
+         Route::get('/list',[OrganizationRoleController::class,'index'])->name('index');
+         Route::get('/show/{id}',[OrganizationRoleController::class,'show'])->name('show');
+         Route::get('/edit/{id}',[OrganizationRoleController::class,'edit'])->name('edit');
+         Route::post('/update/{id}',[OrganizationRoleController::class,'update'])->name('update');
+         Route::get('/status/{id}',[OrganizationRoleController::class,'status'])->name('status');
+      });  
      /* ----------------- ----------   Organization_Role end  -------------------------*/
 
      /* ----------------- ----------  company location start  -------------------------*/
         Route::group(['prefix'=>'company-location/','middleware'=>[],'as'=>'company_location.'], function(){
-            Route::get('/create',[CompanyLocationController::class,'create'])->name('create');
-            Route::post('/store',[CompanyLocationController::class,'store'])->name('add');
-            Route::get('/',[CompanyLocationController::class,'index'])->name('index');
+            Route::get('/add',[CompanyLocationController::class,'create'])->name('create');
+            Route::post('/save',[CompanyLocationController::class,'store'])->name('add');
+            Route::get('/list',[CompanyLocationController::class,'index'])->name('index');
             Route::get('/show/{id}',[CompanyLocationController::class,'show'])->name('show');
             Route::get('/edit/{id}',[CompanyLocationController::class,'edit'])->name('edit');
             Route::post('/update/{id}',[CompanyLocationController::class,'update'])->name('update');
@@ -82,9 +89,9 @@ Route::group(['middleware'=>['afterlogin']], function()
 
       /* ----------------- ---------- company location type start  -------------------------*/
         Route::group(['prefix'=>'company-location-type/','middleware'=>[],'as'=>'company_location_type.'], function(){
-            Route::get('/create',[CompanyLocationTypeController::class,'create'])->name('create');
-            Route::post('/store',[CompanyLocationTypeController::class,'store'])->name('add');
-            Route::get('/',[CompanyLocationTypeController::class,'index'])->name('index');
+            Route::get('/add',[CompanyLocationTypeController::class,'create'])->name('create');
+            Route::post('/save',[CompanyLocationTypeController::class,'store'])->name('add');
+            Route::get('/list',[CompanyLocationTypeController::class,'index'])->name('index');
             Route::get('/show/{id}',[CompanyLocationTypeController::class,'show'])->name('show');
             Route::get('/edit/{id}',[CompanyLocationTypeController::class,'edit'])->name('edit');
             Route::post('/update/{id}',[CompanyLocationTypeController::class,'update'])->name('update');
@@ -94,9 +101,9 @@ Route::group(['middleware'=>['afterlogin']], function()
 
      /* ----------------- ---------- medium of instruction type start  -------------------------*/
      Route::group(['prefix'=>'medium-instruction-type/','middleware'=>[],'as'=>'medium_instruction.'], function(){
-        Route::get('/create',[MediumOfInstructionController::class,'create'])->name('create');
-        Route::post('/store',[MediumOfInstructionController::class,'store'])->name('add');
-        Route::get('/',[MediumOfInstructionController::class,'index'])->name('index');
+        Route::get('/add',[MediumOfInstructionController::class,'create'])->name('create');
+        Route::post('/save',[MediumOfInstructionController::class,'store'])->name('add');
+        Route::get('/list',[MediumOfInstructionController::class,'index'])->name('index');
         Route::get('/show/{id}',[MediumOfInstructionController::class,'show'])->name('show');
         Route::get('/edit/{id}',[MediumOfInstructionController::class,'edit'])->name('edit');
         Route::post('/update/{id}',[MediumOfInstructionController::class,'update'])->name('update');
@@ -106,9 +113,9 @@ Route::group(['middleware'=>['afterlogin']], function()
 
     /* ----------------- ---------- Langauge start  -------------------------*/
      Route::group(['prefix'=>'language/','middleware'=>[],'as'=>'language.'], function(){
-        Route::get('/create',[LanguageController::class,'create'])->name('create');
-        Route::post('/store',[LanguageController::class,'store'])->name('add');
-        Route::get('/',[LanguageController::class,'index'])->name('index');
+        Route::get('/add',[LanguageController::class,'create'])->name('create');
+        Route::post('/save',[LanguageController::class,'store'])->name('add');
+        Route::get('/list',[LanguageController::class,'index'])->name('index');
         Route::get('/show/{id}',[LanguageController::class,'show'])->name('show');
         Route::get('/edit/{id}',[LanguageController::class,'edit'])->name('edit');
         Route::post('/update/{id}',[LanguageController::class,'update'])->name('update');
@@ -118,9 +125,9 @@ Route::group(['middleware'=>['afterlogin']], function()
 
     /* ----------------- ---------- Education Level start  -------------------------*/
     Route::group(['prefix'=>'education-level/','middleware'=>[],'as'=>'education_level.'], function(){
-        Route::get('/create',[EducationLevelController::class,'create'])->name('create');
-        Route::post('/store',[EducationLevelController::class,'store'])->name('add');
-        Route::get('/',[EducationLevelController::class,'index'])->name('index');
+        Route::get('/add',[EducationLevelController::class,'create'])->name('create');
+        Route::post('/save',[EducationLevelController::class,'store'])->name('add');
+        Route::get('/list',[EducationLevelController::class,'index'])->name('index');
         Route::get('/show/{id}',[EducationLevelController::class,'show'])->name('show');
         Route::get('/edit/{id}',[EducationLevelController::class,'edit'])->name('edit');
         Route::post('/update/{id}',[EducationLevelController::class,'update'])->name('update');
@@ -130,9 +137,9 @@ Route::group(['middleware'=>['afterlogin']], function()
 
      /* ----------------- ---------- Document Type start  -------------------------*/
      Route::group(['prefix'=>'document-type/','middleware'=>[],'as'=>'document_type.'], function(){
-      Route::get('/create',[DocumentTypeController::class,'create'])->name('create');
-      Route::post('/store',[DocumentTypeController::class,'store'])->name('add');
-      Route::get('/',[DocumentTypeController::class,'index'])->name('index');
+      Route::get('/add',[DocumentTypeController::class,'create'])->name('create');
+      Route::post('/save',[DocumentTypeController::class,'store'])->name('add');
+      Route::get('/list',[DocumentTypeController::class,'index'])->name('index');
       Route::get('/show/{id}',[DocumentTypeController::class,'show'])->name('show');
       Route::get('/edit/{id}',[DocumentTypeController::class,'edit'])->name('edit');
       Route::post('/update/{id}',[DocumentTypeController::class,'update'])->name('update');
@@ -143,9 +150,9 @@ Route::group(['middleware'=>['afterlogin']], function()
   
      /* ----------------- ---------- Asset Brand start  -------------------------*/
      Route::group(['prefix'=>'asset-brand/','middleware'=>[],'as'=>'asset_brand.'], function(){
-      Route::get('/create',[AssetBrandController::class,'create'])->name('create');
-      Route::post('/store',[AssetBrandController::class,'store'])->name('add');
-      Route::get('/',[AssetBrandController::class,'index'])->name('index');
+      Route::get('/add',[AssetBrandController::class,'create'])->name('create');
+      Route::post('/save',[AssetBrandController::class,'store'])->name('add');
+      Route::get('/list',[AssetBrandController::class,'index'])->name('index');
       Route::get('/show/{id}',[AssetBrandController::class,'show'])->name('show');
       Route::get('/edit/{id}',[AssetBrandController::class,'edit'])->name('edit');
       Route::post('/update/{id}',[AssetBrandController::class,'update'])->name('update');
@@ -155,9 +162,9 @@ Route::group(['middleware'=>['afterlogin']], function()
 
   /* ----------------- ---------- Asset Type  start  -------------------------*/
   Route::group(['prefix'=>'asset-type/','middleware'=>[],'as'=>'asset_type.'], function(){
-   Route::get('/create',[AssetTypeController::class,'create'])->name('create');
-   Route::post('/store',[AssetTypeController::class,'store'])->name('add');
-   Route::get('/',[AssetTypeController::class,'index'])->name('index');
+   Route::get('/add',[AssetTypeController::class,'create'])->name('create');
+   Route::post('/save',[AssetTypeController::class,'store'])->name('add');
+   Route::get('/list',[AssetTypeController::class,'index'])->name('index');
    Route::get('/show/{id}',[AssetTypeController::class,'show'])->name('show');
    Route::get('/edit/{id}',[AssetTypeController::class,'edit'])->name('edit');
    Route::post('/update/{id}',[AssetTypeController::class,'update'])->name('update');
@@ -168,9 +175,9 @@ Route::group(['middleware'=>['afterlogin']], function()
 
  /* ----------------- ---------- Asset sub Type  start  -------------------------*/
  Route::group(['prefix'=>'asset-sub-type/','middleware'=>[],'as'=>'asset_sub_type.'], function(){
-   Route::get('/create',[AssetSubTypeController::class,'create'])->name('create');
-   Route::post('/store',[AssetSubTypeController::class,'store'])->name('add');
-   Route::get('/',[AssetSubTypeController::class,'index'])->name('index');
+   Route::get('/add',[AssetSubTypeController::class,'create'])->name('create');
+   Route::post('/save',[AssetSubTypeController::class,'store'])->name('add');
+   Route::get('/list',[AssetSubTypeController::class,'index'])->name('index');
    Route::get('/show/{id}',[AssetSubTypeController::class,'show'])->name('show');
    Route::get('/edit/{id}',[AssetSubTypeController::class,'edit'])->name('edit');
    Route::post('/update/{id}',[AssetSubTypeController::class,'update'])->name('update');
@@ -180,9 +187,9 @@ Route::group(['middleware'=>['afterlogin']], function()
 
  /* ----------------- ---------- current-residence-type   start  -------------------------*/
  Route::group(['prefix'=>'current-residence-type/','middleware'=>[],'as'=>'current_residence_type.'], function(){
-   Route::get('/create',[CurrentResidenceTypeController::class,'create'])->name('create');
-   Route::post('/store',[CurrentResidenceTypeController::class,'store'])->name('add');
-   Route::get('/',[CurrentResidenceTypeController::class,'index'])->name('index');
+   Route::get('/add',[CurrentResidenceTypeController::class,'create'])->name('create');
+   Route::post('/save',[CurrentResidenceTypeController::class,'store'])->name('add');
+   Route::get('/list',[CurrentResidenceTypeController::class,'index'])->name('index');
    Route::get('/show/{id}',[CurrentResidenceTypeController::class,'show'])->name('show');
    Route::get('/edit/{id}',[CurrentResidenceTypeController::class,'edit'])->name('edit');
    Route::post('/update/{id}',[CurrentResidenceTypeController::class,'update'])->name('update');
@@ -192,9 +199,9 @@ Route::group(['middleware'=>['afterlogin']], function()
 
 /* ----------------- ---------- mode of transportation   start  -------------------------*/
 Route::group(['prefix'=>'mode-of-transportation/','middleware'=>[],'as'=>'mode_of_transportation.'], function(){
-   Route::get('/create',[ModeOfTransportationController::class,'create'])->name('create');
-   Route::post('/store',[ModeOfTransportationController::class,'store'])->name('add');
-   Route::get('/',[ModeOfTransportationController::class,'index'])->name('index');
+   Route::get('/add',[ModeOfTransportationController::class,'create'])->name('create');
+   Route::post('/save',[ModeOfTransportationController::class,'store'])->name('add');
+   Route::get('/list',[ModeOfTransportationController::class,'index'])->name('index');
    Route::get('/show/{id}',[ModeOfTransportationController::class,'show'])->name('show');
    Route::get('/edit/{id}',[ModeOfTransportationController::class,'edit'])->name('edit');
    Route::post('/update/{id}',[ModeOfTransportationController::class,'update'])->name('update');
@@ -204,9 +211,9 @@ Route::group(['prefix'=>'mode-of-transportation/','middleware'=>[],'as'=>'mode_o
 
 /* -----------------==---------- Leave Type  start--------------------------*/
 Route::group(['prefix'=>'leave-type/','middleware'=>[],'as'=>'leave_type.'], function(){
-   Route::get('/create',[LeaveTypeController::class,'create'])->name('create');
-   Route::post('/store',[LeaveTypeController::class,'store'])->name('add');
-   Route::get('/',[LeaveTypeController::class,'index'])->name('index');
+   Route::get('/add',[LeaveTypeController::class,'create'])->name('create');
+   Route::post('/save',[LeaveTypeController::class,'store'])->name('add');
+   Route::get('/list',[LeaveTypeController::class,'index'])->name('index');
    Route::get('/show/{id}',[LeaveTypeController::class,'show'])->name('show');
    Route::get('/edit/{id}',[LeaveTypeController::class,'edit'])->name('edit');
    Route::post('/update/{id}',[LeaveTypeController::class,'update'])->name('update');

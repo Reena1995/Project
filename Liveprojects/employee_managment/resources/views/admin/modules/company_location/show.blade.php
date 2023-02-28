@@ -35,7 +35,7 @@
                                         @csrf  
                                         <div class="tab-content" id="myTabContent1">
                                             <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
-                                                <h5 class="font-weight-semibold p-t-20 m-b-20">Basic</h5>
+                                                <h5 class="font-weight-semibold p-t-20 m-b-20"></h5>
                                                 <div class="form-row">
                                                     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                                         <label>Location Name</label>

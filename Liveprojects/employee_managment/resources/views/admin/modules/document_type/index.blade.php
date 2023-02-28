@@ -17,7 +17,7 @@
                         <!--card begins-->
                         <div class="card m-b-0">
                             <div class="card-header">
-                                <div class="card-title">Document Type List</div>
+                                <div class="card-title">Document Types List</div>
                             </div>
                             <div class="card-body pt-0">
                                 <div class="row">

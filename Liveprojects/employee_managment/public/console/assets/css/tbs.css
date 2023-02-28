@@ -15306,6 +15306,7 @@ img {
     width: fit-content;
     margin: 0;
     padding: 0;
+   
 }
 
 .theme-btn-outline {
@@ -15807,6 +15808,31 @@ input[type="search"]
   #tab1:hover, #tab2:hover, #tab3:hover{
     background-color:darkgrey;
   }
+
+  .bedrequest
+  {
+    background-color: #799aafba;
+   
+  }
+  .centerbad
+  {
+    color:white;
+    position: relative;
+    text-align: center;
+  }
+  
+  .error-top 
+{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.centerbad p{
+
+    font-weight: 10px;
+}
 
 
 
