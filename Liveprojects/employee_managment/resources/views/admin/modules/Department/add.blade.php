@@ -13,51 +13,37 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-10 col-md-12 col-12 m-b-30">
                             <!--card begins-->
-                            <div class="card m-b-30">
+                            <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
                                     <div class="card-title">Add Department Details</div>
                                 </div>
-                                <div class="card-body">
-                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" id="personal-details-tab-z" data-toggle="tab" href="#personal-details" role="tab" aria-controls="personal-details" aria-selected="true">Department Details</a>
-                                        </li>
-                                       
-                                       
-                                    </ul>
-                                    <form name="form" action="{{route('department.add')}}" method="post" enctype="multipart/form-data">
-                                        @csrf  
-                                        <div class="tab-content" id="myTabContent1">
-                                            <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
-                                                <h5 class="font-weight-semibold p-t-20 m-b-20"></h5>
-                                                <div class="form-row">
-                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                        <label>Department Name</label>
-                                                        <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control form-control-lg" placeholder="Enter department" />
-                                                        <span class="error"></span>
-                                                        @if ($errors->has('name'))
-        								                    <span class="errr-validation">{{ $errors->first('name') }}</span>
-       								                    @endif
-                                                    </div>
-                                                   
-                                                </div>
+                                <form id="department_add" name="department_add_form" action="{{route('department.add')}}" method="post" enctype="multipart/form-data">
+                                    @csrf  
+                                    <div class="card-body">    
+                                        <div class="form-row row">
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Department Name</label>
+                                                <input type="text" id="department_name" name="department_name" value="{{old('name')}}" class="form-control form-control-lg" placeholder="Enter department" />
+                                                <span class="error"></span>
+                                                @if ($errors->has('department_name'))
+                                                    <span class="errr-validation">{{ $errors->first('department_name') }}</span>
+                                                @endif
                                             </div>
-                                            <div class="card-footer p-t-20 text-right">
-                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <a href="{{route('department.index')}}" class="theme-btn-outline">cancel
-                                                        </a>
-                                                </div>
-                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
-                                                </div>
-                                            </div>
-                                            
                                         </div>
-                                    </form>
-                                </div>
-                              
+                                    </div>
+                                    <div class="card-footer p-t-20 text-right">
+                                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                        <a href="{{route('department.index')}}" class="theme-btn-outline">cancel
+                                                            </a>
+                                                    </div>
+                                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                        <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
+                                                    </div>
+                                                </div>
+                                
+                                    </div>
+                              </form>
                             </div>
-                            <!--card ends-->
                         </div>
                     </div>
                 </div>
@@ -68,15 +54,15 @@
  @push('scripts')
     <script>
          $(document).ready(function(){
-            $("form[name='form']").validate({
+            $("form[name='department_add_form']").validate({
                 rules : {
-                    name : {
+                    department_name : {
                         required:true,
-                        lettersonly:true
+                       
                     },                    
                 },
                 messages : {
-                    name : "Please enter a department name",
+                    department_name : "Please enter a department name",
                     
                 },
                 submitHandler : function(form){

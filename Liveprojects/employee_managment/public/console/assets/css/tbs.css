@@ -3411,6 +3411,7 @@ fieldset:disabled a.btn {
 
 input[type="search"] {
     min-height: 40px;
+    width: 100%;
 }
 
 input[type="submit"].btn-block,
@@ -15779,9 +15780,14 @@ table .employee-image
 }
 input[type="search"] 
 {
-    border-color: #8080804f;
+    border: 1px solid #8080804f !important;
     border-radius: 5px;
     justify-content: end;
+    padding-left: 15px;
+}
+:focus 
+{
+outline: none !important;
 }
 .showw
 {
@@ -15833,8 +15839,40 @@ input[type="search"]
 
     font-weight: 10px;
 }
-
-
-
-
 /*  */
+
+::placeholder ,
+.form-control
+{
+    font-size: 16px !important;
+}
+
+.card-title
+{
+    margin-bottom: 0px !important;
+}
+.add-cards .card-footer .theme-btn,
+.add-cards .card-footer .theme-btn-outline {
+font-size: 16px !important;
+height: 40px !important;
+}
+.add-cards .card-body{
+    padding: 40px 20px 25px !important;
+}
+.form-row .form-group 
+{
+    margin-bottom: 25px !important;
+}
+
+.searchlook 
+{
+    margin-top: 20px;
+}
+a:hover {
+    text-decoration: none !important;
+}
+.admin-sidebar .sub-menu .menu-item .menu-name
+{
+    font-size: 15px !important;
+    font-weight: 400 !important;
+}

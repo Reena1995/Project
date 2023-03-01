@@ -1,18 +1,24 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Designation;
 use App\Models\Department;
-
+use App\Models\Designation;
 use Illuminate\Http\Request;
 use DB;
-use Session;
 use Log;
-use Validate;
 use Auth;
+use Session;
+use Validate;
+
 
 class DesignationController extends Controller
 {
+    public function index()
+    {
+        $designation = Designation::where('is_active',1)->paginate(5);
+        return view('admin.modules.designation.index',compact('designation'));
+    }  
+
     public function create()
     {  
         $department=Department::where('is_active',1)->orderBy('name', 'ASC')->get();
@@ -24,8 +30,8 @@ class DesignationController extends Controller
     {
         Log::info('aaaaaaa');
          $department = $request->validate([
-            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
-            
+            'designation_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'department_id' =>'bail|required'  
 
         ]); 
         
@@ -34,7 +40,7 @@ class DesignationController extends Controller
             Log::info('bbbbbbb');
             DB::beginTransaction();
             $designation = new Designation;
-            $designation->name = $request->name;
+            $designation->name = $request->designation_name;
             $designation->department_id = $request->department_id;
             $designation->created_by = Auth::id();
             $designation->uuid = \Str::uuid();
@@ -44,42 +50,55 @@ class DesignationController extends Controller
             if(!$res)
             {
                 DB::rollback();
+
                 Session::flash('error','Internal server error please try again later.');
              
-            
                 return redirect()->back();
             }
             DB::commit();
+
             Session::flash('success','designation create successfully');
            
             return redirect()->route('designation.index');
            
 
 
-        }
-        catch (\Exception $exception) {
-            \Log::info("ERROR: CODE: " . $exception->getCode());
-            \Log::info("ERROR: Message: " . $exception->getMessage());
-            DB::rollback();
-            Session::flash('error','Internal server error please try again later.');
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:DesignationController function:store");
+            Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
         }
     }
 
    
-    public function index()
-    {
-        $designation = Designation::where('is_active',1)->paginate(5);
-        return view('admin.modules.designation.index',compact('designation'));
-    }   
+     
 
 
     public function show($id)
     {
-        $department=Department::where('is_active',1)->orderBy('name', 'ASC')->first();
-        $designation = Designation::where('uuid',$id)->first();
-        return view('admin.modules.designation.show',compact('designation','department'));
+        $post = Designation::where('uuid',$id)->first();
+
+        if( is_null($post) ) {
+
+            return abort(404);
+
+        } else {
+            
+            $department=Department::where('is_active',1)->orderBy('name', 'ASC')->first();
+            $designation = Designation::where('uuid',$id)->first();
+            return view('admin.modules.designation.show',compact('designation','department'));
+        }
     }
    
     
@@ -87,9 +106,16 @@ class DesignationController extends Controller
     
     public function edit($id)
     {
-        $department=Department::where('is_active',1)->orderBy('name', 'ASC')->get();
-        $designation = Designation::where('uuid',$id)->first();
-        return view('admin.modules.designation.edit',compact('designation','department'));
+        $post = Designation::where('uuid',$id)->first();
+
+        if( is_null($post) ) {
+            return abort(404);
+        } else {
+
+            $department=Department::where('is_active',1)->orderBy('name', 'ASC')->get();
+            $designation = Designation::where('uuid',$id)->first();
+            return view('admin.modules.designation.edit',compact('designation','department'));
+        }
     }
 
    
@@ -97,8 +123,8 @@ class DesignationController extends Controller
     {
         Log::info('dddddddd');
          $designation = $request->validate([
-            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
-            'department_id'=>'required',
+            'designation_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'department_id'=>'bail|required',
             
 
         ]); 
@@ -107,7 +133,7 @@ class DesignationController extends Controller
             Log::info('eeeeeeee');
             DB::beginTransaction();
             $designation = Designation::where('uuid',$id)->first();
-            $designation->name = $request->name;
+            $designation->name = $request->designation_name;
             $designation->department_id = $request->department_id;
             $designation->updated_by = Auth::id();
             $res = $designation->save();
@@ -126,13 +152,20 @@ class DesignationController extends Controller
            
 
 
-        }
-        catch (\Exception $exception) {
-            \Log::info("ERROR: CODE: " . $exception->getCode());
-            \Log::info("ERROR: Message: " . $exception->getMessage());
-            DB::rollback();
-            Session::flash('error','Internal server error please try again later.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:DesignationController function:update");
+            Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
         }
     }   
@@ -163,15 +196,22 @@ class DesignationController extends Controller
           
 
 
-       }
-       catch (\Exception $exception) {
-           \Log::info("ERROR: CODE: " . $exception->getCode());
-           \Log::info("ERROR: Message: " . $exception->getMessage());
-           DB::rollback();
-           Session::flash('error','Internal server error please try again later.');
-           return redirect()->back();
+       } catch (\Illuminate\Database\QueryException $e) {
+        Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+        Log::info('Error Code: ' . $e->getCode());
+        Log::info('Error Message: ' . $e->getMessage());
+        Log::info("Exiting class:DesignationController function:delete");
+        Session::flash('danger', "Internal server error.Please try again later.");
+        return redirect()->back();
+    }    
+    catch (\Exception $e) {
+            Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Session::flash('danger', "Internal server error.Please try again later.");
+            return redirect()->back();
 
-       }
+    }
 
       
 

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Department;
 use DB;
@@ -46,7 +45,7 @@ class DepartmentController extends Controller
     {
         Log::info('aaaaaaa');
          $department = $request->validate([
-            'name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'department_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -56,7 +55,7 @@ class DepartmentController extends Controller
             Log::info('bbbbbbb');
             DB::beginTransaction();
             $department = new Department;
-            $department->name = $request->name;
+            $department->name = $request->department_name;
             $department->uuid = \Str::uuid();
             $department->created_by = Auth::id();
           
@@ -76,8 +75,7 @@ class DepartmentController extends Controller
 
             return redirect()->route('department.index');
         
-        }
-        catch (\Illuminate\Database\QueryException $e) {
+        }catch (\Illuminate\Database\QueryException $e) {
             Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
             Log::info('Error Code: ' . $e->getCode());
             Log::info('Error Message: ' . $e->getMessage());
@@ -136,7 +134,7 @@ class DepartmentController extends Controller
 
          $department = $request->validate([
 
-            'name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'department_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
         try{
@@ -144,7 +142,7 @@ class DepartmentController extends Controller
             Log::info('eeeeeeee');
             DB::beginTransaction();
             $department = Department::where('uuid',$id)->first();
-            $department->name = $request->name;
+            $department->name = $request->department_name;
             $department->updated_by  = Auth::id();
             $res = $department->save();
 

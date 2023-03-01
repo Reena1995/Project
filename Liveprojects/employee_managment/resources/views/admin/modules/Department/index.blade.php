@@ -21,9 +21,9 @@
                                 <div class="card-title">Departments List</div>
                             </div>
                             <div class="card-body pt-0">
-                                <div class="row">
-                                    <div class="col-6"></div>
-                                    <div class="col-6 searchlook text-right">               
+                                <div class="row justify-content-end">
+                               
+                                    <div class="col-lg-4 col-md-6 col-sm-12 searchlook text-right">               
                                         <input  type="search" id="search" class="search" name="search" placeholder="search here....."size="30" />
                                         <br>
                                     </div>
@@ -31,48 +31,50 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-12">
-                                        <table class="table  table-vcenter text-nowrap table-bordered border-bottom"
-                                            id="listholiday">
-                                            <thead>
-                                                <tr>
-                                                    <th class="border-bottom-0 w-5">No</th>
-                                                    <th class="border-bottom-0 w-5">Department_Name</th>
-                                                    <th class="border-bottom-0">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tablebody">
-                                            @if(!empty($department) && $department->count())
-                                                @foreach($department as $index => $dep)
+                                        <div class="table-responsive-sm">
+                                            <table class="table  table-vcenter text-nowrap table-bordered border-bottom"
+                                                id="departmentlist">
+                                                <thead>
                                                     <tr>
-                                                        <td>{{ $department->firstItem() + $index}}</td>
-                                                        <td>{{$dep->name}}</td>
-                                                        <td>
-                                                            <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('department.show',$dep->uuid)}}" >
-                                                                <i class="mdi mdi-eye" data-toggle="tooltip" data-original-title="view"></i>
-                                                            </a>
-                                                        
-                                                            <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('department.edit',$dep->uuid)}}" >
-                                                                <i class="mdi mdi-pen" data-toggle="tooltip"
-                                                                    data-original-title="Edit"></i>
-                                                            </a>
-                                                            <a class="btn btn-danger btn-icon btn-sm text-white" href="{{route('department.status',$dep->uuid)}}" 
-                                                                data-toggle="tooltip" data-original-title="Delete"><i
-                                                                    class="mdi mdi-delete"></i></a>
-                                                        </td>
+                                                        <th class="border-bottom-0 w-5">No</th>
+                                                        <th class="border-bottom-0 w-5">Department_Name</th>
+                                                        <th class="border-bottom-0">Actions</th>
                                                     </tr>
-                                                    @endforeach
-                                            @else
-                                                <tr>
-                                                    <td colspan="3" class="emptydata">There is no Data</td>
-                                                </tr>        
-                                            @endif   
-                                            </tbody>
-                                        </table>
-                                        <div class="row align-items-center">
-                                            <div class="col-6">showing {{$department->firstItem()}} - {{$department->lastitem()}} of  {{$department->total()}}</div>
-                                            <div class="col-6"> 
-                                                <div class="custom-pagination">
-                                                        {{$department->links()}}
+                                                </thead>
+                                                <tbody id="tablebody">
+                                                @if(!empty($department) && $department->count())
+                                                    @foreach($department as $index => $dep)
+                                                        <tr>
+                                                            <td>{{ $department->firstItem() + $index}}</td>
+                                                            <td>{{$dep->name}}</td>
+                                                            <td>
+                                                                <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('department.show',$dep->uuid)}}" >
+                                                                    <i class="mdi mdi-eye" data-toggle="tooltip" data-original-title="view"></i>
+                                                                </a>
+                                                            
+                                                                <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('department.edit',$dep->uuid)}}" >
+                                                                    <i class="mdi mdi-pen" data-toggle="tooltip"
+                                                                        data-original-title="Edit"></i>
+                                                                </a>
+                                                                <a class="btn btn-danger btn-icon btn-sm text-white" href="{{route('department.status',$dep->uuid)}}" 
+                                                                    data-toggle="tooltip" data-original-title="Delete"><i
+                                                                        class="mdi mdi-delete"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                @else
+                                                    <tr>
+                                                        <td colspan="3" class="emptydata">There is no Data</td>
+                                                    </tr>        
+                                                @endif   
+                                                </tbody>
+                                            </table>
+                                            <div class="row align-items-center">
+                                                <div class="col-6">showing {{$department->firstItem()}} - {{$department->lastitem()}} of  {{$department->total()}}</div>
+                                                <div class="col-6"> 
+                                                    <div class="custom-pagination">
+                                                            {{$department->links()}}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

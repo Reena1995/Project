@@ -13,65 +13,50 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-10 col-md-12 col-12 m-b-30">
                             <!--card begins-->
-                            <div class="card m-b-30">
+                            <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
                                     <div class="card-title">Add Designation Details</div>
                                 </div>
-                                <div class="card-body">
-                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" id="personal-details-tab-z" data-toggle="tab" href="#personal-details" role="tab" aria-controls="personal-details" aria-selected="true">Designation Details</a>
-                                        </li>
-                                       
-                                       
-                                    </ul>
-                                    <form name="form" action="{{route('designation.add')}}" method="post" enctype="multipart/form-data">
-                                        @csrf  
-                                        <div class="tab-content" id="myTabContent1">
-                                            <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
-                                                <h5 class="font-weight-semibold p-t-20 m-b-20"></h5>
-                                                <div class="row">
-                                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                                            <div class="form-group floating-label ">
-                                                                <label>designation Name</label>
-                                                                <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="Enter designation" />
-                                                                @if ($errors->has('name'))
-                                                                    <span class="errr-validation">{{ $errors->first('name') }}</span>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                                            <div class="form-group floating-label show-label ">
-                                                                <label>Select Deaprtment</label>
-                                                                <select class="form-control" name="department_id"  id="department_id">
-                                                                    <option selected value="">Choose...</option>
-                                                                    @foreach($department as $dept)
-                                                                        <option value="{{$dept->id}}">{{$dept->name}} </option>
-                                                                    @endforeach
-                                                                </select>
-                                                                @if ($errors->has('department'))
-                                                                    <span class="errr-validation">{{ $errors->first('department') }}</span>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                </div>
+                                <form id="designation_add" action="{{route('designation.add')}}" name="designation_add_form" method="post" enctype="multipart/form-data">
+                                    @csrf  
+                                    <div class="card-body">    
+                                        <div class="form-row row">
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Designation Name</label>
+                                                <input type="text" id="designation_name" name="designation_name"  class="form-control form-control-lg" placeholder="Enter Designation" />
+                                                <span class="error"></span>
+                                                @if ($errors->has('designation_name'))
+                                                    <span class="errr-validation">{{ $errors->first('designation_name') }}</span>
+                                                @endif
                                             </div>
-                                            <div class="card-footer p-t-20 text-right">
-                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <a href="{{route('designation.index')}}" class="theme-btn-outline">cancel
-                                                        </a>
-                                                </div>
-                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
-                                                </div>
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Select Department</label>
+                                                <select class="form-control" name="department_id"  id="department_id">
+                                                        <option selected value="">Choose...</option>
+                                                            @foreach($department as $dept)
+                                                                    <option value="{{$dept->id}}">{{$dept->name}} </option>
+                                                            @endforeach
+                                                </select>
+                                                <span class="error"></span>
+                                                @if ($errors->has('department_id'))
+                                                    <span class="errr-validation">{{ $errors->first('department_id') }}</span>
+                                                @endif
                                             </div>
                                             
                                         </div>
-                                    </form>
-                                </div>
-                              
+                                    </div>
+                                    <div class="card-footer p-t-20 text-right">
+                                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                        <a href="{{route('designation.index')}}" class="theme-btn-outline">cancel
+                                                            </a>
+                                                    </div>
+                                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                        <button type="submit"  value="submit" name="submit" class="theme-btn text-white">Save</button>
+                                                    </div>
+
+                                    </div>
+                                </form>
                             </div>
-                            <!--card ends-->
                         </div>
                     </div>
                 </div>
@@ -81,14 +66,14 @@
        	@endsection
  @push('scripts')
  <script>
-         $(document).ready(function(){
-            $("form[name='form']").validate({
+       $(document).ready(function(){
+            $("form[name='designation_add_form']").validate({
                 rules : {
-                    name : "required",  
+                    designation_name : "required",  
                     department_id : "required",                    
                 },
                 messages : {
-                    name : "Please enter a designation name",
+                    designation_name : "Please enter a designation name",
                     department_id : "Please select department ",  
                     
                 },
@@ -108,5 +93,5 @@
                 }
             });
         });
-    </script>          
+</script>         
  @endpush
