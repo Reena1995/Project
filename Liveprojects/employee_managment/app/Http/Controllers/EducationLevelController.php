@@ -110,7 +110,7 @@ class EducationLevelController extends Controller
     {
         Log::info('dddddddd');
         $medium = $request->validate([
-            'name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'education_level_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -119,7 +119,7 @@ class EducationLevelController extends Controller
             Log::info('eeeeeeee');
             DB::beginTransaction();
             $edulevel = EducationLevel::where('uuid',$id)->first();;
-            $edulevel -> name = $request->name;
+            $edulevel -> name = $request->education_level_name;
             $edulevel->updated_by = Auth::id();
             $res = $edulevel ->save();
             

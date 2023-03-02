@@ -1,17 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use App\Models\CurrentResidenceType;
+use Illuminate\Http\Request;
 use DB;
-use Session;
 use Log;
-use Validate;
 use Auth;
+use Session;
+use Validate;
 
 class CurrentResidenceTypeController extends Controller
 {
+    public function index()
+    {
+        $resitype = CurrentResidenceType::where('is_active',1)->paginate(5);
+        return view('admin.modules.current_residence_type.index',compact('resitype'));
+    }   
+
     public function create()
     {
        return view('admin.modules.current_residence_type.add');
@@ -22,7 +27,7 @@ class CurrentResidenceTypeController extends Controller
     {
         Log::info('aaaaaaa');
          $resitype= $request->validate([
-            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'current_residence_type_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -32,7 +37,7 @@ class CurrentResidenceTypeController extends Controller
             Log::info('bbbbbbb');
             DB::beginTransaction();
             $resitype = new CurrentResidenceType;
-            $resitype->type = $request->type;
+            $resitype->type = $request->current_residence_type_name;
             $resitype->created_by = Auth::id();
             $resitype->uuid = \Str::uuid();
           
@@ -52,36 +57,55 @@ class CurrentResidenceTypeController extends Controller
            
 
 
-        }
-        catch (\Exception $exception) {
-            \Log::info("ERROR: CODE: " . $exception->getCode());
-            \Log::info("ERROR: Message: " . $exception->getMessage());
-            DB::rollback();
-            Session::flash('error','Internal server error please try again later.');
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:CurrentResidenceTypeController function:store");
+            Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
         }
     }
 
    
-    public function index()
-    {
-        $resitype = CurrentResidenceType::where('is_active',1)->paginate(5);
-        return view('admin.modules.current_residence_type.index',compact('resitype'));
-    }   
-
-
     public function show($id)
     {
-        $resitype = CurrentResidenceType::where('uuid',$id)->first();
-        return view('admin.modules.current_residence_type.show',compact('resitype'));
+        $post = CurrentResidenceType::where('uuid',$id)->first();
+
+        if( is_null($post) ) {
+
+            return abort(404);
+
+        } else {
+
+            $resitype = CurrentResidenceType::where('uuid',$id)->first();
+            return view('admin.modules.current_residence_type.show',compact('resitype'));
+
+        }
     }
 
     
     public function edit($id)
     {
-        $resitype = CurrentResidenceType::where('uuid',$id)->first();
-        return view('admin.modules.current_residence_type.edit',compact('resitype'));
+        $post = CurrentResidenceType::where('uuid',$id)->first();
+
+        if( is_null($post) ) {
+
+            return abort(404);
+
+        } else {
+
+            $resitype = CurrentResidenceType::where('uuid',$id)->first();
+            return view('admin.modules.current_residence_type.edit',compact('resitype'));
+        }    
     }
 
    
@@ -89,7 +113,7 @@ class CurrentResidenceTypeController extends Controller
     {
         Log::info('dddddddd');
         $resitype = $request->validate([
-            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'current_residence_type_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -98,7 +122,7 @@ class CurrentResidenceTypeController extends Controller
             Log::info('eeeeeeee');
             DB::beginTransaction();
             $resitype = CurrentResidenceType::where('uuid',$id)->first();;
-            $resitype -> type = $request->type;
+            $resitype -> type = $request->current_residence_type_name;
             $resitype->updated_by = Auth::id();
             $res = $resitype ->save();
             
@@ -116,14 +140,20 @@ class CurrentResidenceTypeController extends Controller
            
 
 
-        }
-        catch (\Exception $exception) {
-            Log::info('catch');
-            \Log::info("ERROR: CODE: " . $exception->getCode());
-            \Log::info("ERROR: Message: " . $exception->getMessage());
-            DB::rollback();
-            Session::flash('error','Internal server error please try again later.');
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:CurrentResidenceTypeController function:update");
+            Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
         }
     }
@@ -154,19 +184,23 @@ class CurrentResidenceTypeController extends Controller
            Session::flash('success','current_residence_type delete successfully');
            return redirect()->route('current_residence_type.index');
           
+        }catch (\Illuminate\Database\QueryException $e) {
+        Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+        Log::info('Error Code: ' . $e->getCode());
+        Log::info('Error Message: ' . $e->getMessage());
+        Log::info("Exiting class:CurrentResidenceTypeController function:delete");
+        Session::flash('danger', "Internal server error.Please try again later.");
+        return redirect()->back();
+        }    
+        catch (\Exception $e) {
+            Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Session::flash('danger', "Internal server error.Please try again later.");
+            return redirect()->back();
 
+        }
 
-       }
-       catch (\Exception $exception) {
-           \Log::info("ERROR: CODE: " . $exception->getCode());
-           \Log::info("ERROR: Message: " . $exception->getMessage());
-           DB::rollback();
-           Session::flash('error','Internal server error please try again later.');
-           return redirect()->back();
-
-       }
-
-      
 
     }
     public function destroy($id)

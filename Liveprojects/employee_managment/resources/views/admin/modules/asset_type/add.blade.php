@@ -13,52 +13,36 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-10 col-md-12 col-12 m-b-30">
                             <!--card begins-->
-                            <div class="card m-b-30">
+                            <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
                                     <div class="card-title">Add Asset Type Details</div>
                                 </div>
-                                <div class="card-body">
-                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" id="personal-details-tab-z" data-toggle="tab" href="#personal-details" role="tab" aria-controls="personal-details" aria-selected="true">Asset Type Details</a>
-                                        </li>
-                                       
-                                       
-                                    </ul>
-                                    <form name="form" action="{{route('asset_type.add')}}" method="post" enctype="multipart/form-data">
-                                        @csrf  
-                                        <div class="tab-content" id="myTabContent1">
-                                            <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
-                                                <h5 class="font-weight-semibold p-t-20 m-b-20"></h5>
-                                                <div class="form-row">
-                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                        <label>Asset Type</label>
-                                                        <input type="text" id="type" name="type"  class="form-control form-control-lg" placeholder="Enter asset type name" />
-                                                       
-                                                        @if ($errors->has('type'))
-        								                    <span class="errr-validation">{{ $errors->first('type') }}</span>
-       								                    @endif
-                                                    </div>
-   
-                                                </div>
+                                <form id="asset_type_add"   action="{{route('asset_type.add')}}" name="asset_type_add_form" method="post" enctype="multipart/form-data">
+                                    @csrf  
+                                    <div class="card-body">    
+                                        <div class="form-row row">
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Asset Type</label>
+                                                <input type="text" id="asset_type" name="asset_type"  class="form-control form-control-lg" placeholder="Enter asset type name" />
+                                                <span class="error"></span>
+                                                @if ($errors->has('asset_type'))
+                                                    <span class="errr-validation">{{ $errors->first('asset_type') }}</span>
+                                                @endif
                                             </div>
-                                            <div class="card-footer p-t-20 text-right">
-                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <a href="{{route('asset_type.index')}}" class="theme-btn-outline text-white">
-                                                        cancel
-                                                    </a>
-                                                </div>
-                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
-                                                </div>
-                                            </div>
-                                            
                                         </div>
-                                    </form>
-                                </div>
-                               
+                                    </div>
+                                    <div class="card-footer p-t-20 text-right">
+                                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                        <a href="{{route('asset_type.index')}}" class="theme-btn-outline">cancel
+                                                            </a>
+                                                    </div>
+                                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                        <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
+                                                    </div>
+                                        
+                                    </div>
+                              </form>
                             </div>
-                            <!--card ends-->
                         </div>
                     </div>
                 </div>
@@ -69,12 +53,15 @@
  @push('scripts')
     <script>
          $(document).ready(function(){
-            $("form[name='form']").validate({
+            $("form[name='asset_type_add_form']").validate({
                 rules : {
-                    type : "required",                    
+                    asset_type : {
+                        required:true,
+                       
+                    },                    
                 },
                 messages : {
-                    type : "Please enter asset type  name",
+                    asset_type : "Please Enter a Asset Type",
                     
                 },
                 submitHandler : function(form){

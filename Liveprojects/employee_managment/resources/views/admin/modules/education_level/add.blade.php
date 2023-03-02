@@ -59,7 +59,7 @@
                     education_level_name : "required",                    
                 },
                 messages : {
-                    education_level_name : "Please enter a language name",
+                    education_level_name : "Please enter a education level name",
                     
                 },
                 submitHandler : function(form){

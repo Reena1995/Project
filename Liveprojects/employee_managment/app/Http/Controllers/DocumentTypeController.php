@@ -1,28 +1,33 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\DocumentType;
 use DB;
-use Session;
 use Log;
-use Validate;
 use Auth;
+use Session;
+use Validate;
 
 class DocumentTypeController extends Controller
 {
+
+    public function index()
+    {
+        $doctype = DocumentType::where('is_active',1)->paginate(5);
+        return view('admin.modules.document_type.index',compact('doctype'));
+    }   
+
     public function create()
     {
        return view('admin.modules.document_type.add');
     }
 
-    
     public function store(Request $request)
     {
         Log::info('aaaaaaa');
          $doctype= $request->validate([
-            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'document_type'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -32,7 +37,7 @@ class DocumentTypeController extends Controller
             Log::info('bbbbbbb');
             DB::beginTransaction();
             $doctype = new DocumentType;
-            $doctype->type = $request->type;
+            $doctype->type = $request->document_type;
             $doctype->created_by = Auth::id();
             $doctype->uuid = \Str::uuid();
           
@@ -52,36 +57,54 @@ class DocumentTypeController extends Controller
            
 
 
-        }
-        catch (\Exception $exception) {
-            \Log::info("ERROR: CODE: " . $exception->getCode());
-            \Log::info("ERROR: Message: " . $exception->getMessage());
-            DB::rollback();
-            Session::flash('error','Internal server error please try again later.');
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:DocumentTypeController function:store");
+            Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
         }
     }
 
-   
-    public function index()
-    {
-        $doctype = DocumentType::where('is_active',1)->paginate(5);
-        return view('admin.modules.document_type.index',compact('doctype'));
-    }   
-
-
     public function show($id)
     {
-        $doctype = DocumentType::where('uuid',$id)->first();
-        return view('admin.modules.document_type.show',compact('doctype'));
+        $post = DocumentType::where('uuid',$id)->first();
+
+        if( is_null($post) ) {
+
+            return abort(404);
+
+        } else {
+
+            $doctype = DocumentType::where('uuid',$id)->first();
+            return view('admin.modules.document_type.show',compact('doctype'));
+        }
     }
 
     
     public function edit($id)
     {
-        $doctype = DocumentType::where('uuid',$id)->first();
-        return view('admin.modules.document_type.edit',compact('doctype'));
+        $post = DocumentType::where('uuid',$id)->first();
+
+        if( is_null($post) ) {
+
+            return abort(404);
+
+        } else {
+
+            $doctype = DocumentType::where('uuid',$id)->first();
+            return view('admin.modules.document_type.edit',compact('doctype'));
+
+        }
     }
 
    
@@ -89,7 +112,7 @@ class DocumentTypeController extends Controller
     {
         Log::info('dddddddd');
         $doctype = $request->validate([
-            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'document_type'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -98,7 +121,7 @@ class DocumentTypeController extends Controller
             Log::info('eeeeeeee');
             DB::beginTransaction();
             $doctype = DocumentType::where('uuid',$id)->first();;
-            $doctype -> type = $request->type;
+            $doctype -> type = $request->document_type;
             $doctype->updated_by = Auth::id();
             $res = $doctype ->save();
             
@@ -116,14 +139,20 @@ class DocumentTypeController extends Controller
            
 
 
-        }
-        catch (\Exception $exception) {
-            Log::info('catch');
-            \Log::info("ERROR: CODE: " . $exception->getCode());
-            \Log::info("ERROR: Message: " . $exception->getMessage());
-            DB::rollback();
-            Session::flash('error','Internal server error please try again later.');
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:DocumentTypeController function:update");
+            Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
         }
     }
@@ -133,7 +162,7 @@ class DocumentTypeController extends Controller
     public function status($id)
     {
       
-       try{
+        try{
 
            Log::info('hbjjhbdjhqw');
            DB::beginTransaction();
@@ -154,17 +183,22 @@ class DocumentTypeController extends Controller
            Session::flash('success',' document type delete successfully');
            return redirect()->route('document_type.index');
           
+        }catch (\Illuminate\Database\QueryException $e) {
+        Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+        Log::info('Error Code: ' . $e->getCode());
+        Log::info('Error Message: ' . $e->getMessage());
+        Log::info("Exiting class:DocumentTypeController function:delete");
+        Session::flash('danger', "Internal server error.Please try again later.");
+        return redirect()->back();
+        }    
+        catch (\Exception $e) {
+            Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Session::flash('danger', "Internal server error.Please try again later.");
+            return redirect()->back();
 
-
-       }
-       catch (\Exception $exception) {
-           \Log::info("ERROR: CODE: " . $exception->getCode());
-           \Log::info("ERROR: Message: " . $exception->getMessage());
-           DB::rollback();
-           Session::flash('error','Internal server error please try again later.');
-           return redirect()->back();
-
-       }
+        }
 
       
 

@@ -1,6 +1,7 @@
 @extends('admin.common.master')
 @section('content')
 
+
         <section class="admin-content">
             <!-- BEGIN PlACE PAGE CONTENT HERE -->
             <!--  container or container-fluid as per your need           -->
@@ -17,21 +18,30 @@
                         <!--card begins-->
                         <div class="card m-b-0">
                             <div class="card-header">
-                                <div class="card-title">Document Types List</div>
+                                <div class="card-title">Document Type List</div>
                             </div>
                             <div class="card-body pt-0">
+                                <div class="row justify-content-end">
+                               
+                                    <div class="col-lg-4 col-md-6 col-sm-12 searchlook text-right">               
+                                        <input  type="search" id="search" class="search" name="search" placeholder="search here....."size="30" />
+                                        <br>
+                                    </div>
+                                </div>
+                                <br>
                                 <div class="row">
                                     <div class="col-12">
-                                        <table class="table  table-vcenter text-nowrap table-bordered border-bottom"
-                                            id="listholiday">
-                                            <thead>
-                                                <tr>
-                                                    <th class="border-bottom-0 w-5">No</th>
-                                                    <th class="border-bottom-0 w-5">Document Type </th>
-                                                    <th class="border-bottom-0">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                        <div class="table-responsive-sm">
+                                            <table class="table  table-vcenter text-nowrap table-bordered border-bottom"
+                                                id="document_type">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="border-bottom-0 w-5">No</th>
+                                                        <th class="border-bottom-0 w-5">Document Type </th>
+                                                        <th class="border-bottom-0">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tablebody">
                                                 @if(!empty($doctype) && $doctype->count())
                                                 
                                                     @foreach($doctype as $index => $doc)
@@ -58,16 +68,18 @@
                                                         <td colspan="3" class="emptydata">There is no Data</td>
                                                     </tr>        
                                                 @endif    
-                                            </tbody>
-                                        </table>
-                                        <div class="row align-items-center">
-                                            <div class="col-6">showing {{$doctype->firstItem()}} - {{$doctype->lastitem()}} of  {{$doctype->total()}}</div>
-                                            <div class="col-6"> 
-                                                <div class="custom-pagination">
-                                                        {{$doctype->links()}}
+                                                </tbody>
+                                            </table>
+                                            <div class="row align-items-center">
+                                                <div class="col-6">showing {{$doctype->firstItem()}} - {{$doctype->lastitem()}} of  {{$doctype->total()}}</div>
+                                                <div class="col-6"> 
+                                                    <div class="custom-pagination">
+                                                            {{$doctype->links()}}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -79,17 +91,21 @@
             <!-- END PLACE PAGE CONTENT HERE -->
         </section>
     </main>
-   
+    
    @endsection
    @push('scripts')
     <script>
-	/*page own css start*/
+	/*page own datatable serching jsstart*/
         // $(document).ready(function () {
         //     $("#listholiday").DataTable();
         //     $(".dropdown-select2").select2();
         //     $(".theme-date-picker").datepicker();
         // });
-	/*page own css end*/	
+	/*page own datatable serching js end*/	
+
+    /*key press searching in ajax start */
+  
+    /*key press searching in ajax end */
 		
     </script>
 	 

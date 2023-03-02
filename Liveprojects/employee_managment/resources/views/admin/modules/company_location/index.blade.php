@@ -33,7 +33,7 @@
                                     <div class="col-12">
                                         <div class="table-responsive-sm">
                                             <table class="table  table-vcenter text-nowrap table-bordered border-bottom"
-                                                id="listholiday">
+                                                id="company_location">
                                                 <thead>
                                                     <tr>
                                                     <th class="border-bottom-0 w-5">No</th>

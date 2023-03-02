@@ -1,17 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\AssetType;
 use DB;
-use Session;
 use Log;
-use Validate;
 use Auth;
+use Session;
+use Validate;
 
 class AssetTypeController extends Controller
 {
+    public function index()
+    {
+        $asstype = AssetType::where('is_active',1)->paginate(5);
+        return view('admin.modules.asset_type.index',compact('asstype'));
+    }   
+
+
     public function create()
     {
        return view('admin.modules.asset_type.add');
@@ -22,7 +28,7 @@ class AssetTypeController extends Controller
     {
         Log::info('aaaaaaa');
          $asstype= $request->validate([
-            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'asset_type'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -32,7 +38,7 @@ class AssetTypeController extends Controller
             Log::info('bbbbbbb');
             DB::beginTransaction();
             $asstype = new AssetType;
-            $asstype->type = $request->type;
+            $asstype->type = $request->asset_type;
             $asstype->uuid = \Str::uuid();
             $asstype->created_by = Auth::id();
           
@@ -52,36 +58,55 @@ class AssetTypeController extends Controller
            
 
 
-        }
-        catch (\Exception $exception) {
-            \Log::info("ERROR: CODE: " . $exception->getCode());
-            \Log::info("ERROR: Message: " . $exception->getMessage());
-            DB::rollback();
-            Session::flash('error','Internal server error please try again later.');
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:AssetTypeController function:store");
+            Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
         }
     }
 
    
-    public function index()
-    {
-        $asstype = AssetType::where('is_active',1)->paginate(5);
-        return view('admin.modules.asset_type.index',compact('asstype'));
-    }   
-
-
+    
     public function show($id)
     {
-        $asstype = AssetType::where('uuid',$id)->first();
-        return view('admin.modules.asset_type.show',compact('asstype'));
+        $post = AssetType::where('uuid',$id)->first();
+
+        if( is_null($post) ) {
+
+            return abort(404);
+
+        } else {
+
+            $asstype = AssetType::where('uuid',$id)->first();
+            return view('admin.modules.asset_type.show',compact('asstype'));
+        }    
     }
 
     
     public function edit($id)
     {
-        $asstype = AssetType::where('uuid',$id)->first();
-        return view('admin.modules.asset_type.edit',compact('asstype'));
+        $post = AssetType::where('uuid',$id)->first();
+
+        if( is_null($post) ) {
+
+            return abort(404);
+
+        } else {
+
+            $asstype = AssetType::where('uuid',$id)->first();
+            return view('admin.modules.asset_type.edit',compact('asstype'));
+        }    
     }
 
    
@@ -89,7 +114,7 @@ class AssetTypeController extends Controller
     {
         Log::info('dddddddd');
         $asstype = $request->validate([
-            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'asset_type'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -98,7 +123,7 @@ class AssetTypeController extends Controller
             Log::info('eeeeeeee');
             DB::beginTransaction();
             $asstype = AssetType::where('uuid',$id)->first();;
-            $asstype -> type = $request->type;
+            $asstype -> type = $request->asset_type;
             $asstype->updated_by = Auth::id();
             $res = $asstype ->save();
             
@@ -116,14 +141,20 @@ class AssetTypeController extends Controller
            
 
 
-        }
-        catch (\Exception $exception) {
-            Log::info('catch');
-            \Log::info("ERROR: CODE: " . $exception->getCode());
-            \Log::info("ERROR: Message: " . $exception->getMessage());
-            DB::rollback();
-            Session::flash('error','Internal server error please try again later.');
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:AssetTypeController function:update");
+            Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
         }
     }
@@ -156,15 +187,22 @@ class AssetTypeController extends Controller
           
 
 
-       }
-       catch (\Exception $exception) {
-           \Log::info("ERROR: CODE: " . $exception->getCode());
-           \Log::info("ERROR: Message: " . $exception->getMessage());
-           DB::rollback();
-           Session::flash('error','Internal server error please try again later.');
-           return redirect()->back();
+       }catch (\Illuminate\Database\QueryException $e) {
+        Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+        Log::info('Error Code: ' . $e->getCode());
+        Log::info('Error Message: ' . $e->getMessage());
+        Log::info("Exiting class:AssetTypeController function:delete");
+        Session::flash('danger', "Internal server error.Please try again later.");
+        return redirect()->back();
+    }    
+    catch (\Exception $e) {
+            Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Session::flash('danger', "Internal server error.Please try again later.");
+            return redirect()->back();
 
-       }
+    }
 
       
 

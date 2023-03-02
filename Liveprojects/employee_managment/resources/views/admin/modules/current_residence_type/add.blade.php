@@ -6,59 +6,43 @@
                 <div class="container-fluid p-t-20">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 m-b-20">
-                            <h3>Add current Residence Type</h3>
+                            <h3>Add Current Residence Type</h3>
                         </div>
                         
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-lg-10 col-md-12 col-12 m-b-30">
                             <!--card begins-->
-                            <div class="card m-b-30">
+                            <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Add current Residence Type Details</div>
+                                    <div class="card-title">Add Current Residence Type Details</div>
                                 </div>
-                                <div class="card-body">
-                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" id="personal-details-tab-z" data-toggle="tab" href="#personal-details" role="tab" aria-controls="personal-details" aria-selected="true"> current Residence Type Details</a>
-                                        </li>
-                                       
-                                       
-                                    </ul>
-                                    <form name="form" action="{{route('current_residence_type.add')}}" method="post" enctype="multipart/form-data">
-                                        @csrf  
-                                        <div class="tab-content" id="myTabContent1">
-                                            <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
-                                                <h5 class="font-weight-semibold p-t-20 m-b-20"></h5>
-                                                <div class="form-row">
-                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                        <label>Asset Type</label>
-                                                        <input type="text" id="type" name="type"  class="form-control form-control-lg" placeholder="Enter  current Residence Type name" />
-                                                       
-                                                        @if ($errors->has('type'))
-        								                    <span class="errr-validation">{{ $errors->first('type') }}</span>
-       								                    @endif
-                                                    </div>
-   
-                                                </div>
+                                <form id="current_residence_type_add" action="{{route('current_residence_type.add')}}" name="current_residence_type_add"  method="post" enctype="multipart/form-data">
+                                    @csrf  
+                                    <div class="card-body">    
+                                        <div class="form-row row">
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Current Residence Type</label>
+                                                <input type="text" id="current_residence_type_name" name="current_residence_type_name"  class="form-control form-control-lg" placeholder="current Residence Type name" />
+                                                <span class="error"></span>
+                                                @if ($errors->has('current_residence_type_name'))
+                                                    <span class="errr-validation">{{ $errors->first('current_residence_type_name') }}</span>
+                                                @endif
                                             </div>
-                                            <div class="card-footer p-t-20 text-right">
-                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <a href="{{route('current_residence_type.index')}}" class="theme-btn-outline text-white">
-                                                        cancel
-                                                    </a>
-                                                </div>
-                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
-                                                </div>
-                                            </div>
-                                            
                                         </div>
-                                    </form>
-                                </div>
-                               
+                                    </div>
+                                    <div class="card-footer p-t-20 text-right">
+                                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                        <a href="{{route('current_residence_type.index')}}" class="theme-btn-outline">cancel
+                                                            </a>
+                                                    </div>
+                                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                        <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
+                                                    </div>
+                                        
+                                    </div>
+                              </form>
                             </div>
-                            <!--card ends-->
                         </div>
                     </div>
                 </div>
@@ -69,12 +53,15 @@
  @push('scripts')
     <script>
          $(document).ready(function(){
-            $("form[name='form']").validate({
+            $("form[name='current_residence_type_add']").validate({
                 rules : {
-                    type : "required",                    
+                    current_residence_type_name : {
+                        required:true,
+                       
+                    },                    
                 },
                 messages : {
-                    type : "Please enter current_residence_type ",
+                    current_residence_type_name : "Please Enter Current Residence Type",
                     
                 },
                 submitHandler : function(form){
