@@ -4,6 +4,7 @@
     --main-bg-color: 0066cc;
     --main-black: #000;
     --main-color: #949fad;
+    --main-light-color: #d4d4d4;
     --bg-liner-color: linear-gradient(to right, #0066cc 0, #ff6633 100%);
     --bg-liner-rotate: linear-gradient(130deg, #0066cc 0%, #ff6633 100%);
     --text-hover: #0066cc;
@@ -1821,6 +1822,7 @@ pre code {
     vertical-align: middle;
     color: var(--thm-textcolor);
     border-top: 1px solid var(--thm-graybg);
+    font-size: 15px;
 }
 
 .table thead th {
@@ -3838,6 +3840,14 @@ input[type="button"].btn-block {
     width: 100%;
     flex-wrap: wrap;
     align-items: stretch;
+    border: 1px solid white !important;
+    border-radius: 5px !important;
+    
+}
+.hover-input:hover
+{
+    border: 1px solid var(--main-color) !important;
+    border-radius: 5px !important;
 }
 
 .input-group>.form-control,
@@ -15877,4 +15887,19 @@ a:hover {
 {
     font-size: 15px !important;
     font-weight: 400 !important;
+}
+.search-btn
+{
+    background: var(--main-light-color) !important;
+    color: var(--thm-white) !important;
+    border-radius: 0 5px 5px 0 !important;
+    height: 100%;
+}
+.search-btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+.form-control:focus
+{
+    border-color: var(--main-light-color) !important;
 }

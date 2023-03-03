@@ -13,10 +13,21 @@ use Validate;
 
 class DesignationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $designation = Designation::where('is_active',1)->paginate(5);
+        
+        $query =Designation::where('is_active',1);
+        if($request->input('search')){
+            $search = $request->input('search');
+            $query->where ( 'name', 'LIKE', '%' . $search . '%' )
+                ->orWhereHas('department', function($q) use ($search){ 
+                    $q->where('name', 'LIKE', '%' . $search . '%');
+                });
+        } 
+        $designation  = $query->paginate(5);
         return view('admin.modules.designation.index',compact('designation'));
+
+
     }  
 
     public function create()

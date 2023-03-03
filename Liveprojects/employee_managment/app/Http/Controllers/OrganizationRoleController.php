@@ -13,10 +13,27 @@ use Validate;
 
 class OrganizationRoleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $org_role = OrganizationRole::where('is_active',1)->paginate(5);
+        $query = OrganizationRole::where('is_active','1');
+        if($request->input('search')){
+            $search = $request->input('search');
+            $query->where ( 'name', 'LIKE', '%' . $search . '%' )
+            ->where(function($q) use ($search) {
+                $q->orWhereHas('department', function($a) use ($search){ 
+                    $a->where('name', 'LIKE', '%' . $search . '%');
+                });
+            });
+            /* ->orWhereHas('designation', function($q) use ($search){ 
+                $q->where('name', 'LIKE', '%' . $search . '%');
+            }) */
+                
+        } 
+        $org_role  = $query->paginate(5);
         return view('admin.modules.organization_role.index',compact('org_role'));
+
+        // $org_role = OrganizationRole::where('is_active',1)->paginate(5);
+        // return view('admin.modules.organization_role.index',compact('org_role'));
     }   
 
     public function create()
