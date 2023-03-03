@@ -1,28 +1,32 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Language;
 use DB;
-use Session;
 use Log;
-use Validate;
 use Auth;
+use Session;
+use Validate;
 
 class LanguageController extends Controller
 {
+    public function index()
+    {
+        $language = Language::where('is_active',1)->paginate(5);
+        return view('admin.modules.language.index',compact('language'));
+    }   
+
     public function create()
     {
        return view('admin.modules.language.add');
     }
 
-    
     public function store(Request $request)
     {
         Log::info('aaaaaaa');
          $language= $request->validate([
-            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'language_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -32,7 +36,7 @@ class LanguageController extends Controller
             Log::info('bbbbbbb');
             DB::beginTransaction();
             $language = new Language;
-            $language->name = $request->name;
+            $language->name = $request->language_name;
             $language->created_by = Auth::id();
             $language->uuid = \Str::uuid();
           
@@ -52,36 +56,52 @@ class LanguageController extends Controller
            
 
 
-        }
-        catch (\Exception $exception) {
-            \Log::info("ERROR: CODE: " . $exception->getCode());
-            \Log::info("ERROR: Message: " . $exception->getMessage());
-            DB::rollback();
-            Session::flash('error','Internal server error please try again later.');
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:LanguageController function:store");
+            Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
         }
     }
-
-   
-    public function index()
-    {
-        $language = Language::where('is_active',1)->paginate(5);
-        return view('admin.modules.language.index',compact('language'));
-    }   
-
 
     public function show($id)
     {
-        $language = Language::where('uuid',$id)->first();
-        return view('admin.modules.language.show',compact('language'));
+        $post =  Language::where('uuid',$id)->first();
+
+        if( is_null($post) ) {
+
+            return abort(404);
+
+        } else {
+
+            $language = Language::where('uuid',$id)->first();
+            return view('admin.modules.language.show',compact('language'));
+        }    
     }
 
-    
     public function edit($id)
     {
-        $language = Language::where('uuid',$id)->first();
-        return view('admin.modules.language.edit',compact('language'));
+        $post =  Language::where('uuid',$id)->first();
+
+        if( is_null($post) ) {
+
+            return abort(404);
+
+        } else {
+
+            $language = Language::where('uuid',$id)->first();
+            return view('admin.modules.language.edit',compact('language'));
+        }    
     }
 
    
@@ -89,7 +109,7 @@ class LanguageController extends Controller
     {
         Log::info('dddddddd');
         $medium = $request->validate([
-            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'language_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -98,7 +118,7 @@ class LanguageController extends Controller
             Log::info('eeeeeeee');
             DB::beginTransaction();
             $language = Language::where('uuid',$id)->first();;
-            $language -> name = $request->name;
+            $language -> name = $request->language_name;
             $language->updated_by = Auth::id();
             $res = $language ->save();
             
@@ -116,19 +136,23 @@ class LanguageController extends Controller
            
 
 
-        }
-        catch (\Exception $exception) {
-            Log::info('catch');
-            \Log::info("ERROR: CODE: " . $exception->getCode());
-            \Log::info("ERROR: Message: " . $exception->getMessage());
-            DB::rollback();
-            Session::flash('error','Internal server error please try again later.');
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:LanguageController function:update");
+            Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
         }
     }
-
-    
 
     public function status($id)
     {
@@ -156,15 +180,22 @@ class LanguageController extends Controller
           
 
 
-       }
-       catch (\Exception $exception) {
-           \Log::info("ERROR: CODE: " . $exception->getCode());
-           \Log::info("ERROR: Message: " . $exception->getMessage());
-           DB::rollback();
-           Session::flash('error','Internal server error please try again later.');
-           return redirect()->back();
+        }catch (\Illuminate\Database\QueryException $e) {
+        Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+        Log::info('Error Code: ' . $e->getCode());
+        Log::info('Error Message: ' . $e->getMessage());
+        Log::info("Exiting class:LanguageController function:delete");
+        Session::flash('danger', "Internal server error.Please try again later.");
+        return redirect()->back();
+        }    
+        catch (\Exception $e) {
+            Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Session::flash('danger', "Internal server error.Please try again later.");
+            return redirect()->back();
 
-       }
+        }
 
       
 

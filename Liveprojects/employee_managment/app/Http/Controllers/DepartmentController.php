@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use App\Models\Department;
 use DB;
 use Log;
@@ -13,28 +14,19 @@ use Validate;
 class DepartmentController extends Controller
 {
    
-    // public function index()
-    // {
-
-    //     $department = Department::where('is_active',1)->paginate(5);
-    //     return view('admin.modules.department.index',compact('department'));
-    // }   
-
     public function index(Request $request)
     {
-        $query = Department::query();
-        if($request->ajax()){
-            $department = $query->where('name','LIKE','%'.$request->xxx.'%')->get();
-            return response()->json(['department'=> $department]);
+
+        $query = Department::where('is_active',1);
+        if($request->input('search')){
+            $query->where ( 'name', 'LIKE', '%' . $request->input('search') . '%' );
         }
-        else
-        {
-            $department = $query->where('is_active',1)->paginate(5);
-            return view('admin.modules.department.index',compact('department'));
-        }
-       
-        
+        $department  = $query->paginate(5);
+        return view('admin.modules.department.index',compact('department'));
     }   
+
+    
+   
     public function create()
     {
        return view('admin.modules.department.add');
@@ -222,4 +214,22 @@ class DepartmentController extends Controller
     {
         //
     }
+
+    // public function index(Request $request)
+    // {
+    //     $query = Department::query();
+    //     if($request->ajax()){
+    //         $department = $query->where('name','LIKE','%'.$request->xxx.'%')->paginate(5);
+    //         \Log::info('department');
+    //         \Log::info($department);
+    //         return response()->json(['department'=> $department]);
+    //     }
+    //     else
+    //     {
+    //         $department = $query->where('is_active',1)->paginate(5);
+    //         return view('admin.modules.department.index',compact('department'));
+    //     }
+       
+        
+    // }   
 }

@@ -41,13 +41,15 @@ Route::group(['middleware'=>['afterlogin']], function()
 
     /* ----------------- ----------   department start  -------------------------*/
     Route::group(['prefix'=>'department/','middleware'=>[],'as'=>'department.'], function(){
-      Route::get('/add',[DepartmentController::class,'create'])->name('create');
-      Route::post('/save',[DepartmentController::class,'store'])->name('add');
+      Route::get('add',[DepartmentController::class,'create'])->name('create');
+      Route::post('save',[DepartmentController::class,'store'])->name('add');
       Route::get('list',[DepartmentController::class,'index'])->name('index');
-      Route::get('/show/{id}',[DepartmentController::class,'show'])->name('show');
-      Route::get('/edit/{id}',[DepartmentController::class,'edit'])->name('edit');
-      Route::post('/update/{id}',[DepartmentController::class,'update'])->name('update');
-      Route::get('/status/{id}',[DepartmentController::class,'status'])->name('status');
+      Route::get('show/{id}',[DepartmentController::class,'show'])->name('show');
+      Route::get('edit/{id}',[DepartmentController::class,'edit'])->name('edit');
+      Route::post('update/{id}',[DepartmentController::class,'update'])->name('update');
+      Route::get('status/{id}',[DepartmentController::class,'status'])->name('status');
+     
+      
     });
     /* ----------------- ----------   department end  -------------------------*/
 

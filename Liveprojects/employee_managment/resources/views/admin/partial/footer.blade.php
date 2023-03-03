@@ -10,3 +10,6 @@
         <script src="{{asset('console/assets/js/select2/js/select2.min.js')}}"></script>
         <!-- validation link -->
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+         <!-- datatbale-->
+         <script src="https://cdn.datatables.net/v/dt/dt-1.13.3/datatables.min.js"></script>
+         <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>

@@ -3411,6 +3411,7 @@ fieldset:disabled a.btn {
 
 input[type="search"] {
     min-height: 40px;
+    width: 100%;
 }
 
 input[type="submit"].btn-block,
@@ -15306,6 +15307,7 @@ img {
     width: fit-content;
     margin: 0;
     padding: 0;
+   
 }
 
 .theme-btn-outline {
@@ -15775,4 +15777,102 @@ table .employee-image
 .custom-pagination .pagination 
 {
     justify-content: end;
+}
+input[type="search"] 
+{
+    border: 1px solid #8080804f !important;
+    border-radius: 5px;
+    justify-content: end;
+    padding-left: 15px;
+}
+:focus 
+{
+outline: none !important;
+}
+.showw
+{
+    margin:2px;
+}
+.editt
+{
+    margin:2px;
+}
+.statuss
+{
+    margin:2px;
+}
+
+/* #tab1, #tab2, #tab3{
+    background-color:grey;
+    color:white;
+    padding:5px 10px;
+    display:grid;
+    width:100px;
+    border-bottom:1px solid;
+  } */
+  
+  #tab1:hover, #tab2:hover, #tab3:hover{
+    background-color:darkgrey;
+  }
+
+  .bedrequest
+  {
+    background-color: #799aafba;
+   
+  }
+  .centerbad
+  {
+    color:white;
+    position: relative;
+    text-align: center;
+  }
+  
+  .error-top 
+{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.centerbad p{
+
+    font-weight: 10px;
+}
+/*  */
+
+::placeholder ,
+.form-control
+{
+    font-size: 16px !important;
+}
+
+.card-title
+{
+    margin-bottom: 0px !important;
+}
+.add-cards .card-footer .theme-btn,
+.add-cards .card-footer .theme-btn-outline {
+font-size: 16px !important;
+height: 40px !important;
+}
+.add-cards .card-body{
+    padding: 40px 20px 25px !important;
+}
+.form-row .form-group 
+{
+    margin-bottom: 25px !important;
+}
+
+.searchlook 
+{
+    margin-top: 20px;
+}
+a:hover {
+    text-decoration: none !important;
+}
+.admin-sidebar .sub-menu .menu-item .menu-name
+{
+    font-size: 15px !important;
+    font-weight: 400 !important;
 }

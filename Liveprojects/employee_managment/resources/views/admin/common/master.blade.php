@@ -27,7 +27,11 @@
         <script src="{{asset('console/assets/js/jquery-ajax/jquery.min.js')}}"></script>
          <!-- boostrap-->
          <link rel="stylesheet" type="text/css" href="{{asset('console/assets/js/bootstrap/css/bootstrap.min.css')}}" />
-        
+          <!-- datatale-->
+         <link href="https://cdn.datatables.net/v/dt/dt-1.13.3/datatables.min.css"/>
+         <link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css"/>
+         <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"/>
+         
         <script>
             var app_url = '{{ url('/') }}';
         </script>

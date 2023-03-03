@@ -5,13 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AssetBrand;
 use DB;
-use Session;
 use Log;
-use Validate;
 use Auth;
+use Session;
+use Validate;
 
 class AssetBrandController extends Controller
 {
+
+    public function index()
+    {
+        $assbrand = AssetBrand::where('is_active',1)->paginate(5);
+        return view('admin.modules.asset_brand.index',compact('assbrand'));
+    }   
+
     public function create()
     {
        return view('admin.modules.asset_brand.add');
@@ -22,7 +29,7 @@ class AssetBrandController extends Controller
     {
         Log::info('aaaaaaa');
          $assbrand= $request->validate([
-            'name'=> 'required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'asset_brand'=> 'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -32,7 +39,7 @@ class AssetBrandController extends Controller
             Log::info('bbbbbbb');
             DB::beginTransaction();
             $assbrand = new AssetBrand;
-            $assbrand->name = $request->name;
+            $assbrand->name = $request->asset_brand;
             $assbrand->uuid = \Str::uuid();
             $assbrand->created_by = Auth::id();
           
@@ -52,36 +59,53 @@ class AssetBrandController extends Controller
            
 
 
-        }
-        catch (\Exception $exception) {
-            \Log::info("ERROR: CODE: " . $exception->getCode());
-            \Log::info("ERROR: Message: " . $exception->getMessage());
-            DB::rollback();
-            Session::flash('error','Internal server error please try again later.');
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:AssetBrandController function:store");
+            Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
         }
     }
 
    
-    public function index()
-    {
-        $assbrand = AssetBrand::where('is_active',1)->paginate(5);
-        return view('admin.modules.asset_brand.index',compact('assbrand'));
-    }   
-
-
     public function show($id)
     {
-        $assbrand = AssetBrand::where('uuid',$id)->first();
-        return view('admin.modules.asset_brand.show',compact('assbrand'));
+        $post = AssetBrand::where('uuid',$id)->first();
+
+        if( is_null($post) ) {
+
+            return abort(404);
+
+        } else {
+
+            $assbrand = AssetBrand::where('uuid',$id)->first();
+            return view('admin.modules.asset_brand.show',compact('assbrand'));
+        }    
     }
 
     
     public function edit($id)
     {
-        $assbrand = AssetBrand::where('uuid',$id)->first();
-        return view('admin.modules.asset_brand.edit',compact('assbrand'));
+        $post = AssetBrand::where('uuid',$id)->first();
+        if( is_null($post) ) {
+
+            return abort(404);
+
+        } else {
+
+            $assbrand = AssetBrand::where('uuid',$id)->first();
+            return view('admin.modules.asset_brand.edit',compact('assbrand'));
+        }    
     }
 
    
@@ -89,7 +113,7 @@ class AssetBrandController extends Controller
     {
         Log::info('dddddddd');
         $assbrand = $request->validate([
-            'name'=> 'required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'asset_brand'=> 'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -98,7 +122,7 @@ class AssetBrandController extends Controller
             Log::info('eeeeeeee');
             DB::beginTransaction();
             $assbrand = AssetBrand::where('uuid',$id)->first();;
-            $assbrand -> name = $request->name;
+            $assbrand -> name = $request->asset_brand;
             $assbrand->updated_by  = Auth::id();
             $res = $assbrand ->save();
             
@@ -113,22 +137,25 @@ class AssetBrandController extends Controller
             DB::commit();
             Session::flash('success','asset brand update successfully');
             return redirect()->route('asset_brand.index');
-           
+        
 
-
-        }
-        catch (\Exception $exception) {
-            Log::info('catch');
-            \Log::info("ERROR: CODE: " . $exception->getCode());
-            \Log::info("ERROR: Message: " . $exception->getMessage());
-            DB::rollback();
-            Session::flash('error','Internal server error please try again later.');
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:AssetBrandController function:update");
+            Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
         }
     }
-
-    
 
     public function status($id)
     {
@@ -153,20 +180,23 @@ class AssetBrandController extends Controller
            DB::commit();
            Session::flash('success','asset brand  delete successfully');
            return redirect()->route('asset_brand.index');
-          
+       
+        }catch (\Illuminate\Database\QueryException $e) {
+        Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+        Log::info('Error Code: ' . $e->getCode());
+        Log::info('Error Message: ' . $e->getMessage());
+        Log::info("Exiting class:AssetBrandController function:delete");
+        Session::flash('danger', "Internal server error.Please try again later.");
+        return redirect()->back();
+        }    
+        catch (\Exception $e) {
+            Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Session::flash('danger', "Internal server error.Please try again later.");
+            return redirect()->back();
 
-
-       }
-       catch (\Exception $exception) {
-           \Log::info("ERROR: CODE: " . $exception->getCode());
-           \Log::info("ERROR: Message: " . $exception->getMessage());
-           DB::rollback();
-           Session::flash('error','Internal server error please try again later.');
-           return redirect()->back();
-
-       }
-
-      
+        }
 
     }
 

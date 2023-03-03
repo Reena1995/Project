@@ -1,17 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\LeaveType;
 use DB;
-use Session;
 use Log;
-use Validate;
 use Auth;
+use Session;
+use Validate;
 
 class LeaveTypeController extends Controller
 {
+    public function index()
+    {
+        $leavetype = LeaveType::where('is_active',1)->paginate(5);
+        return view('admin.modules.leave_type.index',compact('leavetype'));
+    }   
+
     public function create()
     {
        return view('admin.modules.leave_type.add');
@@ -22,7 +27,7 @@ class LeaveTypeController extends Controller
     {
         Log::info('aaaaaaa');
          $leavetype= $request->validate([
-            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'leave_type_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -32,7 +37,7 @@ class LeaveTypeController extends Controller
             Log::info('bbbbbbb');
             DB::beginTransaction();
             $leavetype = new LeaveType;
-            $leavetype->type = $request->type;
+            $leavetype->type = $request->leave_type_name;
             $leavetype->created_by = Auth::id();
             $leavetype->uuid = \Str::uuid();
           
@@ -52,36 +57,54 @@ class LeaveTypeController extends Controller
            
 
 
-        }
-        catch (\Exception $exception) {
-            \Log::info("ERROR: CODE: " . $exception->getCode());
-            \Log::info("ERROR: Message: " . $exception->getMessage());
-            DB::rollback();
-            Session::flash('error','Internal server error please try again later.');
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:LeaveTypeController function:store");
+            Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
         }
     }
 
    
-    public function index()
-    {
-        $leavetype = LeaveType::where('is_active',1)->paginate(5);
-        return view('admin.modules.leave_type.index',compact('leavetype'));
-    }   
-
-
     public function show($id)
     {
-        $leavetype = LeaveType::where('uuid',$id)->first();
-        return view('admin.modules.leave_type.show',compact('leavetype'));
+        $post =  LeaveType::where('uuid',$id)->first();
+
+        if( is_null($post) ) {
+
+            return abort(404);
+
+        } else {
+
+            $leavetype = LeaveType::where('uuid',$id)->first();
+            return view('admin.modules.leave_type.show',compact('leavetype'));
+        }    
     }
 
     
     public function edit($id)
     {
-        $leavetype = LeaveType::where('uuid',$id)->first();
-        return view('admin.modules.leave_type.edit',compact('leavetype'));
+        $post = LeaveType::where('uuid',$id)->first();
+
+        if( is_null($post) ) {
+
+            return abort(404);
+
+        } else {
+
+            $leavetype = LeaveType::where('uuid',$id)->first();
+            return view('admin.modules.leave_type.edit',compact('leavetype'));
+        }    
     }
 
    
@@ -89,7 +112,7 @@ class LeaveTypeController extends Controller
     {
         Log::info('dddddddd');
         $leavetype = $request->validate([
-            'type'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'leave_type_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -98,7 +121,7 @@ class LeaveTypeController extends Controller
             Log::info('eeeeeeee');
             DB::beginTransaction();
             $leavetype = LeaveType::where('uuid',$id)->first();;
-            $leavetype -> type = $request->type;
+            $leavetype -> type = $request->leave_type_name;
             $leavetype->updated_by = Auth::id();
             $res = $leavetype ->save();
             
@@ -116,14 +139,20 @@ class LeaveTypeController extends Controller
            
 
 
-        }
-        catch (\Exception $exception) {
-            Log::info('catch');
-            \Log::info("ERROR: CODE: " . $exception->getCode());
-            \Log::info("ERROR: Message: " . $exception->getMessage());
-            DB::rollback();
-            Session::flash('error','Internal server error please try again later.');
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:LeaveTypeController function:update");
+            Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
         }
     }
@@ -156,15 +185,22 @@ class LeaveTypeController extends Controller
           
 
 
-       }
-       catch (\Exception $exception) {
-           \Log::info("ERROR: CODE: " . $exception->getCode());
-           \Log::info("ERROR: Message: " . $exception->getMessage());
-           DB::rollback();
-           Session::flash('error','Internal server error please try again later.');
-           return redirect()->back();
+       }catch (\Illuminate\Database\QueryException $e) {
+        Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+        Log::info('Error Code: ' . $e->getCode());
+        Log::info('Error Message: ' . $e->getMessage());
+        Log::info("Exiting class:LeaveTypeController function:delete");
+        Session::flash('danger', "Internal server error.Please try again later.");
+        return redirect()->back();
+    }    
+    catch (\Exception $e) {
+            Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Session::flash('danger', "Internal server error.Please try again later.");
+            return redirect()->back();
 
-       }
+    }
 
       
 

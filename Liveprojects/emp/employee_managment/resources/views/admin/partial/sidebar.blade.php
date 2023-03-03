@@ -1,4 +1,5 @@
- <aside class="admin-sidebar">
+
+<aside class="admin-sidebar">
             <div class="admin-sidebar-brand">
                 <!-- begin sidebar branding-->
                 <img class="admin-brand-logo" src="{{asset('console/assets/img/logo.svg')}}" width="40" alt="hci Logo" />
@@ -11,11 +12,31 @@
                     <a href="#" class="admin-close-sidebar"></a>
                 </div>
             </div>
+            
             <div class="admin-sidebar-wrapper js-scrollbar">
                 <!-- Menu List Begins-->
-                <ul class="menu">
+                <!-- <div id="nav-mobile">
+                    <a href="#" id="tab1">Products</a>
+                    <ul style="display: none;">
+                        <li><a href="index.php">Home</a></li>
+                        <li><a href="#">Why Us</a></li>
+                        <li><a href="#">Our Work</a></li>
+                    </ul>
+                    <a href="#" id="tab2">About</a>
+                    <ul style="display: none;">
+                        <li><a href="#">Our Equipment</a></li>
+                        <li><a href="#">Video Production</a></li>
+                    </ul>
+                    <a href="#" id="tab3">Contact</a>
+                    <ul style="display: none;">
+                        <li id="last-child"><a href="#">Contact</a></li>
+                        <li id="last-child"><a href="#">Social Media</a></li>
+                    </ul>
+
+                </div> -->
+                <ul class="menu">   
                     <!--list item begins-->
-                    <li class="menu-item active">
+                    <li class="menu-item" >
                         <a href="{{route('admin.dashboard')}}" class="menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">Dashboard </span>
@@ -26,14 +47,14 @@
                         </a>
                     </li>
                     <!--list item ends-->
-
+                    
                    
                      <!--list item department  module  begins-->
-                     <li class="menu-item">
-                        <a href="#" class="open-dropdown menu-link">
+                     <li class="menu-item {{ Request::is('department/list') || Request::is('department/*')? 'opened' : '' }}">
+                        <a href="javascript:void(0);" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
-                                    Department
+                                Department
                                     <span class="menu-arrow"></span>
                                 </span>
                             </span>
@@ -42,8 +63,8 @@
                             </span>
                         </a>
                         <!--submenu-->
-                        <ul class="sub-menu">
-                            <li class="menu-item">
+                        <ul class="sub-menu" style="display: {{ Request::is('department/*') ? 'block' : 'none' }};">
+                            <li class="menu-item  {{ Request::url() == route('department.create') ? 'opened' : '' }}" >
                                     <a href="{{route('department.create')}}"   class="menu-link">
                                         <span class="menu-label">
                                             <span class="menu-name">Add Department</span>
@@ -54,10 +75,10 @@
                                     </a>
                             </li>
                             
-                            <li class="menu-item">
+                            <li class="menu-item  {{ Request::url() == route('department.index') ? 'opened' : '' }}">
                                 <a href="{{route('department.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View Department</span>
+                                        <span class="menu-name">View Departments</span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -72,8 +93,8 @@
                     <!--list item department  module ends-->
                     
                     <!--list item designation  module  begins-->
-                    <li class="menu-item">
-                        <a href="#" class="open-dropdown menu-link">
+                    <li class="menu-item {{ Request::is('designation/list') || Request::is('designation/*')? 'opened' : '' }}">
+                        <a href="javascript:void(0);" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
                                 Designation
@@ -85,8 +106,8 @@
                             </span>
                         </a>
                         <!--submenu-->
-                        <ul class="sub-menu">
-                            <li class="menu-item">
+                        <ul class="sub-menu" style="display: {{ Request::is('designation/*') ? 'block' : 'none' }};">
+                            <li class="menu-item  {{ Request::url() == route('designation.create') ? 'opened' : '' }}" >
                                     <a href="{{route('designation.create')}}"   class="menu-link">
                                         <span class="menu-label">
                                             <span class="menu-name">Add Designation</span>
@@ -97,10 +118,10 @@
                                     </a>
                             </li>
                             
-                            <li class="menu-item">
+                            <li class="menu-item  {{ Request::url() == route('designation.index') ? 'opened' : '' }}">
                                 <a href="{{route('designation.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View Designation</span>
+                                        <span class="menu-name">View Designations</span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -115,8 +136,8 @@
                     <!--list item designation  module ends-->
 
                     <!--list item Role organization  module  begins-->
-                    <li class="menu-item">
-                        <a href="#" class="open-dropdown menu-link">
+                    <li class="menu-item {{ Request::is('organization-role/list') || Request::is('organization-role/*')? 'opened' : '' }}">
+                        <a href="javascript:void(0);" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
                                     Organization Role
@@ -128,8 +149,8 @@
                             </span>
                         </a>
                         <!--submenu-->
-                        <ul class="sub-menu">
-                            <li class="menu-item">
+                        <ul class="sub-menu" style="display: {{ Request::is('organization-role/*') ? 'block' : 'none' }};">
+                            <li class="menu-item {{ Request::url() == route('organization_role.create') ? 'opened' : '' }}">
                                     <a href="{{route('organization_role.create')}}"   class="menu-link">
                                         <span class="menu-label">
                                             <span class="menu-name">Add Organization Role</span>
@@ -140,10 +161,10 @@
                                     </a>
                             </li>
                             
-                            <li class="menu-item">
+                            <li class="menu-item {{ Request::url() == route('organization_role.index') ? 'opened' : '' }}">
                                 <a href="{{route('organization_role.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View Organization Role</span>
+                                        <span class="menu-name">View Organization Roles</span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -155,21 +176,23 @@
                     <!--list item Role organization  module ends-->
 
                     <!--list item company location module  begins-->
-                    <li class="menu-item">
-                        <a href="#" class="open-dropdown menu-link">
+                    
+                    <!--list item company location  module ends-->
+                    <li class="menu-item {{ Request::is('company-location/list') || Request::is('company-location/*')? 'opened' : '' }}">
+                        <a href="javascript:void(0);" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
-                                    Location
+                                    Location 
                                     <span class="menu-arrow"></span>
                                 </span>
                             </span>
                             <span class="menu-icon">
-                                <i class="icon-placeholder  fa fa-map-marker"></i>
+                                <i class="icon-placeholder   fa fa-map-marker"></i>
                             </span>
                         </a>
                         <!--submenu-->
-                        <ul class="sub-menu">
-                            <li class="menu-item">
+                        <ul class="sub-menu" style="display: {{ Request::is('company-location/*') ? 'block' : 'none' }};">
+                            <li class="menu-item {{ Request::url() == route('company_location.create') ? 'opened' : '' }}">
                                     <a href="{{route('company_location.create')}}"   class="menu-link">
                                         <span class="menu-label">
                                             <span class="menu-name">Add Location</span>
@@ -180,10 +203,10 @@
                                     </a>
                             </li>
                             
-                            <li class="menu-item">
+                            <li class="menu-item {{ Request::url() == route('company_location.index') ? 'opened' : '' }}">
                                 <a href="{{route('company_location.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View Location</span>
+                                        <span class="menu-name">View Locations</span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -192,11 +215,9 @@
                             </li>
                         </ul>
                     </li>
-                    <!--list item company location  module ends-->
-
                     <!--list item company location Type module  begins-->
-                    <li class="menu-item">
-                        <a href="#" class="open-dropdown menu-link">
+                    <li class="menu-item {{ Request::is('company-location-type/list') || Request::is('company-location-type/*')? 'opened' : '' }}">
+                        <a href="javascript:void(0);" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
                                     Location Type
@@ -208,8 +229,8 @@
                             </span>
                         </a>
                         <!--submenu-->
-                        <ul class="sub-menu">
-                            <li class="menu-item">
+                        <ul class="sub-menu" style="display: {{ Request::is('company-location-type/*') ? 'block' : 'none' }};">
+                            <li class="menu-item {{ Request::url() == route('company_location_type.create') ? 'opened' : '' }}">
                                     <a href="{{route('company_location_type.create')}}"   class="menu-link">
                                         <span class="menu-label">
                                             <span class="menu-name">Add Location Type</span>
@@ -220,10 +241,10 @@
                                     </a>
                             </li>
                             
-                            <li class="menu-item">
+                            <li class="menu-item {{ Request::url() == route('company_location_type.index') ? 'opened' : '' }}">
                                 <a href="{{route('company_location_type.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View Location Type</span>
+                                        <span class="menu-name">View Location Types</span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -235,8 +256,8 @@
                     <!--list item company location Type  module ends-->
                     
                      <!--list item medium of instruction module  begins-->
-                     <li class="menu-item">
-                        <a href="#" class="open-dropdown menu-link">
+                     <li class="menu-item {{ Request::is('medium-instruction-type/list') || Request::is('medium-instruction-type/*')? 'opened' : '' }}">
+                        <a href="javascript:void(0);" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
                                     Medium 
@@ -248,8 +269,8 @@
                             </span>
                         </a>
                         <!--submenu-->
-                        <ul class="sub-menu">
-                            <li class="menu-item">
+                        <ul class="sub-menu" style="display: {{ Request::is('medium-instruction-type/*') ? 'block' : 'none' }};">
+                            <li class="menu-item {{ Request::url() == route('medium_instruction.create') ? 'opened' : '' }}">
                                     <a href="{{route('medium_instruction.create')}}"   class="menu-link">
                                         <span class="menu-label">
                                             <span class="menu-name">Add Medium </span>
@@ -260,10 +281,10 @@
                                     </a>
                             </li>
                             
-                            <li class="menu-item">
+                            <li class="menu-item {{ Request::url() == route('medium_instruction.index') ? 'opened' : '' }}">
                                 <a href="{{route('medium_instruction.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View Medium </span>
+                                        <span class="menu-name">View Mediums </span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -276,8 +297,8 @@
 
                     
                      <!--list item Language module  begins-->
-                     <li class="menu-item">
-                        <a href="#" class="open-dropdown menu-link">
+                     <li class="menu-item {{ Request::is('language/list') || Request::is('language/*')? 'opened' : '' }}">
+                        <a href="javascript:void(0);" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
                                     Language
@@ -290,8 +311,8 @@
                             </span>
                         </a>
                         <!--submenu-->
-                        <ul class="sub-menu">
-                            <li class="menu-item">
+                        <ul class="sub-menu" style="display: {{ Request::is('language/*') ? 'block' : 'none' }};">
+                            <li class="menu-item {{ Request::url() == route('language.create') ? 'opened' : '' }}">
                                     <a href="{{route('language.create')}}"   class="menu-link">
                                         <span class="menu-label">
                                             <span class="menu-name">Add Language</span>
@@ -302,10 +323,10 @@
                                     </a>
                             </li>
                             
-                            <li class="menu-item">
+                            <li class="menu-item {{ Request::url() == route('language.index') ? 'opened' : '' }}">
                                 <a href="{{route('language.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View   Language</span>
+                                        <span class="menu-name">View   Languages</span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -317,8 +338,8 @@
                     <!--list item  Language  module ends-->
 
                      <!--list item Education Level module  begins-->
-                     <li class="menu-item">
-                        <a href="#" class="open-dropdown menu-link">
+                     <li class="menu-item {{ Request::is('education-level/list') || Request::is('education-level/*')? 'opened' : '' }}">
+                        <a href="javascript:void(0);" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
                                     Education Level
@@ -330,8 +351,8 @@
                             </span>
                         </a>
                         <!--submenu-->
-                        <ul class="sub-menu">
-                            <li class="menu-item">
+                        <ul class="sub-menu" style="display: {{ Request::is('education-level/*') ? 'block' : 'none' }};">
+                            <li class="menu-item {{ Request::url() == route('education_level.create') ? 'opened' : '' }}">
                                     <a href="{{route('education_level.create')}}"   class="menu-link">
                                         <span class="menu-label">
                                             <span class="menu-name">Add Education Level</span>
@@ -342,10 +363,10 @@
                                     </a>
                             </li>
                             
-                            <li class="menu-item">
+                            <li class="menu-item {{ Request::url() == route('education_level.index') ? 'opened' : '' }}">
                                 <a href="{{route('education_level.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View   Education Level</span>
+                                        <span class="menu-name">View   Education Levels</span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -357,8 +378,8 @@
                     <!--list item Education Level  module ends-->
 
                      <!--list item Document Type module  begins-->
-                     <li class="menu-item">
-                        <a href="#" class="open-dropdown menu-link">
+                     <li class="menu-item {{ Request::is('document-type/list') || Request::is('document-type/*')? 'opened' : '' }}">
+                        <a href="javascript:void(0);" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
                                     Document Type
@@ -370,8 +391,8 @@
                             </span>
                         </a>
                         <!--submenu-->
-                        <ul class="sub-menu">
-                            <li class="menu-item">
+                        <ul class="sub-menu" style="display: {{ Request::is('document-type/*') ? 'block' : 'none' }};">
+                            <li class="menu-item {{ Request::url() == route('document_type.create') ? 'opened' : '' }}">
                                     <a href="{{route('document_type.create')}}"   class="menu-link">
                                         <span class="menu-label">
                                             <span class="menu-name">Add Document Type</span>
@@ -382,10 +403,10 @@
                                     </a>
                             </li>
                             
-                            <li class="menu-item">
+                            <li class="menu-item {{ Request::url() == route('document_type.index') ? 'opened' : '' }}">
                                 <a href="{{route('document_type.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View Document Type</span>
+                                        <span class="menu-name">View Document Types</span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -397,8 +418,8 @@
                     <!--list item Document Type  module ends-->
 
                     <!--list item Asset Brand module  begins-->
-                    <li class="menu-item">
-                        <a href="#" class="open-dropdown menu-link">
+                    <li class="menu-item {{ Request::is('asset-brand/list') || Request::is('asset-brand/*')? 'opened' : '' }}">
+                        <a href="javascript:void(0);" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
                                          Asset Brand 
@@ -410,8 +431,8 @@
                             </span>
                         </a>
                         <!--submenu-->
-                        <ul class="sub-menu">
-                            <li class="menu-item">
+                        <ul class="sub-menu" style="display: {{ Request::is('asset-brand/*') ? 'block' : 'none' }};">
+                            <li class="menu-item {{ Request::url() == route('asset_brand.create') ? 'opened' : '' }}">
                                     <a href="{{route('asset_brand.create')}}"   class="menu-link">
                                         <span class="menu-label">
                                             <span class="menu-name">Add Asset Brand </span>
@@ -422,10 +443,10 @@
                                     </a>
                             </li>
                             
-                            <li class="menu-item">
+                            <li class="menu-item {{ Request::url() == route('asset_brand.index') ? 'opened' : '' }}">
                                 <a href="{{route('asset_brand.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View Asset Brand </span>
+                                        <span class="menu-name">View Asset Brands </span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -437,8 +458,8 @@
                     <!--list item Asset Brand  module ends-->
 
                      <!--list item Asset Type module  begins-->
-                     <li class="menu-item">
-                        <a href="#" class="open-dropdown menu-link">
+                     <li class="menu-item {{ Request::is('asset-type/list') || Request::is('asset-type/*')? 'opened' : '' }}">
+                        <a href="javascript:void(0);" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
                                          Asset Type 
@@ -450,8 +471,8 @@
                             </span>
                         </a>
                         <!--submenu-->
-                        <ul class="sub-menu">
-                            <li class="menu-item">
+                        <ul class="sub-menu" style="display: {{ Request::is('asset-type/*') ? 'block' : 'none' }};">
+                            <li class="menu-item {{ Request::url() == route('asset_type.create') ? 'opened' : '' }}">
                                     <a href="{{route('asset_type.create')}}"   class="menu-link">
                                         <span class="menu-label">
                                             <span class="menu-name">Add Asset Type </span>
@@ -462,10 +483,10 @@
                                     </a>
                             </li>
                             
-                            <li class="menu-item">
+                            <li class="menu-item {{ Request::url() == route('asset_type.index') ? 'opened' : '' }}">
                                 <a href="{{route('asset_type.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View Asset Type </span>
+                                        <span class="menu-name">View Asset Types </span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -477,8 +498,8 @@
                     <!--list item Asset Type  module ends-->
 
                     <!--list item    Asset Sub Type  module  begins-->
-                    <li class="menu-item">
-                        <a href="#" class="open-dropdown menu-link">
+                    <li class="menu-item {{ Request::is('asset-sub-type/list') || Request::is('asset-sub-type/*')? 'opened' : '' }}">
+                        <a href="javascript:void(0);" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
                                          Asset Sub Type 
@@ -490,8 +511,8 @@
                             </span>
                         </a>
                         <!--submenu-->
-                        <ul class="sub-menu">
-                            <li class="menu-item">
+                        <ul class="sub-menu" style="display: {{ Request::is('asset-sub-type/*') ? 'block' : 'none' }};">
+                            <li class="menu-item {{ Request::url() == route('asset_sub_type.create') ? 'opened' : '' }}">
                                     <a href="{{route('asset_sub_type.create')}}"   class="menu-link">
                                         <span class="menu-label">
                                             <span class="menu-name">Add Asset Sub Type </span>
@@ -502,10 +523,10 @@
                                     </a>
                             </li>
                             
-                            <li class="menu-item">
+                            <li class="menu-item {{ Request::url() == route('asset_sub_type.index') ? 'opened' : '' }}">
                                 <a href="{{route('asset_sub_type.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View Asset Sub Type </span>
+                                        <span class="menu-name">View Asset Sub Types </span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -517,8 +538,8 @@
                     <!--list item    Asset Sub Type   module ends-->
 
                     <!--list item    Current Residence Type  module  begins-->
-                    <li class="menu-item">
-                        <a href="#" class="open-dropdown menu-link">
+                    <li class="menu-item {{ Request::is('current-residence-type/list') || Request::is('current-residence-type/*')? 'opened' : '' }}">
+                        <a href="javascript:void(0);" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
                                     Residence Type 
@@ -530,8 +551,8 @@
                             </span>
                         </a>
                         <!--submenu-->
-                        <ul class="sub-menu">
-                            <li class="menu-item">
+                        <ul class="sub-menu" style="display: {{ Request::is('current-residence-type/*') ? 'block' : 'none' }};">
+                            <li class="menu-item {{ Request::url() == route('current_residence_type.create') ? 'opened' : '' }}">
                                     <a href="{{route('current_residence_type.create')}}"   class="menu-link">
                                         <span class="menu-label">
                                             <span class="menu-name">Add Residence Type </span>
@@ -542,10 +563,10 @@
                                     </a>
                             </li>
                             
-                            <li class="menu-item">
+                            <li class="menu-item {{ Request::url() == route('current_residence_type.index') ? 'opened' : '' }}">
                                 <a href="{{route('current_residence_type.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View Residence Type </span>
+                                        <span class="menu-name">View Residence Types </span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -557,8 +578,8 @@
                     <!--list item    current Residence Type   module ends-->
 
                     <!--list item    mode Of Transportation  module  begins-->
-                    <li class="menu-item">
-                        <a href="#" class="open-dropdown menu-link">
+                    <li class="menu-item {{ Request::is('mode-of-transportation/list') || Request::is('mode-of-transportation/*')? 'opened' : '' }}">
+                        <a href="javascript:void(0);" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
                                     Transportation 
@@ -570,8 +591,8 @@
                             </span>
                         </a>
                         <!--submenu-->
-                        <ul class="sub-menu">
-                            <li class="menu-item">
+                        <ul class="sub-menu" style="display: {{ Request::is('mode-of-transportation/*') ? 'block' : 'none' }};">
+                            <li class="menu-item {{ Request::url() == route('mode_of_transportation.create') ? 'opened' : '' }}">
                                     <a href="{{route('mode_of_transportation.create')}}"   class="menu-link">
                                         <span class="menu-label">
                                             <span class="menu-name">Add Transportation </span>
@@ -582,10 +603,10 @@
                                     </a>
                             </li>
                             
-                            <li class="menu-item">
+                            <li class="menu-item {{ Request::url() == route('mode_of_transportation.index') ? 'opened' : '' }}">
                                 <a href="{{route('mode_of_transportation.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View Transportation </span>
+                                        <span class="menu-name">View Transportations </span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -597,8 +618,8 @@
                     <!--list item    mode Of Transportation   module ends-->
 
                      <!--list item    Leave Type  module  begins-->
-                     <li class="menu-item">
-                        <a href="#" class="open-dropdown menu-link">
+                     <li class="menu-item {{ Request::is('leave-type/list') || Request::is('leave-type/*')? 'opened' : '' }}">
+                        <a href="javascript:void(0);" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">
                                     Leave Type
@@ -610,8 +631,8 @@
                             </span>
                         </a>
                         <!--submenu-->
-                        <ul class="sub-menu">
-                            <li class="menu-item">
+                        <ul class="sub-menu" style="display: {{ Request::is('leave-type/*') ? 'block' : 'none' }};">
+                            <li class="menu-item {{ Request::url() == route('leave_type.create') ? 'opened' : '' }}">
                                     <a href="{{route('leave_type.create')}}"   class="menu-link">
                                         <span class="menu-label">
                                             <span class="menu-name">Add Leave Type </span>
@@ -622,10 +643,10 @@
                                     </a>
                             </li>
                             
-                            <li class="menu-item">
+                            <li class="menu-item {{ Request::url() == route('leave_type.index') ? 'opened' : '' }}">
                                 <a href="{{route('leave_type.index')}}" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">View Leave Type </span>
+                                        <span class="menu-name">View Leave Types </span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="icon-placeholder mdi mdi-eye-outline"></i>
@@ -642,3 +663,5 @@
                 <!-- Menu List Ends-->
             </div>
         </aside>
+       
+       

@@ -1,28 +1,32 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\EducationLevel;
 use DB;
-use Session;
 use Log;
-use Validate;
 use Auth;
+use Session;
+use Validate;
 
 class EducationLevelController extends Controller
 {
+    public function index()
+    {
+        $edulevel = EducationLevel::where('is_active',1)->paginate(5);
+        return view('admin.modules.education_level.index',compact('edulevel'));
+    }  
+
     public function create()
     {
        return view('admin.modules.education_level.add');
     }
 
-    
     public function store(Request $request)
     {
         Log::info('aaaaaaa');
          $edulevel= $request->validate([
-            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'education_level_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
         ]); 
@@ -32,7 +36,7 @@ class EducationLevelController extends Controller
             Log::info('bbbbbbb');
             DB::beginTransaction();
             $edulevel = new EducationLevel;
-            $edulevel->name = $request->name;
+            $edulevel->name = $request->education_level_name;
             $edulevel->created_by = Auth::id();
             $edulevel->uuid = \Str::uuid();
           
@@ -52,36 +56,53 @@ class EducationLevelController extends Controller
            
 
 
-        }
-        catch (\Exception $exception) {
-            \Log::info("ERROR: CODE: " . $exception->getCode());
-            \Log::info("ERROR: Message: " . $exception->getMessage());
-            DB::rollback();
-            Session::flash('error','Internal server error please try again later.');
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:EducationLevelController function:store");
+            Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
         }
     }
 
-   
-    public function index()
-    {
-        $edulevel = EducationLevel::where('is_active',1)->paginate(5);
-        return view('admin.modules.education_level.index',compact('edulevel'));
-    }   
-
-
     public function show($id)
     {
-        $edulevel = EducationLevel::where('uuid',$id)->first();
-        return view('admin.modules.education_level.show',compact('edulevel'));
+        $post =  EducationLevel::where('uuid',$id)->first();
+
+        if( is_null($post) ) {
+
+            return abort(404);
+
+        } else {
+
+            $edulevel = EducationLevel::where('uuid',$id)->first();
+            return view('admin.modules.education_level.show',compact('edulevel'));
+        }    
     }
 
     
     public function edit($id)
     {
-        $edulevel = EducationLevel::where('uuid',$id)->first();
-        return view('admin.modules.education_level.edit',compact('edulevel'));
+        $post =  EducationLevel::where('uuid',$id)->first();
+
+        if( is_null($post) ) {
+
+            return abort(404);
+
+        } else {
+
+            $edulevel = EducationLevel::where('uuid',$id)->first();
+            return view('admin.modules.education_level.edit',compact('edulevel'));
+        }    
     }
 
    
@@ -89,7 +110,7 @@ class EducationLevelController extends Controller
     {
         Log::info('dddddddd');
         $medium = $request->validate([
-            'name'=>'required','regex:/(^[A-Za-z0-9 ]+$)+/',
+            'education_level_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
        
@@ -98,7 +119,7 @@ class EducationLevelController extends Controller
             Log::info('eeeeeeee');
             DB::beginTransaction();
             $edulevel = EducationLevel::where('uuid',$id)->first();;
-            $edulevel -> name = $request->name;
+            $edulevel -> name = $request->education_level_name;
             $edulevel->updated_by = Auth::id();
             $res = $edulevel ->save();
             
@@ -116,14 +137,20 @@ class EducationLevelController extends Controller
            
 
 
-        }
-        catch (\Exception $exception) {
-            Log::info('catch');
-            \Log::info("ERROR: CODE: " . $exception->getCode());
-            \Log::info("ERROR: Message: " . $exception->getMessage());
-            DB::rollback();
-            Session::flash('error','Internal server error please try again later.');
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:EducationLevelController function:update");
+            Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
         }
     }
@@ -132,7 +159,7 @@ class EducationLevelController extends Controller
 
     public function status($id)
     {
-      
+
        try{
 
            Log::info('hbjjhbdjhqw');
@@ -153,22 +180,26 @@ class EducationLevelController extends Controller
            DB::commit();
            Session::flash('success','education level  delete successfully');
            return redirect()->route('education_level.index');
-          
+        
+        }catch (\Illuminate\Database\QueryException $e) {
+        Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+        Log::info('Error Code: ' . $e->getCode());
+        Log::info('Error Message: ' . $e->getMessage());
+        Log::info("Exiting class:EducationLevelController function:delete");
+        Session::flash('danger', "Internal server error.Please try again later.");
+        return redirect()->back();
+        }    
+        catch (\Exception $e) {
+            Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Session::flash('danger', "Internal server error.Please try again later.");
+            return redirect()->back();
 
-
-       }
-       catch (\Exception $exception) {
-           \Log::info("ERROR: CODE: " . $exception->getCode());
-           \Log::info("ERROR: Message: " . $exception->getMessage());
-           DB::rollback();
-           Session::flash('error','Internal server error please try again later.');
-           return redirect()->back();
-
-       }
-
-      
+        }
 
     }
+
     public function destroy($id)
     {
         //

@@ -66,8 +66,18 @@
      * @param {(Element|jQuery)} [context] - A DOM Element, Document, or jQuery to use as context.
      * @requires jQuery
      */
+    $(document).on("click", ".menu-item", function () {
+
+        $('.menu-item').next().slideDown();
+        $('.menu-item').removeClass('opened');
+        $(this).addClass('opened');
+        $('.sub-menu').hide();
+        $(this).children('.sub-menu').show();
+            
+    });
+
     $(document).on("click", ".open-dropdown", function (e) {
-        e.preventDefault(); 
+        e.preventDefault();
         if (!$(this).next().is(":visible")) {
             //opens the adjacent list to the target
             $(this).next().slideDown();
@@ -80,6 +90,12 @@
     });
 
     // light and dark theme setting js END
+
+
+    $('.nav-list').click(function() {
+        $('.nav-list li.active').removeClass('active');
+        $(this).addClass('active');
+    });
 
     //Floating Form Floating label :: START
 
@@ -101,4 +117,29 @@
     });
 
     //Floating Form Floating label :: END
+
+    $(document).ready(function() {
+        $('#nav-mobile ul').hide();
+        $('#nav-mobile a').click(function(e) {
+            e.preventDefault();
+            var $menuItem = $(this).next('ul');
+            $menuItem.slideToggle();
+            $('#nav-mobile ul').not($menuItem).slideUp();
+        });
+    });
+
+    
+    /* session time out start */
+    $("document").ready(function(){
+        setTimeout(function(){
+           $(".alert").remove();
+        }, 5000 ); // 5 secs
+    
+    }); 
+    /* session time out start */
+
+
 })(window.jQuery);
+
+
+
