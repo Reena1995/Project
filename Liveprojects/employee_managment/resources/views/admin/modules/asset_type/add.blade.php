@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Add Asset Type Details</div>
+                                    <div class="card-title">Add Asset Type Name</div>
                                 </div>
                                 <form id="asset_type_add"   action="{{route('asset_type.add')}}" name="asset_type_add_form" method="post" enctype="multipart/form-data">
                                     @csrf  
@@ -23,7 +23,7 @@
                                         <div class="form-row row">
                                             <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                                 <label>Asset Type</label>
-                                                <input type="text" id="asset_type" name="asset_type"  class="form-control form-control-lg" placeholder="Enter asset type name" />
+                                                <input type="text" id="asset_type" name="asset_type"  class="form-control form-control-lg" placeholder="Enter asset type" />
                                                 <span class="error"></span>
                                                 @if ($errors->has('asset_type'))
                                                     <span class="errr-validation">{{ $errors->first('asset_type') }}</span>
@@ -61,7 +61,7 @@
                     },                    
                 },
                 messages : {
-                    asset_type : "Please Enter a Asset Type",
+                    asset_type : "Please Enter an Asset Type",
                     
                 },
                 submitHandler : function(form){

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AssetType;
+use App\Models\AssetSubType;
 use DB;
 use Log;
 use Auth;
@@ -11,9 +12,13 @@ use Validate;
 
 class AssetTypeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $asstype = AssetType::where('is_active',1)->paginate(5);
+        $query = AssetType::query();
+        if($request->input('search')){
+            $query->where ( 'type', 'LIKE', '%' . $request->input('search') . '%' );
+        }
+        $asstype  = $query->where('is_active',1)->paginate(5);
         return view('admin.modules.asset_type.index',compact('asstype'));
     }   
 
@@ -160,7 +165,6 @@ class AssetTypeController extends Controller
     }
 
     
-
     public function status($id)
     {
       
@@ -169,44 +173,49 @@ class AssetTypeController extends Controller
            Log::info('hbjjhbdjhqw');
            DB::beginTransaction();
            $asstype = AssetType::where('uuid',$id)->first();
-           $asstype->is_active = 0;
-           $asstype->updated_by = Auth::id();
-           $res = $asstype->update();
+           if($asstype->id){
+            AssetSubType::where('asset_type_id',$asstype->id)->update(['is_active'=>'0']);
+            $asstype->is_active = 0;
+            $asstype->updated_by  = Auth::id();
+            $res = $asstype->update();
 
-           if(!$res)
-           {
-               DB::rollback();
-               Session::flash('error','Internal server error please try again later.');
-            
-           
-               return redirect()->back();
-           }
-           DB::commit();
-           Session::flash('success','asset type  delete successfully');
+            if(!$res)
+            { 
+                DB::rollback();
+
+                Session::flash('error','Internal server error please try again later.');
+
+                return redirect()->back();
+            }
+            DB::commit();
+            Session::flash('success','asset type delete successfully');
+        }else{
+            Session::flash('success','Please try again..!');
+        }
            return redirect()->route('asset_type.index');
-          
 
-
-       }catch (\Illuminate\Database\QueryException $e) {
+       } catch (\Illuminate\Database\QueryException $e) {
         Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
         Log::info('Error Code: ' . $e->getCode());
         Log::info('Error Message: ' . $e->getMessage());
         Log::info("Exiting class:AssetTypeController function:delete");
         Session::flash('danger', "Internal server error.Please try again later.");
         return redirect()->back();
-    }    
-    catch (\Exception $e) {
+        }catch (\Exception $e) {
             Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
             Log::info('Error Code: ' . $e->getCode());
             Log::info('Error Message: ' . $e->getMessage());
             Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
 
+        }
     }
+
+
 
       
 
-    }
+    
     public function destroy($id)
     {
         //

@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Show Mode Of Transportation Details</div>
+                                    <div class="card-title">Show Mode Of Transportation Name</div>
                                 </div>
                                 <form id="mode_of_transportation_show"  action="" name="mode_of_transportation_add_form" method="post" enctype="multipart/form-data">
                                     @csrf  

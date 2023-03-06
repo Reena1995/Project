@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Add  Mode Of Transportation Details</div>
+                                    <div class="card-title">Add  Mode Of Transportation Name</div>
                                 </div>
                                 <form id="mode_of_transportation_add"  action="{{route('mode_of_transportation.add')}}" name="mode_of_transportation_add_form" method="post" enctype="multipart/form-data">
                                     @csrf  
@@ -23,7 +23,7 @@
                                         <div class="form-row row">
                                             <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                                 <label>Mode Of Transportation Name</label>
-                                                <input type="text" id="mode_of_transportation_name" name="mode_of_transportation_name"  class="form-control form-control-lg" placeholder="Enter Mode of Transportation Name" />
+                                                <input type="text" id="mode_of_transportation_name" name="mode_of_transportation_name"  class="form-control form-control-lg" placeholder="Enter Mode of Transportation" />
                                                 <span class="error"></span>
                                                 @if ($errors->has('mode_of_transportation_name'))
                                                     <span class="errr-validation">{{ $errors->first('mode_of_transportation_name') }}</span>
@@ -59,7 +59,7 @@
                     mode_of_transportation_name : "required",                    
                 },
                 messages : {
-                    mode_of_transportation_name : "Please enter a Mode of Transportation",
+                    mode_of_transportation_name : "Please Enter a Mode of Transportation",
                     
                 },
                 submitHandler : function(form){

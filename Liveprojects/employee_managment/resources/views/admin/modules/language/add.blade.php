@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Add Language Details</div>
+                                    <div class="card-title">Add Language Name</div>
                                 </div>
                                 <form id="language_add"  action="{{route('language.add')}}" name="language_add_form" method="post" enctype="multipart/form-data">
                                     @csrf  
@@ -23,7 +23,7 @@
                                         <div class="form-row row">
                                             <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                                 <label>Language Name</label>
-                                                <input type="text" id="language_name" name="language_name"  class="form-control form-control-lg" placeholder="Enter Language name" />
+                                                <input type="text" id="language_name" name="language_name"  class="form-control form-control-lg" placeholder="Enter Language" />
                                                 <span class="error"></span>
                                                 @if ($errors->has('language_name'))
                                                     <span class="errr-validation">{{ $errors->first('language_name') }}</span>
@@ -59,7 +59,7 @@
                     language_name : "required",                    
                 },
                 messages : {
-                    language_name : "Please enter a language name",
+                    language_name : "Please Enter a Language",
                     
                 },
                 submitHandler : function(form){

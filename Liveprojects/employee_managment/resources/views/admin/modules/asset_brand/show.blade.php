@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">show Asset Brand Details</div>
+                                    <div class="card-title">show Asset Brand Name</div>
                                 </div>
                                 <form id="asset_brand_show" name="asset_brand_show" action="" method="post" enctype="multipart/form-data">
                                     @csrf  

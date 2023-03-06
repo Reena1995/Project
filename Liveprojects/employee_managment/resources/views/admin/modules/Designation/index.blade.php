@@ -46,19 +46,20 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="border-bottom-0 w-5">No</th>
-                                                        <th class="border-bottom-0 w-5">Department_Name</th>
                                                         <th class="border-bottom-0 w-5">Designation_Name</th>
+                                                        <th class="border-bottom-0 w-5">Department_Name</th>
                                                         <th class="border-bottom-0">Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tablebody">
                                                     @if(!empty($designation) && $designation->count())
                                                         @foreach($designation as $index => $desi)
+                                                      
                                                             <tr>
                                                                 <td>{{$designation->firstItem() + $index}}</td>
-                                                                <td>{{$desi->department->name ?? ''}}</td>
                                                                 <td>{{$desi->name}}</td>
-                                                                <td>
+                                                                <td>{{$desi->departmentActive->name ?? ''}}</td>
+                                                                   <td>
                                                                     <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('designation.show',$desi->uuid)}}" >
                                                                         <i class="mdi mdi-eye" data-toggle="tooltip" data-original-title="view"></i>
                                                                     </a>

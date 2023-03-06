@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Show Department Details</div>
+                                    <div class="card-title">Show Department Name</div>
                                 </div>
                                 <form id="department_show" action="{{route('department.add',$department->uuid)}}" name="department_show_form"  method="post" enctype="multipart/form-data">
                                     @csrf  

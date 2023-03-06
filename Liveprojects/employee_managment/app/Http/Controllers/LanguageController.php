@@ -11,9 +11,14 @@ use Validate;
 
 class LanguageController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $language = Language::where('is_active',1)->paginate(5);
+        
+        $query = Language::query();
+        if($request->input('search')){
+            $query->where ( 'name', 'LIKE', '%' . $request->input('search') . '%' );
+        }
+        $language  = $query->where('is_active',1)->paginate(5);
         return view('admin.modules.language.index',compact('language'));
     }   
 

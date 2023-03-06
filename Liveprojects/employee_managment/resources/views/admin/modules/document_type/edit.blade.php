@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Edit Document Type Details</div>
+                                    <div class="card-title">Edit Document Type Name</div>
                                 </div>
                                 <form id="document_type_edit"  action="{{route('document_type.update',$doctype->uuid)}}" name="document_type_edit_form" method="post" enctype="multipart/form-data">
                                     @csrf  
@@ -52,14 +52,14 @@
         
        	@endsection
  @push('scripts')
-<!-- <script>
+<script>
          $(document).ready(function(){
             $("form[name='document_type_edit_form']").validate({
                 rules : {
                     document_type : "required",                    
                 },
                 messages : {
-                    document_type : "Please enter a Document Type",
+                    document_type : "Please Enter a Document Type",
                     
                 },
                 submitHandler : function(form){
@@ -67,5 +67,5 @@
                 }
             });
         });
-</script>         -->
+</script>        
  @endpush

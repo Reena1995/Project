@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Edit Medium Of Instruction Details</div>
+                                    <div class="card-title">Edit Medium Of Instruction Name</div>
                                 </div>
                                 <form id="medium_instruction_edit"  action="{{route('medium_instruction.update',$medium->uuid)}}" name="medium_instruction_edit_form" method="post" enctype="multipart/form-data">
                                     @csrf  
@@ -23,7 +23,7 @@
                                         <div class="form-row row">
                                             <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                                 <label>Medium Of Instruction  Name</label>
-                                                <input type="text" id="medium_instruction_name" name="medium_instruction_name"  value="{{$medium->name}}" class="form-control form-control-lg" placeholder="Enter medium of instruction name" />
+                                                <input type="text" id="medium_instruction_name" name="medium_instruction_name"  value="{{$medium->name}}" class="form-control form-control-lg" placeholder="Enter medium of instruction" />
                                                 <span class="error"></span>
                                                 @if ($errors->has('medium_instruction_name'))
                                                     <span class="errr-validation">{{ $errors->first('medium_instruction_name') }}</span>
@@ -59,7 +59,7 @@
                     medium_instruction_name : "required",                    
                 },
                 messages : {
-                    medium_instruction_name : "Please enter a medium of instructor",
+                    medium_instruction_name : "Please Enter a Medium Of Instruction",
                     
                 },
                 submitHandler : function(form){

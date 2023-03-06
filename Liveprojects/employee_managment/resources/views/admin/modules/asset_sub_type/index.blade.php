@@ -56,7 +56,7 @@
                                                     @foreach($ass_sub_type as $index => $asubtype)
                                                         <tr>
                                                             <td>{{ $ass_sub_type->firstItem() + $index}}</td>
-                                                            <td>{{$asubtype->ass_type->type ?? ''}}</td>
+                                                            <td>{{$asubtype->ass_type_active->type ?? ''}}</td>
                                                             <td>{{$asubtype->type}}</td>
                                                             <td>
                                                                 <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('asset_sub_type.show',$asubtype->uuid)}}" >
@@ -75,7 +75,7 @@
                                                     @endforeach
                                                     @else
                                                         <tr>
-                                                            <td colspan="3" class="emptydata">There is no Data</td>
+                                                            <td colspan="4" class="emptydata">There is no Data</td>
                                                         </tr>  
 
                                                 @endif      

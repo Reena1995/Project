@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Show Education Level  Details</div>
+                                    <div class="card-title">Show Education Level  Name</div>
                                 </div>
                                 <form id="education_level_show"  action="" name="education_level_show_form"  method="post" enctype="multipart/form-data">
                                     @csrf  

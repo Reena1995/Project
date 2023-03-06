@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Show Language Details</div>
+                                    <div class="card-title">Show Language Name</div>
                                 </div>
                                 <form id="language_show"  action="" name="language_show_form" method="post" enctype="multipart/form-data">
                                     @csrf  

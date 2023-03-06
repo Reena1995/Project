@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Show Document Type Details</div>
+                                    <div class="card-title">Show Document Type Name</div>
                                 </div>
                                 <form id="document_type_show"  action="" name="document_type_show_form" method="post" enctype="multipart/form-data">
                                     @csrf  

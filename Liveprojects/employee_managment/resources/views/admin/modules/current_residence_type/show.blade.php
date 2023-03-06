@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Show Current Residence Type Details</div>
+                                    <div class="card-title">Show Current Residence Type Name</div>
                                 </div>
                                 <form id="current_residence_type_show" action="" name="current_residence_type_show"  method="post" enctype="multipart/form-data">
                                     @csrf  

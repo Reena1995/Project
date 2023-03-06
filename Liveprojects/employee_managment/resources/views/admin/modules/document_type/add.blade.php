@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Add Document Type Details</div>
+                                    <div class="card-title">Add Document Type Name</div>
                                 </div>
                                 <form id="document_type_add"  action="{{route('document_type.add')}}" name="document_type_add_form" method="post" enctype="multipart/form-data">
                                     @csrf  
@@ -59,7 +59,7 @@
                     document_type : "required",                    
                 },
                 messages : {
-                    document_type : "Please enter a Document Type",
+                    document_type : "Please Enter a Document Type",
                     
                 },
                 submitHandler : function(form){

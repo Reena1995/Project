@@ -24,8 +24,18 @@
                                 <div class="row justify-content-end">
                                
                                     <div class="col-lg-4 col-md-6 col-sm-12 searchlook text-right">               
-                                        <input  type="search" id="search" class="search" name="search" placeholder="search here....."size="30" />
-                                        <br>
+                                        <!-- <input  type="search" id="search" class="search" name="search" placeholder="search here....."size="30" />
+                                        <br> -->
+                                        <form action="" method="GET" role="search">
+                                            <div class="input-group hover-input">
+                                                <input type="text" class="form-control" name="search"
+                                                    placeholder="search here....." value="{{ Request::input('search') ?? ''}}" > <span class="input-group-btn">
+                                                    <button type="submit" class="btn btn-default search-btn">
+                                                        <span class=""><i class="fa fa-search" aria-hidden="true"></i></span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                                 <br>

@@ -8,7 +8,7 @@
             <div class="container-fluid p-t-20">
                 <div class="row d-flex align-items-center">
                     <div class="col-lg-6 col-md-6 col-sm-12 m-b-20">
-                        <h3>current Residence Types</h3>
+                        <h3>Current Residence Types</h3>
                     </div>
                    
                 </div>
@@ -18,7 +18,7 @@
                         <!--card begins-->
                         <div class="card m-b-0">
                             <div class="card-header">
-                                <div class="card-title">current Residence Types List</div>
+                                <div class="card-title">Current Residence Types List</div>
                             </div>
                             <div class="card-body pt-0">
                                 <div class="row justify-content-end">

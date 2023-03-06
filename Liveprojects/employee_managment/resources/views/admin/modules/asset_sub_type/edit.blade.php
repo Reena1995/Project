@@ -23,16 +23,16 @@
                                         <div class="form-row row">
                                             <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                                 <label>Asset Sub Type</label>
-                                                <input type="text" id="asset_sub_type_name" name="asset_sub_type_name" value="{{$ass_sub_type->type}}"  class="form-control form-control-lg" placeholder="Enter asset_sub_type" />
+                                                <input type="text" id="asset_sub_type_name" name="asset_sub_type_name" value="{{$ass_sub_type->type}}"  class="form-control form-control-lg" placeholder="Enter asset sub type" />
                                                 <span class="error"></span>
                                                 @if ($errors->has('asset_sub_type_name'))
                                                     <span class="errr-validation">{{ $errors->first('asset_sub_type_name') }}</span>
                                                 @endif
                                             </div>
-                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
                                                 <label>Select Asset type</label>
                                                     <select class="form-control" name="asset_type_id"  id="asset_type_id">
-                                                        <option selected value="">Select Asset type</option>
+                                                        <option selected value="">Choose...</option>
                                                         @foreach($ass_type as $ass)
                                                             @if($ass->id == $ass_sub_type->asset_type_id)
                                                                     <option value="{{$ass->id}}" selected>{{$ass->type}} </option>
@@ -76,8 +76,8 @@
                     asset_type_id : "required",                    
                 },
                 messages : {
-                    asset_sub_type_name : "Please enter a asset sub type name",
-                    asset_type_id : "Please select asset type",  
+                    asset_sub_type_name : "Please Enter an asset sub type ",
+                    asset_type_id : "Please select an asset type",  
                     
                 },
                 errorClass: "custom-error",

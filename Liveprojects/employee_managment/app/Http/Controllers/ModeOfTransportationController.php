@@ -12,9 +12,13 @@ use Validate;
 
 class ModeOfTransportationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $modetype = ModeOfTransportation::where('is_active',1)->paginate(5);
+        $query = ModeOfTransportation::query();
+        if($request->input('search')){
+            $query->where ( 'type', 'LIKE', '%' . $request->input('search') . '%' );
+        }
+        $modetype  = $query->where('is_active',1)->paginate(5);
         return view('admin.modules.mode_of_transportation.index',compact('modetype'));
     }   
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Models\Department;
+use App\Models\Designation;
+use App\Models\OrganizationRole;
 use DB;
 use Log;
 use Auth;
@@ -17,11 +19,11 @@ class DepartmentController extends Controller
     public function index(Request $request)
     {
 
-        $query = Department::where('is_active',1);
+        $query = Department::query();
         if($request->input('search')){
             $query->where ( 'name', 'LIKE', '%' . $request->input('search') . '%' );
         }
-        $department  = $query->paginate(5);
+        $department  = $query->where('is_active',1)->paginate(5);
         return view('admin.modules.department.index',compact('department'));
     }   
 
@@ -174,22 +176,26 @@ class DepartmentController extends Controller
            Log::info('hbjjhbdjhqw');
            DB::beginTransaction();
            $department = Department::where('uuid',$id)->first();
-           $department->is_active = 0;
-           $department->updated_by  = Auth::id();
-           $res = $department->update();
+           if($department->id){
+            Designation::where('department_id',$department->id)->update(['is_active'=>'0']);
+            OrganizationRole::where('department_id',$department->id)->update(['is_active'=>'0']);
+            $department->is_active = 0;
+            $department->updated_by  = Auth::id();
+            $res = $department->update();
 
-           if(!$res)
-           {
-               DB::rollback();
+            if(!$res)
+            { 
+                DB::rollback();
 
-               Session::flash('error','Internal server error please try again later.');
+                Session::flash('error','Internal server error please try again later.');
 
-               return redirect()->back();
-           }
-           DB::commit();
-
-           Session::flash('success','department delete successfully');
-
+                return redirect()->back();
+            }
+            DB::commit();
+            Session::flash('success','Department delete successfully');
+        }else{
+            Session::flash('success','Please try again..!');
+        }
            return redirect()->route('department.index');
 
        } catch (\Illuminate\Database\QueryException $e) {

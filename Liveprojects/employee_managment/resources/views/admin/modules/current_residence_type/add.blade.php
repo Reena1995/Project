@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Add Current Residence Type Details</div>
+                                    <div class="card-title">Add Current Residence Type Name</div>
                                 </div>
                                 <form id="current_residence_type_add" action="{{route('current_residence_type.add')}}" name="current_residence_type_add"  method="post" enctype="multipart/form-data">
                                     @csrf  
@@ -23,7 +23,7 @@
                                         <div class="form-row row">
                                             <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                                 <label>Current Residence Type</label>
-                                                <input type="text" id="current_residence_type_name" name="current_residence_type_name"  class="form-control form-control-lg" placeholder="current Residence Type name" />
+                                                <input type="text" id="current_residence_type_name" name="current_residence_type_name"  class="form-control form-control-lg" placeholder="Current Residence Type" />
                                                 <span class="error"></span>
                                                 @if ($errors->has('current_residence_type_name'))
                                                     <span class="errr-validation">{{ $errors->first('current_residence_type_name') }}</span>
@@ -61,7 +61,7 @@
                     },                    
                 },
                 messages : {
-                    current_residence_type_name : "Please Enter Current Residence Type",
+                    current_residence_type_name : "Please Enter a Current Residence Type",
                     
                 },
                 submitHandler : function(form){

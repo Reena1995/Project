@@ -57,9 +57,9 @@
                                                     @foreach($org_role as $index => $role)
                                                         <tr>
                                                             <td>{{$org_role->firstItem() + $index}}</td>
-                                                            <td>{{$role->name}} {{ $role->id}}</td>
-                                                            <td>{{$role->department->name ?? ''}}</td>
-                                                            <td>{{$role->designation->name ?? ''}}</td>
+                                                            <td>{{$role->name}}</td>
+                                                            <td>{{$role->departmentActive->name ?? ''}}</td>
+                                                            <td>{{$role->designationActive->name ?? ''}}</td>
                                                             <td>
                                                                 <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('organization_role.show',$role->uuid)}}" >
                                                                     <i class="mdi mdi-eye" data-toggle="tooltip" data-original-title="view"></i>
@@ -77,7 +77,7 @@
                                                     @endforeach
                                                 @else
                                                     <tr>
-                                                        <td colspan="3" class="emptydata">There is no Data</td>
+                                                        <td colspan="5" class="emptydata">There is no Data</td>
                                                     </tr>        
                                                 @endif      
                                                 </tbody>

@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Show Leave Type Details</div>
+                                    <div class="card-title">Show Leave Type Name</div>
                                 </div>
                                 <form id="leave_type_show"   action="" name="leave_type_show_form" method="post" enctype="multipart/form-data">
                                     @csrf  

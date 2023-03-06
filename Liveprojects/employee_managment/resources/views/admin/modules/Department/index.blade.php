@@ -59,15 +59,15 @@
                                                             <td>{{ $department->firstItem() + $index}}</td>
                                                             <td>{{$dep->name}}</td>
                                                             <td>
-                                                                <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('department.show',$dep->id)}}" >
+                                                                <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('department.show',$dep->uuid)}}" >
                                                                     <i class="mdi mdi-eye" data-toggle="tooltip" data-original-title="view"></i>
                                                                 </a>
                                                             
-                                                                <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('department.edit',$dep->id)}}" >
+                                                                <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('department.edit',$dep->uuid)}}" >
                                                                     <i class="mdi mdi-pen" data-toggle="tooltip"
                                                                         data-original-title="Edit"></i>
                                                                 </a>
-                                                                <a class="btn btn-danger btn-icon btn-sm text-white" href="{{route('department.status',$dep->id)}}" 
+                                                                <a class="btn btn-danger btn-icon btn-sm text-white" href="{{route('department.status',$dep->uuid)}}" 
                                                                     data-toggle="tooltip" data-original-title="Delete"><i
                                                                         class="mdi mdi-delete"></i></a>
                                                             </td>

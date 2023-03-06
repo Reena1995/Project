@@ -73,7 +73,7 @@
                                                 @endforeach
                                                 @else
                                                     <tr>
-                                                        <td colspan="3" class="emptydata">There is no Data</td>
+                                                        <td colspan="4" class="emptydata">There is no Data</td>
                                                     </tr>        
                                                 @endif    
                                                 </tbody>

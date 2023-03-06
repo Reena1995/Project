@@ -11,7 +11,11 @@ class Designation extends Model
       /* ORM */ 
     public function department()
     {
-            return $this->hasOne(Department::class,'id','department_id')->where('is_active',1);
+            return $this->hasOne(Department::class,'id','department_id');
+    }
+    public function departmentActive()
+    {
+            return $this->department()->where('is_active',1);
     }
     /* ORM end */ 
     

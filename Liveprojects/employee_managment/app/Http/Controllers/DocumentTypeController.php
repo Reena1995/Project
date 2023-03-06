@@ -12,9 +12,14 @@ use Validate;
 class DocumentTypeController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $doctype = DocumentType::where('is_active',1)->paginate(5);
+        
+        $query = DocumentType::query();
+        if($request->input('search')){
+            $query->where ( 'type', 'LIKE', '%' . $request->input('search') . '%' );
+        }
+        $doctype  = $query->where('is_active',1)->paginate(5);
         return view('admin.modules.document_type.index',compact('doctype'));
     }   
 

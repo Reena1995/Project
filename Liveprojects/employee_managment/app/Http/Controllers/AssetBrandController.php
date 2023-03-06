@@ -13,9 +13,14 @@ use Validate;
 class AssetBrandController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $assbrand = AssetBrand::where('is_active',1)->paginate(5);
+        
+        $query = AssetBrand::query();
+        if($request->input('search')){
+            $query->where ( 'name', 'LIKE', '%' . $request->input('search') . '%' );
+        }
+        $assbrand  = $query->where('is_active',1)->paginate(5);
         return view('admin.modules.asset_brand.index',compact('assbrand'));
     }   
 

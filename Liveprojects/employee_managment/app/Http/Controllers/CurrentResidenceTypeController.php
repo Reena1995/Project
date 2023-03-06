@@ -11,10 +11,18 @@ use Validate;
 
 class CurrentResidenceTypeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $resitype = CurrentResidenceType::where('is_active',1)->paginate(5);
+       
+
+        $query = CurrentResidenceType::query();
+        if($request->input('search')){
+            $query->where ( 'type', 'LIKE', '%' . $request->input('search') . '%' );
+        }
+        $resitype  = $query->where('is_active',1)->paginate(5);
         return view('admin.modules.current_residence_type.index',compact('resitype'));
+
+
     }   
 
     public function create()

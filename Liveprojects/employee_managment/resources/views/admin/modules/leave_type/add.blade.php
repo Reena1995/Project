@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Add Leave Type Details</div>
+                                    <div class="card-title">Add Leave Type Name</div>
                                 </div>
                                 <form id="leave_type_add"   action="{{route('leave_type.add')}}" name="leave_type_add_form" method="post" enctype="multipart/form-data">
                                     @csrf  
@@ -23,7 +23,7 @@
                                         <div class="form-row row">
                                             <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                                 <label>Leave Type</label>
-                                                <input type="text" id="leave_type_name" name="leave_type_name"  class="form-control form-control-lg" placeholder="Enter Leave Type Name" />
+                                                <input type="text" id="leave_type_name" name="leave_type_name"  class="form-control form-control-lg" placeholder="Enter Leave Type " />
                                                 <span class="error"></span>
                                                 @if ($errors->has('leave_type_name'))
                                                     <span class="errr-validation">{{ $errors->first('leave_type_name') }}</span>

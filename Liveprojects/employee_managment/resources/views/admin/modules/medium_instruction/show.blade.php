@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Show Medium Of Instruction Details</div>
+                                    <div class="card-title">Show Medium Of Instruction Name</div>
                                 </div>
                                 <form id="medium_instruction_show"  action="" name="medium_instruction_show_form" method="post" enctype="multipart/form-data">
                                     @csrf  

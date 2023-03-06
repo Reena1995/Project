@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Show Company Location Details</div>
+                                    <div class="card-title">Show Company Location Name</div>
                                 </div>
                                 <form id="company_location_show"  action="" name="company_location_show_form" method="post" enctype="multipart/form-data">
                                     @csrf  

@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Add  Company Location Details</div>
+                                    <div class="card-title">Add  Company Location Name</div>
                                 </div>
                                 <form id="company_location_add"  action="{{route('company_location.add')}}" name="company_location_add_form" method="post" enctype="multipart/form-data">
                                     @csrf  
@@ -23,7 +23,7 @@
                                         <div class="form-row row">
                                             <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                                 <label>Location Name</label>
-                                                <input type="text" id="location_name" name="location_name"  class="form-control form-control-lg" placeholder="Enter Location Name" />
+                                                <input type="text" id="location_name" name="location_name"  class="form-control form-control-lg" placeholder="Enter Location" />
                                                 <span class="error"></span>
                                                 @if ($errors->has('location_name'))
                                                     <span class="errr-validation">{{ $errors->first('location_name') }}</span>
@@ -59,7 +59,7 @@
                     location_name : "required",                    
                 },
                 messages : {
-                    location_name : "Please enter a location  name",
+                    location_name : "Please Enter a Location",
                     
                 },
                 submitHandler : function(form){

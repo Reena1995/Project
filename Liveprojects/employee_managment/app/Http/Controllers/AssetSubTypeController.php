@@ -12,9 +12,18 @@ use Validate;
 
 class AssetSubTypeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $ass_sub_type = AssetSubType::where('is_active',1)->paginate(5);
+       
+        $query =AssetSubType::query();
+        if($request->input('search')){
+            $search = $request->input('search');
+            $query->where ( 'type', 'LIKE', '%' . $search . '%' )
+                ->orWhereHas('ass_type_active', function($q) use ($search){ 
+                    $q->where('type', 'LIKE', '%' . $search . '%');
+                });
+        } 
+        $ass_sub_type  = $query->where('is_active',1)->paginate(5);
         return view('admin.modules.asset_sub_type.index',compact('ass_sub_type'));
     }   
 

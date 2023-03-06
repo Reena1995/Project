@@ -11,9 +11,14 @@ use Validate;
 
 class LeaveTypeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $leavetype = LeaveType::where('is_active',1)->paginate(5);
+       
+        $query = LeaveType::query();
+        if($request->input('search')){
+            $query->where ( 'type', 'LIKE', '%' . $request->input('search') . '%' );
+        }
+        $leavetype  = $query->where('is_active',1)->paginate(5);
         return view('admin.modules.leave_type.index',compact('leavetype'));
     }   
 

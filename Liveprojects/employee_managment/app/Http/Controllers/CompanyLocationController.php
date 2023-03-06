@@ -11,9 +11,13 @@ use Validate;
 
 class CompanyLocationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $location = CompanyLocation::where('is_active',1)->paginate(5);
+        $query = CompanyLocation::query();
+        if($request->input('search')){
+            $query->where ( 'name', 'LIKE', '%' . $request->input('search') . '%' );
+        }
+        $location  = $query->where('is_active',1)->paginate(5);
         return view('admin.modules.company_location.index',compact('location'));
     }  
 

@@ -11,9 +11,14 @@ use Validate;
 
 class EducationLevelController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $edulevel = EducationLevel::where('is_active',1)->paginate(5);
+        
+        $query = EducationLevel::query();
+        if($request->input('search')){
+            $query->where ( 'name', 'LIKE', '%' . $request->input('search') . '%' );
+        }
+        $edulevel  = $query->where('is_active',1)->paginate(5);
         return view('admin.modules.education_level.index',compact('edulevel'));
     }  
 

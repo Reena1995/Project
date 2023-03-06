@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Add Company Location Type Details </div>
+                                    <div class="card-title">Add Company Location Type Name </div>
                                 </div>
                                 <form id="company_location_type_add"  action="{{route('company_location_type.add')}}" name="company_location_type_add_form" method="post" enctype="multipart/form-data">
                                     @csrf  
@@ -59,7 +59,7 @@
                     location_type_name : "required",                    
                 },
                 messages : {
-                    location_type_name : "Please enter a location  type",
+                    location_type_name : "Please Enter a Location Type",
                     
                 },
                 submitHandler : function(form){

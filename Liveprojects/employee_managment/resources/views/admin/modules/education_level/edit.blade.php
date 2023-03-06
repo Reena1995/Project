@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Edit Education Level  Details</div>
+                                    <div class="card-title">Edit Education Level  Name</div>
                                 </div>
                                 <form id="education_level_edit"  action="{{route('education_level.update',$edulevel->uuid)}}" name="education_level_edit_form" method="post" enctype="multipart/form-data">
                                     @csrf  
@@ -23,7 +23,7 @@
                                         <div class="form-row row">
                                             <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                                 <label>Education Level  Name</label>
-                                                <input type="text" id="education_level_name" name="education_level_name"  value="{{$edulevel->name}}" class="form-control form-control-lg" placeholder="Enter Education Levels name" />
+                                                <input type="text" id="education_level_name" name="education_level_name"  value="{{$edulevel->name}}" class="form-control form-control-lg" placeholder="Enter Education Level" />
                                                 <span class="error"></span>
                                                 @if ($errors->has('education_level_name'))
                                                     <span class="errr-validation">{{ $errors->first('education_level_name') }}</span>
@@ -58,7 +58,7 @@
                     education_level_name : "required",                    
                 },
                 messages : {
-                    education_level_name : "Please enter a education level name",
+                    education_level_name : "Please Enter a Education Level",
                     
                 },
                 submitHandler : function(form){

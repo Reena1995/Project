@@ -29,10 +29,10 @@
                                                     <span class="errr-validation">{{ $errors->first('designation_name') }}</span>
                                                 @endif
                                             </div>
-                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                <label>select Department</label>
+                                            <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Select Department</label>
                                                 <select class="form-control" name="department_id"  id="department_id">
-                                                                <option selected value="">Select Department</option>
+                                                                <option selected value="">Choose...</option>
                                                                 @foreach($department as $dept)
                                                                     @if($dept->id == $designation->department_id)
                                                                         <option value="{{$dept->id}}" selected>{{$dept->name}} </option>
@@ -80,8 +80,8 @@
                     department_id : "required",                    
                 },
                 messages : {
-                    designation_name : "Please enter a designation name",
-                    department_id : "Please select department ",  
+                    designation_name : "Please Enter a Designation",
+                    department_id : "Please Select  a Department ",  
                     
                 },
                 errorClass: "custom-error",

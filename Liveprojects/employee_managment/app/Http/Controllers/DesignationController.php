@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Department;
 use App\Models\Designation;
+use App\Models\OrganizationRole;
 use Illuminate\Http\Request;
 use DB;
 use Log;
@@ -15,16 +16,16 @@ class DesignationController extends Controller
 {
     public function index(Request $request)
     {
-        
-        $query =Designation::where('is_active',1);
+
+        $query =Designation::query();
         if($request->input('search')){
             $search = $request->input('search');
             $query->where ( 'name', 'LIKE', '%' . $search . '%' )
-                ->orWhereHas('department', function($q) use ($search){ 
+                ->orWhereHas('departmentActive', function($q) use ($search){ 
                     $q->where('name', 'LIKE', '%' . $search . '%');
                 });
         } 
-        $designation  = $query->paginate(5);
+        $designation  = $query->where('is_active',1)->paginate(5);
         return view('admin.modules.designation.index',compact('designation'));
 
 
@@ -189,23 +190,26 @@ class DesignationController extends Controller
            Log::info('hbjjhbdjhqw');
            DB::beginTransaction();
            $designation = Designation::where('uuid',$id)->first();
-           $designation->is_active = 0;
-           $designation->updated_by = Auth::id();
-           $res = $designation->update();
+           if($designation->id){
+            OrganizationRole::where('designation_id',$designation->id)->update(['is_active'=>'0']);
+            $designation->is_active = 0;
+            $designation->updated_by  = Auth::id();
+            $res = $designation->update();
 
-           if(!$res)
-           {
-               DB::rollback();
-               Session::flash('error','Internal server error please try again later.');
-            
-           
-               return redirect()->back();
-           }
-           DB::commit();
-           Session::flash('success','designation delete successfully');
+            if(!$res)
+            { 
+                DB::rollback();
+
+                Session::flash('error','Internal server error please try again later.');
+
+                return redirect()->back();
+            }
+            DB::commit();
+            Session::flash('success','Designation delete successfully');
+        }else{
+            Session::flash('success','Please try again..!');
+        }
            return redirect()->route('designation.index');
-          
-
 
        } catch (\Illuminate\Database\QueryException $e) {
         Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
@@ -214,18 +218,14 @@ class DesignationController extends Controller
         Log::info("Exiting class:DesignationController function:delete");
         Session::flash('danger', "Internal server error.Please try again later.");
         return redirect()->back();
-    }    
-    catch (\Exception $e) {
+        }catch (\Exception $e) {
             Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
             Log::info('Error Code: ' . $e->getCode());
             Log::info('Error Message: ' . $e->getMessage());
             Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
 
-    }
-
-      
-
+        }
     }
     public function destroy($id)
     {

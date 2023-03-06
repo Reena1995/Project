@@ -29,11 +29,11 @@
                                                     <span class="errr-validation">{{ $errors->first('organization_role_name') }}</span>
                                                 @endif
                                             </div>
-                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
 
                                                             <label>Select Deaprtment</label>
                                                             <select class="form-control" name="department_id"  id="department_id">
-                                                                <option selected value="">Select Deaprtment</option>
+                                                                <option selected value="">Choose...</option>
                                                                 @foreach($department as $dept)
                                                                     <option value="{{$dept->id}}">{{$dept->name}} </option>
                                                                 @endforeach
@@ -44,11 +44,11 @@
                                                             @endif
 
                                             </div>
-                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
 
                                                             <label>Select Designation</label>
                                                             <select class="form-control" name="designation_id"  id="designation_id">
-                                                                    <option selected value="">Select Designation</option>
+                                                                    <option selected value="">Choose...</option>
                                                                     @foreach($designation as $desi)
                                                                         <option value="{{$desi->id}}">{{$desi->name}} </option>
                                                                     @endforeach
@@ -91,9 +91,9 @@
                     designation_id : "required",                    
                 },
                 messages : {
-                    organization_role_name : "Please enter a ornazation role name",
-                    department_id : "Please select department ",  
-                    designation_id : "Please select designation", 
+                    organization_role_name : "Please Enter a Organization Role",
+                    department_id : "Please Select a Department ",  
+                    designation_id : "Please Select a Designation", 
                     
                 },
                 errorClass: "custom-error",

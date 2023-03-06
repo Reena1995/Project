@@ -15,7 +15,7 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Add Department Details</div>
+                                    <div class="card-title">Add Department Name</div>
                                 </div>
                                 <form id="department_add" name="department_add_form" action="{{route('department.add')}}" method="post" enctype="multipart/form-data">
                                     @csrf  
@@ -42,6 +42,7 @@
                                                 </div>
                                 
                                     </div>
+                                    
                               </form>
                             </div>
                         </div>
@@ -62,7 +63,7 @@
                     },                    
                 },
                 messages : {
-                    department_name : "Please enter a department name",
+                    department_name : "Please Enter a Department",
                     
                 },
                 submitHandler : function(form){
