@@ -66,27 +66,66 @@
      * @param {(Element|jQuery)} [context] - A DOM Element, Document, or jQuery to use as context.
      * @requires jQuery
      */
-    $(document).on("click", ".menu-item", function () {
-
+    /* $(document).on("click", ".menu-item", function () { 
         $('.menu-item').next().slideDown();
         $('.menu-item').removeClass('opened');
         $(this).addClass('opened');
         $('.sub-menu').hide();
         $(this).children('.sub-menu').show();
             
+    }); */
+    $(document).on("click", ".sub-menu-link", function () {
+        /* $('.menu-item').each(function(i, obj) {
+            console.log(i,'i');
+            console.log(obj,'obj');
+            //test
+        }); */
+        if (!$(this).next().is(":visible")) { 
+            console.log("click if");
+            /* if ($(".menu-item").hasClass('opened')){
+                console.log("check condition");
+                console.log($(this));
+            } */
+            $('.sub-menu>.opened').removeClass('opened');
+           
+            $(this).parent().addClass('opened');
+            $(this).addClass('opened');
+            $('.sub-menu-ul').hide("slow" );
+            console.log( $(this).next());
+            $(this).next('.sub-menu-ul').show("slow" );
+        } else{ 
+            console.log("click else");
+            
+            console.log($(this).parent().removeClass('opened'));
+            // console.log($(this).parent().addClass('opened'));
+
+
+            $(this).addClass('opened');
+            $('.sub-menu-ul').hide("slow" );
+            console.log( $(this).next());
+            $(this).next('.sub-menu-ul').hide("slow" );
+        }
+        /* $('.menu-item').next().slideDown();
+        $('.menu-item').removeClass('opened');
+        $(this).addClass('opened');
+        $('.sub-menu').hide();
+        $(this).children('.sub-menu').show(); */
+            
     });
 
     $(document).on("click", ".open-dropdown", function (e) {
-        e.preventDefault();
-        if (!$(this).next().is(":visible")) {
-            //opens the adjacent list to the target
+        e.preventDefault(); 
+
+        if (!$(this).next().is(":visible")) { 
+            $('.menu-item').removeClass('opened');
+            $('.sub-menu').hide("slow");
             $(this).next().slideDown();
             $(this).parent().addClass("opened");
-        } else {
-            //closes the adjacent list to the target
+        } else { 
             $(this).next().slideUp();
             $(this).parent().removeClass("opened");
         }
+        
     });
 
     // light and dark theme setting js END

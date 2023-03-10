@@ -13018,12 +13018,13 @@ a:hover {
     transition: opacity ease 0.2s;
 }
 
-.admin-sidebar .menu .menu-item .menu-link {
+.admin-sidebar .menu .menu-item .menu-link{
     display: table;
     width: 100%;
     padding: 10px 15px;
     transition: opacity 0.2s ease;
     justify-content: space-between;
+    
 }
 
 .admin-sidebar .menu .menu-item .menu-link .menu-label {
@@ -15902,4 +15903,11 @@ a:hover {
 .form-control:focus
 {
     border-color: var(--main-light-color) !important;
+}
+.subtab-active{
+    color: #0056b3 !important;
+}
+.menu-item a:hover
+{
+    color: #0056b3 !important;
 }

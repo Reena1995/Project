@@ -17,6 +17,7 @@ use App\Http\Controllers\AssetSubTypeController;
 use App\Http\Controllers\CurrentResidenceTypeController;
 use App\Http\Controllers\ModeOfTransportationController;
 use App\Http\Controllers\LeaveTypeController;
+use App\Http\Controllers\UserController;
 
 
 
@@ -222,6 +223,15 @@ Route::group(['prefix'=>'leave-type/','middleware'=>[],'as'=>'leave_type.'], fun
    Route::get('/status/{id}',[LeaveTypeController::class,'status'])->name('status');
 });
 /* ------------------------------- Leave Type  end  ---------------------------*/
+
+/* -----------------==---------- employee  start--------------------------*/
+Route::group(['prefix'=>'employee/','middleware'=>[],'as'=>'employee.'], function(){
+   Route::get('/add',[UserController::class,'create'])->name('create');
+   // Route::post('/save',[UserController::class,'store'])->name('add');
+   Route::get('/list',[UserController::class,'index'])->name('index');
+   
+});
+/* ------------------------------- employee  end  ---------------------------*/
 
 
 });
