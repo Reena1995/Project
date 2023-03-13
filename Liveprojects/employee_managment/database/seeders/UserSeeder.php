@@ -19,20 +19,11 @@ class UserSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'uuid' => \Str::uuid(),
             'password' =>\Hash::make('admin@gmail.com'),
+            'onboarding_dtls' => '0',
             'role_id' =>'1',
             'created_by' => '1',
             'is_active' =>'1',
         ]);
-        \DB::table('users')->insert([ 
-           
-            'name' => 'riya',
-            'email' => 'riya@gmail.com',
-            'uuid' => \Str::uuid(),
-            'password' =>\Hash::make('riya@gmail.com'),
-            'role_id' =>'2',
-            'is_active' =>'1',
-            'created_by' => '2',
-            
-        ]);
+       
     }
 }

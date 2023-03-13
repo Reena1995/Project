@@ -13024,7 +13024,6 @@ a:hover {
     padding: 10px 15px;
     transition: opacity 0.2s ease;
     justify-content: space-between;
-    
 }
 
 .admin-sidebar .menu .menu-item .menu-link .menu-label {
@@ -15853,12 +15852,16 @@ outline: none !important;
     font-weight: 10px;
 }
 /*  */
-
-::placeholder ,
+::placeholder 
+{
+    font-size: 14px !important;
+    color: #d3d4d5 !important ;
+}
 .form-control
 {
-    font-size: 16px !important;
+    font-size: 14px !important;
 }
+
 
 .card-title
 {
@@ -15910,4 +15913,23 @@ a:hover {
 .menu-item a:hover
 {
     color: #0056b3 !important;
+}
+.card
+{
+    border: 0 !important;
+}
+.card-footer
+{
+    border: 0 !important;
+    background-color: #fff !important;
+}
+
+
+.tab-form
+{
+    background: #ededed;
+    padding: 15px;
+    height: 100%;
+    width: 100%;
+    margin-top: 15px;
 }

@@ -227,8 +227,9 @@ Route::group(['prefix'=>'leave-type/','middleware'=>[],'as'=>'leave_type.'], fun
 /* -----------------==---------- employee  start--------------------------*/
 Route::group(['prefix'=>'employee/','middleware'=>[],'as'=>'employee.'], function(){
    Route::get('/add',[UserController::class,'create'])->name('create');
-   // Route::post('/save',[UserController::class,'store'])->name('add');
+   Route::post('/save',[UserController::class,'store'])->name('add');
    Route::get('/list',[UserController::class,'index'])->name('index');
+   Route::get('/edit',[UserController::class,'edit'])->name('edit');
    
 });
 /* ------------------------------- employee  end  ---------------------------*/

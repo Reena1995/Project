@@ -15,18 +15,45 @@
                             <!--card begins-->
                             <div class="card m-b-30 add-cards" >
                                 <div class="card-header">
-                                    <div class="card-title">Add Employee</div>
+                                    <div class="card-title">Add Employee Details</div>
                                 </div>
-                                <form id="" name="" action="" method="post" enctype="multipart/form-data">
+                                <form id="employee_register" action="{{route('employee.add')}}" name="employee__add_form" method="post" enctype="multipart/form-data">
                                     @csrf  
                                     <div class="card-body">    
                                         <div class="form-row row">
                                             <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                <label>Department Name</label>
-                                                <input type="text" id="department_name" name="department_name" value="{{old('name')}}" class="form-control form-control-lg" placeholder="Enter department" />
-                                                <span class="error"></span>
-                                               
+                                                <label>First Name</label>
+                                                <input type="text" id="first_name_id" name="first_name"  class="form-control form-control-lg" placeholder="Enter First Name" />
+                                                
+                                                @if ($errors->has('first_name'))
+                                                    <span class="errr-validation">{{ $errors->first('first_name') }}</span>
+                                                @endif
                                             </div>
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Last Name</label>
+                                                <input type="text" id="last_name_id" name="last_name"  class="form-control form-control-lg" placeholder="Enter Last Name" />
+                                               
+                                                @if ($errors->has('last_name'))
+                                                    <span class="errr-validation">{{ $errors->first('last_name') }}</span>
+                                                @endif
+                                            </div>
+                                            <div class="form-group floating-label show-label  col-lg-6 col-md-6 col-sm-12">
+                                                <label>Company Email Id</label>
+                                                <input type="email" id="company_mail_id" name="company_mail"  class="form-control form-control-lg" placeholder="Enter Email Id" />
+                                                
+                                                @if ($errors->has('company_mail'))
+                                                    <span class="errr-validation">{{ $errors->first('company_mail') }}</span>
+                                                @endif
+                                            </div>
+                                            <div class="form-group floating-label show-label  col-lg-6 col-md-6 col-sm-12">
+                                                <label>Mobile No</label>
+                                                <input type="text" id="mobile_no_id" name="mobile_no"  class="form-control form-control-lg" placeholder="Enter Mobile No" />
+                                                
+                                                @if ($errors->has('mobile_no'))
+                                                    <span class="errr-validation">{{ $errors->first('mobile_no') }}</span>
+                                                @endif
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <div class="card-footer p-t-20 text-right">
@@ -35,13 +62,11 @@
                                                             </a>
                                                     </div>
                                                     <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                        <button type="submit"  value="submit" name="submit"class="theme-btn text-white">Save</button>
+                                                        <button type="submit"  value="submit" name="submit" class="theme-btn text-white">Save</button>
                                                     </div>
-                                                </div>
-                                
+
                                     </div>
-                                    
-                              </form>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -51,7 +76,37 @@
         
        	@endsection
  @push('scripts')
-    <script>
-      
-    </script>      
+ <script>
+       $(document).ready(function(){
+            $("form[name='employee__add_form']").validate({
+                rules : {
+                    first_name : "required",  
+                    last_name : "required",
+                    company_mail : "required",  
+                    mobile_no : "required",                    
+                },
+                messages : {
+                    first_name : "Please Enter a First Name ",
+                    last_name : "Please Enter  a Last Name ",
+                    company_mail : "Please Enter an Email Id  ",
+                    mobile_no : "Please Enter  a Mobile No ",  
+                    
+                },
+                errorClass: "custom-error",
+                errorElement: "div",
+                errorPlacement: function(error, element) {
+                    var placement = $(element).data('error');
+                    if (placement) {
+                        $(element).append(error)
+                    } else {
+                        console.log(element.prev());
+                        error.insertAfter(element);
+                    }
+                },
+                submitHandler : function(form){
+                    form.submit();
+                }
+            });
+        });
+</script>         
  @endpush

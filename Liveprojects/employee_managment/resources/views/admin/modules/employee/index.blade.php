@@ -8,7 +8,7 @@
             <div class="container-fluid p-t-20">
                 <div class="row d-flex align-items-center">
                     <div class="col-lg-6 col-md-6 col-sm-12 m-b-20">
-                        <h3>View Employees</h3>
+                        <h3>Employee</h3>
                     </div>
                    
                 </div>
@@ -18,11 +18,10 @@
                         <!--card begins-->
                         <div class="card m-b-0">
                             <div class="card-header">
-                                <div class="card-title">Departments List</div>
+                                <div class="card-title">Employees List</div>
                             </div>
                             <div class="card-body pt-0">
                                 <div class="row justify-content-end">
-                               
                                     <div class="col-lg-4 col-md-6 col-sm-12 searchlook text-right">               
                                         <!-- <input  type="search" id="search" class="search" name="search" placeholder="search here....."size="30" />
                                         <br> -->
@@ -43,40 +42,65 @@
                                     <div class="col-12">
                                         <div class="table-responsive-sm">
                                             <table class="table  table-vcenter text-nowrap table-bordered border-bottom"
-                                                id="departmentlist">
+                                                id="designationlist">
                                                 <thead>
                                                     <tr>
                                                         <th class="border-bottom-0 w-5">No</th>
-                                                        <th class="border-bottom-0 w-5">employee name</th>
+                                                        <th class="border-bottom-0 w-5">Employee_Name</th>
+                                                        <th class="border-bottom-0 w-5">Onboarding Details</th>
                                                         <th class="border-bottom-0">Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tablebody">
-                                                    <tr>
-                                                            <td>1</td>
-                                                            <td>reena</td>
-                                                            <td>
-                                                                <a class="btn btn-primary btn-icon btn-sm text-white" href="" >
-                                                                    <i class="mdi mdi-eye" data-toggle="tooltip" data-original-title="view"></i>
-                                                                </a>
-                                                            
-                                                                <a class="btn btn-primary btn-icon btn-sm text-white" href="" >
-                                                                    <i class="mdi mdi-pen" data-toggle="tooltip"
-                                                                        data-original-title="Edit"></i>
-                                                                </a>
-                                                                <a class="btn btn-danger btn-icon btn-sm text-white" href="" 
-                                                                    data-toggle="tooltip" data-original-title="Delete"><i
-                                                                        class="mdi mdi-delete"></i></a>
-                                                            </td>
-                                                    </tr>
-                                                            
-                                              
+                                                    @if(!empty($user) && $user->count())
+                                                        @foreach($user as $index => $use)
+                                                      
+                                                            <tr>
+                                                                <td>{{$user->firstItem() + $index}}</td>
+                                                                <td>{{$use->name}}</td>
+                                                                <td>
+                                                                    @if($use->onboarding_dtls == 0)
+                                                                    
+                                                                        <div class="btn btn-danger">Not Available</div>
+                                                                    
+                                                                    @else
+                                                                    
+                                                                        <div class="btn btn-success">Available</div>
+                                                                    
+                                                                    @endif
+                                                                    <!-- {{($use->onboarding_dtls == 0) ?  'Not Available' :'Avialble'}}-->
+                                                                </td> 
+                                                                    <td>
+                                                                        <a class="btn btn-primary btn-icon btn-sm text-white" href="" >
+                                                                            <i class="mdi mdi-eye" data-toggle="tooltip" data-original-title="view"></i>
+                                                                        </a>
+                                                                    
+                                                                        <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('employee.edit')}}" >
+                                                                            <i class="mdi mdi-pen" data-toggle="tooltip"
+                                                                                data-original-title="Edit"></i>
+                                                                        </a>
+                                                                        <a class="btn btn-danger btn-icon btn-sm text-white" href="" 
+                                                                            data-toggle="tooltip" data-original-title="Delete"><i
+                                                                                class="mdi mdi-delete"></i></a>
+                                                                    </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @else
+                                                        <tr>
+                                                            <td colspan="3" class="emptydata">There is no Data</td>
+                                                        </tr>        
+                                                    @endif      
                                                 </tbody>
+                                                
                                             </table>
-                                            	
-			                               
-                                           
-                                            
+                                            <div class="row align-items-center">
+                                                    <div class="col-6">showing {{$user->firstItem()}} - {{$user->lastitem()}} of  {{$user->total()}}</div>
+                                                    <div class="col-6"> 
+                                                        <div class="custom-pagination">
+                                                                {{$user->links()}}
+                                                        </div>
+                                                    </div>
+                                            </div>
                                         </div>
                                         
                                     </div>
@@ -103,75 +127,10 @@
 	/*page own datatable serching js end*/	
 
     /*key press searching in ajax start */
-    // $('document').ready(function (){
-
-    //     $('#search').on('keyup',function(){
-
-    //         $value= $(this).val();
-    //         console.log($value);
-    //         $('#pagination_id').html('Demo text');
-            
-    //         $.ajax({
-
-    //             url:"{{route('department.index')}}",
-    //             data:{'xxx':$value},
-    //             success:function(yyy){
-    //                 // console.log(yyy);
-    //                 var department= yyy.department.data;
-    //                 var html= '';
-    //                 if(department.length > 0)
-    //                 {
-    //                     for(let i=0 ; i < department.length ; i++){
-    //                         var id = department[i]['uuid'];
-    //                         html +='<tr>';
-    //                             html +='<td>'+(+i + +1)+'</td>';
-    //                             html +='<td>'+department[i]['name']+'</td>';
-    //                             html +='<td>';
-    //                                 html +='<a class="btn btn-primary btn-icon btn-sm text-white showw" href="'+app_url+'/department/show/'+id+'" >';
-    //                                     html +='<i class="mdi mdi-eye" data-toggle="tooltip" data-original-title="view"></i>';
-    //                                 html +='</a>';
-                                    
-    //                                 html +='<a class="btn btn-primary btn-icon btn-sm text-white editt" href="'+app_url+'/department/edit/'+id+'" >';
-    //                                     html +='<i class="mdi mdi-pen" data-toggle="tooltip" data-original-title="Edit"></i>';
-    //                                 html +='</a>';
-    //                                 html +='<a class="btn btn-danger btn-icon btn-sm text-white statuss" href="'+app_url+'/department/status/'+id+'" data-toggle="tooltip" data-original-title="Delete">';
-    //                                     html +='<i class="mdi mdi-delete"></i>';
-    //                                 html +='</a>';
-    //                             html +='</td>'; 
-    //                         html +='</tr>';
-    //                     }
-    //                 }
-    //                 else{
-
-    //                     html +='<tr>\
-    //                                 <td colspan="3"> Data Not Found <td>\
-    //                             </tr>';
-
-    //                 }
-
-    //                 $('#tablebody').html(html);
-    //             }
-    //         });
-
-    //     });
-    // });
+ 
     /*key press searching in ajax end */
-
-    /* laravle searching start*/ 
-    // $('document').ready(function (){
-
-    //     $('#search').on('keyup',function(){
-
-    //     $value= $(this).val();
-    //     console.log($value);
-    //     $('#pagination_id').html('');
-
-    //     });
-    // });    
-    /* laravle searching end*/  
 		
     </script>
-
 	 
 	@endpush
 
