@@ -1,17 +1,17 @@
 @extends('admin.common.master')
 @section('content')
-<section class="admin-content">
+<section class="admin-content edit-section">
                 <!-- BEGIN PlACE PAGE CONTENT HERE -->
                 <!--  container or container-fluid as per your need           -->
-                <div class="container-fluid p-t-20">
+                <div class="container-fluid p-t-20 edit-tab-section">
                     <div class="row d-flex align-items-baseline">
                         <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
                             <div class="tab-form card">
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class="nav-link active" id="v-pills-personal-tab" data-toggle="pill" href="#v-pills-personal" role="tab" aria-controls="v-pills-personal" aria-selected="true">Personal Details</a>
-                                    <a class="nav-link" id="v-pills-organization-tab" data-toggle="pill" href="#v-pills-organization" role="tab" aria-controls="v-pills-organization" aria-selected="false">Organization Details</a>
-                                    <a class="nav-link" id="v-pills-professional-tab" data-toggle="pill" href="#v-pills-professional" role="tab" aria-controls="v-pills-professional" aria-selected="false">Professional Details</a>
-                                    <a class="nav-link" id="v-pills-contact-tab" data-toggle="pill" href="#v-pills-contact" role="tab" aria-controls="v-pills-contact" aria-selected="false">Contact Details</a>
+                                    <a class="nav-link disabled" id="v-pills-organization-tab" data-toggle="pill" href="#v-pills-organization" role="tab" aria-controls="v-pills-organization" aria-selected="false">Organization Details</a>
+                                    <a class="nav-link disabled" id="v-pills-professional-tab" data-toggle="pill" href="#v-pills-professional" role="tab" aria-controls="v-pills-professional" aria-selected="false">Professional Details</a>
+                                    <a class="nav-link disabled" id="v-pills-contact-tab" data-toggle="pill" href="#v-pills-contact" role="tab" aria-controls="v-pills-contact" aria-selected="false">Contact Details</a>
                                 </div>
                             </div>
                         </div>
@@ -24,13 +24,13 @@
                                                     <a class="nav-link active" id="personal-details-tab-z" data-toggle="tab" href="#personal-details" role="tab" aria-controls="personal-details" aria-selected="true">Personal Details</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" id="education-details-tab-z" data-toggle="tab" href="#education-details" role="tab" aria-controls="education-details" aria-selected="false">Education Details</a>
+                                                    <a class="nav-link disabled"  id="education-details-tab-z" data-toggle="tab" href="#education-details" role="tab" aria-controls="education-details" aria-selected="false">Education Details</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" id="document-details-tab-z" data-toggle="tab" href="#document-details" role="tab" aria-controls="document-details" aria-selected="false">Document Details</a>
+                                                    <a class="nav-link disabled" id="document-details-tab-z" data-toggle="tab" href="#document-details" role="tab" aria-controls="document-details" aria-selected="false">Document Details</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" id="langauge-tab-z" data-toggle="tab" href="#langauge" role="tab" aria-controls="langauge" aria-selected="false">Langauge Details</a>
+                                                    <a class="nav-link disabled" id="langauge-tab-z" data-toggle="tab" href="#langauge" role="tab" aria-controls="langauge" aria-selected="false">Langauge Details</a>
                                                 </li>
                                                 
                                             </ul>

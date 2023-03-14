@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\EmployeePersonalDetail;
 use App\Models\User;
+use App\Models\CurrentResidenceType;
+use App\Models\ModeOfTransportation;
+use App\Models\Country;
+use App\Models\State;
+use App\Models\City;
 use DB;
 use Str;
 use Log;
@@ -100,11 +105,35 @@ class UserController extends Controller
     }
 
     
-    public function edit()
+    public function edit($id)
     {
-        return view('admin.modules.employee.edit');
+        $emp = User::where('uuid',$id)->where('role_id',2)->first();
+        $current_residency=CurrentResidenceType::where('is_active',1)->orderBy('type', 'ASC')->get();
+        $mode_transportation=ModeOfTransportation::where('is_active',1)->orderBy('type', 'ASC')->get();
+        $country=Country::where('is_active',1)->orderBy('name', 'ASC')->get();
+        // $state=State::where('is_active',1)->orderBy('name', 'ASC')->get();
+        // $city=City::where('is_active',1)->orderBy('name', 'ASC')->get();
+        return view('admin.modules.employee.edit',compact('emp','current_residency','mode_transportation','country'));
+       
     }
 
+    public function getState(Request $request)
+    {
+        \Log::info($request->all());
+		$data['states']=State::where("country_id",$request->cid)->orderBy('name', 'ASC')->get();
+        \Log::info($data);
+        return response()->json($data);	
+    }
+
+    public function getCity(Request $request)
+    {
+        \Log::info($request->all());
+		$data['cities']=City::where("state_id",$request->sid)->orderBy('name', 'ASC')->get();
+        \Log::info($data);
+        return response()->json($data);	
+    }
+    
+	
    
     public function update(Request $request, $id)
     {

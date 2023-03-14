@@ -138,16 +138,23 @@
 
     //Floating Form Floating label :: START
 
-    $(document).on("input", ".floating-label input", function (e) {
+    $(document).on("input", ".floating-label input ", function (e) {
         var item = $(this).parents(".floating-label");
-        item.addClass("show-label");
+        item.addClass("show-label"); 
     });
+
+    $(document).on("input", ".floating-label textarea ", function (e) {
+        var item = $(this).parents(".floating-label");
+        item.addClass("show-label"); 
+    });
+
 
     $(document).on("blur", ".floating-label input", function (e) { 
         /* $(this).val() ? item.addClass("show-label") : item.removeClass("show-label"); */
         var item = $(this).parents(".floating-label");
         item.addClass("show-label");
     });
+ 
 
     //checking for pre-filled forms
     $(".floating-label input").each(function () {
@@ -155,6 +162,10 @@
         item.addClass("show-label");
     });
 
+    $(".floating-label textarea").each(function () {
+        var item = $(this).parents(".floating-label");
+        item.addClass("show-label");
+    });
     //Floating Form Floating label :: END
 
     $(document).ready(function() {

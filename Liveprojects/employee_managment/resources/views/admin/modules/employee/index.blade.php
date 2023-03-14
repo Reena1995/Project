@@ -75,7 +75,7 @@
                                                                             <i class="mdi mdi-eye" data-toggle="tooltip" data-original-title="view"></i>
                                                                         </a>
                                                                     
-                                                                        <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('employee.edit')}}" >
+                                                                        <a class="btn btn-primary btn-icon btn-sm text-white" href="{{route('employee.edit',$use->uuid)}}" >
                                                                             <i class="mdi mdi-pen" data-toggle="tooltip"
                                                                                 data-original-title="Edit"></i>
                                                                         </a>

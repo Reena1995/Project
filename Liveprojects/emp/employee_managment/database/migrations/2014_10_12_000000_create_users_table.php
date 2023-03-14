@@ -19,6 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('name',255);
             $table->string('email',255);
             $table->string('password');
+            $table->string('mobile_no')->nullable();
+            $table->string('onboarding_dtls');
             $table->unsignedBigInteger('role_id');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();

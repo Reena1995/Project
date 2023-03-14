@@ -61,7 +61,7 @@
                                                         <a href="{{route('employee.index')}}" class="theme-btn-outline">cancel
                                                             </a>
                                                     </div>
-                                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                    <div class="btn-group" role="group" aria-label="Second group">
                                                         <button type="submit"  value="submit" name="submit" class="theme-btn text-white">Save</button>
                                                     </div>
 

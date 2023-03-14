@@ -98,7 +98,7 @@ body {
     margin: 0;
     text-align: left;
     color: var(--thm-textcolor);
-    background-color: var(--thm-graybg);
+    background-color: var(--thm-graybg) !important;
     overflow-x: hidden;
 }
 
@@ -4294,23 +4294,23 @@ input[type="button"].btn-block {
 }
 
 .custom-file-label::after {
-    line-height: 1.5;
-    position: absolute;
-    z-index: 3;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    display: block;
-    height: calc(1.5em + 0.75rem);
-    padding: 0.375rem 0.75rem;
-    content: "Browse";
-    color: var(--thm-white);
-    border-left: inherit;
-    border-radius: 0 0.25rem 0.25rem 0;
-    background: var(--thm-color);
-    height: calc(100% - 0%);
-    display: flex;
-    align-items: center;
+    line-height: 1.5 !important;
+    position: absolute !important;
+    z-index: 3 !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    display: block !important;
+    height: calc(1.5em + 0.75rem) !important;
+    padding: 0.375rem 0.75rem !important;
+    content: "Browse" !important;
+    color: var(--thm-white) !important;
+    border-left: inherit !important;
+    border-radius: 0 0.25rem 0.25rem 0 !important;
+    background: var(--thm-color) !important;
+    height: calc(100% - 0%) !important;
+    display: flex !important;
+    align-items: center !important;
 }
 
 .custom-range {
@@ -4529,16 +4529,16 @@ input[type="button"].btn-block {
 }
 
 .nav-tabs .nav-link.disabled {
-    color: #95aac9;
-    border-color: transparent;
-    background-color: transparent;
+    color: #95aac9 !important;
+    border-color: transparent !important;
+    background-color: transparent !important;
 }
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-    color: var(--thm-textcolor);
-    border-color: #e3ebf6 #e3ebf6 var(--thm-graybg);
-    background-color: var(--thm-graybg);
+    color: var(--thm-textcolor) !important;
+    border-color: #e3ebf6 #e3ebf6 var(--thm-graybg) !important;
+    background-color: var(--thm-graybg) !important;
 }
 
 .nav-tabs .dropdown-menu {
@@ -11914,19 +11914,19 @@ td.sorting_1 {
 }
 
 .tab-line .nav-item .nav-link.active {
-    color: var(--thm-color);
+    color: var(--thm-color) !important;
     border-top: none;
     border-right: none;
-    border-bottom: 2px solid var(--thm-color);
+    border-bottom: 2px solid var(--thm-color) !important;
     border-left: none;
 }
 
 /* 3.12 typography */
 body {
-    font-family: "Poppins-Regular", Arial, sans-serif;
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: #2e384d;
+    font-family: "Poppins-Regular", Arial, sans-serif !important;
+    font-size: 0.9rem !important;
+    font-weight: 400 !important;
+    color: #2e384d !important;
     background-color: var(--thm-graybg);
 }
 
@@ -13018,7 +13018,7 @@ a:hover {
     transition: opacity ease 0.2s;
 }
 
-.admin-sidebar .menu .menu-item .menu-link {
+.admin-sidebar .menu .menu-item .menu-link{
     display: table;
     width: 100%;
     padding: 10px 15px;
@@ -15852,12 +15852,16 @@ outline: none !important;
     font-weight: 10px;
 }
 /*  */
-
-::placeholder ,
+::placeholder 
+{
+    font-size: 14px !important;
+    color: #d3d4d5 !important ;
+}
 .form-control
 {
-    font-size: 16px !important;
+    font-size: 14px !important;
 }
+
 
 .card-title
 {
@@ -15902,4 +15906,55 @@ a:hover {
 .form-control:focus
 {
     border-color: var(--main-light-color) !important;
+}
+.subtab-active{
+    color: #0056b3 !important;
+}
+.menu-item a:hover
+{
+    color: #0056b3 !important;
+}
+.card
+{
+    border: 0 !important;
+}
+.card-footer
+{
+    border: 0 !important;
+    background-color: #fff !important;
+}
+
+
+.tab-form
+{
+    background: #ededed;
+    padding: 15px;
+    height: 100%;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.edit-section .nav-link 
+{
+   color: #2e384d !important;
+   font-size: 15px;
+   font-weight: 400;
+}
+.edit-section .nav-link.active
+{
+   background: #EDF2F9 !important;
+}
+.custom-radio
+{
+    padding-left: 40px !important;
+}
+.form-card-footer
+{
+    width: 100%;
+    padding: 0;
+}
+.card-footer .theme-btn,
+.card-footer .theme-btn-outline {
+font-size: 16px !important;
+height: 40px !important;
 }
