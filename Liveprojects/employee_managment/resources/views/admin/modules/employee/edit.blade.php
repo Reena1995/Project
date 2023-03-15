@@ -34,25 +34,25 @@
                                                 </li>
                                                 
                                             </ul>
-                                            <form action="#">
+                                            <!-- <form action="#"> -->
                                                 <div class="tab-content" id="myTabContent1">
                                                     <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
                                                         <h5 class="font-weight-semibold p-t-20 m-b-20">Basic</h5>
-                                                        @include('admin.modules.employee.personal_detail.personal')
+                                                        @include('admin.modules.employee.personal.personaldetail')
                                                     </div>
                                                     <div class="tab-pane fade" id="education-details" role="tabpanel" aria-labelledby="education-details-tab">
                                                         <h5 class="font-weight-semibold p-t-20 m-b-20">Basic2</h5>
-                                                        @include('admin.modules.employee.personal_detail.education')
+                                                        @include('admin.modules.employee.personal.education')
                                                         
                                                     </div>
                                                     <div class="tab-pane fade" id="document-details" role="tabpanel" aria-labelledby="document-details-tab">
                                                         <h5 class="font-weight-semibold p-t-20 m-b-20">Basic</h5>
-                                                        @include('admin.modules.employee.personal_detail.document')
+                                                        @include('admin.modules.employee.personal.document')
                                                         
                                                     </div>
                                                     <div class="tab-pane fade" id="langauge" role="tabpanel" aria-labelledby="langauge-tab">
                                                         <h5 class="font-weight-semibold p-t-20 m-b-20">Details</h5>
-                                                        @include('admin.modules.employee.personal_detail.language')
+                                                        @include('admin.modules.employee.personal.language')
                                                         
                                                     </div>
                                                 </div>
@@ -132,7 +132,7 @@
                                                     
                                                 </div>
                                             </div>
-                                        </form>
+                                        <!-- </form> -->
                                     </div>
                                 </div>
 

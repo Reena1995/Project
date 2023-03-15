@@ -18,7 +18,7 @@ use App\Http\Controllers\CurrentResidenceTypeController;
 use App\Http\Controllers\ModeOfTransportationController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\EmpPersonalDetailController;
+use App\Http\Controllers\PersonalController;
 
 
 
@@ -235,20 +235,21 @@ Route::group(['prefix'=>'employee/','middleware'=>[],'as'=>'employee.'], functio
 });
 /* ------------------------------- employee  end  ---------------------------*/
 
-/* -----------------==---------- personal details start--------------------------*/
-Route::group(['prefix'=>'personal/','middleware'=>[],'as'=>'personal.'], function(){
-   Route::get('/add',[EmpPersonalDetailController::class,'create'])->name('create');
-   // Route::post('/save',[UserController::class,'store'])->name('add');
-   // Route::get('/list',[UserController::class,'index'])->name('index');
-   // Route::get('/edit/{id}',[UserController::class,'edit'])->name('edit');
-   
-});
-/* ------------------------------- personal details end  ---------------------------*/
 
 /* ------------------------------- get state city start ---------------------------*/
 Route::get('/getStatee',[UserController::class,'getState'])->name('getstate');
 Route::get('/getCitty',[UserController::class,'getCity'])->name('getcity');
 /* ------------------------------- get state city end ---------------------------*/
+
+/* -----------------==---------- personal details start--------------------------*/
+Route::group(['prefix'=>'personal/','middleware'=>[],'as'=>'personal.'], function(){
+ 
+   Route::post('save',[PersonalController::class,'personaldetail_add'])->name('personaldetail.add');
+   // Route::get('/list',[PersonalController::class,'index'])->name('index');
+   // Route::get('/edit/{id}',[PersonalController::class,'edit'])->name('edit');
+   
+});
+/* ------------------------------- personal details end  ---------------------------*/
 
 
 });
