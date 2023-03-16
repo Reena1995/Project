@@ -4,21 +4,21 @@
         <input type="hidden" name="user_id" value="{{$emp->uuid}}">
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Father Name</label>
-            <input type="text" name="fathername" value="{{old('fathername')}}" class="form-control form-control-lg" placeholder="Enter Father Name">
+            <input type="text" name="fathername"  value = "{{ (isset($personal_detail) ? $personal_detail->fathername :  old('fathername')) }}" class="form-control form-control-lg" placeholder="Enter Father Name">
             @if ($errors->has('fathername'))
                 <span class="errr-validation">{{ $errors->first('fathername') }}</span>
             @endif
         </div>  
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Mother Name</label>
-            <input type="text" name="mothername" value="{{old('mothername')}}" class="form-control form-control-lg" placeholder="Enter Mother Name">
+            <input type="text" name="mothername"  value = "{{ (isset($personal_detail) ? $personal_detail->mothername :  old('mothername')) }}" class="form-control form-control-lg" placeholder="Enter Mother Name">
             @if ($errors->has('mothername'))
                 <span class="errr-validation">{{ $errors->first('mothername') }}</span>
             @endif
         </div>
             <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Date Of Birth</label>
-            <input type="date" name="dob" value="{{old('dob')}}" class="form-control form-control-lg" placeholder="Select Date Of Birth">
+            <input type="date" name="dob"  value = "{{ (isset($personal_detail) ? $personal_detail->dob :  old('dob')) }}" class="form-control form-control-lg" placeholder="Select Date Of Birth">
             @if ($errors->has('dob'))
                 <span class="errr-validation">{{ $errors->first('dob') }}</span>
             @endif
@@ -27,11 +27,11 @@
             <label class="">Gender</label>
             <div class="d-flex row ">
                 <div class="custom-control custom-radio col-lg-2 col-md-4 col-6">
-                    <input type="radio" name="gender" id="gender_male" value="Male" class="custom-control-input" @if(old('gender')) checked @endif>
+                    <input type="radio" name="gender" id="gender_male" value="Male" class="custom-control-input" @if((old('gender') == 'Male') || (isset($personal_detail) && ($personal_detail->gender == 'Male'))) checked @endif>
                     <label class="custom-control-label" for="gender_male">Male</label>
                 </div>
                 <div class="custom-control custom-radio col-lg-2 col-md-4 col-6">
-                    <input type="radio"  name="gender" id="gender_female" value="Female"  class="custom-control-input" @if(old('gender')) checked @endif>
+                    <input type="radio"  name="gender" id="gender_female" value="Female"  class="custom-control-input" @if((old('gender') == 'Female') || (isset($personal_detail) && ($personal_detail->gender == 'Female'))) checked @endif>
                     <label class="custom-control-label" for="gender_female">Female</label>
                 </div>
             </div>
@@ -41,14 +41,14 @@
         </div>
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Blood Group</label>
-            <input type="text" name="bloodgroup" value="{{old('bloodgroup')}}"class="form-control form-control-lg" placeholder="Enter Blood Group">
+            <input type="text" name="bloodgroup"  value = "{{ (isset($personal_detail) ? $personal_detail->blood_group :  old('bloodgroup')) }}"   class="form-control form-control-lg" placeholder="Enter Blood Group">
             @if ($errors->has('bloodgroup'))
                 <span class="errr-validation">{{ $errors->first('bloodgroup') }}</span>
             @endif
         </div>
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Alternate Number</label>
-            <input type="text" name="alternateno" value="{{old('alternateno')}}" class="form-control form-control-lg" placeholder="Enter alternate  Number">
+            <input type="text" name="alternateno" value = "{{ (isset($personal_detail) ? $personal_detail->alternate_no :  old('alternateno')) }}" class="form-control form-control-lg" placeholder="Enter alternate  Number">
             @if ($errors->has('alternateno'))
                 <span class="errr-validation">{{ $errors->first('alternateno') }}</span>
             @endif
@@ -60,9 +60,9 @@
             <label>Marital Status </label>
             <select class="form-control" id="merriedstatus" value=""  name="marital_status">
                 <!-- <option value= "" selected="">Choose...</option> -->
-                <option value="single" {{(old('marital_status') == 'single' ? 'selected' : '' )}}>Single</option>
-                <option value="married" {{(old('marital_status') == 'married' ? 'selected' : '' )}}>Married</option>
-                <option value="divorce" {{(old('marital_status') == 'divorce' ? 'selected' : '' )}}>Divorce</option>
+                <option value="single" {{ (isset($personal_detail) ? ($personal_detail->marital_status == 'single' ? 'selected' : '') :  old('marital_status') == 'single' ? 'selected' : '' ) }} >Single</option>
+                <option value="married" {{ (isset($personal_detail) ? ($personal_detail->marital_status == 'married' ? 'selected' : '') :  old('marital_status') == 'married' ? 'selected' : '' ) }} >Married</option>
+                <option value="divorce" {{ (isset($personal_detail) ? ($personal_detail->marital_status == 'divorce' ? 'selected' : '') :  old('marital_status') == 'divorce' ? 'selected' : '' ) }} >Divorce</option>
             </select>
             @if ($errors->has('marital_status'))
                 <span class="errr-validation">{{ $errors->first('marital_status') }}</span>
@@ -72,11 +72,27 @@
         <div class="form-group col-lg-6 col-md-6 col-sm-12 ">
             <div class="custom-file">
                 <label class="custom-file-label" for="inputGroupFile02">Choose Profile Image</label>
+                @if(empty($personal_detail))
                 <input type="file" name="image" class="custom-file-input" id="inputGroupFile02">
                 
-                <div class="file mt-2">@if ($errors->has('image'))
-                <span class="errr-validation">{{ $errors->first('image') }}</span>
-                @endif</div>
+                <div class="file mt-2">
+                    @if ($errors->has('image'))
+                    <span class="errr-validation">{{ $errors->first('image') }}</span>
+                    @endif
+                </div>    
+                @else
+                    <input type="file" name="image" class="custom-file-input" id="inputGroupFile02">
+                    
+                    <div class="file mt-2">
+                        @if ($errors->has('image'))
+                        <span class="errr-validation">{{ $errors->first('image') }}</span>
+                        @endif
+                    </div>    
+                    <div class="imageset mt-4 m-4">
+                        <img src="{{asset('console/upload/employee/profileimage/'.$personal_detail->image)}}" height="120px" width="100px"> 
+                    </div>    
+                @endif    
+                
             </div>
         </div>
         <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
@@ -84,8 +100,11 @@
             <select class="form-control"  name="residencetype">
             <option value="" selected="">Select Choose</option>
                 @foreach($current_residency as $curr)
-                        <option value="{{$curr->id}}" {{(old('residencetype') == $curr->id ? 'selected' : '' )}}>{{$curr->type}} </option>
-                    @endforeach
+
+                  
+                <option value="{{$curr->id}}" {{ (isset($personal_detail) ? ($personal_detail->current_residence_type_id == $curr->id ? 'selected' : '') :  old('residencetype') == $curr->id ? 'selected' : '' ) }}>{{$curr->type}}</option>
+
+                @endforeach
             </select>
             @if ($errors->has('residencetype'))
                 <span class="errr-validation">{{ $errors->first('residencetype') }}</span>
@@ -96,7 +115,7 @@
             <select class="form-control" value="{{old('transportationmode')}}" name="transportationmode">
             <option value="" selected="">Select Choose</option>
                 @foreach($mode_transportation as $mode)
-                        <option value="{{$mode->id}}" {{(old('transportationmode') == $mode->id ? 'selected' : '' )}}>{{$mode->type}} </option>
+                        <option value="{{$mode->id}}" {{ (isset($personal_detail) ? ($personal_detail->	mode_of_transportation_id  == $mode->id ? 'selected' : '') :  old('transportationmode') == $mode->id ? 'selected' : '' ) }}>{{$mode->type}}</option>
                     @endforeach
             </select>
             @if ($errors->has('transportationmode'))
@@ -105,7 +124,9 @@
         </div>
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Details Of Disability</label>
-            <textarea  class="form-control form-control-lg"  name="disabilitydtls" cols="30" placeholder="Enter Details Of disaility">{{old('disabilitydtls')}} </textarea>
+            <textarea  class="form-control form-control-lg"  name="disabilitydtls" cols="30" placeholder="Enter Details Of disaility">
+                {{ (isset($personal_detail) ? $personal_detail->details_of_disability :  old('disabilitydtls')) }}
+            </textarea>
             @if ($errors->has('disabilitydtls'))
                 <span class="errr-validation">{{ $errors->first('disabilitydtls') }}</span>
             @endif
@@ -113,7 +134,7 @@
         
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Total Experience</label>
-            <input type="number" name="totalexperience" value="{{old('totalexperience')}}" class="form-control form-control-lg" placeholder="Total Experience">
+            <input type="number" name="totalexperience"  value = "{{ (isset($personal_detail) ? $personal_detail->total_of_experience :  old('totalexperience')) }}" value="{{old('totalexperience')}}" class="form-control form-control-lg" placeholder="Total Experience">
             @if ($errors->has('totalexperience'))
                 <span class="errr-validation">{{ $errors->first('totalexperience') }}</span>
             @endif
@@ -121,14 +142,18 @@
         
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label for="inputAddress">Current Address</label>
-            <textarea  rows="6" name="current_address" class="form-control form-control-lg" id="inputAddress" placeholder="1234 Main St"> {{old('current_address')}}</textarea>
+            <textarea  rows="6" name="current_address" class="form-control form-control-lg" id="inputAddress" placeholder="1234 Main St">
+                  {{ (isset($personal_detail) ? $personal_detail->current_address :  old('current_address')) }}
+            </textarea>
             @if ($errors->has('current_address'))
                 <span class="errr-validation">{{ $errors->first('current_address') }}</span>
             @endif
         </div>
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label for="inputAddress2">Permanent Address</label>
-            <textarea  rows="6" name="permanent_address"   class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">{{old('permanent_address')}}</textarea>
+            <textarea  rows="6" name="permanent_address"   class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                {{ (isset($personal_detail) ? $personal_detail->permanent_address :  old('permanent_address')) }}
+            </textarea>
             @if ($errors->has('permanent_address'))
                 <span class="errr-validation">{{ $errors->first('permanent_address') }}</span>
             @endif
@@ -138,7 +163,7 @@
             <select class="form-control" id="current_country"  name="current_country">
                 <option value="" selected="">Select Country</option>
                 @foreach($country as $con)
-                        <option value="{{$con->id}}" {{(old('current_country') == $con->id ? 'selected' : '' )}}>{{$con->name}} </option>
+                        <option value="{{$con->id}}" {{ (isset($personal_detail) ? ($personal_detail->current_country_id  == $con->id ? 'selected' : '') :  old('current_country') == $con->id ? 'selected' : '' ) }}>{{$con->name}}  </option>
                         
                     @endforeach
             </select>
@@ -151,8 +176,8 @@
             <select class="form-control" id="permanent_country" name="permanent_country">
                 <option value="" selected="">Select Country</option>
                 @foreach($country as $con)
-                        <option value="{{$con->id}}" {{(old('permanent_country') == $con->id ? 'selected' : '' )}}>{{$con->name}} </option>
-                    @endforeach
+                    <option value="{{$con->id}}" {{ (isset($personal_detail) ? ($personal_detail->permanent_country_id  == $con->id ? 'selected' : '') :  old('current_country') == $con->id ? 'selected' : '' ) }}>{{$con->name}}  </option>
+                @endforeach
             </select>
             @if ($errors->has('permanent_country'))
                 <span class="errr-validation">{{ $errors->first('permanent_country') }}</span>
@@ -199,7 +224,7 @@
         </div>
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Pincode</label>
-            <input type="text" name="current_pincode" value="{{old('current_pincode')}}" class="form-control form-control-lg" placeholder="Enter current pincode">
+            <input type="text" name="current_pincode" value = "{{ (isset($personal_detail) ? $personal_detail->current_pincode :  old('current_pincode')) }}"  class="form-control form-control-lg" placeholder="Enter current pincode">
             @if ($errors->has('current_pincode'))
                 <span class="errr-validation">{{ $errors->first('current_pincode') }}</span>
             @endif
@@ -207,7 +232,7 @@
         
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Pincode</label>
-            <input type="text" name="permanent_pincode" value="{{old('permanent_pincode')}}" class="form-control form-control-lg" placeholder="Enter permanant pincode">
+            <input type="text" name="permanent_pincode" value = "{{ (isset($personal_detail) ? $personal_detail->permanent_pincode :  old('permanent_pincode')) }}"  class="form-control form-control-lg" placeholder="Enter permanant pincode">
             @if ($errors->has('permanent_pincode'))
                 <span class="errr-validation">{{ $errors->first('permanent_pincode') }}</span>
             @endif
@@ -236,13 +261,16 @@
        
          /* country select than after state fetch  code start*/ 
 
-            var curentState = '{{ old("current_state") }}';
-            var countryID = '{{ old("current_country") }}'; 
+            var curentState =  '{{ old("current_state") }}' ? '{{ old("current_state") }}' : '{{ $personal_detail->current_state_id ?? 0}}';
+            var countryID = '{{ old("current_country") }}' ? '{{ old("current_country") }}' :'{{ $personal_detail->current_country_id ?? 0}}'; 
+            console.log('countryID ::',countryID);
+            console.log('curentState ::',curentState);
+             
             getStates(countryID,'current_state',curentState);
             
-            var permentState = '{{ old("permanent_state") }}';
-            var countryID = '{{ old("permanent_country") }}'; 
-            getStates(countryID,'permanent_state',permentState);
+            var permentState =  '{{ old("permanent_state") }}' ? '{{ old("permanent_state") }}' : '{{ $personal_detail->permanent_state_id ?? 0 }}';
+            var countryID =  '{{ old("permanent_country") }}' ? '{{ old("permanent_country") }}' : '{{ $personal_detail->permanent_country_id ?? 0 }}';
+             getStates(countryID,'permanent_state',permentState);
 
 
             function getStates(countryId,place,stateId = '0') {
@@ -282,12 +310,20 @@
          
          /* state select than after city fetch  code start*/ 
 
-            var curentCity = '{{ old("current_city") }}';
-            var stateID = '{{ old("current_state") }}'; 
+            var curentCity ='{{ old("current_city") }}' ? '{{ old("current_city") }}' : '{{ $personal_detail->current_city_id ?? 0}}'; 
+            var stateID = '{{ old("current_state") }}' ? '{{ old("current_state") }}' : '{{ $personal_detail->current_state_id  ?? 0}}'; 
+           
+            console.log('stateID ::',stateID);
+            console.log('curentCity ::',curentCity);
+
             getCitys(stateID,'current_city',curentCity);
+
+
             
-            var permentCity = '{{ old("permanent_city") }}';
-            var stateID = '{{ old("permanent_state") }}'; 
+            var permentCity = '{{ old("permanent_city") }}' ? '{{ old("permanent_city") }}' : '{{ $personal_detail->permanent_city_id  ?? 0}}'; 
+            var stateID = '{{ old("permanent_state") }}' ? '{{ old("permanent_state") }}' : '{{ $personal_detail->permanent_state_id ?? 0}}';  
+            
+            
             getCitys(stateID,'permanent_city',permentCity);
 
 

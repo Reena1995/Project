@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\CurrentResidenceType;
 use App\Models\ModeOfTransportation;
 use App\Models\Country;
+use App\Models\EmpEducationDetail;
 use App\Models\State;
 use App\Models\City;
 use DB;
@@ -111,25 +112,27 @@ class UserController extends Controller
         $current_residency=CurrentResidenceType::where('is_active',1)->orderBy('type', 'ASC')->get();
         $mode_transportation=ModeOfTransportation::where('is_active',1)->orderBy('type', 'ASC')->get();
         $country=Country::where('is_active',1)->orderBy('name', 'ASC')->get();
-        // $state=State::where('is_active',1)->orderBy('name', 'ASC')->get();
-        // $city=City::where('is_active',1)->orderBy('name', 'ASC')->get();
-        return view('admin.modules.employee.edit',compact('emp','current_residency','mode_transportation','country'));
+        $personal_detail=EmployeePersonalDetail::where('user_id',$emp->id)->first();
+        $educationDetail = EmpEducationDetail::where('user_id',$emp->id)->where('is_active',1)->first();
+        // dd($educationDetail);
+        
+        return view('admin.modules.employee.edit',compact('emp','current_residency','mode_transportation','educationDetail','country','personal_detail'));
        
     }
 
     public function getState(Request $request)
     {
-        \Log::info($request->all());
+        
 		$data['states']=State::where("country_id",$request->cid)->orderBy('name', 'ASC')->get();
-        \Log::info($data);
+        
         return response()->json($data);	
     }
 
     public function getCity(Request $request)
     {
-        \Log::info($request->all());
+        
 		$data['cities']=City::where("state_id",$request->sid)->orderBy('name', 'ASC')->get();
-        \Log::info($data);
+        
         return response()->json($data);	
     }
     

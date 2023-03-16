@@ -15958,3 +15958,8 @@ a:hover {
 font-size: 16px !important;
 height: 40px !important;
 }
+
+.education
+{
+    box-shadow: 5px 5px 5px 5px  ;
+}

@@ -21,10 +21,10 @@
                                     <div class="card-body">
                                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active" id="personal-details-tab-z" data-toggle="tab" href="#personal-details" role="tab" aria-controls="personal-details" aria-selected="true">Personal Details</a>
+                                                    <a class="nav-link {{ (empty($personal_detail)) ? 'active' : ''  }}" id="personal-details-tab-z" data-toggle="tab" href="#personal-details" role="tab" aria-controls="personal-details" aria-selected="true">Personal Details</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link disabled"  id="education-details-tab-z" data-toggle="tab" href="#education-details" role="tab" aria-controls="education-details" aria-selected="false">Education Details</a>
+                                                    <a class="nav-link  {{ (!empty($personal_detail)) ? 'active' : 'disabled'  }}"  id="education-details-tab-z" data-toggle="tab" href="#education-details" role="tab" aria-controls="education-details" aria-selected="false">Education Details</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link disabled" id="document-details-tab-z" data-toggle="tab" href="#document-details" role="tab" aria-controls="document-details" aria-selected="false">Document Details</a>
@@ -36,11 +36,11 @@
                                             </ul>
                                             <!-- <form action="#"> -->
                                                 <div class="tab-content" id="myTabContent1">
-                                                    <div class="tab-pane fade show active" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
+                                                    <div class="tab-pane fade {{ (!empty($personal_detail)) ? '' : 'show active'  }}" id="personal-details" role="tabpanel" aria-labelledby="personal-details-tab">
                                                         <h5 class="font-weight-semibold p-t-20 m-b-20">Basic</h5>
                                                         @include('admin.modules.employee.personal.personaldetail')
                                                     </div>
-                                                    <div class="tab-pane fade" id="education-details" role="tabpanel" aria-labelledby="education-details-tab">
+                                                    <div class="tab-pane fade {{ (!empty($personal_detail)) ? 'show active' : ''  }}" id="education-details" role="tabpanel" aria-labelledby="education-details-tab">
                                                         <h5 class="font-weight-semibold p-t-20 m-b-20">Basic2</h5>
                                                         @include('admin.modules.employee.personal.education')
                                                         
