@@ -15963,3 +15963,7 @@ height: 40px !important;
 {
     box-shadow: 5px 5px 5px 5px  ;
 }
+.delete
+{
+    text-align: right;
+}

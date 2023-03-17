@@ -42,6 +42,7 @@
                                                     </div>
                                                     <div class="tab-pane fade {{ (!empty($personal_detail)) ? 'show active' : ''  }}" id="education-details" role="tabpanel" aria-labelledby="education-details-tab">
                                                         <h5 class="font-weight-semibold p-t-20 m-b-20">Basic2</h5>
+                                                       
                                                         @include('admin.modules.employee.personal.education')
                                                         
                                                     </div>

@@ -23,7 +23,6 @@ class CreateEmployeePersonalDetailsTable extends Migration
             $table->string('gender');
             $table->string('marital_status');
             $table->string('image');
-            $table->integer('mobile');
             $table->integer('alternate_no');
             $table->string('blood_group');
             $table->unsignedBigInteger('current_residence_type_id');

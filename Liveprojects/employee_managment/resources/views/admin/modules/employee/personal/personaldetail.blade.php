@@ -1,4 +1,4 @@
-<form  name="personal_deatil_add" action="{{route('personal.personaldetail.add')}}"  method="post" enctype="multipart/form-data">
+<form id="personalDetailForm"  name="personal_deatil_add" action="{{route('personal.personaldetail.add')}}"  method="post" enctype="multipart/form-data">
     <div class="form-row">
         @csrf
         <input type="hidden" name="user_id" value="{{$emp->uuid}}">
@@ -73,15 +73,17 @@
             <div class="custom-file">
                 <label class="custom-file-label" for="inputGroupFile02">Choose Profile Image</label>
                 @if(empty($personal_detail))
-                <input type="file" name="image" class="custom-file-input" id="inputGroupFile02">
+                <input type="file" name="image" class="custom-file-input" id="inputGroupFile02" accept="image/png, image/gif, image/jpeg">
                 
                 <div class="file mt-2">
-                    @if ($errors->has('image'))
-                    <span class="errr-validation">{{ $errors->first('image') }}</span>
-                    @endif
-                </div>    
+                    <span id="img-error" class="errr-validation">
+                        @if ($errors->has('image'))
+                            {{ $errors->first('image') }}
+                            @endif
+                            </span>
+                </div>   
                 @else
-                    <input type="file" name="image" class="custom-file-input" id="inputGroupFile02">
+                    <input type="file" name="image" class="custom-file-input" id="inputGroupFile02" accept="image/png, image/gif, image/jpeg">
                     
                     <div class="file mt-2">
                         @if ($errors->has('image'))
@@ -245,7 +247,7 @@
                 </a>
             </div>
             <div class="btn-group mr-2" role="group" aria-label="Second group">
-                <button type="submit"  value="submit" name="submit" class="theme-btn text-white">Save</button>
+                <button type="submit"  id="personalDetailBtn" value="submit" name="submit" class="theme-btn text-white">Save</button>
             </div>
         </div>        
     </div> 
@@ -363,94 +365,109 @@
          /* state select than after city fetch  code end */ 
 
           /*validation Frontend jquery start*/
+          var isEditImage = '{{ !empty($personal_detail) && ($personal_detail->image) }}' ? 2:1; 
+       
 
-        $("form[name='personal_deatil_add']").validate({
-                rules : {
-                    fathername : "required",  
-                    mothername : "required", 
-                    dob : "required",  
-                    gender : "required",    
-                    bloodgroup : "required",  
-                    alternateno : { required : true,
-                        number:true,
-                        minlength:10,
-                        maxlength:10
-                    },    
-                    marital_status : "required",  
-                    image :  {required: true,extension:'jpg|jpeg|png|ico|bmp'},    
-                    residencetype : "required",     
-                    transportationmode : "required",    
-                    disabilitydtls : "required",  
-                    totalexperience : "required",
-                    current_address : "required",  
-                    permanent_address : "required", 
-                    current_country : "required",  
-                    permanent_country : "required",    
-                    current_state : "required",  
-                    permanent_state : "required",    
-                    current_city : "required",  
-                    permanent_city : "required",    
-                    current_pincode : {required: true,number:true},  
-                    permanent_pincode : {required: true,number:true},    
-                    
-                },
-                messages : {
-                    fathername : "Please Enter a fathername ",
-                    mothername : "Please Enter  a mothername ",
-                    dob : "Please select a date of birth ",
-                    gender : "Please Select  a gender ",
-                    bloodgroup : "Please Enter a bloodgroup ",
-                    alternateno : {
-                        required : "Please enter a Mobile Number.",
-                        number:'Please enter valid Number.',
-                        minlength : "Please enter at least 10 digit Number.",
-                        maxlength : "Please enter at least 10 digit Number.",
-                    },
-                    marital_status : "Please Select a marital status ",
-                    image : {required: "Select a image",extension:"only jpg ,jpeg ,pdf"},
-                    residencetype : "Please Select a residencetype ",
-                    transportationmode : "Please Select  a transportationmode ",
-                    disabilitydtls : "Please Enter a disability details ",
-                    totalexperience : "Please Enter a totalexperience ",  
-                    current_address : "Please Enter a Address ",
-                    permanent_address : "Please Enter  a Address ",
-                    current_country : "Please Select a Country ",
-                    permanent_country : "Please Select  a Country ",
-                    current_state : "Please Select a State ",
-                    permanent_state : "Please Select  a State ",
-                    current_city : "Please Select  a City",
-                    permanent_city : "Please Select  a City",
-                    current_pincode :  {required: "Please Enter a pincode",number:"Please enter numbers Only"},
-                    permanent_pincode :  {required: "Please Enter a pincode",number:"Please enter numbers Only"},
-                      
-                    
-                },
-                errorClass: "custom-error",
-                errorElement: "span",
-                errorPlacement: function(error, element) {
-                    var placement = $(element).data('error');
-                    console.log(element.attr("type"),'placement');
-                    if((element.attr("type") == 'radio')){                       
-                        $(element).parents('.gender').append(error)
-                        
-                    }else if (element.attr("type") == 'file') {
-                        console.log('elseif');
-                        console.log(element.parents('.file'));
-                        $('.file').append(error)
-                        // $(element).parents('.file').append(error)
-
-
-                        // $(element).append(error);
-                    } else {
-                        // console.log('else');
-                        // console.log(element);
-                        error.insertAfter(element);
-                    }
-                },
-                submitHandler : function(form){
-                    form.submit();
+            $(document).delegate('#personalDetailBtn','click',function(){
+                isImageValidation() 
+                formSubmit();  
+            });
+            function isImageValidation(){
+                 console.log('isEditImage :',isEditImage);
+                var img = $('#inputGroupFile02').val();
+                var html = '';
+                console.log('img ::',img);
+                if(img == '' && (isEditImage == 1)){
+                    html = 'Please select image';
+                    return false;
                 }
-        });
+                console.log(html);
+                $('#img-error').html(html);
+                return true;
+            }
+            function formSubmit(){
+                console.log('asd');
+                $("#personalDetailForm").validate({
+                    rules : {
+                        fathername : "required",  
+                        mothername : "required", 
+                        dob : "required",  
+                        gender : "required",    
+                        bloodgroup : "required",  
+                        alternateno : { required : true,
+                            number:true,
+                            minlength:10,
+                            maxlength:10
+                        },    
+                        marital_status : "required",  
+                        //image :  {extension:'jpg|jpeg|png|ico|bmp'},    
+                        residencetype : "required",     
+                        transportationmode : "required",    
+                        disabilitydtls : "required",  
+                        totalexperience : "required",
+                        current_address : "required",  
+                        permanent_address : "required", 
+                        current_country : "required",  
+                        permanent_country : "required",    
+                        current_state : "required",  
+                        permanent_state : "required",    
+                        current_city : "required",  
+                        permanent_city : "required",    
+                        current_pincode : {required: true,number:true},  
+                        permanent_pincode : {required: true,number:true},    
+                        
+                    },
+                    messages : {
+                        fathername : "Please Enter a fathername ",
+                        mothername : "Please Enter  a mothername ",
+                        dob : "Please select a date of birth ",
+                        gender : "Please Select  a gender ",
+                        bloodgroup : "Please Enter a bloodgroup ",
+                        alternateno : {
+                            required : "Please enter a Mobile Number.",
+                            number:'Please enter valid Number.',
+                            minlength : "Please enter at least 10 digit Number.",
+                            maxlength : "Please enter at least 10 digit Number.",
+                        },
+                        marital_status : "Please Select a marital status ",
+                       // image : {extension:"only jpg ,jpeg ,pdf"},
+                        residencetype : "Please Select a residencetype ",
+                        transportationmode : "Please Select  a transportationmode ",
+                        disabilitydtls : "Please Enter a disability details ",
+                        totalexperience : "Please Enter a totalexperience ",  
+                        current_address : "Please Enter a Address ",
+                        permanent_address : "Please Enter  a Address ",
+                        current_country : "Please Select a Country ",
+                        permanent_country : "Please Select  a Country ",
+                        current_state : "Please Select a State ",
+                        permanent_state : "Please Select  a State ",
+                        current_city : "Please Select  a City",
+                        permanent_city : "Please Select  a City",
+                        current_pincode :  {required: "Please Enter a pincode",number:"Please enter numbers Only"},
+                        permanent_pincode :  {required: "Please Enter a pincode",number:"Please enter numbers Only"},
+                    },
+                    errorClass: "custom-error",
+                    errorElement: "span",
+                    errorPlacement: function(error, element) {
+                        var placement = $(element).data('error');
+                        console.log(element.attr("type"),'placement');
+                        if((element.attr("type") == 'radio')){                       
+                            $(element).parents('.gender').append(error)
+                        }else if (element.attr("type") == 'file') {
+                            $('.file').append(error)
+                        } else {
+                            error.insertAfter(element);
+                        }
+                    },
+                    submitHandler : function(form){
+                        if(!isImageValidation()){
+                            return false;
+                        }else{
+                            form.submit();
+                        }
+                    }
+                });
+            }
 
          /*validation Frontend jquery start*/
 

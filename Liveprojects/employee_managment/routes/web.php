@@ -245,11 +245,13 @@ Route::get('/getCitty',[UserController::class,'getCity'])->name('getcity');
 Route::group(['prefix'=>'personal/','middleware'=>[],'as'=>'personal.'], function(){
  
    Route::post('save',[PersonalController::class,'personaldetail_add'])->name('personaldetail.add');
-   // Route::get('/list',[PersonalController::class,'index'])->name('index');
-   // Route::get('/edit/{id}',[PersonalController::class,'edit'])->name('edit');
+   Route::post('edusave',[PersonalController::class,'education_add'])->name('education.add');
+   
    
 });
 /* ------------------------------- personal details end  ---------------------------*/
+
+
 
 
 });

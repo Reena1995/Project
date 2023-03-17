@@ -12,6 +12,8 @@ use App\Models\Country;
 use App\Models\EmpEducationDetail;
 use App\Models\State;
 use App\Models\City;
+use App\Models\EducationLevel;
+use App\Models\MediumOfInstruction;
 use DB;
 use Str;
 use Log;
@@ -109,15 +111,20 @@ class UserController extends Controller
     public function edit($id)
     {
         $emp = User::where('uuid',$id)->where('role_id',2)->first();
-        $current_residency=CurrentResidenceType::where('is_active',1)->orderBy('type', 'ASC')->get();
-        $mode_transportation=ModeOfTransportation::where('is_active',1)->orderBy('type', 'ASC')->get();
-        $country=Country::where('is_active',1)->orderBy('name', 'ASC')->get();
+        $current_residency = CurrentResidenceType::where('is_active', 1)->orderBy('type', 'ASC')->get();
+        $mode_transportation=ModeOfTransportation::where('is_active', 1)->orderBy('type', 'ASC')->get();
+        $country=Country::where('is_active', 1)->orderBy('name', 'ASC')->get();
         $personal_detail=EmployeePersonalDetail::where('user_id',$emp->id)->first();
-        $educationDetail = EmpEducationDetail::where('user_id',$emp->id)->where('is_active',1)->first();
+        $educationDetails = EmpEducationDetail::where('user_id',$emp->id)->where('is_active',1)->get();
+        // dd($educationDetails);
+        $medium=MediumOfInstruction::where('is_active', 1)->orderBy('name', 'ASC')->get();
+
+        $educationlevel=EducationLevel::where('is_active', 1)->orderBy('name', 'ASC')->get();
+        
+
         // dd($educationDetail);
         
-        return view('admin.modules.employee.edit',compact('emp','current_residency','mode_transportation','educationDetail','country','personal_detail'));
-       
+        return view('admin.modules.employee.edit',compact('emp','current_residency','mode_transportation', 'educationDetails','country','personal_detail','medium','educationlevel'));
     }
 
     public function getState(Request $request)
