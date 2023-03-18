@@ -19,6 +19,7 @@ use App\Http\Controllers\ModeOfTransportationController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PersonalController;
+use App\Http\Controllers\OrganizationController;
 
 
 
@@ -246,10 +247,23 @@ Route::group(['prefix'=>'personal/','middleware'=>[],'as'=>'personal.'], functio
  
    Route::post('save',[PersonalController::class,'personaldetail_add'])->name('personaldetail.add');
    Route::post('edusave',[PersonalController::class,'education_add'])->name('education.add');
+   Route::post('documentsave',[PersonalController::class,'document_add'])->name('document.add');
    
    
 });
 /* ------------------------------- personal details end  ---------------------------*/
+
+/* -----------------==---------- Organization details start--------------------------*/
+Route::group(['prefix'=>'organization/','middleware'=>[],'as'=>'organization.'], function(){
+ 
+   Route::post('jobprofile/save',[OrganizationController::class,'jobprofile_add'])->name('jobprofile.add');
+   Route::post('bandetail/save',[OrganizationController::class,'bank_add'])->name('bank.add');
+   Route::post('employment/save',[OrganizationController::class,'employment_add'])->name('employment.add');
+   Route::post('location/save',[OrganizationController::class,'location_add'])->name('location.add');
+   
+   
+});
+/* ------------------------------- Organization details end  ---------------------------*/
 
 
 

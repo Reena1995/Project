@@ -8,6 +8,7 @@ use App\Models\EmpEducationDetail;
 use App\Models\EmpDocumentDetail;
 use App\Models\EmpLangDetail;
 use App\Models\User;
+use App\Models\DocumentType;
 use DB;
 use Str;
 use Log;
@@ -209,6 +210,114 @@ class PersonalController extends Controller
         }
     }
 
+    // public function education_add(Request $request)
+    // {
+    //     Log::info('aaaaaaa');
+    //     // dd($request->all());
+    //     //  $medium = $request->validate([
+    //     //     'medium.*'=>'bail|required' ,
+    //     //     'education.*'=>'bail|required' ,
+    //     //     'percentage.*'=>'bail|required' ,
+    //     //     'universityname.*'=>'bail|required' ,
+    //     //     'specialization.*'=>'bail|required' 
+    //     // ]); 
+        
+    //     try{
+    //         DB::beginTransaction();
+    //         $user = User::where('uuid',$request->user_id)->first();
+
+    //         foreach($request->medium as $key=> $data){
+    //             if(isset($request->education_uuid[$key]))
+    //             {
+    //                 $educationD =  EmpEducationDetail::where('uuid',$request->education_uuid[$key])->first();
+                    
+    //                 \Log::info($request->education_uuid[$key]);
+    //                 $educationD->medium_instruction_id  = $request->medium[$key];
+    //                 $educationD->education_level_id  = $request->education[$key];
+    //                 $educationD->percentage = $request->percentage[$key];
+    //                 $educationD->university_name = $request->universityname[$key];
+    //                 $educationD->specilaization = $request->specialization[$key];
+    //                 $educationD->passing_year = $request->passingyear[$key];
+                    
+    //                 if(isset($request->result[$key])){
+
+    //                     $file = $request->result[$key];  // get file
+    //                     $file_name=time()."_image.".$file->getClientOriginalExtension();// make file name
+    //                     $file->move('console/upload/employee/education',$file_name); //file name move upload in public		
+    //                     $educationD->result = $file_name;
+    //                 }
+                    
+    //                 $educationD->updated_by = Auth::id();
+                
+    //                 $res = $educationD->update();
+    //                 if(!$res)
+    //                 {
+    //                     DB::rollback();
+    //                     Session::flash('error','Internal server error please try again later.');
+                    
+                    
+    //                     return redirect()->back();
+    //                 }
+
+    //             }else{
+    //                 $education = new EmpEducationDetail;
+    //                 $education->medium_instruction_id  = $request->medium[$key];
+    //                 $education->education_level_id  = $request->education[$key];
+    //                 $education->percentage = $request->percentage[$key];
+    //                 $education->university_name = $request->universityname[$key];
+    //                 $education->specilaization = $request->specialization[$key];
+    //                 $education->passing_year = $request->passingyear[$key];
+    //                 $education->user_id = $user->id;
+    //                 if($request->result[$key]){
+    
+    //                     $file = $request->result[$key];  // get file
+    //                     $file_name=time()."_image.".$file->getClientOriginalExtension();// make file name
+    //                     $file->move('console/upload/employee/education',$file_name); //file name move upload in public		
+    //                     $education->result = $file_name;
+    //                 }
+                    
+    //                 $education->created_by = Auth::id();
+    //                 $education->uuid = \Str::uuid();
+                  
+    //                 $res = $education->save();
+        
+    //                 if(!$res)
+    //                 {
+    //                     DB::rollback();
+    //                     Session::flash('error','Internal server error please try again later.');
+                     
+                    
+    //                     return redirect()->back();
+    //                 }
+    //             }
+    //             /* 
+    //             */
+    //         }
+    //         Log::info('bbbbbbb');
+    //         DB::commit();
+    //         Session::flash('success','Education created successfully');
+           
+    //         return redirect()->back();
+           
+
+
+    //     }catch (\Illuminate\Database\QueryException $e) {
+    //         Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+    //         Log::info('Error Code: ' . $e->getCode());
+    //         Log::info('Error Message: ' . $e->getMessage());
+    //         Log::info("Exiting class:MediumOfInstructionController function:store");
+    //         Session::flash('danger', "Internal server error.Please try again later.");
+    //         return redirect()->back();
+    //     }    
+    //     catch (\Exception $e) {
+    //             Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+    //             Log::info('Error Code: ' . $e->getCode());
+    //             Log::info('Error Message: ' . $e->getMessage());
+    //             Session::flash('danger', "Internal server error.Please try again later.");
+    //             return redirect()->back();
+
+    //     }
+    // }
     public function education_add(Request $request)
     {
         Log::info('aaaaaaa');
@@ -291,6 +400,116 @@ class PersonalController extends Controller
                 }
                 /* 
                 */
+            }
+            Log::info('bbbbbbb');
+            DB::commit();
+            Session::flash('success','Education created successfully');
+           
+            return redirect()->back();
+           
+
+
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:MediumOfInstructionController function:store");
+            Session::flash('danger', "Internal server error.Please try again later.");
+            return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
+
+        }
+    }
+
+    public function document_add(Request $request)
+    {
+        Log::info('aaaaaaa');
+        // dd($request->all());
+        //  $medium = $request->validate([
+        //     'medium.*'=>'bail|required' ,
+        //     'education.*'=>'bail|required' ,
+        //     'percentage.*'=>'bail|required' ,
+        //     'universityname.*'=>'bail|required' ,
+        //     'specialization.*'=>'bail|required' 
+        // ]); 
+        
+        try{
+            DB::beginTransaction();
+            $user = User::where('uuid',$request->user_id)->first();
+            // $documenttype=DocumentType::where('is_active', 1)->orderBy('type', 'ASC')->get();
+
+
+            foreach($request->medium as $key=> $data){
+                if(isset($request->document_uuid[$key]))
+                {
+                    \Log::info('ifff');
+                    $empdoc =  EmpDocumentDetail::where('uuid',$request->document_uuid[$key])->first();
+                    
+                    \Log::info($request->document_uuid[$key]);
+                    $empdoc->medium_instruction_id  = $request->type[$key];
+                   
+                   
+                    
+                    if(isset($request->file[$key])){
+
+                        $file = $request->type[$key];  // get file
+                        $file_name=time()."_image.".$file->getClientOriginalExtension();// make file name
+                        $file->move('console/upload/employee/education',$file_name); //file name move upload in public		
+                        $empdoc->file = $file_name;
+                    }
+                    
+                    $educationD->updated_by = Auth::id();
+                
+                    $res = $educationD->update();
+                    if(!$res)
+                    {
+                        DB::rollback();
+                        Session::flash('error','Internal server error please try again later.');
+                    
+                    
+                        return redirect()->back();
+                    }
+
+                }else{
+
+                    \Log::info('ifffffffff');
+                    
+                    $emp_document_dtls= new EmpDocumentDetail;
+                     $emp_document_dtl->document_type_id   = $request->type[$key];;
+                    $emp_document_dtls->user_id = $user->id;
+                   
+                   
+                    if($request->file[$key]){
+    
+                        $file = $request->file[$key];  // get file
+                        $file_name=time()."_image.".$file->getClientOriginalExtension();// make file name
+                        $file->move('console/upload/employee/document',$file_name); //file name move upload in public		
+                        $emp_document_dtls->file = $file_name;
+                    }
+                    
+                    $emp_document_dtls->created_by = Auth::id();
+    
+                    $emp_document_dtls->uuid = \Str::uuid();
+                  
+                    $res = $emp_document_dtls->save();
+        
+                    if(!$res)
+                    {
+                        DB::rollback();
+                        Session::flash('error','Internal server error please try again later.');
+                     
+                    
+                        return redirect()->back();
+                    }
+                }
+            
+                
             }
             Log::info('bbbbbbb');
             DB::commit();

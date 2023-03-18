@@ -8,8 +8,8 @@
                         <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
                             <div class="tab-form card">
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    <a class="nav-link active" id="v-pills-personal-tab" data-toggle="pill" href="#v-pills-personal" role="tab" aria-controls="v-pills-personal" aria-selected="true">Personal Details</a>
-                                    <a class="nav-link disabled" id="v-pills-organization-tab" data-toggle="pill" href="#v-pills-organization" role="tab" aria-controls="v-pills-organization" aria-selected="false">Organization Details</a>
+                                    <a class="nav-link " id="v-pills-personal-tab" data-toggle="pill" href="#v-pills-personal" role="tab" aria-controls="v-pills-personal" aria-selected="true">Personal Details</a>
+                                    <a class="nav-link active" id="v-pills-organization-tab" data-toggle="pill" href="#v-pills-organization" role="tab" aria-controls="v-pills-organization" aria-selected="false">Organization Details</a>
                                     <a class="nav-link disabled" id="v-pills-professional-tab" data-toggle="pill" href="#v-pills-professional" role="tab" aria-controls="v-pills-professional" aria-selected="false">Professional Details</a>
                                     <a class="nav-link disabled" id="v-pills-contact-tab" data-toggle="pill" href="#v-pills-contact" role="tab" aria-controls="v-pills-contact" aria-selected="false">Contact Details</a>
                                 </div>
@@ -17,17 +17,17 @@
                         </div>
                         <div class="col-lg-9 col-md-6 col-sm-12 d-flex">
                             <div class="tab-content card" id="v-pills-tabContent">
-                                <div class="tab-pane fade show active" id="v-pills-personal" role="tabpanel" aria-labelledby="v-pills-personal-tab">
+                                <div class="tab-pane fade " id="v-pills-personal" role="tabpanel" aria-labelledby="v-pills-personal-tab">
                                     <div class="card-body">
                                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                                 <li class="nav-item">
                                                     <a class="nav-link {{ (empty($personal_detail)) ? 'active' : ''  }}" id="personal-details-tab-z" data-toggle="tab" href="#personal-details" role="tab" aria-controls="personal-details" aria-selected="true">Personal Details</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link  {{ (!empty($personal_detail)) ? 'active' : 'disabled'  }}"  id="education-details-tab-z" data-toggle="tab" href="#education-details" role="tab" aria-controls="education-details" aria-selected="false">Education Details</a>
+                                                    <a class="nav-link  {{ (!empty($personal_detail)) ? '' : 'disabled' }}"  id="education-details-tab-z" data-toggle="tab" href="#education-details" role="tab" aria-controls="education-details" aria-selected="false">Education Details</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link disabled" id="document-details-tab-z" data-toggle="tab" href="#document-details" role="tab" aria-controls="document-details" aria-selected="false">Document Details</a>
+                                                    <a class="nav-link  {{ (!empty($emp_education_detail)) ? '' : 'disabled' }}"  id="document-details-tab-z" data-toggle="tab" href="#document-details" role="tab" aria-controls="document-details" aria-selected="false">Document Details</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link disabled" id="langauge-tab-z" data-toggle="tab" href="#langauge" role="tab" aria-controls="langauge" aria-selected="false">Langauge Details</a>
@@ -60,30 +60,30 @@
                                             </form>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="v-pills-organization" role="tabpanel" aria-labelledby="v-pills-organization-tab">
+                                <div class="tab-pane fade show active" id="v-pills-organization" role="tabpanel" aria-labelledby="v-pills-organization-tab">
                                     <div class="card-body">
                                             <ul class="nav nav-tabs" id="myTab1" role="tablist">
-                                                <li class="nav-item">
-                                                    <a class="nav-link active" id="jobprofile-details-tab-z" data-toggle="tab" href="#jobprofile-details" role="tab" aria-controls="jobprofile-details" aria-selected="true">Job Profile Details</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" id="employment-details-tab-z" data-toggle="tab" href="#employment-details" role="tab" aria-controls="employment-details" aria-selected="false">Employement Details</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" id="asset-details-tab-z" data-toggle="tab" href="#asset-details" role="tab" aria-controls="asset-details" aria-selected="false">Asset  Details</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" id="location_detail-tab-z" data-toggle="tab" href="#location_detail" role="tab" aria-controls="location_detail" aria-selected="false">Location Details</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" id="bank-details-tab-z" data-toggle="tab" href="#bank-details" role="tab" aria-controls="bank-details" aria-selected="false">Bank Details</a>
-                                                </li>
                                                 
-                                                
+                                                <li class="nav-item">
+                                                    <a class="nav-link {{ (empty($emp_job_profile)) ? '' : ''  }}" id="jobprofile-details-tab-z" data-toggle="tab" href="#jobprofile-details" role="tab" aria-controls="jobprofile-details" aria-selected="true">Job Profile Details</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link {{ (!empty($emp_job_profile)) ? '' : 'disabled'  }}" id="bank-details-tab-z" data-toggle="tab" href="#bank-details" role="tab" aria-controls="bank-details" aria-selected="false">Bank Details</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link {{ (!empty($emp_bank_profile)) ? '' : 'disabled'  }}" id="employment-details-tab-z" data-toggle="tab" href="#employment-details" role="tab" aria-controls="employment-details" aria-selected="false">Employement Details</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link {{ (!empty($employment_detail)) ? '' : 'disabled'  }}" id="location_detail-tab-z" data-toggle="tab" href="#location_detail" role="tab" aria-controls="location_detail" aria-selected="false">Location Details</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link disabled" id="asset-details-tab-z" data-toggle="tab" href="#asset-details" role="tab" aria-controls="asset-details" aria-selected="false">Asset  Details</a>
+                                                </li>
+                                               
                                             </ul>
-                                            <form action="#">
+                                           
                                                 <div class="tab-content" id="myTabContent1">
-                                                    <div class="tab-pane fade show active" id="jobprofile-details" role="tabpanel" aria-labelledby="jobprofile-details-tab">
+                                                    <div class="tab-pane fade show {{ (!empty($jobprofile_detail)) ? '' : 'show active'  }}" id="jobprofile-details" role="tabpanel" aria-labelledby="jobprofile-details-tab">
                                                         <h5 class="font-weight-semibold p-t-20 m-b-20">Basic job</h5>
                                                         @include('admin.modules.employee.organization.job_profile')
                                                         
@@ -106,10 +106,11 @@
                                                         @include('admin.modules.employee.organization.bank')
                                                     </div>
                                                 </div>
-                                            </form>
-                                        </div>
+                                            
                                     </div>
-                               
+                                   
+                                </div>
+
                                 <div class="tab-pane fade" id="v-pills-professional" role="tabpanel" aria-labelledby="v-pills-professional-tab">
                                     <div class="card-body">
                                         <ul class="nav nav-tabs" id="myTab2" role="tablist">
@@ -136,7 +137,6 @@
                                         <!-- </form> -->
                                     </div>
                                 </div>
-
                                 <div class="tab-pane fade" id="v-pills-contact" role="tabpanel" aria-labelledby="v-pills-contact-tab">
                                      <div class="card-body">
                                         <ul class="nav nav-tabs" id="myTab3" role="tablist">
