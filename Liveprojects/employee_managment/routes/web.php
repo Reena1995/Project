@@ -260,6 +260,7 @@ Route::group(['prefix'=>'organization/','middleware'=>[],'as'=>'organization.'],
    Route::post('bandetail/save',[OrganizationController::class,'bank_add'])->name('bank.add');
    Route::post('employment/save',[OrganizationController::class,'employment_add'])->name('employment.add');
    Route::post('location/save',[OrganizationController::class,'location_add'])->name('location.add');
+   Route::post('asset/save',[OrganizationController::class,'asset_add'])->name('asset.add');
    
    
 });

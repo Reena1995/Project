@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\EmpBankDetail;
 use App\Models\EmpEmploymentDetail;
 use App\Models\EmployeeLocationHistorie;
+use App\Models\EmpAssetDetail;
 use DB;
 use Str;
 use Log;
@@ -459,6 +460,132 @@ class OrganizationController extends Controller
             Log::info('Error Code: ' . $e->getCode());
             Log::info('Error Message: ' . $e->getMessage());
             Log::info("Exiting class:OrganizationController function:jobprofile_add");
+            Session::flash('danger', "Internal server error.Please try again later.");
+            return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
+
+        }
+    }
+
+    public function asset_add(Request $request)
+    {
+        Log::info('aaaaaaa');
+        // dd($request->all());
+        
+         $emp_asset_validation = $request->validate([
+
+            // 'asset_brand_id'=>'bail|required' ,
+            // 'asset_sub_type_id '=>'bail|required' ,
+            // 'serial_no'=>'bail|required' ,
+            // 'purchased_dn'=>'bail|required' ,
+            // 'purchased_from'=>'bail|required' ,
+            // 'warranty_period'=>'bail|required' ,
+            // 'organization_asset_code	 '=>'bail|required' ,
+            // 'invoice_no'=>'bail|required' ,
+            // 'asset_image'=>'bail|required' ,
+           
+        
+        ]); 
+        
+        try{
+            DB::beginTransaction();
+            $user = User::where('uuid',$request->user_id)->first();
+
+            foreach($request->medium as $key=> $data){
+                if(isset($request->asset_uuid[$key]))
+                {
+                    $emp_asset =  EmpAssetDetail::where('uuid',$request->asset_uuid[$key])->first();
+                    
+                    \Log::info($request->education_uuid[$key]);
+                    $emp_asset->asset_brand_id  = $request->asset_brand_id[$key];
+                    $emp_asset->asset_sub_type_id  = $request->asset_sub_type_id[$key];
+                    $emp_asset->serial_no = $request->serial_no[$key];
+                    $emp_asset->purchased_dn = $request->purchased_dn[$key];
+                    $emp_asset->purchased_from = $request->purchased_from[$key];
+                    $emp_asset->warranty_period = $request->warranty_period[$key];
+                    $emp_asset->organization_asset_code = $request->organization_asset_code[$key];
+                    $emp_asset->invoice_no = $request->invoice_no[$key];
+                    
+                    if(isset($request->asset_image[$key])){
+
+                        $file = $request->asset_image[$key];  // get file
+                        $file_name=time()."_image.".$file->getClientOriginalExtension();// make file name
+                        $file->move('console/upload/employee/assetimage',$file_name); //file name move upload in public		
+                        $emp_asset->result = $file_name;
+                    }
+                    
+                    $emp_asset->updated_by = Auth::id();
+                
+                    $res = $emp_asset->update();
+                    if(!$res)
+                    {
+                        DB::rollback();
+                        Session::flash('error','Internal server error please try again later.');
+                    
+                    
+                        return redirect()->back();
+                    }
+
+                }else{
+
+                    $emp_asset = new EmpAssetDetail;
+
+                    $emp_asset->asset_brand_id  = $request->asset_brand_id[$key];
+                    $emp_asset->asset_sub_type_id  = $request->asset_sub_type_id[$key];
+                    $emp_asset->serial_no = $request->serial_no[$key];
+                    $emp_asset->purchased_dn = $request->purchased_dn[$key];
+                    $emp_asset->purchased_from = $request->purchased_from[$key];
+                    $emp_asset->warranty_period = $request->warranty_period[$key];
+                    $emp_asset->organization_asset_code = $request->organization_asset_code[$key];
+                    $emp_asset->invoice_no = $request->invoice_no[$key];
+
+                    $emp_asset->user_id = $user->id;
+
+                    if($request->asset_image[$key]){
+    
+                        $file = $request->asset_image[$key];  // get file
+                        $file_name=time()."_image.".$file->getClientOriginalExtension();// make file name
+                        $file->move('console/upload/employee/assetimage',$file_name); //file name move upload in public		
+                        $emp_asset->result = $file_name;
+                    }
+
+                   
+                    $emp_asset->created_by = Auth::id();
+                    $emp_asset->uuid = \Str::uuid();
+                  
+                    $res = $emp_asset->save();
+        
+                    if(!$res)
+                    {
+                        DB::rollback();
+                        Session::flash('error','Internal server error please try again later.');
+                     
+                    
+                        return redirect()->back();
+                    }
+                }
+                /* 
+                */
+            }
+            Log::info('bbbbbbb');
+            DB::commit();
+            Session::flash('success','Education created successfully');
+           
+            return redirect()->back();
+           
+
+
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:MediumOfInstructionController function:store");
             Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
         }    

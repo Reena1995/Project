@@ -77,7 +77,7 @@
                                                     <a class="nav-link {{ (!empty($employment_detail)) ? '' : 'disabled'  }}" id="location_detail-tab-z" data-toggle="tab" href="#location_detail" role="tab" aria-controls="location_detail" aria-selected="false">Location Details</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link disabled" id="asset-details-tab-z" data-toggle="tab" href="#asset-details" role="tab" aria-controls="asset-details" aria-selected="false">Asset  Details</a>
+                                                    <a class="nav-link {{ (!empty($emp_location_details)) ? '' : 'disabled'  }}" id="asset-details-tab-z" data-toggle="tab" href="#asset-details" role="tab" aria-controls="asset-details" aria-selected="false">Asset  Details</a>
                                                 </li>
                                                
                                             </ul>
