@@ -1,6 +1,6 @@
 
 
-<form  name="emp_asset_deatil_add"  name="emp_asset_deatil_add" action="{{route('organization.asset.add')}}"  method="post" enctype="multipart/form-data">
+<form  id="emp_asset_deatil_add"  name="emp_asset_deatil_add" action="{{route('organization.asset.add')}}"  method="post" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="user_id" value="{{$emp->uuid}}">
 

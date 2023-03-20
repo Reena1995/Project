@@ -16,7 +16,8 @@
                 <span class="errr-validation">{{ $errors->first('mothername') }}</span>
             @endif
         </div>
-            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+        
+        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Date Of Birth</label>
             <input type="date" name="dob"  value = "{{ (isset($personal_detail) ? $personal_detail->dob :  old('dob')) }}" class="form-control form-control-lg" placeholder="Select Date Of Birth">
             @if ($errors->has('dob'))

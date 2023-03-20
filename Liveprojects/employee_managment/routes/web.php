@@ -20,6 +20,8 @@ use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\ProfessionalController;
+use App\Http\Controllers\ContactController;
 
 
 
@@ -266,6 +268,27 @@ Route::group(['prefix'=>'organization/','middleware'=>[],'as'=>'organization.'],
    
 });
 /* ------------------------------- Organization details end  ---------------------------*/
+
+/* -----------------==---------- professional details start--------------------------*/
+Route::group(['prefix'=>'professional/','middleware'=>[],'as'=>'professional.'], function(){
+ 
+   Route::post('professional/save',[ProfessionalController::class,'professional_add'])->name('professional.add');
+   Route::post('workexperience/save',[ProfessionalController::class,'workexperience_add'])->name('workexperience.add');
+   
+   
+});
+/* ------------------------------- professional details end  ---------------------------*/
+
+/* -----------------==---------- contact details start--------------------------*/
+Route::group(['prefix'=>'contact/','middleware'=>[],'as'=>'contact.'], function(){
+ 
+   Route::post('family/save',[ContactController::class,'family_add'])->name('family.add');
+   Route::post('emergency/save',[ContactController::class,'emergency_add'])->name('emergency.add');
+   
+   
+});
+/* ------------------------------- contact details end  ---------------------------*/
+
 
 
 

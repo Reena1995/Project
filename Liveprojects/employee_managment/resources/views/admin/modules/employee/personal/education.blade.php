@@ -45,7 +45,7 @@
                                             @endif
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>percentage</label>
-                                            <input type="text" name="percentage[]" value = "{{ $educationDetail->percentage }}"class="form-control form-control-lg" placeholder="Enter your Percentage">
+                                            <input type="text" name="percentage[]" value = "{{ $educationDetail->percentage }}" class="form-control form-control-lg" placeholder="Enter your Percentage">
                                         </div>
                                         @if ($errors->has('percentage[]'))
                                                 <span class="errr-validation">{{ $errors->first('percentage[]') }}</span>

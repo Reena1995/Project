@@ -30,6 +30,8 @@ use App\Models\AssetBrand;
 use App\Models\AssetSubType;
 use App\Models\EmpLangDetail;
 use App\Models\Language;
+use App\Models\EmpProfessionalTrainingDetail;
+use App\Models\EmpWorkExperienceDetail;
 use DB;
 use Str;
 use Log;
@@ -179,11 +181,20 @@ class UserController extends Controller
         $asset_sub_type = AssetSubType::where('is_active', 1)->orderBy('type', 'ASC')->get();
         $empasset_detail=EmpAssetDetail::where('user_id',$emp->id)->first();
         // dd($emp_asset_details);
+
+        //professional training 
+        $emp_professional_details = EmpProfessionalTrainingDetail::where('user_id',$emp->id)->where('is_active',1)->get();
+        // dd($emp_professional_details);
+        //work experience
+        $emp_work_exp_details = EmpWorkExperienceDetail::where('user_id',$emp->id)->where('is_active',1)->get();
+
+
         return view('admin.modules.employee.edit',compact('emp','current_residency','mode_transportation', 'educationDetails','country','personal_detail',
         'medium','educationlevel','documenttype','empDocumentDetails','emp_education_detail',
         'emp_job_profile','department','designation','organization_role','emp_bank_profile',
         'employment_detail','company_location','company_location_type','emp_location_details',
-        'emp_asset_details','asset_brand','asset_sub_type','emp_language_detail','emp_document_detail','langauge','empasset_detail'));
+        'emp_asset_details','asset_brand','asset_sub_type','emp_language_detail','emp_document_detail',
+        'langauge','empasset_detail','emp_professional_details','emp_work_exp_details'));
     }
 
     public function getState(Request $request)

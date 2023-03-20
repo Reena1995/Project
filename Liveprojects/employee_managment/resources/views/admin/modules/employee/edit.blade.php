@@ -2,11 +2,19 @@
 @section('content')
 @php
 
+
+$tabActiveDetail = '1'; 
+
 $isTabAcitive = '1';
 $tabActive = ''; 
-$tabActiveDetail = '1'; 
+
 $isTabAcitiveOrg = '1'; 
-    $tabActiveOrg = '';
+$tabActiveOrg = '';
+
+$isTabAcitiveProf= '1'; 
+$tabActiveprof = '';
+
+
 if(empty($personal_detail)){
     
     $tabActive = 'personal_detail';
@@ -26,7 +34,7 @@ if(empty($personal_detail)){
     $isTabAcitive = '5';
     $tabActiveDetail = '2';
 
-
+}
   
 
     if(empty($emp_job_profile)){
@@ -60,9 +68,27 @@ if(empty($personal_detail)){
     }
 
 
+    if(empty($emp_professional_details)){
+
+        $tabActiveprof = 'professional_detail';
+
+    }else if(empty($emp_work_exp_details)){
+
+        $isTabAcitiveProf = '2';
+
+        $tabActiveprof = 'workexp_detail';
+
+    
+    }else{
+
+        $isTabAcitiveProf = '3'; 
+    
+        $tabActiveDetail = '4';
+    }
 
 
-}
+
+
 
 ##
 
@@ -88,7 +114,7 @@ if(empty($personal_detail)){
                                     <div class="card-body">
                                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                                 <li class="nav-item">
-                                                    <a class="nav-link {{ ($tabActive == 'personal_detail') ? 'active' : '' }}  " id="personal-details-tab-z" data-toggle="tab" href="#personal-details" role="tab" aria-controls="personal-details" aria-selected="true">Personal Details</a>
+                                                    <a class="nav-link {{ ($tabActive == 'personal_detail') ? 'active' : '' }} {{ ($isTabAcitive == 5)  ? 'active' : '' }} " id="personal-details-tab-z" data-toggle="tab" href="#personal-details" role="tab" aria-controls="personal-details" aria-selected="true">Personal Details</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link  {{ ($tabActive == 'education_detail')  ? 'active' : '' }} {{ ($isTabAcitive < 2)  ? 'disabled' : '' }} {{ ($isTabAcitive ==  5)  ? '' : 'disabled' }}"  id="education-details-tab-z" data-toggle="tab" href="#education-details" role="tab" aria-controls="education-details" aria-selected="false">Education Details</a>
@@ -187,26 +213,26 @@ if(empty($personal_detail)){
                                     <div class="card-body">
                                         <ul class="nav nav-tabs" id="myTab2" role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link active" id="professional-details-tab-z" data-toggle="tab" href="#professional-details" role="tab" aria-controls="professional-details" aria-selected="true">Proessional  Details</a>
+                                                <a class="nav-link {{ ($tabActiveOrg == 'professional_detail') ? 'active' : '' }}  {{ ($isTabAcitiveProf == 3)  ? 'active' : '' }}" id="professional-details-tab-z" data-toggle="tab" href="#professional-details" role="tab" aria-controls="professional-details" aria-selected="true">Proessional  Details</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" id="workexperies-details-tab-z" data-toggle="tab" href="#workexperies-details" role="tab" aria-controls="workexperies-details" aria-selected="false">Work ExperienceDetails</a>
+                                                <a class="nav-link {{ ($tabActiveOrg == 'workexp_detail')  ? 'active' : '' }} {{ ($isTabAcitiveProf < 2)  ? 'disabled' : '' }} {{ ($isTabAcitiveOrg <= 6)  ? '' : 'disabled' }}" id="workexperies-details-tab-z" data-toggle="tab" href="#workexperies-details" role="tab" aria-controls="workexperies-details" aria-selected="false">Work ExperienceDetails</a>
                                             </li>
                                         </ul>
-                                        <form action="#">
+                                       
                                             <div class="tab-content" id="myTabContent3">
-                                                <div class="tab-pane fade show active" id="professional-details" role="tabpanel" aria-labelledby="professional-details-tab">
+                                                <div class="tab-pane fade show {{ ($isTabAcitiveProf == 'professional_detail') ? 'show active' : '' }}" id="professional-details" role="tabpanel" aria-labelledby="professional-details-tab">
                                                     <h5 class="font-weight-semibold p-t-20 m-b-20">Basic job</h5>
                                                     @include('admin.modules.employee.professional.professional')
                                                     
                                                 </div>
-                                                <div class="tab-pane fade" id="workexperies-details" role="tabpanel" aria-labelledby="workexperies-details-tab">
+                                                <div class="tab-pane fade {{ ($isTabAcitiveProf == 'workexp_detail') ? 'show active' : '' }}" id="workexperies-details" role="tabpanel" aria-labelledby="workexperies-details-tab">
                                                     <h5 class="font-weight-semibold p-t-20 m-b-20">Basic</h5>
                                                     @include('admin.modules.employee.professional.workexperience')
                                                     
                                                 </div>
                                             </div>
-                                        <!-- </form> -->
+                                       
                                     </div>
                                 </div>
                                 <div class="tab-pane fade {{($tabActiveDetail == 4) ? 'show active' : ''}}" id="v-pills-contact" role="tabpanel" aria-labelledby="v-pills-contact-tab">
