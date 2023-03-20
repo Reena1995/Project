@@ -95,18 +95,17 @@ class OrganizationController extends Controller
 
                 Log::info('else');
 
-                $jobprofile_detailNew->company_employee_id = $request->company_employee_id;
-                $jobprofile_detailNew->company_emp_device_id = $request->company_emp_device_id;
+                $jobprofile_detail->company_employee_id = $request->company_employee_id;
+                $jobprofile_detail->company_emp_device_id = $request->company_emp_device_id;
                 // $jobprofile_detailNew->department_id = $request->department_id;
                 // $jobprofile_detailNew->designation_id = $request->designation_id;
-                $jobprofile_detailNew->organization_role_id = $request->organization_role_id;
+                $jobprofile_detail->organization_role_id = $request->organization_role_id;
     
                 
                 $jobprofile_detail->updated_by = Auth::id();
-                $jobprofile_detail->user_id = $user->id;
                 $result = $jobprofile_detail->update();
 
-                $message = 'Employee  job Profile successfully';
+                $message = 'Employee  job Profile  update successfully';
                 
 
                 if(!$result)
@@ -149,7 +148,10 @@ class OrganizationController extends Controller
     {
         Log::info('aaaaaaa');
         $user = User::where('uuid',$request->user_id)->first();
+
         $bankdeatil=EmpBankDetail::where('user_id',$user->id)->first();
+
+        \Log::info($bankdeatil);
         
         
         $bank_dtl = $request->validate([
@@ -204,16 +206,16 @@ class OrganizationController extends Controller
 
                 Log::info('else');
 
-                $bank_detailNew->ac_holder_name = $request->ac_holder_name;
-                $bank_detailNew->bank_name = $request->bank_name;
-                $bank_detailNew->branch_name = $request->branch_name;
-                $bank_detailNew->account_no = $request->account_no;
-                $bank_detailNew->ifsc_code = $request->ifsc_code;
+                $bankdeatil->ac_holder_name = $request->ac_holder_name;
+                $bankdeatil->bank_name = $request->bank_name;
+                $bankdeatil->branch_name = $request->branch_name;
+                $bankdeatil->account_no = $request->account_no;
+                $bankdeatil->ifsc_code = $request->ifsc_code;
     
                 
-                $bank_detailNew->updated_by = Auth::id();
-                $bank_detailNew->user_id = $user->id;
-                $result = $bank_detailNew->update();
+                $bankdeatil->updated_by = Auth::id();
+                $result = $bankdeatil->update();
+                \Log::info($result);
 
                 $message = 'Employee  jbank details update  successfully';
                 
@@ -317,10 +319,10 @@ class OrganizationController extends Controller
             }            
             else{
 
-                $employment_detailNew->date_of_joining = $request->date_of_joining;
-                $employment_detailNew->date_of_resigning = $request->date_of_resigning;
-                $employment_detailNew->date_of_leaving = $request->date_of_leaving;
-                $employment_detailNew->reason_for_leaving = $request->reason_for_leaviemployment;
+                $employment_detail->date_of_joining = $request->date_of_joining;
+                $employment_detail->date_of_resigning = $request->date_of_resigning;
+                $employment_detail->date_of_leaving = $request->date_of_leaving;
+                $employment_detail->reason_for_leaving = $request->reason_for_leaviemployment;
     
                
                 if($request->has('resign_letter_pdf'))
@@ -329,15 +331,15 @@ class OrganizationController extends Controller
                     $file=$request->file('resign_letter_pdf');  // get file
                     $file_name=time()."_image.".$request->file('resign_letter_pdf')->getClientOriginalExtension();// make file name
                     $file->move('console/upload/employee/resignletter',$file_name); //file name move upload in public		
-                    $employment_detailNew->resign_letter_pdf=$file_name; // file name store in db
+                    $employment_detail->resign_letter_pdf=$file_name; // file name store in db
                 }
                
 
-                $employment_detailNew->updated_by = Auth::id();
+                $employment_detail->updated_by = Auth::id();
     
-                $employment_detailNew->user_id = $user->id;
-                $result = $employment_detailNew->update();
-                $message = 'employment  details successfully';
+                $employment_detail->user_id = $user->id;
+                $result = $employment_detail->update();
+                $message = 'employment  details updatesuccessfully';
                 
 
                 if(!$result)
@@ -427,12 +429,12 @@ class OrganizationController extends Controller
 
                 Log::info('else');
 
-                $emp_location_detail->company_location_id = $request->company_location_id;
-                $emp_location_detail->company_location_type_id = $request->company_location_type_id;
+                $emp_location->company_location_id = $request->company_location_id;
+                $emp_location->company_location_type_id = $request->company_location_type_id;
                
-                $emp_location_detail->updated_by = Auth::id();
-                $emp_location_detail->user_id = $user->id;
-                $result = $emp_location_detail->update();
+                $emp_location->updated_by = Auth::id();
+               
+                $result = $emp_location->update();
 
                 $message = 'Employee location history update successfully';
                 
@@ -497,12 +499,14 @@ class OrganizationController extends Controller
             DB::beginTransaction();
             $user = User::where('uuid',$request->user_id)->first();
 
-            foreach($request->medium as $key=> $data){
+           
+            foreach($request->asset_brand_id as $key=> $data){
                 if(isset($request->asset_uuid[$key]))
                 {
                     $emp_asset =  EmpAssetDetail::where('uuid',$request->asset_uuid[$key])->first();
                     
-                    \Log::info($request->education_uuid[$key]);
+                    \Log::info($emp_asset);
+                    // \Log::info($request->all());
                     $emp_asset->asset_brand_id  = $request->asset_brand_id[$key];
                     $emp_asset->asset_sub_type_id  = $request->asset_sub_type_id[$key];
                     $emp_asset->serial_no = $request->serial_no[$key];
@@ -514,15 +518,18 @@ class OrganizationController extends Controller
                     
                     if(isset($request->asset_image[$key])){
 
+
                         $file = $request->asset_image[$key];  // get file
-                        $file_name=time()."_image.".$file->getClientOriginalExtension();// make file name
+                        $file_name=time().rand()."_image.".$file->getClientOriginalExtension();// make file name
+                        \Log::info($file_name);
                         $file->move('console/upload/employee/assetimage',$file_name); //file name move upload in public		
-                        $emp_asset->result = $file_name;
+                        $emp_asset->asset_image = $file_name;
                     }
                     
                     $emp_asset->updated_by = Auth::id();
-                
+                    
                     $res = $emp_asset->update();
+                    $message = 'Employee update successfully';
                     if(!$res)
                     {
                         DB::rollback();
@@ -550,9 +557,9 @@ class OrganizationController extends Controller
                     if($request->asset_image[$key]){
     
                         $file = $request->asset_image[$key];  // get file
-                        $file_name=time()."_image.".$file->getClientOriginalExtension();// make file name
+                        $file_name=time().rand()."_image.".$file->getClientOriginalExtension();// make file name
                         $file->move('console/upload/employee/assetimage',$file_name); //file name move upload in public		
-                        $emp_asset->result = $file_name;
+                        $emp_asset->asset_image = $file_name;
                     }
 
                    
@@ -560,7 +567,8 @@ class OrganizationController extends Controller
                     $emp_asset->uuid = \Str::uuid();
                   
                     $res = $emp_asset->save();
-        
+
+                    $message = 'Employee add successfully';
                     if(!$res)
                     {
                         DB::rollback();
@@ -575,7 +583,8 @@ class OrganizationController extends Controller
             }
             Log::info('bbbbbbb');
             DB::commit();
-            Session::flash('success','Education created successfully');
+          
+            Session::flash('success',$message);
            
             return redirect()->back();
            

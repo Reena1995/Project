@@ -15967,3 +15967,7 @@ height: 40px !important;
 {
     text-align: right;
 }
+.tab-content
+{
+    width: 100%;
+}

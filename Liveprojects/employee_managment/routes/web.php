@@ -248,6 +248,7 @@ Route::group(['prefix'=>'personal/','middleware'=>[],'as'=>'personal.'], functio
    Route::post('save',[PersonalController::class,'personaldetail_add'])->name('personaldetail.add');
    Route::post('edusave',[PersonalController::class,'education_add'])->name('education.add');
    Route::post('documentsave',[PersonalController::class,'document_add'])->name('document.add');
+   Route::post('langauge/save',[PersonalController::class,'langauge_add'])->name('langauge.add');
    
    
 });

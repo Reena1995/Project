@@ -101,7 +101,7 @@
                                             <lable >Result</lable>
                                             <input type="file" name="asset_image[]" class=" form-control form-control-lg">
                                             <div class="imageset mt-4 m-4">
-                                                    <img src="{{asset('console/upload/employee/asseimages'.$asset->asset_image)}}" height="120px" width="100px"> 
+                                                    <img src="{{asset('console/upload/employee/assetimage/'.$asset->asset_image)}}" height="120px" width="100px"> 
                                             </div>   
                                             @endif
                                         </div>

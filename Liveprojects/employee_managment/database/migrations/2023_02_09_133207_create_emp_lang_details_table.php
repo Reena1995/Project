@@ -17,9 +17,9 @@ class CreateEmpLangDetailsTable extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->unsignedBigInteger('language_id');
-            $table->boolean('read');
-            $table->boolean('write');
-            $table->boolean('speak');
+            $table->string('read')->default('NO');
+            $table->string('write')->default('NO');
+            $table->string('speak')->default('NO');
             $table->unsignedBigInteger('user_id');
 			$table->boolean('is_active')->default(1);
 			$table->unsignedBigInteger('created_by');

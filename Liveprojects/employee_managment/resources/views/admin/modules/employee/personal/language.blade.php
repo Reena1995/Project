@@ -1,39 +1,50 @@
-<div class="form-row">
-                                                        <div class="form-group col-lg-6 col-md-6 col-sm-12 mt-2">
-                                                            <div class="custom-file">
-                                                                <label class="custom-file-label" for="resumefile">Choose Resume</label>
-                                                                <input type="file" class="custom-file-input" id="resumefile">
-                                                            </div>
-                                                            <small class="form-text text-muted mt-3">Remume File Name (ex: Resume-ui-ux-designer.pdf) </small>
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-6 col-sm-12 mt-2">
-                                                            <div class="custom-file">
-                                                                <label class="custom-file-label" for="idprooffile">ID Proof</label>
-                                                                <input type="file" class="custom-file-input" id="idprooffile">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-6 col-sm-12 mt-2">
-                                                            <div class="custom-file">
-                                                                <label class="custom-file-label" for="offerletterfile">Offer Letter</label>
-                                                                <input type="file" class="custom-file-input" id="offerletterfile">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-6 col-sm-12 mt-2">
-                                                            <div class="custom-file">
-                                                                <label class="custom-file-label" for="joiningletterfile">Joining Letter</label>
-                                                                <input type="file" class="custom-file-input" id="joiningletterfile">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-6 col-sm-12 mt-2">
-                                                            <div class="custom-file">
-                                                                <label class="custom-file-label" for="agreementletterfile">Agreement Letter</label>
-                                                                <input type="file" class="custom-file-input" id="agreementletterfile">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-6 col-sm-12 mt-2">
-                                                            <div class="custom-file">
-                                                                <label class="custom-file-label" for="experienceletterfile">Experience Letter</label>
-                                                                <input type="file" class="custom-file-input" id="experienceletterfile">
-                                                            </div>
-                                                        </div>
-                                                    </div>
+<form id="langauge_form_id"  name="langauge_add" action="{{route('personal.langauge.add')}}"  method="post" enctype="multipart/form-data">
+@csrf
+        <input type="hidden" name="user_id" value="{{$emp->uuid}}">
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Languages Know</th>
+                    <th scope="col">Read</th>
+                    <th scope="col">Write</th>
+                    <th scope="col">Speak</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    @if(count($langauge))
+                        @foreach($langauge as $lang)
+                        <td>
+                            <div class="form-group floating-label">
+                                <input type="text" name="language_id[] " value="{{$lang->id}}" class="form-control form-control-lg">
+                            </div>  
+                        </td>
+                        <td><input type="checkbox" id="read" name="read[]" value="YES"></td>
+                        <td><input type="checkbox" id="write" name="write[]" value="YES"></td>
+                        <td><input type="checkbox" id="speack" name="speack[]" value="YES"></td>
+                    </tr>
+                    @endforeach
+                @endif  
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="form-card-footer card-footer p-t-20 p-0 text-right">
+            <div class="btn-group mr-2" role="group" aria-label="Second group">
+                <a href="" >
+                    <button class="theme-btn-outline">cancel</button>
+                </a>
+            </div>
+            <div class="btn-group mr-2" role="group" aria-label="Second group">
+                <button type="submit"  value="submit" name="submit" class="theme-btn text-white">Save</button>
+            </div>
+        </div>    
+</form>
+
+@push('scripts')
+ <script>
+    
+</script>
+ @endpush   

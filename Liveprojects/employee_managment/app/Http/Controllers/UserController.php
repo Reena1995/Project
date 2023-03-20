@@ -28,6 +28,8 @@ use App\Models\EmployeeLocationHistorie;
 use App\Models\EmpAssetDetail;
 use App\Models\AssetBrand;
 use App\Models\AssetSubType;
+use App\Models\EmpLangDetail;
+use App\Models\Language;
 use DB;
 use Str;
 use Log;
@@ -131,15 +133,27 @@ class UserController extends Controller
         $mode_transportation=ModeOfTransportation::where('is_active', 1)->orderBy('type', 'ASC')->get();
         $country=Country::where('is_active', 1)->orderBy('name', 'ASC')->get();
         $personal_detail=EmployeePersonalDetail::where('user_id',$emp->id)->first();
+        //emp education 
         $emp_education_detail=EmpEducationDetail::where('user_id',$emp->id)->first();
+        //emp document
+        $emp_document_detail=EmpDocumentDetail::where('user_id',$emp->id)->first();
+        $empDocumentDetails = EmpDocumentDetail::where('user_id',$emp->id)->where('is_active',1)->get();
+        //langauge
+        $langauge=Language::where('is_active', 1)->orderBy('name', 'ASC')->get();
+        $emp_language_detail=EmpLangDetail::where('user_id',$emp->id)->first();
+
+        
         $educationDetails = EmpEducationDetail::where('user_id',$emp->id)->where('is_active',1)->get();
         // dd($educationDetails);
         $medium=MediumOfInstruction::where('is_active', 1)->orderBy('name', 'ASC')->get();
         $educationlevel=EducationLevel::where('is_active', 1)->orderBy('name', 'ASC')->get();
         $documenttype=DocumentType::where('is_active', 1)->orderBy('type', 'ASC')->get();
+        
         $empDocumentDetails = EmpDocumentDetail::where('user_id',$emp->id)->where('is_active',1)->get();
         
-        //organization controller code start
+        
+
+        
 
         //job profile
         $emp_job_profile=EmployeeJobProfileDetail::where('user_id',$emp->id)->first();
@@ -159,17 +173,17 @@ class UserController extends Controller
         $company_location = CompanyLocation::where('is_active', 1)->orderBy('name', 'ASC')->get();
         $company_location_type = CompanyLocationType::where('is_active', 1)->orderBy('type', 'ASC')->get();
 
-        //asset details append
+        //asset details 
         $emp_asset_details = EmpAssetDetail::where('user_id',$emp->id)->where('is_active',1)->get();
         $asset_brand = AssetBrand::where('is_active', 1)->orderBy('name', 'ASC')->get();
         $asset_sub_type = AssetSubType::where('is_active', 1)->orderBy('type', 'ASC')->get();
-
-
+        $empasset_detail=EmpAssetDetail::where('user_id',$emp->id)->first();
+        // dd($emp_asset_details);
         return view('admin.modules.employee.edit',compact('emp','current_residency','mode_transportation', 'educationDetails','country','personal_detail',
         'medium','educationlevel','documenttype','empDocumentDetails','emp_education_detail',
         'emp_job_profile','department','designation','organization_role','emp_bank_profile',
         'employment_detail','company_location','company_location_type','emp_location_details',
-        'emp_asset_details','asset_brand','asset_sub_type'));
+        'emp_asset_details','asset_brand','asset_sub_type','emp_language_detail','emp_document_detail','langauge','empasset_detail'));
     }
 
     public function getState(Request $request)
