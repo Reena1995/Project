@@ -234,6 +234,7 @@ Route::group(['prefix'=>'employee/','middleware'=>[],'as'=>'employee.'], functio
    Route::post('/save',[UserController::class,'store'])->name('add');
    Route::get('/list',[UserController::class,'index'])->name('index');
    Route::get('/edit/{id}',[UserController::class,'edit'])->name('edit');
+   Route::get('/status/{id}',[UserController::class,'status'])->name('status');
    
 });
 /* ------------------------------- employee  end  ---------------------------*/

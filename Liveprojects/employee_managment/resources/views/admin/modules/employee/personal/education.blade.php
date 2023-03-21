@@ -1,6 +1,6 @@
 
 
-        <form  name="education_deatil_add"  action="{{route('personal.education.add')}}"  method="post" enctype="multipart/form-data">
+        <form  name="education_deatil_add" id="education_deatil_add" action="{{route('personal.education.add')}}"  method="post" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="user_id" value="{{$emp->uuid}}">
             <div id="formId">
@@ -123,11 +123,11 @@
                                         @endif
                                     </div>
                                     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        <input type="text" name="universityname[]"class="form-control form-control-lg" placeholder="Enter University Name">
+                                        <input type="text" name="universityname[]"class="form-control form-control-lg universityname" placeholder="Enter University Name">
                                     </div>
                                     @if ($errors->has('universityname[]'))
                                             <span class="errr-validation">{{ $errors->first('universityname[]') }}</span>
-                                        @endif
+                                    @endif
                                     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                     
                                         <input type="text" name="percentage[]"class="form-control form-control-lg" placeholder="Enter your Percentage">
@@ -151,7 +151,7 @@
                                         @endif
                                     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                         <lable>Result</lable>
-                                        <input type="file" name="result[]" class=" form-control form-control-lg">
+                                        <input type="file" name="result[]" id="result_id"class=" form-control form-control-lg">
                                     </div>
                                     @if ($errors->has('result[]'))
                                             <span class="errr-validation">{{ $errors->first('result[]') }}</span>
@@ -176,7 +176,7 @@
                         </a>
                     </div>
                     <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <button type="submit"   class="theme-btn text-white">Save</button>
+                        <button type="submit" id="educationDetailBtn"  class="theme-btn text-white">Save</button>
                     </div>
             </div>     
 
@@ -213,13 +213,81 @@
             $('#educationDetail-'+id).remove();
             
         });
-        // $(".delete").click(function () {
-        //     console.log('delete   hbjhb')
+        
+         /*validation Frontend jquery start*/
 
+        
+                
 
+            // $('#education_deatil_add').each(function (event) {
 
-        // });    
+            //     event.preventDefault();
+                
+            // console.log('xxxxxxxxxxxxx')
+                
+            //     $(this).validate({
+            //         rules : {
+            //             universityname : "required",  
+            //             percentage : "required",                    
+            //         },
+
+            //         messages : {
+            //             universityname : "Please Enter a universityname ",
+            //             percentage : "Please Select  a percentage ",  
+                    
+            //         },
+            //     errorClass: "custom-error",
+            //     errorElement: "div",
+            //     errorPlacement: function(error, element) {
+            //         var placement = $(element).data('error');
+            //         if (placement) {
+            //             $(element).append(error)
+            //         } else {
+            //             console.log(element.prev());
+            //             error.insertAfter(element);
+            //         }
+            //     },
+            //     submitHandler : function(form){
+            //         form.submit();
+            //     }
+            //     });
+            // });
+
+            
+        
+    /*validation Frontend jquery start*/
 
     });
- </script>   
+ </script>  
+ 
+ <script>
+    $(document).ready(function(){
+
+        // -------------- Validation ---------------------
+        // $( "#educationDetailBtn" ).click(function() {
+        //     console.log('111111111');
+        //     submitHandler : function(form){
+        //             form.submit();
+        //             checkNameValidation();
+        //         }
+
+        //     function checkNameValidation(){
+        //     var isReturn  = true;
+        //     $(".universityname").each(function() {
+        //         console.log('NAME :: ',$(this).val());
+        //         console.log('00000000000000000');
+        //     });
+        //     return isReturn;
+        // }
+        // -------------------------------------------------------------------
+              
+
+              
+
+            
+
+             
+        });
+    });
+ </script>
 @endpush    

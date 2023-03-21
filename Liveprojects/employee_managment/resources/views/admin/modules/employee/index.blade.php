@@ -79,7 +79,7 @@
                                                                             <i class="mdi mdi-pen" data-toggle="tooltip"
                                                                                 data-original-title="Edit"></i>
                                                                         </a>
-                                                                        <a class="btn btn-danger btn-icon btn-sm text-white" href="" 
+                                                                        <a class="btn btn-danger btn-icon btn-sm text-white" href="{{route('employee.status',$use->uuid)}}" 
                                                                             data-toggle="tooltip" data-original-title="Delete"><i
                                                                                 class="mdi mdi-delete"></i></a>
                                                                     </td>

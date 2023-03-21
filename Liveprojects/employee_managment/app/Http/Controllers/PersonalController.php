@@ -217,11 +217,11 @@ class PersonalController extends Controller
         Log::info('aaaaaaa');
         // dd($request->all());
          $medium = $request->validate([
-            'medium.*'=>'bail|required' ,
-            'education.*'=>'bail|required' ,
-            'percentage.*'=>'bail|required' ,
-            'universityname.*'=>'bail|required' ,
-            'specialization.*'=>'bail|required' 
+            // 'medium.*'=>'bail|required' ,
+            // 'education.*'=>'bail|required' ,
+            // 'percentage.*'=>'bail|required' ,
+            // 'universityname.*'=>'bail|required' ,
+            // 'specialization.*'=>'bail|required' 
         ]); 
         // $errors = $medium->errors();
         // dd($errors);

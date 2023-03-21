@@ -3,7 +3,7 @@
         <input type="hidden" name="user_id" value="{{$emp->uuid}}">
     <div class="row">
         <div class="col-12">
-            <table class="table">
+            <table class="table language_table">
                 <thead>
                     <tr>
                     <th scope="col">Languages Know</th>
@@ -13,20 +13,41 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    @if(count($langauge))
-                        @foreach($langauge as $lang)
-                        <td>
-                            <div class="form-group floating-label">
-                                <input type="text" name="language_id[] " value="{{$lang->id}}" class="form-control form-control-lg">
-                            </div>  
-                        </td>
-                        <td><input type="checkbox" id="read" name="read[]" value="YES"></td>
-                        <td><input type="checkbox" id="write" name="write[]" value="YES"></td>
-                        <td><input type="checkbox" id="speack" name="speack[]" value="YES"></td>
-                    </tr>
-                    @endforeach
-                @endif  
+                    @if(count($emp_languages))
+                        @foreach($emp_languages as $emp_language)
+                            <tr>
+                                <td>
+                                    <div class="form-group floating-label mb-0">
+                                        <input type="hidden" name="language_id[]"  value="{{$emp_language->id}}" >
+                                        <input type="text"  value="{{$emp_language->languageName->name}}" readonly class="form-control form-control-lg">
+                                    </div>  
+                                </td>
+                                
+                                <td><input type="checkbox" id="read" name="read[]" value="YES" {{$emp_language->read == 'YES' ? 'checked' : ''}}></td>
+                                
+                                <td><input type="checkbox" id="write" name="write[]" value="YES" {{$emp_language->write == 'YES' ? 'checked' : ''}}></td>
+                                <td><input type="checkbox" id="speack" name="speack[]" value="YES" {{$emp_language->speack == 'YES' ? 'checked' : ''}}></td>
+                            </tr>
+                         @endforeach   
+                    @else
+                        @if(count($langauge))
+                            @foreach($langauge as $lang)
+                            <tr>
+                                <td>
+                                    <div class="form-group floating-label mb-0">
+                                        <input type="hidden" name="language_id[]"  value="{{$lang->id}}" >
+                                        <input type="text"  value="{{$lang->name}}" class="form-control form-control-lg" readonly>
+                                    </div>  
+                                </td>
+                                
+                                <td><input type="checkbox" id="read" name="read[]" value="YES"></td>
+                                
+                                <td><input type="checkbox" id="write" name="write[]" value="YES"></td>
+                                <td><input type="checkbox" id="speack" name="speack[]" value="YES"></td>
+                            </tr>
+                            @endforeach
+                        @endif  
+                    @endif
                 </tbody>
             </table>
         </div>

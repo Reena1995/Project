@@ -48,7 +48,7 @@
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Date of joining Leaving</label>
-                                            <input type="date" value = "{{ $work->	date_of_leaving}}" name="from" class="form-control form-control-lg" placeholder="Enter University Name">
+                                            <input type="date" value = "{{ $work->date_of_leaving}}" name="date_of_leaving[]" class="form-control form-control-lg" placeholder="Enter University Name">
                                             @if ($errors->has('	date_of_leaving[]'))
                                                     <span class="errr-validation">{{ $errors->first('date_of_leaving[]') }}</span>
                                             @endif
@@ -119,13 +119,15 @@
                                         </div>
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                           
-                                            <label>reporting_authority_contact</label>
-                                            <input type="text" value = "{{ $work->reporting_authority_designation	 }}" name="reporting_authority_designation	[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('reporting_authority_designation	[]'))
-                                                    <span class="errr-validation">{{ $errors->first('reporting_authority_designation	[]') }}</span>
+                                            
+                                            <label>reporting_authority_designation</label>
+                                            <input type="text" value = "{{ $work->reporting_authority_designation }}" name="reporting_authority_designation[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                            @if ($errors->has('reporting_authority_designation[]'))
+                                                    <span class="errr-validation">{{ $errors->first('reporting_authority_designation[]') }}</span>
                                             @endif
                                         </div>
+
+                                       
 
                                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                             @if(empty($work))
@@ -182,14 +184,14 @@
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Date of joining</label>
-                                            <input type="date" name="date_of_joining[]"  value = ""  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                            <input type="date" name="date_of_joining[]"  value =""  class="form-control form-control-lg" placeholder="Select Date Of Birth">
                                             @if ($errors->has('date_of_joining[]'))
                                                 <span class="errr-validation">{{ $errors->first('date_of_joining[]') }}</span>
                                             @endif
                                         </div>
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>Date of joining Leaving</label>
+                                            <label>Date of Leaving</label>
                                             <input type="date" value = "" name="date_of_leaving[]" class="form-control form-control-lg" placeholder="Enter University Name">
                                             @if ($errors->has('	date_of_leaving[]'))
                                                     <span class="errr-validation">{{ $errors->first('date_of_leaving[]') }}</span>
@@ -265,9 +267,9 @@
                                         </div>
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                           
-                                            <label>reporting_authority_contact</label>
-                                            <input type="text" value = "" name="reporting_authority_designation	[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                            
+                                            <label>reporting_authority_designation</label>
+                                            <input type="text" value = "" name="reporting_authority_designation[]" class="form-control form-control-lg" placeholder="Enter University Name">
                                             @if ($errors->has('reporting_authority_designation[]'))
                                                     <span class="errr-validation">{{ $errors->first('reporting_authority_designation[]') }}</span>
                                             @endif
@@ -293,6 +295,7 @@
 
                         </div>   
                     </div>
+                    
                 @endif     
             </div>
             

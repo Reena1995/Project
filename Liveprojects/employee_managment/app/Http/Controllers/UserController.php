@@ -32,6 +32,9 @@ use App\Models\EmpLangDetail;
 use App\Models\Language;
 use App\Models\EmpProfessionalTrainingDetail;
 use App\Models\EmpWorkExperienceDetail;
+use App\Models\EmpEmergencyContact;
+use App\Models\EmpFamilyDetail;
+
 use DB;
 use Str;
 use Log;
@@ -143,6 +146,7 @@ class UserController extends Controller
         //langauge
         $langauge=Language::where('is_active', 1)->orderBy('name', 'ASC')->get();
         $emp_language_detail=EmpLangDetail::where('user_id',$emp->id)->first();
+        $emp_languages=EmpLangDetail::where('user_id',$emp->id)->where('is_active',1)->get();
 
         
         $educationDetails = EmpEducationDetail::where('user_id',$emp->id)->where('is_active',1)->get();
@@ -187,6 +191,12 @@ class UserController extends Controller
         // dd($emp_professional_details);
         //work experience
         $emp_work_exp_details = EmpWorkExperienceDetail::where('user_id',$emp->id)->where('is_active',1)->get();
+       
+        //family_details
+        $family_details =EmpFamilyDetail::where('user_id',$emp->id)->where('is_active',1)->get();
+
+        //emergency contact
+        $emergency_details =EmpEmergencyContact::where('user_id',$emp->id)->where('is_active',1)->get();
 
 
         return view('admin.modules.employee.edit',compact('emp','current_residency','mode_transportation', 'educationDetails','country','personal_detail',
@@ -194,7 +204,8 @@ class UserController extends Controller
         'emp_job_profile','department','designation','organization_role','emp_bank_profile',
         'employment_detail','company_location','company_location_type','emp_location_details',
         'emp_asset_details','asset_brand','asset_sub_type','emp_language_detail','emp_document_detail',
-        'langauge','empasset_detail','emp_professional_details','emp_work_exp_details'));
+        'langauge','empasset_detail','emp_professional_details','emp_work_exp_details','family_details',
+        'emergency_details','emp_languages'));
     }
 
     public function getState(Request $request)
@@ -213,7 +224,55 @@ class UserController extends Controller
         return response()->json($data);	
     }
     
-	
+    public function status($id)
+    {
+      
+        try{
+
+            // $emp = User::where('uuid',$id)->where('role_id',2)->first();
+
+           Log::info('hbjjhbdjhqw');
+           DB::beginTransaction();
+           $employee = User::where('uuid',$id)->where('role_id',2)->where('is_active',1)->first();
+        //    dd($employee);
+           $employee->is_active = 0;
+           $employee->updated_by = Auth::id();
+           $res = $employee->update();
+
+           if(!$res)
+           {
+               DB::rollback();
+               Session::flash('error','Internal server error please try again later.');
+            
+           
+               return redirect()->back();
+           }
+           DB::commit();
+           Session::flash('success','employee delete successfully');
+           return redirect()->back();
+          
+
+
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:LeaveTypeController function:delete");
+            Session::flash('danger', "Internal server error.Please try again later.");
+            return redirect()->back();
+        }    
+        catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
+
+
+        }
+    }    
+
+    
    
     public function update(Request $request, $id)
     {
