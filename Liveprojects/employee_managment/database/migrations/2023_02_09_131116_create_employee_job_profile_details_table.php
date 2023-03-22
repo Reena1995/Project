@@ -16,7 +16,6 @@ class CreateEmployeeJobProfileDetailsTable extends Migration
         Schema::create('employee_job_profile_details', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
-            $table->string('company_email');
             $table->string('company_employee_id');
             $table->string('company_emp_device_id');
             $table->unsignedBigInteger('department_id');

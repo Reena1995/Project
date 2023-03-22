@@ -1,5 +1,5 @@
 
-<form id="location_id"  name="location_id" action="{{route('organization.location.add')}}"  method="post" enctype="multipart/form-data">
+<form id="emp_location_id"  name="emp_location_id" action="{{route('organization.location.add')}}"  method="post" enctype="multipart/form-data">
     <div class="form-row">
         @csrf
         <input type="hidden" name="user_id" value="{{$emp->uuid}}">
@@ -27,8 +27,8 @@
                         <option value="{{$type->id}}" {{ (isset($emp_location_details) ? ($emp_location_details->company_location_type_id   == $type->id ? 'selected' : '') :  old('company_location_type_id ') == $type->id ? 'selected' : '' ) }}>{{$type->type}}</option>
                     @endforeach
             </select>
-            @if ($errors->has('company_location_type_id '))
-                <span class="errr-validation">{{ $errors->first('company_location_type_id ') }}</span>
+            @if ($errors->has('company_location_type_id'))
+                <span class="errr-validation">{{ $errors->first('company_location_type_id') }}</span>
             @endif
         </div>
         

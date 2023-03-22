@@ -45,18 +45,14 @@ class OrganizationController extends Controller
         
         $job_profile_dtl = $request->validate([
 
-            // 'company_employee_id'=>'bail|required',
-            // 'company_emp_device_id'=>'bail|required',
-            // 'department_id' =>'bail|required' , 
-            // 'designation_id '  =>'bail|required' ,
-            // 'organization_role_id '=>'bail|required',
-           
-           
+            'company_employee_id'=>'bail|required',
+            'company_emp_device_id'=>'bail|required',
+            'department_id' =>'bail|required' , 
+            'designation_id' =>'bail|required' , 
+            'organization_role_id' =>'bail|required'  
+          
         ]); 
-        
-       
-       
-
+      
         try{
 
             Log::info('bbbbbbb');
@@ -97,8 +93,8 @@ class OrganizationController extends Controller
 
                 $jobprofile_detail->company_employee_id = $request->company_employee_id;
                 $jobprofile_detail->company_emp_device_id = $request->company_emp_device_id;
-                // $jobprofile_detailNew->department_id = $request->department_id;
-                // $jobprofile_detailNew->designation_id = $request->designation_id;
+                $jobprofile_detail->department_id = $request->department_id;
+                $jobprofile_detail->designation_id = $request->designation_id;
                 $jobprofile_detail->organization_role_id = $request->organization_role_id;
     
                 
@@ -127,11 +123,12 @@ class OrganizationController extends Controller
 
 
         }catch (\Illuminate\Database\QueryException $e) {
+          
             Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
             Log::info('Error Code: ' . $e->getCode());
             Log::info('Error Message: ' . $e->getMessage());
-            Log::info("Exiting class:OrganizationController function:jobprofile_add");
-            Session::flash('danger', "Internal server error.Please try again later.");
+            Log::info("Exiting class:MediumOfInstructionController function:store");
+            Session::flash('danger', "Internal server error.Please try again later 12121.");
             return redirect()->back();
         }    
         catch (\Exception $e) {
@@ -139,6 +136,9 @@ class OrganizationController extends Controller
                 Log::info('Error Code: ' . $e->getCode());
                 Log::info('Error Message: ' . $e->getMessage());
                 Session::flash('danger', "Internal server error.Please try again later.");
+                Log::info('Message :'.$e->getMessage());
+                Log::info('File Location :'.$e->getFile());
+                Log::info('Line No :'.$e->getLine()); 
                 return redirect()->back();
 
         }
@@ -156,11 +156,11 @@ class OrganizationController extends Controller
         
         $bank_dtl = $request->validate([
 
-            // 'ac_holder_name'=>'bail|required',
-            // 'bank_name'=>'bail|required',
-            // 'branch_name' =>'bail|required' , 
-            // 'account_no '  =>'bail|required' ,
-            // 'ifsc_code '=>'bail|required',
+            'ac_holder_name'=>'bail|required',
+            'bank_name'=>'bail|required',
+            'branch_name' =>'bail|required' , 
+            'account_no'  =>'bail|required' ,
+            'ifsc_code'=>'bail|required',
            
            
         ]); 
@@ -217,7 +217,7 @@ class OrganizationController extends Controller
                 $result = $bankdeatil->update();
                 \Log::info($result);
 
-                $message = 'Employee  jbank details update  successfully';
+                $message = 'Employee bank details update  successfully';
                 
 
                 if(!$result)
@@ -262,14 +262,18 @@ class OrganizationController extends Controller
         $user = User::where('uuid',$request->user_id)->first();
         $employment_detail=EmpEmploymentDetail::where('user_id',$user->id)->first();
         
-       
+        $required = '';
+        if (is_null($employment_detail)){
+            $required = '|required';
+        }
+
         $personal_dtl = $request->validate([
 
             'date_of_joining'=>'bail|required',
             'date_of_resigning'=>'bail|required',
             'date_of_leaving' =>'bail|required' , 
             'reason_for_leaving'  =>'bail|required' ,
-            'resign_letter_pdf'=>'bail|required',
+            'resign_letter_pdf'=>'bail'.$required,
             
             
         ]); 
@@ -282,15 +286,16 @@ class OrganizationController extends Controller
             // dd($request->all());
             DB::beginTransaction();
 
+            // dd($employment_detail);
             if (is_null($employment_detail)) 
-            {             
+            {       
+                Log::info('if');      
                 $employment_detailNew = new EmpEmploymentDetail;
                 $employment_detailNew->date_of_joining = $request->date_of_joining;
                 $employment_detailNew->date_of_resigning = $request->date_of_resigning;
                 $employment_detailNew->date_of_leaving = $request->date_of_leaving;
-                $employment_detailNew->reason_for_leaving = $request->reason_for_leaviemployment;
+                $employment_detailNew->reason_for_leaving = $request->reason_for_leaving;
     
-               
                 if($request->has('resign_letter_pdf'))
                 {
     
@@ -319,10 +324,11 @@ class OrganizationController extends Controller
             }            
             else{
 
+                Log::info('ELSE');
                 $employment_detail->date_of_joining = $request->date_of_joining;
                 $employment_detail->date_of_resigning = $request->date_of_resigning;
                 $employment_detail->date_of_leaving = $request->date_of_leaving;
-                $employment_detail->reason_for_leaving = $request->reason_for_leaviemployment;
+                $employment_detail->reason_for_leaving = $request->reason_for_leaving;
     
                
                 if($request->has('resign_letter_pdf'))
@@ -339,7 +345,7 @@ class OrganizationController extends Controller
     
                 $employment_detail->user_id = $user->id;
                 $result = $employment_detail->update();
-                $message = 'employment  details updatesuccessfully';
+                $message = 'employment  details update successfully';
                 
 
                 if(!$result)
@@ -361,11 +367,12 @@ class OrganizationController extends Controller
 
 
         }catch (\Illuminate\Database\QueryException $e) {
+          
             Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
             Log::info('Error Code: ' . $e->getCode());
             Log::info('Error Message: ' . $e->getMessage());
-            Log::info("Exiting class:EmployeePersonalDetail function:personaldetail_add");
-            Session::flash('danger', "Internal server error.Please try again later.");
+            Log::info("Exiting class:MediumOfInstructionController function:store");
+            Session::flash('danger', "Internal server error.Please try again later 12121.");
             return redirect()->back();
         }    
         catch (\Exception $e) {
@@ -373,6 +380,9 @@ class OrganizationController extends Controller
                 Log::info('Error Code: ' . $e->getCode());
                 Log::info('Error Message: ' . $e->getMessage());
                 Session::flash('danger', "Internal server error.Please try again later.");
+                Log::info('Message :'.$e->getMessage());
+                Log::info('File Location :'.$e->getFile());
+                Log::info('Line No :'.$e->getLine()); 
                 return redirect()->back();
 
         }
@@ -388,8 +398,8 @@ class OrganizationController extends Controller
         
         $emp_location_dtl = $request->validate([
 
-            // 'company_location_id'=>'bail|required',
-            // 'company_location_type_id'=>'bail|required'
+            'company_location_id'=>'bail|required',
+            'company_location_type_id'=>'bail|required',
           
         ]); 
        

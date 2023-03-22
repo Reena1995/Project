@@ -289,8 +289,8 @@ class ProfessionalController extends Controller
                 Log::info('Error Message: ' . $e->getMessage());
                 Session::flash('danger', "Internal server error.Please try again later.");
                 Log::info('Message :'.$e->getMessage());
-        Log::info('File Location :'.$e->getFile());
-        Log::info('Line No :'.$e->getLine()); 
+                Log::info('File Location :'.$e->getFile());
+                Log::info('Line No :'.$e->getLine()); 
                 return redirect()->back();
 
         }

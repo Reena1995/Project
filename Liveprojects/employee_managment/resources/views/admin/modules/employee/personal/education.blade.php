@@ -144,14 +144,14 @@
                                         @endif
                                     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                         
-                                        <input type="text" name="passingyear[]"class=" form-control form-control-lg" placeholder="Enter your Passing Year">
+                                        <input type="text" name="passingyear[]"class=" form-control form-control-lg" placeholder="Enter your Passing Year" >
                                     </div>
                                     @if ($errors->has('passingyear[]'))
                                             <span class="errr-validation">{{ $errors->first('passingyear[]') }}</span>
                                         @endif
                                     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                         <lable>Result</lable>
-                                        <input type="file" name="result[]" id="result_id"class=" form-control form-control-lg">
+                                        <input type="file" name="result[]" id="result_id"class="form-control form-control-lg" accept="image/png, image/gif, image/jpeg">
                                     </div>
                                     @if ($errors->has('result[]'))
                                             <span class="errr-validation">{{ $errors->first('result[]') }}</span>
@@ -287,7 +287,7 @@
             
 
              
-        });
+        
     });
  </script>
 @endpush    

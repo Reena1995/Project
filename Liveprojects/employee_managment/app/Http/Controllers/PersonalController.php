@@ -216,15 +216,19 @@ class PersonalController extends Controller
     {
         Log::info('aaaaaaa');
         // dd($request->all());
-         $medium = $request->validate([
-            // 'medium.*'=>'bail|required' ,
-            // 'education.*'=>'bail|required' ,
-            // 'percentage.*'=>'bail|required' ,
-            // 'universityname.*'=>'bail|required' ,
-            // 'specialization.*'=>'bail|required' 
+         $education = $request->validate([
+            'education_level_id.*'=>'bail|required' ,
+            'medium_instruction_id.*'=>'bail|required' ,
+            'university_name.*'=>'bail|required' ,
+            'percentage.*'=>'bail|required' ,
+            'specilaization.*'=>'bail|required',
+            'passing_year.*'=>'bail|required',
+            'result.*'=>'bail|required'  
         ]); 
-        // $errors = $medium->errors();
+
+        // $errors = $education->errors();
         // dd($errors);
+
         try{
             DB::beginTransaction();
             $user = User::where('uuid',$request->user_id)->first();
@@ -251,7 +255,7 @@ class PersonalController extends Controller
                     }
                     
                     $educationD->updated_by = Auth::id();
-                
+                    $message="Education deatils upadte successfully";
                     $res = $educationD->update();
                     if(!$res)
                     {
@@ -283,7 +287,7 @@ class PersonalController extends Controller
                     $education->uuid = \Str::uuid();
                   
                     $res = $education->save();
-        
+                    $message="Education created successfully";
                     if(!$res)
                     {
                         DB::rollback();
@@ -298,18 +302,19 @@ class PersonalController extends Controller
             }
             Log::info('bbbbbbb');
             DB::commit();
-            Session::flash('success','Education created successfully');
+            Session::flash('success',$message);
            
             return redirect()->back();
            
 
 
         }catch (\Illuminate\Database\QueryException $e) {
+          
             Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
             Log::info('Error Code: ' . $e->getCode());
             Log::info('Error Message: ' . $e->getMessage());
             Log::info("Exiting class:MediumOfInstructionController function:store");
-            Session::flash('danger', "Internal server error.Please try again later.");
+            Session::flash('danger', "Internal server error.Please try again later 12121.");
             return redirect()->back();
         }    
         catch (\Exception $e) {
@@ -317,6 +322,9 @@ class PersonalController extends Controller
                 Log::info('Error Code: ' . $e->getCode());
                 Log::info('Error Message: ' . $e->getMessage());
                 Session::flash('danger', "Internal server error.Please try again later.");
+                Log::info('Message :'.$e->getMessage());
+                Log::info('File Location :'.$e->getFile());
+                Log::info('Line No :'.$e->getLine()); 
                 return redirect()->back();
 
         }
@@ -327,13 +335,16 @@ class PersonalController extends Controller
         Log::info('aaaaaaa');
        
         // dd($request->all());
-         $medium = $request->validate([
-            // 'medium.*'=>'bail|required' ,
-            // 'education.*'=>'bail|required' ,
-            // 'percentage.*'=>'bail|required' ,
-            // 'universityname.*'=>'bail|required' ,
-            // 'specialization.*'=>'bail|required' 
+         $document = $request->validate([
+
+            'document_type_id.*'=>'bail|required' ,
+            'file.*'=>'bail|required' ,
+           
         ]); 
+
+        // $errors = $document->errors();
+        // dd($errors);
+
         
         try{
             DB::beginTransaction();
@@ -443,13 +454,16 @@ class PersonalController extends Controller
         Log::info('aaaaaaa');
        
         // dd($request->all());
-         $medium = $request->validate([
+         $langauge = $request->validate([
             // 'medium.*'=>'bail|required' ,
             // 'education.*'=>'bail|required' ,
             // 'percentage.*'=>'bail|required' ,
             // 'universityname.*'=>'bail|required' ,
             // 'specialization.*'=>'bail|required' 
         ]); 
+
+        // $errors = $langauge->errors();
+        // dd($errors);
         
         try{
             DB::beginTransaction();
