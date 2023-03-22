@@ -3,14 +3,14 @@
         @csrf
         <input type="hidden" name="user_id" value="{{$emp->uuid}}">
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-            <label>Father Name </label>
+            <label>Father's Name </label>
             <input type="text" name="fathername"  value = "{{ (isset($personal_detail) ? $personal_detail->fathername :  old('fathername')) }}" class="form-control form-control-lg" placeholder="Enter Father Name" tabindex="1" autofocus >
             @if ($errors->has('fathername'))
                 <span class="errr-validation">{{ $errors->first('fathername') }}</span>
             @endif
         </div>  
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-            <label>Mother Name</label>
+            <label>Mother's Name</label>
             <input type="text" name="mothername"  value = "{{ (isset($personal_detail) ? $personal_detail->mothername :  old('mothername')) }}" class="form-control form-control-lg" placeholder="Enter Mother Name" tabindex="2">
             @if ($errors->has('mothername'))
                 <span class="errr-validation">{{ $errors->first('mothername') }}</span>
@@ -19,7 +19,7 @@
         
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Date Of Birth</label>
-            <input type="date" name="dob"  value = "{{ (isset($personal_detail) ? $personal_detail->dob :  old('dob')) }}" class="form-control form-control-lg" placeholder="Select Date Of Birth">
+            <input type="date" name="dob"  value = "{{ (isset($personal_detail) ? $personal_detail->dob :  old('dob')) }}" class="form-control form-control-lg" placeholder="Select Date Of Birth" tabindex="3">
             @if ($errors->has('dob'))
                 <span class="errr-validation">{{ $errors->first('dob') }}</span>
             @endif
@@ -28,11 +28,11 @@
             <label class="">Gender</label>
             <div class="d-flex row ">
                 <div class="custom-control custom-radio col-lg-2 col-md-4 col-6">
-                    <input type="radio" name="gender" id="gender_male" value="Male" class="custom-control-input" @if((old('gender') == 'Male') || (isset($personal_detail) && ($personal_detail->gender == 'Male'))) checked @endif>
+                    <input type="radio" name="gender" id="gender_male" tabindex="4" value="Male" class="custom-control-input" @if((old('gender') == 'Male') || (isset($personal_detail) && ($personal_detail->gender == 'Male'))) checked @endif>
                     <label class="custom-control-label" for="gender_male">Male</label>
                 </div>
                 <div class="custom-control custom-radio col-lg-2 col-md-4 col-6">
-                    <input type="radio"  name="gender" id="gender_female" value="Female"  class="custom-control-input" @if((old('gender') == 'Female') || (isset($personal_detail) && ($personal_detail->gender == 'Female'))) checked @endif>
+                    <input type="radio"  name="gender" tabindex="4" id="gender_female" value="Female"  class="custom-control-input" @if((old('gender') == 'Female') || (isset($personal_detail) && ($personal_detail->gender == 'Female'))) checked @endif>
                     <label class="custom-control-label" for="gender_female">Female</label>
                 </div>
             </div>
@@ -42,14 +42,14 @@
         </div>
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Blood Group</label>
-            <input type="text" name="bloodgroup"  value = "{{ (isset($personal_detail) ? $personal_detail->blood_group :  old('bloodgroup')) }}"   class="form-control form-control-lg" placeholder="Enter Blood Group">
+            <input type="text" name="bloodgroup"  tabindex="5" value = "{{ (isset($personal_detail) ? $personal_detail->blood_group :  old('bloodgroup')) }}"   class="form-control form-control-lg" placeholder="Enter Blood Group">
             @if ($errors->has('bloodgroup'))
                 <span class="errr-validation">{{ $errors->first('bloodgroup') }}</span>
             @endif
         </div>
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Alternate Number</label>
-            <input type="text" name="alternateno" value = "{{ (isset($personal_detail) ? $personal_detail->alternate_no :  old('alternateno')) }}" class="form-control form-control-lg" placeholder="Enter alternate  Number">
+            <input type="text" name="alternateno"  tabindex="6" value = "{{ (isset($personal_detail) ? $personal_detail->alternate_no :  old('alternateno')) }}" class="form-control form-control-lg" placeholder="Enter alternate  Number">
             @if ($errors->has('alternateno'))
                 <span class="errr-validation">{{ $errors->first('alternateno') }}</span>
             @endif
@@ -59,7 +59,7 @@
         
         <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
             <label>Marital Status </label>
-            <select class="form-control" id="merriedstatus" value=""  name="marital_status">
+            <select class="form-control" id="merriedstatus" value=""  name="marital_status"  tabindex="7">
                 <!-- <option value= "" selected="">Choose...</option> -->
                 <option value="single" {{ (isset($personal_detail) ? ($personal_detail->marital_status == 'single' ? 'selected' : '') :  old('marital_status') == 'single' ? 'selected' : '' ) }} >Single</option>
                 <option value="married" {{ (isset($personal_detail) ? ($personal_detail->marital_status == 'married' ? 'selected' : '') :  old('marital_status') == 'married' ? 'selected' : '' ) }} >Married</option>
@@ -74,7 +74,7 @@
             <div class="custom-file">
                 <label class="custom-file-label" for="inputGroupFile02">Choose Profile Image</label>
                 @if(empty($personal_detail))
-                <input type="file" name="image" class="custom-file-input" id="inputGroupFile02" accept="image/png, image/gif, image/jpeg">
+                <input type="file" name="image"  tabindex="8" class="custom-file-input" id="inputGroupFile02" accept="image/png, image/gif, image/jpeg">
                 
                 <div class="file mt-2">
                     <span id="img-error" class="errr-validation">
@@ -84,7 +84,7 @@
                     </span>
                 </div>   
                 @else
-                    <input type="file" name="image" class="custom-file-input" id="inputGroupFile02" accept="image/png, image/gif, image/jpeg">
+                    <input type="file" name="image"tabindex="8"  class="custom-file-input" id="inputGroupFile02" accept="image/png, image/gif, image/jpeg">
                     
                     <div class="file mt-2">
                         @if ($errors->has('image'))
@@ -100,7 +100,7 @@
         </div>
         <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
             <label>Current Residence Type</label>
-            <select class="form-control"  name="residencetype">
+            <select class="form-control"  name="residencetype" tabindex="9">
             <option value="" selected="">Select Choose</option>
                 @foreach($current_residency as $curr)
 
@@ -115,7 +115,7 @@
         </div>
         <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
             <label>Mode Of Transportation</label>
-            <select class="form-control" value="{{old('transportationmode')}}" name="transportationmode">
+            <select class="form-control" value="{{old('transportationmode')}}" name="transportationmode" tabindex="10">
             <option value="" selected="">Select Choose</option>
                 @foreach($mode_transportation as $mode)
                         <option value="{{$mode->id}}" {{ (isset($personal_detail) ? ($personal_detail->	mode_of_transportation_id  == $mode->id ? 'selected' : '') :  old('transportationmode') == $mode->id ? 'selected' : '' ) }}>{{$mode->type}}</option>
@@ -127,7 +127,7 @@
         </div>
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Details Of Disability</label>
-            <textarea  class="form-control form-control-lg"  name="disabilitydtls" cols="30" placeholder="Enter Details Of disaility">
+            <textarea  class="form-control form-control-lg" tabindex="11" name="disabilitydtls" cols="30" placeholder="Enter Details Of disaility">
                 {{ (isset($personal_detail) ? $personal_detail->details_of_disability :  old('disabilitydtls')) }}
             </textarea>
             @if ($errors->has('disabilitydtls'))
@@ -137,7 +137,7 @@
         
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Total Experience</label>
-            <input type="number" name="totalexperience"  value = "{{ (isset($personal_detail) ? $personal_detail->total_of_experience :  old('totalexperience')) }}" value="{{old('totalexperience')}}" class="form-control form-control-lg" placeholder="Total Experience">
+            <input type="number" name="totalexperience" tabindex="12" value = "{{ (isset($personal_detail) ? $personal_detail->total_of_experience :  old('totalexperience')) }}" value="{{old('totalexperience')}}" class="form-control form-control-lg" placeholder="Total Experience">
             @if ($errors->has('totalexperience'))
                 <span class="errr-validation">{{ $errors->first('totalexperience') }}</span>
             @endif
@@ -151,7 +151,7 @@
 
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label for="inputAddress">Current Address</label>
-            <textarea  rows="6" name="current_address" class="form-control form-control-lg" id="inputAddress" placeholder="1234 Main St">
+            <textarea  rows="6" tabindex="13" name="current_address" class="form-control form-control-lg" id="inputAddress" placeholder="1234 Main St">
                   {{ (isset($personal_detail) ? $personal_detail->current_address :  old('current_address')) }}
             </textarea>
             @if ($errors->has('current_address'))
@@ -160,7 +160,7 @@
         </div>
         <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
             <label>Country</label>
-            <select class="form-control" id="current_country"  name="current_country">
+            <select class="form-control" tabindex="14" id="current_country"  name="current_country">
                 <option value="" selected="">Select Country</option>
                 @foreach($country as $con)
                         <option value="{{$con->id}}" {{ (isset($personal_detail) ? ($personal_detail->current_country_id  == $con->id ? 'selected' : '') :  old('current_country') == $con->id ? 'selected' : '' ) }}>{{$con->name}}  </option>
@@ -173,7 +173,7 @@
         </div>
         <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
             <label>State</label>
-            <select class="form-control" value="" id="current_state"  name="current_state">
+            <select class="form-control" tabindex="15" value="" id="current_state"  name="current_state">
                 
             </select>
             @if ($errors->has('current_state'))
@@ -182,7 +182,7 @@
         </div>
         <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
             <label>City</label>
-            <select class="form-control"  id="current_city"  name="current_city">
+            <select class="form-control" tabindex="16" id="current_city"  name="current_city">
                 
                 
             </select>
@@ -192,7 +192,7 @@
         </div>
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Pincode</label>
-            <input type="text" name="current_pincode" value = "{{ (isset($personal_detail) ? $personal_detail->current_pincode :  old('current_pincode')) }}"  class="form-control form-control-lg" placeholder="Enter current pincode">
+            <input type="text" tabindex="17" name="current_pincode" value = "{{ (isset($personal_detail) ? $personal_detail->current_pincode :  old('current_pincode')) }}"  class="form-control form-control-lg" placeholder="Enter current pincode">
             @if ($errors->has('current_pincode'))
                 <span class="errr-validation">{{ $errors->first('current_pincode') }}</span>
             @endif
@@ -209,7 +209,7 @@
 
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label for="inputAddress2">Permanent Address</label>
-            <textarea  rows="6" name="permanent_address"   class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+            <textarea  rows="6"  tabindex="18" name="permanent_address"   class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
                 {{ (isset($personal_detail) ? $personal_detail->permanent_address :  old('permanent_address')) }}
             </textarea>
             @if ($errors->has('permanent_address'))
@@ -219,7 +219,7 @@
         
         <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
             <label>Country </label>
-            <select class="form-control" id="permanent_country" name="permanent_country">
+            <select class="form-control"  tabindex="19" id="permanent_country" name="permanent_country">
                 <option value="" selected="">Select Country</option>
                 @foreach($country as $con)
                     <option value="{{$con->id}}" {{ (isset($personal_detail) ? ($personal_detail->permanent_country_id  == $con->id ? 'selected' : '') :  old('current_country') == $con->id ? 'selected' : '' ) }}>{{$con->name}}  </option>
@@ -232,7 +232,7 @@
         
         <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
             <label>State</label>
-            <select class="form-control" id="permanent_state"  name="permanent_state" >
+            <select class="form-control"  tabindex="20" id="permanent_state"  name="permanent_state" >
                 
                 
             </select>
@@ -243,7 +243,7 @@
         
         <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
             <label>City</label>
-            <select class="form-control"id="permanent_city"  name="permanent_city">
+            <select class="form-control"id="permanent_city"  tabindex="21" name="permanent_city">
                 
                     
             </select>
@@ -255,7 +255,7 @@
         
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Pincode</label>
-            <input type="text" name="permanent_pincode" value = "{{ (isset($personal_detail) ? $personal_detail->permanent_pincode :  old('permanent_pincode')) }}"  class="form-control form-control-lg" placeholder="Enter permanant pincode">
+            <input type="text" name="permanent_pincode"  tabindex="22" value = "{{ (isset($personal_detail) ? $personal_detail->permanent_pincode :  old('permanent_pincode')) }}"  class="form-control form-control-lg" placeholder="Enter permanant pincode">
             @if ($errors->has('permanent_pincode'))
                 <span class="errr-validation">{{ $errors->first('permanent_pincode') }}</span>
             @endif

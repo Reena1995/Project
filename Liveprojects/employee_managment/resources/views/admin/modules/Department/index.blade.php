@@ -24,8 +24,7 @@
                                 <div class="row justify-content-end">
                                
                                     <div class="col-lg-4 col-md-6 col-sm-12 searchlook text-right">               
-                                        <!-- <input  type="search" id="search" class="search" name="search" placeholder="search here....."size="30" />
-                                        <br> -->
+                                       
                                         <form action="" method="GET" role="search">
                                             <div class="input-group hover-input">
                                                 <input type="text" class="form-control" name="search"

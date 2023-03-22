@@ -1,5 +1,6 @@
 <script>
     /* employee register validation start */
+
        $(document).ready(function(){
             $("#employee_register").validate({
                 rules : {
@@ -332,5 +333,83 @@
 
             /*employee location histories validation end */
 
+             /*employee education validation start */
 
+              /*employee education  validation end*/
+
+
+
+                $(document).delegate('#educationDetailBtn','click',function(){
+                    
+                    employeeEducation(); 
+                    employeeMedium();
+                    employeeUniversity();
+                    submitForm(); 
+                })
+
+                function employeeMedium(){
+                    var isValid = 1;
+                    $( ".employee_medium" ).each(function( ) {
+                        var key = $(this).attr('data-key');
+                        var html = '';
+                        console.log($(this).val());
+                        if($(this).val() == null){
+                            console.log('key :'+key);
+                            isValid = 2;
+                            html = 'Please select medium';
+                        }
+                        $("#medium_error_"+key).html(html);
+                    });  
+                    return isValid;
+                }
+
+                function employeeEducation(){
+                   
+                   var isValid = 1;
+                   $( ".employee_education" ).each(function( ) {
+                       var key = $(this).attr('data-key');
+                       var html = '';
+                       console.log('HI ',$(this).val());
+                       if($(this).val() == null){
+                           console.log('key :'+key);
+                           isValid = 2;
+                           html = 'Please select education level';
+                       }
+                       $("#education_level_error_"+key).html(html);
+                   }); 
+                   return isValid; 
+                 
+               }
+
+               function employeeUniversity(){
+                   
+                   var isValid = 1;
+                   $( ".employee_university" ).each(function( ) {
+                       var key = $(this).attr('data-key');
+                       console.log('KEY :: ',key);
+                       var html = '';
+                      
+                       console.log('HI aa',$(this).val());
+                       if($(this).val() == ""){
+                           console.log('key UUU :'+key);
+                           isValid = 2;
+                           html = 'Please enter university name';
+                       }
+                       $("#university_error_"+key).html(html);
+                   }); 
+                   return isValid; 
+                 
+               }
+
+                function submitForm(){
+                    console.log('hhhiih ',employeeMedium());
+                    console.log('hhhiih 1 ',employeeEducation());
+
+ 
+                    if((employeeMedium() == 2) || (employeeEducation() == 2) || (employeeUniversity() == 2)){
+                        return false;
+                    }else{
+                        $("#education_deatil_add").submit();
+                    }
+                }
 </script>  

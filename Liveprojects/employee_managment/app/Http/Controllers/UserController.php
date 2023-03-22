@@ -47,9 +47,15 @@ use Validate;
 class UserController extends Controller
 {
     
-    public function index()
+    public function index(Request $request)
     {
-        $user = User::where('is_active',1)->where('role_id',2)->paginate(5);
+        
+
+        $query = User::query();
+        if($request->input('search')){
+            $query->where('name', 'LIKE', '%' . $request->input('search') . '%');
+        }
+        $user  = $query->where('is_active',1)->where('role_id',2)->paginate(5);
         return view('admin.modules.employee.index',compact('user'));
        
     }
