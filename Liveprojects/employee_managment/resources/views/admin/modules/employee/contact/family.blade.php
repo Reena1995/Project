@@ -141,7 +141,7 @@
                                 </div> 
 
                                 <div>
-                                    <button type="button" class="btn btn-danger d-none delete">delete</button> 
+                                    <button type="button"  class="btn btn-danger d-none delete">delete</button> 
                                 </div>
 
                             </div> 
@@ -167,7 +167,7 @@
                         </a>
                     </div>
                     <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <button type="submit"   class="theme-btn text-white">Save</button>
+                        <button type="button" id="familyBtn"  class="theme-btn text-white">Save</button>
                     </div>
             </div>     
 
@@ -194,7 +194,7 @@
                 var name = $(this).attr('name');
 		    	$(this).attr('name',name).val('');
                 $(this).parents('.familyadd').find('.imageset').remove();
-                                    
+                // $(this).attr('data-key',rowIndex);                 
                 $(this).parents('.familyadd').append('');
 		    }); 
          

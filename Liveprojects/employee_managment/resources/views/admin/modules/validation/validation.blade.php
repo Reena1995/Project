@@ -1,6 +1,6 @@
 <script>
-    /* employee register validation start */
 
+    /* employee register validation start */
        $(document).ready(function(){
             $("#employee_register").validate({
                 rules : {
@@ -41,16 +41,15 @@
             });
         });
         /* employee register validation start */
-
         
           /*personal deatils  Frontend validation start*/
           var isEditImage = '{{ !empty($personal_detail) && ($personal_detail->image) }}' ? 2:1; 
        
-
             $(document).delegate('#personalDetailBtn','click',function(){
                 isImageValidation() 
                 formSubmitPersonal();  
             });
+
             function isImageValidation(){
                  console.log('isEditImage :',isEditImage);
                 var img = $('#inputGroupFile02').val();
@@ -149,12 +148,11 @@
                     }
                 });
             }
-
          /*personal deatils validation Frontend jquery */
-
          /* job profile validation start */
             
             $("#jobprofileform_id").validate({
+
                 rules : {
                     company_employee_id : "required",  
                     company_emp_device_id : "required",
@@ -190,7 +188,6 @@
          /* job profile validation end */
 
           /*bank deatils validation start */
-
             $("#bank_form_id").validate({
                 rules : {
                     ac_holder_name	 : "required",  
@@ -223,16 +220,11 @@
                     form.submit();
                 }
             });
-
           /*bank deatils validation end */
-
           /*employment deatils  validation start */
-
            
-
             var isEditResign = '{{ !empty($employment_detail) && ($employment_detail->resign_letter_pdf) }}' ? 2:1; 
        
-
             $(document).delegate('#employmentDetailBtn','click',function(){
                 isResignValidation() 
                 formSubmitEmployment();  
@@ -253,7 +245,6 @@
                 console.log('Html ::    ',html1);
                 return true;
             }
-
             function formSubmitEmployment(){
                 console.log('asd');
                 $("#employmentform").validate({
@@ -266,7 +257,6 @@
                        
                     },
                     messages : {
-
                         date_of_joining	 : "Please select date of joining",
                         date_of_resigning : "Please select date of resigning",
                         date_of_leaving : "Please select date of leaving",
@@ -296,11 +286,8 @@
                     }
                 });
             }
-
           /*employment deatils  validation end */
-
            /*employee location histories validation start */
-
             $("#emp_location_id").validate({
                 rules : {
                     company_location_id 	 : "required",  
@@ -313,7 +300,6 @@
                     company_location_type_id  : "Please select company location type",
                    
                  
-
                 },
                 errorClass: "custom-error",
                 errorElement: "div",
@@ -330,86 +316,417 @@
                     form.submit();
                 }
             });
-
             /*employee location histories validation end */
 
+            
              /*employee education validation start */
 
-              /*employee education  validation end*/
-
-
-
-                $(document).delegate('#educationDetailBtn','click',function(){
-                    
-                    employeeEducation(); 
-                    employeeMedium();
-                    employeeUniversity();
-                    submitForm(); 
-                })
-
-                function employeeMedium(){
+                $('#educationDetailBtn').on('click', function(event) {
                     var isValid = 1;
-                    $( ".employee_medium" ).each(function( ) {
-                        var key = $(this).attr('data-key');
-                        var html = '';
-                        console.log($(this).val());
-                        if($(this).val() == null){
-                            console.log('key :'+key);
-                            isValid = 2;
-                            html = 'Please select medium';
+                    event.preventDefault()
+                  
+                    console.log('subbbbbbbbb');
+                
+                    $('#education_deatil_add :input').each(function(index,ele) {
+                        console.log('xxxx');
+                        var input = $(this);
+                        console.log(ele);
+                        console.log($(ele).val());
+                        console.log($(ele).val().length , 'condition');
+                        
+                        if($(ele).val().length === 0){
+
+                            console.log('check');
+                            if($(ele).attr('type') == 'text')
+                            {
+                                isValid = 2;
+                                console.log('zzzzzzzzz');
+                                $(ele).parents('.form-group').find('.error').remove();
+                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                            }
+                            if($(ele).attr('type') == 'file')
+                            {
+                                console.log('zzzzzzzzz');
+                                if($(ele).attr('data-key') == 'new_image'){
+                                    isValid = 2;
+                                    $(ele).parents('.form-group').find('.error').remove();
+                                    ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                }
+                            }
+
+                           
                         }
-                        $("#medium_error_"+key).html(html);
-                    });  
-                    return isValid;
-                }
-
-                function employeeEducation(){
-                   
-                   var isValid = 1;
-                   $( ".employee_education" ).each(function( ) {
-                       var key = $(this).attr('data-key');
-                       var html = '';
-                       console.log('HI ',$(this).val());
-                       if($(this).val() == null){
-                           console.log('key :'+key);
-                           isValid = 2;
-                           html = 'Please select education level';
-                       }
-                       $("#education_level_error_"+key).html(html);
-                   }); 
-                   return isValid; 
-                 
-               }
-
-               function employeeUniversity(){
-                   
-                   var isValid = 1;
-                   $( ".employee_university" ).each(function( ) {
-                       var key = $(this).attr('data-key');
-                       console.log('KEY :: ',key);
-                       var html = '';
-                      
-                       console.log('HI aa',$(this).val());
-                       if($(this).val() == ""){
-                           console.log('key UUU :'+key);
-                           isValid = 2;
-                           html = 'Please enter university name';
-                       }
-                       $("#university_error_"+key).html(html);
-                   }); 
-                   return isValid; 
-                 
-               }
-
-                function submitForm(){
-                    console.log('hhhiih ',employeeMedium());
-                    console.log('hhhiih 1 ',employeeEducation());
-
- 
-                    if((employeeMedium() == 2) || (employeeEducation() == 2) || (employeeUniversity() == 2)){
+                        else
+                        {
+                            $(ele).parents('.form-group').find('.error').remove();
+                        }
+                       
+                    });
+                    if(isValid == 2){
                         return false;
                     }else{
                         $("#education_deatil_add").submit();
                     }
-                }
+                  
+                   
+
+                });
+
+            /*employee education validation end */   
+
+
+             /*employee education validation start */
+
+                $('#doctBtn').on('click', function(event) {
+                    var isValid = 1;
+                    event.preventDefault()
+                  
+                    console.log('subbbbbbbbb');
+                
+                    $('#document_deatil_add :input').each(function(index,ele) {
+                        console.log('xxxx');
+                        var input = $(this);
+                        console.log(ele);
+                        console.log($(ele).val());
+                        console.log($(ele).val().length , 'condition');
+                        
+                        if($(ele).val().length === 0){
+
+                            console.log('check');
+                           
+                            if($(ele).attr('type') == 'file')
+                            {
+                                console.log('zzzzzzzzz');
+                                if($(ele).attr('data-key') == 'doc_image'){
+                                    isValid = 2;
+                                    $(ele).parents('.form-group').find('.error').remove();
+                                    ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                }
+                            }
+
+                           
+                        }
+                        else
+                        {
+                            $(ele).parents('.form-group').find('.error').remove();
+                        }
+                       
+                    });
+                    if(isValid == 2){
+                        return false;
+                    }else{
+                        $("#document_deatil_add").submit();
+                    }
+                  
+                   
+
+                });
+
+            /*employee education validation end */   
+
+
+
+              /*employee asset validation start */
+
+                $('#assetbtn').on('click', function(event) {
+                    var isValid = 1;
+                    event.preventDefault()
+                  
+                    console.log('subbbbbbbbb');
+                
+                    $('#emp_asset_deatil_add :input').each(function(index,ele) {
+                        console.log('xxxx');
+                        var input = $(this);
+                        console.log(ele);
+                        console.log($(ele).val());
+                        console.log($(ele).val().length , 'condition');
+                        
+                        if($(ele).val().length === 0){
+
+                            console.log('check');
+
+                            if($(ele).attr('type') == 'text')
+                            {
+                                isValid = 2;
+                                console.log('zzzzzzzzz');
+                                $(ele).parents('.form-group').find('.error').remove();
+                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                            }
+                            if($(ele).attr('type') == 'date')
+                            {
+                                isValid = 2;
+                                console.log('zzzzzzzzz');
+                                $(ele).parents('.form-group').find('.error').remove();
+                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                            }
+                           
+                            if($(ele).attr('type') == 'file')
+                            {
+                                console.log('zzzzzzzzz');
+                                
+                                if($(ele).attr('data-key') == 'image_fill'){
+                                    isValid = 2;
+                                    $(ele).parents('.form-group').find('.error').remove();
+                                    ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                }
+                            }
+
+                           
+                        }
+                        else
+                        {
+                            $(ele).parents('.form-group').find('.error').remove();
+                        }
+                       
+                    });
+                    if(isValid == 2){
+                        return false;
+                    }else{
+                        $("#emp_asset_deatil_add").submit();
+                    }
+                  
+                   
+
+                });
+
+            /*employee asset validation end */ 
+
+
+             /*employee professional validation start */
+
+                $('#profBtn').on('click', function(event) {
+                    var isValid = 1;
+                    event.preventDefault()
+                  
+                    console.log('subbbbbbbbb');
+                
+                    $('#emp_proessional_add :input').each(function(index,ele) {
+                        console.log('xxxx');
+                        var input = $(this);
+                        console.log(ele);
+                        console.log($(ele).val());
+                        console.log($(ele).val().length , 'condition');
+                        
+                        if($(ele).val().length === 0){
+
+                            console.log('check');
+
+                            if($(ele).attr('type') == 'text')
+                            {
+                                isValid = 2;
+                                console.log('zzzzzzzzz');
+                                $(ele).parents('.form-group').find('.error').remove();
+                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                            }
+                            if($(ele).attr('type') == 'date')
+                            {
+                                isValid = 2;
+                                console.log('zzzzzzzzz');
+                                $(ele).parents('.form-group').find('.error').remove();
+                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                            }
+                           
+                           
+                            if($(ele).attr('type') == 'file')
+                            {
+                                console.log('zzzzzzzzz');
+                                
+                                if($(ele).attr('data-key') == 'certificate_image'){
+                                    isValid = 2;
+                                    $(ele).parents('.form-group').find('.error').remove();
+                                    ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                }
+                            }
+
+                           
+                        }
+                        else
+                        {
+                            $(ele).parents('.form-group').find('.error').remove();
+                        }
+                       
+                    });
+                    if(isValid == 2){
+                        return false;
+                    }else{
+                        $("#emp_proessional_add").submit();
+                    }
+                  
+                   
+
+                });
+
+            /*employee professional validation end */ 
+
+
+            /*employee work validation start */
+
+                $('#workBtn').on('click', function(event) {
+
+                    var isValid = 1;
+                    event.preventDefault()
+                  
+                    console.log('subbbbbbbbb');
+                
+                    $('#emp_work_add :input').each(function(index,ele) {
+                        console.log('xxxx');
+                        var input = $(this);
+                        console.log(ele);
+                        console.log($(ele).val());
+                        console.log($(ele).val().length , 'condition');
+                        
+                        if($(ele).val().length === 0){
+
+                            console.log('check');
+
+                            if($(ele).attr('type') == 'text')
+                            {
+                                isValid = 2;
+                                console.log('zzzzzzzzz');
+                                $(ele).parents('.form-group').find('.error').remove();
+                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                            }
+                            if($(ele).attr('type') == 'date')
+                            {
+                                isValid = 2;
+                                console.log('zzzzzzzzz');
+                                $(ele).parents('.form-group').find('.error').remove();
+                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                            }
+                          
+                           
+                            if($(ele).attr('type') == 'file')
+                            {
+                                console.log('zzzzzzzzz');
+                                
+                                if($(ele).attr('data-key') == 'exp_image'){
+                                    isValid = 2;
+                                    $(ele).parents('.form-group').find('.error').remove();
+                                    ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                }
+                            }
+
+                           
+                        }
+                        else
+                        {
+                            $(ele).parents('.form-group').find('.error').remove();
+                        }
+                       
+                    });
+                    if(isValid == 2){
+                        return false;
+                    }else{
+                        $("#emp_work_add").submit();
+                    }
+                  
+                   
+
+                });
+
+            /*employee work validation end */ 
+
+
+            /*employee family validation start */
+
+            $('#familyBtn').on('click', function(event) {
+
+                        var isValid = 1;
+                        event.preventDefault()
+
+                        console.log('subbbbbbbbb');
+
+                        $('#emp_family_add :input').each(function(index,ele) {
+                            console.log('xxxx');
+                            var input = $(this);
+                            console.log(ele);
+                            console.log($(ele).val());
+                            console.log($(ele).val().length , 'condition');
+                            
+                            if($(ele).val().length === 0){
+
+                                console.log('check');
+
+                                if($(ele).attr('type') == 'text')
+                                {
+                                    isValid = 2;
+                                    console.log('zzzzzzzzz');
+                                    $(ele).parents('.form-group').find('.error').remove();
+                                    ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                }
+                              
+                            
+                            }
+                            else
+                            {
+                                $(ele).parents('.form-group').find('.error').remove();
+                            }
+                        
+                        });
+                        if(isValid == 2){
+                            return false;
+                        }else{
+                            $("#emp_family_add").submit();
+                        }
+
+
+
+            });
+
+            /*employee family validation end */ 
+
+
+            /*employee emergrncy validation start */
+
+            $('#emeBtn').on('click', function(event) {
+
+                    var isValid = 1;
+                    event.preventDefault()
+
+                    console.log('subbbbbbbbb');
+
+                    $('#emp_emergency_add :input').each(function(index,ele) {
+                        console.log('xxxx');
+                        var input = $(this);
+                        console.log(ele);
+                        console.log($(ele).val());
+                        console.log($(ele).val().length , 'condition');
+                        
+                        if($(ele).val().length === 0){
+
+                            console.log('check');
+
+                            if($(ele).attr('type') == 'text')
+                            {
+                                isValid = 2;
+                                console.log('zzzzzzzzz');
+                                $(ele).parents('.form-group').find('.error').remove();
+                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                            }
+                        
+                        
+                        }
+                        else
+                        {
+                            $(ele).parents('.form-group').find('.error').remove();
+                        }
+
+                    });
+                    if(isValid == 2){
+                        return false;
+                    }else{
+                        $("#emp_emergency_add").submit();
+                    }
+
+
+
+            });
+
+                    /*employee emergrncy validation end */ 
+
+
+
+            
+
+           
 </script>  

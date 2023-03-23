@@ -15958,3 +15958,30 @@ a:hover {
 font-size: 16px !important;
 height: 40px !important;
 }
+
+.education
+{
+    box-shadow: 5px 5px 5px 5px  ;
+}
+.delete
+{
+    text-align: right;
+}
+.tab-content
+{
+    width: 100%;
+}
+.language_table tr td
+{
+    vertical-align: middle;
+    border: none;
+}
+.language_table tr td input
+{
+    text-transform: capitalize;
+}
+.language_table tr td input[type=checkbox]
+{
+    width: 17px;
+    height: 17px;
+}

@@ -18,7 +18,10 @@ use App\Http\Controllers\CurrentResidenceTypeController;
 use App\Http\Controllers\ModeOfTransportationController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\EmpPersonalDetailController;
+use App\Http\Controllers\PersonalController;
+use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\ProfessionalController;
+use App\Http\Controllers\ContactController;
 
 
 
@@ -231,21 +234,64 @@ Route::group(['prefix'=>'employee/','middleware'=>[],'as'=>'employee.'], functio
    Route::post('/save',[UserController::class,'store'])->name('add');
    Route::get('/list',[UserController::class,'index'])->name('index');
    Route::get('/edit/{id}',[UserController::class,'edit'])->name('edit');
+   Route::get('/status/{id}',[UserController::class,'status'])->name('status');
    
 });
 /* ------------------------------- employee  end  ---------------------------*/
 
+
+/* ------------------------------- get state city start ---------------------------*/
+Route::get('/getStatee',[UserController::class,'getState'])->name('getstate');
+Route::get('/getCitty',[UserController::class,'getCity'])->name('getcity');
+/* ------------------------------- get state city end ---------------------------*/
+
 /* -----------------==---------- personal details start--------------------------*/
 Route::group(['prefix'=>'personal/','middleware'=>[],'as'=>'personal.'], function(){
-   Route::get('/add',[EmpPersonalDetailController::class,'create'])->name('create');
-   // Route::post('/save',[UserController::class,'store'])->name('add');
-   // Route::get('/list',[UserController::class,'index'])->name('index');
-   // Route::get('/edit/{id}',[UserController::class,'edit'])->name('edit');
+ 
+   Route::post('save',[PersonalController::class,'personaldetail_add'])->name('personaldetail.add');
+   Route::post('edusave',[PersonalController::class,'education_add'])->name('education.add');
+   Route::post('documentsave',[PersonalController::class,'document_add'])->name('document.add');
+   Route::post('langauge/save',[PersonalController::class,'langauge_add'])->name('langauge.add');
+   
    
 });
 /* ------------------------------- personal details end  ---------------------------*/
 
-Route::get('/getState',[UserController::class,'getState']);
+/* -----------------==---------- Organization details start--------------------------*/
+Route::group(['prefix'=>'organization/','middleware'=>[],'as'=>'organization.'], function(){
+ 
+   Route::post('jobprofile/save',[OrganizationController::class,'jobprofile_add'])->name('jobprofile.add');
+   Route::post('bandetail/save',[OrganizationController::class,'bank_add'])->name('bank.add');
+   Route::post('employment/save',[OrganizationController::class,'employment_add'])->name('employment.add');
+   Route::post('location/save',[OrganizationController::class,'location_add'])->name('location.add');
+   Route::post('asset/save',[OrganizationController::class,'asset_add'])->name('asset.add');
+   
+   
+});
+/* ------------------------------- Organization details end  ---------------------------*/
+
+/* -----------------==---------- professional details start--------------------------*/
+Route::group(['prefix'=>'professional/','middleware'=>[],'as'=>'professional.'], function(){
+ 
+   Route::post('professional/save',[ProfessionalController::class,'professional_add'])->name('professional.add');
+   Route::post('workexperience/save',[ProfessionalController::class,'workexperience_add'])->name('workexperience.add');
+   
+   
+});
+/* ------------------------------- professional details end  ---------------------------*/
+
+/* -----------------==---------- contact details start--------------------------*/
+Route::group(['prefix'=>'contact/','middleware'=>[],'as'=>'contact.'], function(){
+ 
+   Route::post('family/save',[ContactController::class,'family_add'])->name('family.add');
+   Route::post('emergency/save',[ContactController::class,'emergency_add'])->name('emergency.add');
+   
+   
+});
+/* ------------------------------- contact details end  ---------------------------*/
+
+
+
 
 
 });

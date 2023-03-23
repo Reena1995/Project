@@ -277,7 +277,7 @@
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <lable>experience_certificate</lable>
-                                            <input type="file" name="experience_certificate[]" class=" form-control form-control-lg">
+                                            <input type="file" value="" data-key="exp_image" name="experience_certificate[]" class=" form-control form-control-lg">
                                         </div>
                                         @if ($errors->has('experience_certificate[]'))
                                                 <span class="errr-validation">{{ $errors->first('experience_certificate[]') }}</span>
@@ -288,7 +288,7 @@
                                         </div> 
 
                                 <div>
-                                    <button type="button" class="btn btn-danger d-none delete">delete</button> 
+                                    <button type="button"  class="btn btn-danger d-none delete">delete</button> 
                                 </div>
 
                             </div> 
@@ -308,7 +308,7 @@
                         </a>
                     </div>
                     <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <button type="submit"   class="theme-btn text-white">Save</button>
+                        <button type="submit"  id="workBtn" class="theme-btn text-white">Save</button>
                     </div>
             </div>     
 
@@ -335,9 +335,16 @@
                 var name = $(this).attr('name');
 		    	$(this).attr('name',name).val('');
                 $(this).parents('.workadd').find('.imageset').remove();
-                                    
+                $(this).attr('data-key',rowIndex);                    
                 $(this).parents('.workadd').append('');
 		    }); 
+            defaultHtmlAppend.find('input[type="file"]').each(function(){
+                var name = $(this).attr('name');
+		    	// $(this).attr('name',name).val('');
+                // $(this).parents('.eduremove').find('.imageset').remove();
+                $(this).attr('data-key','exp_image');
+                // $(this).parents('.eduremove').append('');
+		    });
          
           defaultHtmlAppend.attr('id','educationDetail-'+rowIndex);
 

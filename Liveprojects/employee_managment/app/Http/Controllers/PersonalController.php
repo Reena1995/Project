@@ -216,6 +216,7 @@ class PersonalController extends Controller
     {
         Log::info('aaaaaaa');
         // dd($request->all());
+        // return false;
          $education = $request->validate([
             'education_level_id.*'=>'bail|required' ,
             'medium_instruction_id.*'=>'bail|required' ,
@@ -357,23 +358,25 @@ class PersonalController extends Controller
                 {
                     \Log::info('ifff');
                     $empdoc =  EmpDocumentDetail::where('uuid',$request->document_uuid[$key])->first();
-                    
+                    \Log::info($empdoc,'cghcghcvgh');
                     \Log::info($request->document_uuid[$key]);
-                    $empdoc->medium_instruction_id  = $request->type[$key];
+                    $empdoc->document_type_id  = $request->type[$key];
                    
                    
                     
-                    if(isset($request->file[$key])){
-
-                        $file = $request->type[$key];  // get file
-                        $file_name=time()."_image.".$file->getClientOriginalExtension();// make file name
-                        $file->move('console/upload/employee/education',$file_name); //file name move upload in public		
+                    if($request->documents[$key]){
+                        $fileN = $request->documents[$key];  // get file
+                        
+                        $file_name=time().rand()."_image.".$fileN->getClientOriginalExtension();// make file name
+                        
+                        $fileN->move('console/upload/employee/document',$file_name); //file name move upload in public		
                         $empdoc->file = $file_name;
                     }
                     
                     $empdoc->updated_by = Auth::id();
                 
                     $res = $empdoc->update();
+                    $msg="Education update successfully";
                     if(!$res)
                     {
                         DB::rollback();
@@ -410,7 +413,7 @@ class PersonalController extends Controller
                     $emp_document_dtls->uuid = \Str::uuid();
                   
                     $res = $emp_document_dtls->save();
-        
+                    $msg="Education create successfully";
                     if(!$res)
                     {
                         DB::rollback();
@@ -425,7 +428,7 @@ class PersonalController extends Controller
             }
             Log::info('bbbbbbb');
             DB::commit();
-            Session::flash('success','Education created successfully');
+            Session::flash('success',$msg);
            
             return redirect()->back();
            

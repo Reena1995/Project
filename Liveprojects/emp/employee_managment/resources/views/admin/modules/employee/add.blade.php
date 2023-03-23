@@ -76,37 +76,5 @@
         
        	@endsection
  @push('scripts')
- <script>
-       $(document).ready(function(){
-            $("form[name='employee__add_form']").validate({
-                rules : {
-                    first_name : "required",  
-                    last_name : "required",
-                    company_mail : "required",  
-                    mobile_no : "required",                    
-                },
-                messages : {
-                    first_name : "Please Enter a First Name ",
-                    last_name : "Please Enter  a Last Name ",
-                    company_mail : "Please Enter an Email Id  ",
-                    mobile_no : "Please Enter  a Mobile No ",  
-                    
-                },
-                errorClass: "custom-error",
-                errorElement: "div",
-                errorPlacement: function(error, element) {
-                    var placement = $(element).data('error');
-                    if (placement) {
-                        $(element).append(error)
-                    } else {
-                        console.log(element.prev());
-                        error.insertAfter(element);
-                    }
-                },
-                submitHandler : function(form){
-                    form.submit();
-                }
-            });
-        });
-</script>         
+        
  @endpush

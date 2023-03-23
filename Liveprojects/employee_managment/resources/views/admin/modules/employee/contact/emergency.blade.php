@@ -115,7 +115,7 @@
                                 </div> 
 
                                 <div>
-                                    <button type="button" class="btn btn-danger d-none delete">delete</button> 
+                                    <button type="button"  class="btn btn-danger d-none delete">delete</button> 
                                 </div>
 
                             </div> 
@@ -131,9 +131,12 @@
                 
             </div>
            
-            <div class="mt-4"><button type="button" id="addem" class="btn btn-default pull-left  btn btn-primary mt-2 ">Add</button><br></div>
+            <div class="mt-4"><button type="button"  id="addem" class="btn btn-default pull-left  btn btn-primary mt-2 ">Add</button><br></div>
            
             
+
+
+
             <div class="form-card-footer card-footer p-t-20 p-0 text-right">
                     <div class="btn-group mr-3" role="group" aria-label="Second group">
                         <a href="" >
@@ -141,7 +144,7 @@
                         </a>
                     </div>
                     <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <button type="submit"   class="theme-btn text-white">Save</button>
+                        <button type="button" id="emeBtn" class="theme-btn text-white">Save</button>
                     </div>
             </div>     
 

@@ -166,7 +166,7 @@
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Purchased Date</label>
-                                            <input type="date" value = "" name="purchased_dn[]"class="form-control form-control-lg" placeholder="Enter University Name">
+                                            <input type="date"    value = "" name="purchased_dn[]"class="form-control form-control-lg" placeholder="Enter University Name">
                                             @if ($errors->has('purchased_dn[]'))
                                                     <span class="errr-validation">{{ $errors->first('purchased_dn[]') }}</span>
                                             @endif
@@ -206,7 +206,7 @@
 
                                     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                         <lable>Asset Image</lable>
-                                        <input type="file" name="asset_image[]" class=" form-control form-control-lg">
+                                        <input type="file" data-key="image_fill"  name="asset_image[]" class=" form-control form-control-lg">
                                     </div>
                                     @if ($errors->has('asset_image[]'))
                                             <span class="errr-validation">{{ $errors->first('asset_image[]') }}</span>
@@ -236,7 +236,7 @@
                         </a>
                     </div>
                     <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <button type="submit"   class="theme-btn text-white">Save</button>
+                        <button type="button"  id="assetbtn" class="theme-btn text-white">Save</button>
                     </div>
             </div>     
 
@@ -262,15 +262,25 @@
                 var name = $(this).attr('name');
 		    	$(this).attr('name',name).val('');
                 $(this).parents('.assetadd').find('.imageset').remove();
-                                    
+                $(this).attr('data-key',rowIndex);                  
                 $(this).parents('.assetadd').append('');
 		    }); 
+            defaultHtmlAppend.find('input[type="file"]').each(function(){
+                console.log("assrt call");
+                // var name = $(this).attr('name');
+		    	// $(this).attr('name',name).val('');
+                // $(this).parents('.eduremove').find('.imageset').remove();
+                $(this).attr('data-key','image_fill');
+                // $(this).parents('.eduremove').append('');
+		    });
           //  defaultHtmlAppend.hasClass('.assetadd').addClass('education_detail_'+rowIndex);
           defaultHtmlAppend.attr('id','educationDetail-'+rowIndex);
 
             defaultHtmlAppend.find('.btn-danger').removeClass('d-none').attr('data-id',rowIndex);
             $('#assetformId').append(defaultHtmlAppend);
         });
+
+
 
         $(document).delegate('.delete','click',function () { 
             var id = $(this).attr('data-id');

@@ -61,14 +61,14 @@
                                                                 <td>
                                                                     @if($use->onboarding_dtls == 0)
                                                                     
-                                                                        <div class="btn btn-danger">Not Available</div>
+                                                                        <div class="btn btn-warning">Not Available</div>
                                                                     
                                                                     @else
                                                                     
                                                                         <div class="btn btn-success">Available</div>
                                                                     
                                                                     @endif
-                                                                    <!-- {{($use->onboarding_dtls == 0) ?  'Not Available' :'Avialble'}}-->
+                                                                    
                                                                 </td> 
                                                                     <td>
                                                                         <a class="btn btn-primary btn-icon btn-sm text-white" href="" >
@@ -79,7 +79,7 @@
                                                                             <i class="mdi mdi-pen" data-toggle="tooltip"
                                                                                 data-original-title="Edit"></i>
                                                                         </a>
-                                                                        <a class="btn btn-danger btn-icon btn-sm text-white" href="" 
+                                                                        <a class="btn btn-danger btn-icon btn-sm text-white" href="{{route('employee.status',$use->uuid)}}" 
                                                                             data-toggle="tooltip" data-original-title="Delete"><i
                                                                                 class="mdi mdi-delete"></i></a>
                                                                     </td>

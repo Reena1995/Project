@@ -1,4 +1,4 @@
-<form  name="document_deatil_add"  action="{{route('personal.document.add')}}"  method="post" enctype="multipart/form-data">
+<form id="document_deatil_add" name="document_deatil_add"  action="{{route('personal.document.add')}}"  method="post" enctype="multipart/form-data">
  @csrf
         <input type="hidden" name="user_id" value="{{$emp->uuid}}">
             
@@ -15,8 +15,31 @@
                         <div class="form-group col-lg-6 col-md-6 col-sm-12 ">
                             <div class="custom-file">
                             <!-- <label class="custom-file-label" for="inputGroupFile02">Upload Document</label> -->
-                        
-                                <input type="file" name="documents[]" class="" id="inputGroupFile02" >
+<!-- 
+                            @if(empty($emp_document_detail))
+                                <input type="file" data-key="doc_image"  name="documents[]"  tabindex="" class="custom-file-input" id="inputGroupFile02" accept="image/png, image/gif, image/jpeg">
+                                
+                                
+                                @if ($errors->has('documents[]'))
+                                    {{ $errors->first('documents[]') }}
+                                @endif
+                            
+                            @else
+                                    <input type="file" name="documents[]" tabindex=""  class="custom-file-input" id="inputGroupFile02" accept="image/png, image/gif, image/jpeg">
+                                    
+                                    
+                                      
+                                     
+                                    <div class="imageset mt-4 m-4">
+                                        <img src="{{asset('console/upload/employee/document/'.$emp_document_detail->file)}}" height="120px" width="100px"> 
+                                    </div>  
+                                    @if ($errors->has('documents[]'))
+                                        <span class="errr-validation">{{ $errors->first('documents[]') }}</span>
+                                    @endif  
+                            @endif     -->
+            
+
+                                <input type="file" data-key="doc_image" name="documents[]" class="" id="inputGroupFile02" >
                                 @if ($errors->has('documents[]'))
                                     <span class="errr-validation">{{ $errors->first('documents[]') }}</span>
                                 @endif
@@ -36,7 +59,7 @@
                         </a>
                     </div>
                     <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <button type="submit"   class="theme-btn text-white">Save</button>
+                        <button type="button"  id="doctBtn" class="theme-btn text-white">Save</button>
                     </div>
                 </div>  
                

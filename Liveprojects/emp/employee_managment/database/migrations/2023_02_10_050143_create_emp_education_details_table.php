@@ -23,6 +23,7 @@ class CreateEmpEducationDetailsTable extends Migration
             $table->string('percentage');
             $table->string('specilaization');
             $table->integer('passing_year');
+            $table->string('result');
 			$table->boolean('is_active')->default(1);
 			$table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();

@@ -1,76 +1,85 @@
-<div class="form-row">
-                                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                            <label>First Name</label>
-                                                            <input type="text" class="form-control form-control-lg" placeholder="Enter First Name">
-                                                        </div>
-                                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                            <label>Last Name</label>
-                                                            <input type="text" class="form-control form-control-lg" placeholder="Enter Last Name">
-                                                        </div>
-                                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                            <label>Email Address</label>
-                                                            <input type="email" class="form-control form-control-lg" placeholder="Enter Email Address">
-                                                        </div>
-                                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                            <label>Mobile Number</label>
-                                                            <input type="number" class="form-control form-control-lg" placeholder="Enter Mobile Number">
-                                                        </div>
-                                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                            <label>Father Name</label>
-                                                            <input type="text" class="form-control form-control-lg" placeholder="Enter Father Name">
-                                                        </div>
-                                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                            <label>Emergency Contact Number</label>
-                                                            <input type="number" class="form-control form-control-lg" placeholder="Enter Emergency Contact Number">
-                                                        </div>
-                                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                            <label>Date Of Birth</label>
-                                                            <input type="text" class="theme-date-picker form-control form-control-lg" placeholder="Select Date Of Birth">
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                                            <label class="m-l-10">Gender</label>
-                                                            <div class="d-flex row m-l-10">
-                                                                <div class="custom-control custom-radio col-lg-2 col-md-4 col-6">
-                                                                    <input type="radio" id="maleradio" name="customRadio" class="custom-control-input">
-                                                                    <label class="custom-control-label" for="maleradio">Male</label>
-                                                                </div>
-                                                                <div class="custom-control custom-radio col-lg-2 col-md-4 col-6">
-                                                                    <input type="radio" id="femaleradio" name="customRadio" class="custom-control-input">
-                                                                    <label class="custom-control-label" for="femaleradio">Female</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
-                                                            <label>Marital Status </label>
-                                                            <select class="form-control">
-                                                                <option selected="">Choose...</option>
-                                                                <option>Single</option>
-                                                                <option>Married</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                                            <div class="custom-file">
-                                                                <label class="custom-file-label" for="inputGroupFile02">Choose Profile Image</label>
-                                                                <input type="file" class="custom-file-input" id="inputGroupFile02">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                            <label for="inputAddress">Present Address</label>
-                                                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                                                        </div>
-                                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                            <label for="inputAddress2">Permanent Address</label>
-                                                            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                                                        </div>
-                                                        <div class="p-t-10 m-b-10 col-12">
-                                                            <h5 class="font-weight-semibold">Account Login</h5>
-                                                        </div>
-                                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                            <label for="employeeemail">Employee Email</label>
-                                                            <input type="text" class="form-control" id="employeeemail" placeholder="Enter Employee Email">
-                                                        </div>
-                                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                                            <label for="employeepassword">Password</label>
-                                                            <input type="password" class="form-control" id="employeepassword" placeholder="Enter Employee Password">
-                                                        </div>
-                                                    </div>
+<form id="jobprofileform_id"  name="job_profile_add" action="{{route('organization.jobprofile.add')}}"  method="post" enctype="multipart/form-data">
+    <div class="form-row">
+        @csrf
+        <input type="hidden" name="user_id" value="{{$emp->uuid}}">
+        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+            <label>Conmpany Employee Id</label>
+            <input type="text" name="company_employee_id"  value = "{{ (isset($emp_job_profile) ? $emp_job_profile->company_employee_id :  old('company_employee_id')) }}"  class="form-control form-control-lg" placeholder="Enter company employee id">
+            @if ($errors->has('company_employee_id'))
+                <span class="errr-validation">{{ $errors->first('company_employee_id') }}</span>
+            @endif
+        </div>  
+
+        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+            <label>Company Employee Device Id</label>
+            <input type="text" name="company_emp_device_id"  value = "{{ (isset($emp_job_profile) ? $emp_job_profile->company_emp_device_id	 :  old('company_emp_device_id')) }}"  class="form-control form-control-lg" placeholder="Enter company employee device id">
+            @if ($errors->has('company_emp_device_id'))
+                <span class="errr-validation">{{ $errors->first('company_emp_device_id') }}</span>
+            @endif
+        </div>
+          
+       
+        
+
+        <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
+            <label>Select Department</label>
+            <select class="form-control"  name="department_id">
+                <option value="" selected="">Select Department</option>
+                @foreach($department as $depart)
+                        <option value="{{$depart->id}}" {{ (isset($emp_job_profile) ? ($emp_job_profile->department_id  == $depart->id ? 'selected' : '') :  old('department_id') == $depart->id ? 'selected' : '' ) }}>{{$depart->name}}  </option>
+                        
+                    @endforeach
+            </select>
+            @if ($errors->has('department_id'))
+                <span class="errr-validation">{{ $errors->first('department_id') }}</span>
+            @endif
+        </div>
+
+       
+
+        <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
+            <label>Select Designation</label>
+            <select class="form-control"  name="designation_id">
+                <option value="" selected="">Select Designation</option>
+                @foreach($designation as $desig)
+                        <option value="{{$desig->id}}" {{ (isset($emp_job_profile) ? ($emp_job_profile->designation_id  == $desig->id ? 'selected' : '') :  old('designation_id') == $desig->id ? 'selected' : '' ) }}>{{$desig->name}}  </option>
+                        
+                    @endforeach
+            </select>
+            @if ($errors->has('designation_id'))
+                <span class="errr-validation">{{ $errors->first('designation_id') }}</span>
+            @endif
+        </div>
+        
+      
+        <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
+            <label>Select Organization Role</label>
+            <select class="form-control"  name="organization_role_id">
+                <option value="" selected="">Select Organization Role</option>
+                @foreach($organization_role as $org_role)
+                        <option value="{{$org_role->id}}" {{ (isset($emp_job_profile) ? ($emp_job_profile->organization_role_id   == $org_role->id ? 'selected' : '')  :  old('organization_role_id') == $org_role->id ? 'selected' : '' ) }}>{{$org_role->name}}  </option>
+                        
+                    @endforeach
+            </select>
+            @if ($errors->has('organization_role_id'))
+                <span class="errr-validation">{{ $errors->first('organization_role_id') }}</span>
+            @endif
+        </div>
+     
+        <div class="form-card-footer card-footer p-t-20 p-0 text-right">
+            <div class="btn-group mr-2" role="group" aria-label="Second group">
+                <a href="" >
+                    <button class="theme-btn-outline">cancel</button>
+                </a>
+            </div>
+            <div class="btn-group mr-2" role="group" aria-label="Second group">
+                <button type="submit"  value="submit" name="submit" class="theme-btn text-white">Save</button>
+            </div>
+        </div>        
+    </div> 
+</form>
+@push('scripts')
+ <script>
+    
+</script>
+ @endpush   

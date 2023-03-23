@@ -46,7 +46,7 @@
         <main class="admin-main">
            
              @include('admin.partial.header')
-             @foreach(['error','success'] as $msg)
+             @foreach(['danger','success'] as $msg)
                     @if(Session::has($msg))
                     <div class="alert alert-{{$msg}}" role="alert">
                     {{session::get($msg)}}
@@ -57,6 +57,7 @@
             
         </main>
 		 @include('admin.partial.footer')
+         @include('admin.modules.validation.validation')
     </body>
     @stack('scripts')
    
