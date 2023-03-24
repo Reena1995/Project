@@ -731,73 +731,6 @@
 
             /*employee emergrncy validation start */
 
-            // $('#emeBtn').on('click', function(event) {
-
-            //         var isValid = 1;
-            //         event.preventDefault()
-
-            //         console.log('subbbbbbbbb');
-
-            //         $('#emp_emergency_add :input').each(function(index,ele) {
-            //             console.log('xxxx');
-            //             var input = $(this);
-            //             console.log(ele);
-            //             console.log($(ele).val());
-            //             console.log($(ele).val().length , 'condition');
-                        
-            //             if($(ele).val().length === 0){
-
-            //                 console.log('check');
-
-            //                 if($(ele).attr('type') == 'text')
-            //                 {
-            //                     isValid = 2;
-            //                     console.log('zzzzzzzzz');
-            //                     $(ele).parents('.form-group').find('.error').remove();
-            //                     ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
-            //                 }
-
-                            
-            //                 if(!($(ele).val())){
-
-            //                     if(this.tagName == 'TEXTAREA'){
-
-            //                         if(!$.trim($(".textArea").val()))
-            //                         {
-            //                             isValid = 2;
-            //                             console.log('textareacheck');
-
-            //                             console.log($(ele));
-            //                             $(ele).parents('.form-group').find('.error').remove();
-            //                             ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
-            //                         }else{
-            //                             isValid = 1;
-
-            //                         }
-            //                     }
-            //                     }else{
-            //                             isValid = 1;
-
-            //                     }
-
-                        
-            //             }
-            //             else
-            //             {
-            //                 $(ele).parents('.form-group').find('.error').remove();
-            //             }
-
-            //         });
-            //         if(isValid == 2){
-            //             return false;
-            //         }else{
-            //             $("#emp_emergency_add").submit();
-            //         }
-
-
-
-            // });
-
             $('#emeBtn').on('click', function(event) {
 
                     var isValid = 1;
@@ -806,12 +739,11 @@
                     console.log('subbbbbbbbb');
 
                     $('#emp_emergency_add :input').each(function(index,ele) {
-                        // console.log('xxxx');
+                        console.log('xxxx');
                         var input = $(this);
-                        // console.log(ele);
-                        // console.log($(ele).val());
-
-                        // console.log($(ele).val().length , 'condition');
+                        console.log(ele);
+                        console.log($(ele).val());
+                        console.log($(ele).val().length , 'condition');
                         
                         if($(ele).val().length === 0){
 
@@ -819,14 +751,10 @@
 
                             if($(ele).attr('type') == 'text')
                             {
-                               
-                                var elementNamee=$(ele).attr('name');
-                                var elename = elementNamee.split('[]');
-                                console.log('zzzzzzzzz');
-                                console.log(elename);
                                 isValid = 2;
+                                console.log('zzzzzzzzz');
                                 $(ele).parents('.form-group').find('.error').remove();
-                                ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
+                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
                             }
 
                             
@@ -836,16 +764,12 @@
 
                                     if(!$.trim($(".textArea").val()))
                                     {
-                                        var textareaNamee=$(ele).attr('name');
-                                        var textname=textareaNamee.split('[]');
-                                        console.log(textareaNamee);
-                                        console.log(textname);
                                         isValid = 2;
                                         console.log('textareacheck');
 
                                         console.log($(ele));
                                         $(ele).parents('.form-group').find('.error').remove();
-                                        ($(ele).parents('.form-group').append('<p class="error">This '+textname[0]+' is required</p>'));
+                                        ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
                                     }else{
                                         isValid = 1;
 
@@ -874,10 +798,7 @@
 
             });
 
-            /*employee emergrncy validation end */ 
-
-
-
+                    /*employee emergrncy validation end */ 
 
 
 
