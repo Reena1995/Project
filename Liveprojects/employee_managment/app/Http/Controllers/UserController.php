@@ -35,6 +35,7 @@ use App\Models\EmpWorkExperienceDetail;
 use App\Models\EmpEmergencyContact;
 use App\Models\EmpFamilyDetail;
 
+
 use DB;
 use Str;
 use Log;
@@ -147,6 +148,7 @@ class UserController extends Controller
         //emp education 
         $emp_education_detail=EmpEducationDetail::where('user_id',$emp->id)->first();
         //emp document
+        $document=DocumentType::where('is_active', 1)->orderBy('type', 'ASC')->get();
         $emp_document_detail=EmpDocumentDetail::where('user_id',$emp->id)->first();
         $empDocumentDetails = EmpDocumentDetail::where('user_id',$emp->id)->where('is_active',1)->get();
         //langauge
@@ -159,9 +161,9 @@ class UserController extends Controller
         // dd($educationDetails);
         $medium=MediumOfInstruction::where('is_active', 1)->orderBy('name', 'ASC')->get();
         $educationlevel=EducationLevel::where('is_active', 1)->orderBy('name', 'ASC')->get();
-        $documenttype=DocumentType::where('is_active', 1)->orderBy('type', 'ASC')->get();
+       
         
-        $empDocumentDetails = EmpDocumentDetail::where('user_id',$emp->id)->where('is_active',1)->get();
+        // $empDocumentDetails = EmpDocumentDetail::where('user_id',$emp->id)->where('is_active',1)->get();
         
         
 
@@ -206,12 +208,12 @@ class UserController extends Controller
 
 
         return view('admin.modules.employee.edit',compact('emp','current_residency','mode_transportation', 'educationDetails','country','personal_detail',
-        'medium','educationlevel','documenttype','empDocumentDetails','emp_education_detail',
+        'medium','educationlevel','empDocumentDetails','emp_education_detail',
         'emp_job_profile','department','designation','organization_role','emp_bank_profile',
         'employment_detail','company_location','company_location_type','emp_location_details',
         'emp_asset_details','asset_brand','asset_sub_type','emp_language_detail','emp_document_detail',
         'langauge','empasset_detail','emp_professional_details','emp_work_exp_details','family_details',
-        'emergency_details','emp_languages'));
+        'emergency_details','emp_languages','document'));
     }
 
     public function getState(Request $request)

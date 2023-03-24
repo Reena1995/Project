@@ -518,6 +518,7 @@
                                 $(ele).parents('.form-group').find('.error').remove();
                                 ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
                             }
+
                             if($(ele).attr('type') == 'date')
                             {
                                 isValid = 2;
@@ -525,7 +526,24 @@
                                 $(ele).parents('.form-group').find('.error').remove();
                                 ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
                             }
+
+                            if($(ele).find('textarea'))
+                            {
+                                isValid = 2;
+                                console.log('textarea');
+                                $(ele).parents('.form-group').find('.error').remove();
+                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                            }
                            
+                            if($(ele).find('addresskey'))
+                            {
+                                
+                                   console.log('addresskey');
+                                    isValid = 2;
+                                    $(ele).parents('.form-group').find('.error').remove();
+                                    ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                               
+                            }
                            
                             if($(ele).attr('type') == 'file')
                             {
@@ -594,6 +612,13 @@
                                 ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
                             }
                           
+                            if($(ele).find('textarea'))
+                            {
+                                isValid = 2;
+                                console.log('textarea');
+                                $(ele).parents('.form-group').find('.error').remove();
+                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                            }
                            
                             if($(ele).attr('type') == 'file')
                             {

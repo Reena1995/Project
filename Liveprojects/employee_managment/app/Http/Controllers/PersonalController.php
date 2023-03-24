@@ -338,7 +338,7 @@ class PersonalController extends Controller
         // dd($request->all());
          $document = $request->validate([
 
-            'document_type_id.*'=>'bail|required' ,
+            'type.*'=>'bail|required' ,
             'file.*'=>'bail|required' ,
            
         ]); 
@@ -350,21 +350,27 @@ class PersonalController extends Controller
         try{
             DB::beginTransaction();
             $user = User::where('uuid',$request->user_id)->first();
-            $documenttype=DocumentType::where('is_active', 1)->orderBy('type', 'ASC')->get();
+        
 
             // dd($request->documents);
+            \Log::info($request->all());
+
             foreach($request->type as $key=> $data){
+
+               
+                
                 if(isset($request->document_uuid[$key]))
                 {
-                    \Log::info('ifff');
+
+                    \Log::info('iffffffffff');
                     $empdoc =  EmpDocumentDetail::where('uuid',$request->document_uuid[$key])->first();
-                    \Log::info($empdoc,'cghcghcvgh');
-                    \Log::info($request->document_uuid[$key]);
-                    $empdoc->document_type_id  = $request->type[$key];
-                   
-                   
+                    \Log::info($empdoc);
+                 
+
+                    $empdoc->document_type_id = $request->type[$key];
+                
                     
-                    if($request->documents[$key]){
+                    if(isset($request->documents[$key])){
                         $fileN = $request->documents[$key];  // get file
                         
                         $file_name=time().rand()."_image.".$fileN->getClientOriginalExtension();// make file name
@@ -376,7 +382,10 @@ class PersonalController extends Controller
                     $empdoc->updated_by = Auth::id();
                 
                     $res = $empdoc->update();
-                    $msg="Education update successfully";
+
+                    // dd($res);
+
+                    $msg="employee Document deatils update successfully";
                     if(!$res)
                     {
                         DB::rollback();
@@ -388,12 +397,9 @@ class PersonalController extends Controller
 
                 }else{
 
-                    \Log::info('ifffffffff');
+                    \Log::info('elseeeee');
                     // \Log::info($request->all());
-                    \Log::info('$request->type[$key]');
-                    \Log::info($request->type[$key]);
-                    \Log::info('$user->id');
-                    \Log::info($user->id);
+                    
 
                     
                     $emp_document_dtls= new EmpDocumentDetail;
@@ -413,7 +419,7 @@ class PersonalController extends Controller
                     $emp_document_dtls->uuid = \Str::uuid();
                   
                     $res = $emp_document_dtls->save();
-                    $msg="Education create successfully";
+                    $msg="employee Document deatils create  successfully";
                     if(!$res)
                     {
                         DB::rollback();

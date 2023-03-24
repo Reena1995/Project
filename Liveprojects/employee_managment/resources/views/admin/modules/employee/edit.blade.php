@@ -233,7 +233,7 @@ if(empty($personal_detail)){
                                         <div class="card-body">
                                             <ul class="nav nav-tabs" id="myTab2" role="tablist">
                                                 <li class="nav-item">
-                                                    <a class="nav-link {{ ($tabActiveprof == 'professional_detail') ? 'active' : '' }}  {{ ($isTabAcitiveProf == 3)  ? 'active' : '' }}" id="professional-details-tab-z" data-toggle="tab" href="#professional-details" role="tab" aria-controls="professional-details" aria-selected="true">Proessional  Details</a>
+                                                    <a class="nav-link {{ ($tabActiveprof == 'professional_detail') ? 'active' : '' }}  {{ ($isTabAcitiveProf == 3)  ? 'active' : '' }}" id="professional-details-tab-z" data-toggle="tab" href="#professional-details" role="tab" aria-controls="professional-details" aria-selected="true">Professional  Details</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link {{ ($tabActiveprof == 'workexp_detail')  ? 'active' : '' }} {{ ($isTabAcitiveProf < 2)  ? 'disabled' : '' }} " id="workexperies-details-tab-z" data-toggle="tab" href="#workexperies-details" role="tab" aria-controls="workexperies-details" aria-selected="false">Work ExperienceDetails</a>

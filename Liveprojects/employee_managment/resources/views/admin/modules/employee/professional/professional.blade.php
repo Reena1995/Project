@@ -127,7 +127,7 @@
 
                                 <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                     <label>Address</label>
-                                    <textarea  class="form-control form-control-lg" value="" name="address[]" cols="30" placeholder="Enter Details Of disaility">
+                                    <textarea  class="form-control form-control-lg" data-key="addresskey"  name="address[]" cols="30" placeholder="Enter Details Of disaility">
                                             
                                     </textarea>
                                     @if ($errors->has('address[]'))
@@ -137,7 +137,7 @@
 
                                 <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                     <label>Description</label>
-                                    <textarea  class="form-control form-control-lg" value="" name="description[]" cols="30" placeholder="Enter Details Of disaility">
+                                    <textarea  class="form-control form-control-lg" data-key="descriptionkey" value="" name="description[]" cols="30" placeholder="Enter Details Of disaility">
                                         
                                     </textarea>
                                     @if ($errors->has('description[]'))

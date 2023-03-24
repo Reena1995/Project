@@ -15985,3 +15985,7 @@ height: 40px !important;
     width: 17px;
     height: 17px;
 }
+.imageset img
+{
+    margin-bottom: 84px;
+}

@@ -539,7 +539,7 @@ class OrganizationController extends Controller
                     $emp_asset->updated_by = Auth::id();
                     
                     $res = $emp_asset->update();
-                    $message = 'Employee update successfully';
+                    $message = 'asset deatails update successfully';
                     if(!$res)
                     {
                         DB::rollback();
@@ -578,7 +578,7 @@ class OrganizationController extends Controller
                   
                     $res = $emp_asset->save();
 
-                    $message = 'Employee add successfully';
+                    $message = 'asset deatils  add successfully';
                     if(!$res)
                     {
                         DB::rollback();
@@ -588,8 +588,7 @@ class OrganizationController extends Controller
                         return redirect()->back();
                     }
                 }
-                /* 
-                */
+               
             }
             Log::info('bbbbbbb');
             DB::commit();
