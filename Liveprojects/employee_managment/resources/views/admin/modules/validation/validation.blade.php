@@ -337,20 +337,32 @@
                         if($(ele).val().length === 0){
 
                             console.log('check');
+
                             if($(ele).attr('type') == 'text')
                             {
-                                isValid = 2;
+                               
+                                var elementNamee=$(ele).attr('name');
+                                var elename = elementNamee.split('[]');
                                 console.log('zzzzzzzzz');
+                                console.log(elename);
+                                isValid = 2;
                                 $(ele).parents('.form-group').find('.error').remove();
-                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
                             }
+
                             if($(ele).attr('type') == 'file')
                             {
                                 console.log('zzzzzzzzz');
+                               
+                                
                                 if($(ele).attr('data-key') == 'new_image'){
+
+                                    var elementNamee=$(ele).attr('name');
+                                    var elename = elementNamee.split('[]');
+                                    console.log(elename);
                                     isValid = 2;
                                     $(ele).parents('.form-group').find('.error').remove();
-                                    ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                    ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
                                 }
                             }
 
@@ -447,27 +459,40 @@
 
                             if($(ele).attr('type') == 'text')
                             {
-                                isValid = 2;
+                               
+                                var elementNamee=$(ele).attr('name');
+                                var elename = elementNamee.split('[]');
                                 console.log('zzzzzzzzz');
+                                console.log(elename);
+                                isValid = 2;
                                 $(ele).parents('.form-group').find('.error').remove();
-                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
                             }
+
                             if($(ele).attr('type') == 'date')
                             {
+                                var elementNamee=$(ele).attr('name');
+                                var elename = elementNamee.split('[]');
                                 isValid = 2;
                                 console.log('zzzzzzzzz');
+                                console.log(elename);
                                 $(ele).parents('.form-group').find('.error').remove();
-                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
                             }
                            
                             if($(ele).attr('type') == 'file')
                             {
                                 console.log('zzzzzzzzz');
+                               
                                 
                                 if($(ele).attr('data-key') == 'image_fill'){
+
+                                    var elementNamee=$(ele).attr('name');
+                                    var elename = elementNamee.split('[]');
+                                    console.log(elename);
                                     isValid = 2;
                                     $(ele).parents('.form-group').find('.error').remove();
-                                    ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                    ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
                                 }
                             }
 
@@ -515,31 +540,41 @@
 
                             if($(ele).attr('type') == 'text')
                             {
-                                
+                               
+                                var elementNamee=$(ele).attr('name');
+                                var elename = elementNamee.split('[]');
+                                console.log('zzzzzzzzz');
+                                console.log(elename);
                                 isValid = 2;
-                                console.log('text');
                                 $(ele).parents('.form-group').find('.error').remove();
-                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
                             }
 
                             if($(ele).attr('type') == 'date')
                             {
+                                var elementNamee=$(ele).attr('name');
+                                var elename = elementNamee.split('[]');
                                 isValid = 2;
-                                console.log('date');
+                                console.log('zzzzzzzzz');
+                                console.log(elename);
                                 $(ele).parents('.form-group').find('.error').remove();
-                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
                             }
 
                             if($(ele).attr('type') == 'file')
                             {
+                                console.log('ffffffffff');
+                               
                                 
                                 if($(ele).attr('data-key') == 'certificate_image'){
+
+                                    var elementNamee=$(ele).attr('name');
+                                    var elename = elementNamee.split('[]');
+                                    console.log(elename);
                                     isValid = 2;
                                     $(ele).parents('.form-group').find('.error').remove();
-                                    ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
-                                    console.log('file');
+                                    ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
                                 }
-
                             }
 
                         
@@ -551,19 +586,22 @@
                                     {
                                         isValid = 2;
                                         console.log('textareacheck');
-        
+
                                         console.log($(ele));
+                                        var elementNamee=$(ele).attr('name');
+                                        var elename = elementNamee.split('[]');
+                                        console.log(elename);
                                         $(ele).parents('.form-group').find('.error').remove();
-                                        ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                        ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
                                     }else{
                                         isValid = 1;
-        
+
                                     }
-                                }
+                            }
                             }else{
-                                        isValid = 1;
-        
-                                }
+                                    isValid = 1;
+
+                            }
                          
                            
                         }
@@ -610,17 +648,25 @@
 
                             if($(ele).attr('type') == 'text')
                             {
-                                isValid = 2;
+                               
+                                var elementNamee=$(ele).attr('name');
+                                var elename = elementNamee.split('[]');
                                 console.log('zzzzzzzzz');
+                                console.log(elename);
+                                isValid = 2;
                                 $(ele).parents('.form-group').find('.error').remove();
-                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
                             }
+
                             if($(ele).attr('type') == 'date')
                             {
+                                var elementNamee=$(ele).attr('name');
+                                var elename = elementNamee.split('[]');
                                 isValid = 2;
                                 console.log('zzzzzzzzz');
+                                console.log(elename);
                                 $(ele).parents('.form-group').find('.error').remove();
-                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
                             }
                           
                           
@@ -628,11 +674,16 @@
                             if($(ele).attr('type') == 'file')
                             {
                                 console.log('zzzzzzzzz');
+                               
                                 
                                 if($(ele).attr('data-key') == 'exp_image'){
+
+                                    var elementNamee=$(ele).attr('name');
+                                    var elename = elementNamee.split('[]');
+                                    console.log(elename);
                                     isValid = 2;
                                     $(ele).parents('.form-group').find('.error').remove();
-                                    ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                    ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
                                 }
                             }
 
@@ -646,8 +697,11 @@
                                             console.log('textareacheck');
 
                                             console.log($(ele));
+                                            var elementNamee=$(ele).attr('name');
+                                            var elename = elementNamee.split('[]');
+                                            console.log(elename);
                                             $(ele).parents('.form-group').find('.error').remove();
-                                            ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                            ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
                                         }else{
                                             isValid = 1;
 
@@ -702,11 +756,16 @@
 
                                 if($(ele).attr('type') == 'text')
                                 {
-                                    isValid = 2;
+                               
+                                    var elementNamee=$(ele).attr('name');
+                                    var elename = elementNamee.split('[]');
                                     console.log('zzzzzzzzz');
+                                    console.log(elename);
+                                    isValid = 2;
                                     $(ele).parents('.form-group').find('.error').remove();
-                                    ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                    ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
                                 }
+
                               
                             
                             }
