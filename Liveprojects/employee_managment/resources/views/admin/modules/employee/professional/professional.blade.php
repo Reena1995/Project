@@ -127,9 +127,7 @@
 
                                 <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                     <label>Address</label>
-                                    <textarea  class="form-control form-control-lg" data-key="addresskey"  name="address[]" cols="30" placeholder="Enter Details Of disaility">
-                                            
-                                    </textarea>
+                                    <textarea  class="form-control form-control-lg"   name="address[]" cols="30" placeholder="Enter Details Of disaility"></textarea>
                                     @if ($errors->has('address[]'))
                                         <span class="errr-validation">{{ $errors->first('address[]') }}</span>
                                     @endif
@@ -137,9 +135,7 @@
 
                                 <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                     <label>Description</label>
-                                    <textarea  class="form-control form-control-lg" data-key="descriptionkey" value="" name="description[]" cols="30" placeholder="Enter Details Of disaility">
-                                        
-                                    </textarea>
+                                    <textarea  class="form-control form-control-lg"  value="" name="description[]" cols="30" placeholder="Enter Details Of disaility"></textarea>
                                     @if ($errors->has('description[]'))
                                         <span class="errr-validation">{{ $errors->first('description[]') }}</span>
                                     @endif
@@ -159,7 +155,7 @@
                                 </div> 
 
                                 <div>
-                                    <button type="submit"  id="educationProfBtn" class="btn btn-danger d-none delete">delete</button> 
+                                    <button type="button"  class="btn btn-danger d-none delete">delete</button> 
                                 </div>
 
                             </div> 
@@ -216,9 +212,18 @@
                 $(this).parents('.profeadd').append('');
 		    }); 
             defaultHtmlAppend.find('input[type="file"]').each(function(){
+                console.log('file');
                 var name = $(this).attr('name');
 		    	// $(this).attr('name',name).val('');
                 // $(this).parents('.eduremove').find('.imageset').remove();
+                $(this).attr('data-key','certificate_image');
+                // $(this).parents('.eduremove').append('');
+		    }); 
+            defaultHtmlAppend.find('textarea').each(function(){
+                console.log('textaaaaa');
+                var name = $(this).attr('name');
+                $(this).attr('name',name).val('');
+		    	
                 $(this).attr('data-key','certificate_image');
                 // $(this).parents('.eduremove').append('');
 		    }); 

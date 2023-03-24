@@ -189,7 +189,7 @@ class ContactController extends Controller
                     
                     
                     $emergency_update->updated_by = Auth::id();
-                    $message = "professional training detail update successfully";
+                    $message = "employee emergency detail update successfully";
                     $res = $emergency_update->update();
                   
 

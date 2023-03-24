@@ -85,9 +85,7 @@
 
                                 <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                     <label>address</label>
-                                    <textarea  class="form-control form-control-lg" value="" name="address[]" cols="30" placeholder="Enter Details Of disaility">
-                                       
-                                    </textarea>
+                                    <textarea  class="form-control form-control-lg" value="" name="address[]" cols="30" placeholder="Enter Details Of disaility"></textarea>
                                     @if ($errors->has('address[]'))
                                         <span class="errr-validation">{{ $errors->first('address[]') }}</span>
                                     @endif
@@ -173,6 +171,14 @@
                 $(this).parents('.emergencyadd').find('.imageset').remove();
                                     
                 $(this).parents('.emergencyadd').append('');
+		    }); 
+            defaultHtmlAppend.find('textarea').each(function(){
+                console.log('textaaaaa');
+                var name = $(this).attr('name');
+                $(this).attr('name',name).val('');
+		    	
+                $(this).attr('data-key','certificate_image');
+                // $(this).parents('.eduremove').append('');
 		    }); 
          
           defaultHtmlAppend.attr('id','educationDetail-'+rowIndex);

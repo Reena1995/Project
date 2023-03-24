@@ -65,7 +65,7 @@
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Leaving Designation</label>
-                                            <input type="text" value = "{{ $work->	leaving_designation }}" name="leaving_designation[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                            <input type="text" value = "{{ $work->leaving_designation }}" name="leaving_designation[]" class="form-control form-control-lg" placeholder="Enter University Name">
                                             @if ($errors->has('leaving_designation[]'))
                                                     <span class="errr-validation">{{ $errors->first('leaving_designation[]') }}</span>
                                             @endif
@@ -174,9 +174,7 @@
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Address</label>
-                                            <textarea  class="form-control form-control-lg" value="" name="address[]" cols="30" placeholder="Enter Details Of disaility">
-                                                  
-                                            </textarea>
+                                            <textarea  class="form-control form-control-lg" value="" name="address[]" cols="30" placeholder="Enter Details Of disaility"></textarea>
                                             @if ($errors->has('address[]'))
                                                 <span class="errr-validation">{{ $errors->first('address[]') }}</span>
                                             @endif
@@ -240,9 +238,7 @@
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>leaving_reason</label>
-                                            <textarea  class="form-control form-control-lg" value="" name="leaving_reason[]" cols="30" placeholder="Enter Details Of disaility">
-                                                
-                                            </textarea>
+                                            <textarea  class="form-control form-control-lg" value="" name="leaving_reason[]" cols="30" placeholder="Enter Details Of disaility"></textarea>
                                             @if ($errors->has('leaving_reason[]'))
                                                 <span class="errr-validation">{{ $errors->first('leaving_reason[]') }}</span>
                                             @endif
@@ -345,6 +341,14 @@
                 $(this).attr('data-key','exp_image');
                 // $(this).parents('.eduremove').append('');
 		    });
+            defaultHtmlAppend.find('textarea').each(function(){
+                console.log('textaaaaa');
+                var name = $(this).attr('name');
+                $(this).attr('name',name).val('');
+		    	
+                $(this).attr('data-key','certificate_image');
+                // $(this).parents('.eduremove').append('');
+		    }); 
          
           defaultHtmlAppend.attr('id','educationDetail-'+rowIndex);
 

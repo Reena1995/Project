@@ -503,9 +503,11 @@
                     $('#emp_proessional_add :input').each(function(index,ele) {
                         console.log('xxxx');
                         var input = $(this);
-                        console.log(ele);
-                        console.log($(ele).val());
-                        console.log($(ele).val().length , 'condition');
+                        console.log(this.tagName);
+                        // console.log($(ele).val());
+                       
+                        console.log('bbbbbbbbb');
+                        // console.log($(ele).val().length , 'condition');
                         
                         if($(ele).val().length === 0){
 
@@ -513,8 +515,9 @@
 
                             if($(ele).attr('type') == 'text')
                             {
+                                
                                 isValid = 2;
-                                console.log('zzzzzzzzz');
+                                console.log('text');
                                 $(ele).parents('.form-group').find('.error').remove();
                                 ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
                             }
@@ -522,55 +525,63 @@
                             if($(ele).attr('type') == 'date')
                             {
                                 isValid = 2;
-                                console.log('zzzzzzzzz');
+                                console.log('date');
                                 $(ele).parents('.form-group').find('.error').remove();
                                 ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
                             }
 
-                            if($(ele).find('textarea'))
-                            {
-                                isValid = 2;
-                                console.log('textarea');
-                                $(ele).parents('.form-group').find('.error').remove();
-                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
-                            }
-                           
-                            if($(ele).find('addresskey'))
-                            {
-                                
-                                   console.log('addresskey');
-                                    isValid = 2;
-                                    $(ele).parents('.form-group').find('.error').remove();
-                                    ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
-                               
-                            }
-                           
                             if($(ele).attr('type') == 'file')
                             {
-                                console.log('zzzzzzzzz');
                                 
                                 if($(ele).attr('data-key') == 'certificate_image'){
                                     isValid = 2;
                                     $(ele).parents('.form-group').find('.error').remove();
                                     ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                    console.log('file');
                                 }
+
                             }
 
+                        
+                            if(!($(ele).val())){
+
+                                if(this.tagName == 'TEXTAREA'){
+
+                                    if(!$.trim($(".textArea").val()))
+                                    {
+                                        isValid = 2;
+                                        console.log('textareacheck');
+        
+                                        console.log($(ele));
+                                        $(ele).parents('.form-group').find('.error').remove();
+                                        ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                    }else{
+                                        isValid = 1;
+        
+                                    }
+                                }
+                            }else{
+                                        isValid = 1;
+        
+                                }
+                         
                            
                         }
                         else
                         {
+                            isValid = 1;
                             $(ele).parents('.form-group').find('.error').remove();
                         }
                        
                     });
+                    console.log('isValid',isValid);
                     if(isValid == 2){
                         return false;
                     }else{
                         $("#emp_proessional_add").submit();
                     }
                   
-                   
+                           
 
                 });
 
@@ -612,13 +623,7 @@
                                 ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
                             }
                           
-                            if($(ele).find('textarea'))
-                            {
-                                isValid = 2;
-                                console.log('textarea');
-                                $(ele).parents('.form-group').find('.error').remove();
-                                ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
-                            }
+                          
                            
                             if($(ele).attr('type') == 'file')
                             {
@@ -630,6 +635,29 @@
                                     ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
                                 }
                             }
+
+                            if(!($(ele).val())){
+
+                                    if(this.tagName == 'TEXTAREA'){
+
+                                        if(!$.trim($(".textArea").val()))
+                                        {
+                                            isValid = 2;
+                                            console.log('textareacheck');
+
+                                            console.log($(ele));
+                                            $(ele).parents('.form-group').find('.error').remove();
+                                            ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                        }else{
+                                            isValid = 1;
+
+                                        }
+                                    }
+                                    }else{
+                                            isValid = 1;
+
+                            }
+
 
                            
                         }
@@ -728,7 +756,30 @@
                                 $(ele).parents('.form-group').find('.error').remove();
                                 ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
                             }
-                        
+
+                            
+                            if(!($(ele).val())){
+
+                                if(this.tagName == 'TEXTAREA'){
+
+                                    if(!$.trim($(".textArea").val()))
+                                    {
+                                        isValid = 2;
+                                        console.log('textareacheck');
+
+                                        console.log($(ele));
+                                        $(ele).parents('.form-group').find('.error').remove();
+                                        ($(ele).parents('.form-group').append('<p class="error">This field is required</p>'));
+                                    }else{
+                                        isValid = 1;
+
+                                    }
+                                }
+                                }else{
+                                        isValid = 1;
+
+                                }
+
                         
                         }
                         else
