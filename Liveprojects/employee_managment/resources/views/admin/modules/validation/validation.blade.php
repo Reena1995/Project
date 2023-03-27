@@ -744,7 +744,7 @@
 
             /*employee family validation start */
 
-            $('#familyBtn').on('click', function(event) {
+                    $('#familyBtn').on('click', function(event) {
 
                         var isValid = 1;
                         event.preventDefault()
@@ -791,88 +791,88 @@
 
 
 
-            });
+                    });
 
             /*employee family validation end */ 
 
 
             /*employee emergrncy validation start */
 
-                $('#emeBtn').on('click', function(event) {
+                    $('#emeBtn').on('click', function(event) {
 
-                        var isValid = 1;
-                        event.preventDefault()
+                            var isValid = 1;
+                            event.preventDefault()
 
-                        console.log('subbbbbbbbb');
+                            console.log('subbbbbbbbb');
 
-                        $('#emp_emergency_add :input').each(function(index,ele) {
-                            // console.log('xxxx');
-                            var input = $(this);
-                            // console.log(ele);
-                            // console.log($(ele).val());
+                            $('#emp_emergency_add :input').each(function(index,ele) {
+                                // console.log('xxxx');
+                                var input = $(this);
+                                // console.log(ele);
+                                // console.log($(ele).val());
 
-                            // console.log($(ele).val().length , 'condition');
-                            
-                            if($(ele).val().length === 0){
-
-                                console.log('check');
-
-                                if($(ele).attr('type') == 'text')
-                                {
+                                // console.log($(ele).val().length , 'condition');
                                 
-                                    var elementNamee=$(ele).attr('name');
-                                    var elename = elementNamee.split('[]');
-                                    console.log('zzzzzzzzz');
-                                    console.log(elename);
-                                    isValid = 2;
-                                    $(ele).parents('.form-group').find('.error').remove();
-                                    ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
-                                }
+                                if($(ele).val().length === 0){
 
-                                
-                                if(!($(ele).val())){
+                                    console.log('check');
 
-                                    if(this.tagName == 'TEXTAREA'){
+                                    if($(ele).attr('type') == 'text')
+                                    {
+                                    
+                                        var elementNamee=$(ele).attr('name');
+                                        var elename = elementNamee.split('[]');
+                                        console.log('zzzzzzzzz');
+                                        console.log(elename);
+                                        isValid = 2;
+                                        $(ele).parents('.form-group').find('.error').remove();
+                                        ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
+                                    }
 
-                                        if(!$.trim($(".textArea").val()))
-                                        {
-                                            var textareaNamee=$(ele).attr('name');
-                                            var textname=textareaNamee.split('[]');
-                                            console.log(textareaNamee);
-                                            console.log(textname);
-                                            isValid = 2;
-                                            console.log('textareacheck');
+                                    
+                                    if(!($(ele).val())){
 
-                                            console.log($(ele));
-                                            $(ele).parents('.form-group').find('.error').remove();
-                                            ($(ele).parents('.form-group').append('<p class="error">This '+textname[0]+' is required</p>'));
+                                        if(this.tagName == 'TEXTAREA'){
+
+                                            if(!$.trim($(".textArea").val()))
+                                            {
+                                                var textareaNamee=$(ele).attr('name');
+                                                var textname=textareaNamee.split('[]');
+                                                console.log(textareaNamee);
+                                                console.log(textname);
+                                                isValid = 2;
+                                                console.log('textareacheck');
+
+                                                console.log($(ele));
+                                                $(ele).parents('.form-group').find('.error').remove();
+                                                ($(ele).parents('.form-group').append('<p class="error">This '+textname[0]+' is required</p>'));
+                                            }else{
+                                                isValid = 1;
+
+                                            }
+                                        }
                                         }else{
-                                            isValid = 1;
+                                                isValid = 1;
 
                                         }
-                                    }
-                                    }else{
-                                            isValid = 1;
 
-                                    }
+                                
+                                }
+                                else
+                                {
+                                    $(ele).parents('.form-group').find('.error').remove();
+                                }
 
-                            
+                            });
+                            if(isValid == 2){
+                                return false;
+                            }else{
+                                $("#emp_emergency_add").submit();
                             }
-                            else
-                            {
-                                $(ele).parents('.form-group').find('.error').remove();
-                            }
-
-                        });
-                        if(isValid == 2){
-                            return false;
-                        }else{
-                            $("#emp_emergency_add").submit();
-                        }
 
 
 
-                });
+                    });
 
             /*employee emergrncy validation end */ 
            

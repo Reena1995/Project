@@ -15,28 +15,12 @@ use Validate;
 class ProfessionalController extends Controller
 {
    
-    public function index()
-    {
-        //
-    }
-
   
-    public function create()
-    {
-        //
-    }
 
-  
-    public function store(Request $request)
+    public function professionalAdd(Request $request)
     {
-        //
-    }
-
-    public function professional_add(Request $request)
-    {
-        Log::info('aaaaaaa');
-        // dd($request->all());
-         $professional = $request->validate([
+       
+         $professionalValidation = $request->validate([
 
             'name_of_institute.*'=>'bail|required' ,
             'address.*'=>'bail|required' ,
@@ -45,122 +29,115 @@ class ProfessionalController extends Controller
             'from.*'=>'bail|required',
             'certificate_pdf.*'=>'bail|required',
         ]); 
-        // $errors = $medium->errors();
-        // dd($errors);
-        Log::info('aaaaaaa');
+    
         try{
-            DB::beginTransaction();
-            $user = User::where('uuid',$request->user_id)->first();
-            //   dd($request->all());
-            foreach($request->name_of_institute as $key=> $data){
 
-                \Log::info($request->name_of_institute);
-                if(isset($request->professional_uuid[$key]))
-                {
-                    \Log::info($request->professional_uuid[$key]);
-                    \Log::info('iffffffff');
-                    $profession_update =  EmpProfessionalTrainingDetail::where('uuid',$request->professional_uuid[$key])->first();
-                    
-                    \Log::info($request->professional_uuid[$key]);
-                    $profession_update->name_of_institute  = $request->name_of_institute[$key];
-                    $profession_update->address  = $request->address[$key];
-                    $profession_update->to = $request->to[$key];
-                    $profession_update->from = $request->from[$key];
-                    $profession_update->description = $request->description[$key];
-                   
-                    
-                    if(isset($request->certificate_pdf[$key])){
+                DB::beginTransaction();
+                $user = User::where('uuid',$request->user_id)->first();
+                if( is_null($user) ) {
 
-                        $file = $request->certificate_pdf[$key];  // get file
-                        $file_name=time().rand()."_image.".$file->getClientOriginalExtension();// make file name
-                        $file->move('console/upload/employee/profession_training',$file_name); //file name move upload in public		
-                        $profession_update->certificate_pdf = $file_name;
-                    }
-                    
-                    $profession_update->updated_by = Auth::id();
-                    $message = "professional training detail update successfully";
-                    $res = $profession_update->update();
-                  
-
-                    if(!$res)
-                    {
-                        DB::rollback();
-                        Session::flash('error','Internal server error please try again later.');
-                    
-                    
-                        return redirect()->back();
-                    }
-
-                }else{
-                    \Log::info('else');
-                    $professional_add = new EmpProfessionalTrainingDetail;
-
-                    $professional_add->name_of_institute  = $request->name_of_institute[$key];
-                    $professional_add->address  = $request->address[$key];
-                    $professional_add->to = $request->to[$key];
-                    $professional_add->from = $request->from[$key];
-                    $professional_add->description = $request->description[$key];
-                   
-                    
-                    if(isset($request->certificate_pdf[$key])){
-
-                        $file = $request->certificate_pdf[$key];  // get file
-                        $file_name=time().rand()."_image.".$file->getClientOriginalExtension();// make file name
-                        $file->move('console/upload/employee/profession_training',$file_name); //file name move upload in public		
-                        $professional_add->certificate_pdf = $file_name;
-                    }
-                    
-                    $professional_add->user_id = $user->id;
-                    $professional_add->created_by = Auth::id();
-                    $professional_add->uuid = \Str::uuid();
-                  
-                    $res = $professional_add->save();
-
-                    $message = "professional training detail add successfully";
-
-                    if(!$res)
-                    {
-                        DB::rollback();
-                        Session::flash('error','Internal server error please try again later.');
-                     
-                    
-                        return redirect()->back();
-                    }
+                    return view('errors.404');
+                
                 }
-                /* 
-                */
-            }
-            Log::info('bbbbbbb');
-            DB::commit();
-            Session::flash('success',$message);
-           
-            return redirect()->back();
-           
+             
+                foreach($request->name_of_institute as $key=> $data){
 
+                  
+                    if(isset($request->professional_uuid[$key]))
+                    {
+                       
+                        $profession_update =  EmpProfessionalTrainingDetail::where('uuid',$request->professional_uuid[$key])->first();
+                        $profession_update->name_of_institute  = $request->name_of_institute[$key];
+                        $profession_update->address  = $request->address[$key];
+                        $profession_update->to = $request->to[$key];
+                        $profession_update->from = $request->from[$key];
+                        $profession_update->description = $request->description[$key];
+                    
+                        if(isset($request->certificate_pdf[$key])){
+
+                            $file = $request->certificate_pdf[$key];  // get file
+                            $file_name=time().rand()."_image.".$file->getClientOriginalExtension();// make file name
+                            $file->move('console/upload/employee/profession_training',$file_name); //file name move upload in public		
+                            $profession_update->certificate_pdf = $file_name;
+                        }
+                        
+                        $profession_update->updated_by = Auth::id();
+                        $message = "professional training detail update successfully";
+                        $res = $profession_update->update();
+                    
+                        if(!$res)
+                        {
+                            DB::rollback();
+                            Session::flash('danger','Internal server error please try again later.');
+                        
+                            return redirect()->back();
+                        }
+
+                    }else{
+                       
+                        $professional_add = new EmpProfessionalTrainingDetail;
+
+                        $professional_add->name_of_institute  = $request->name_of_institute[$key];
+                        $professional_add->address  = $request->address[$key];
+                        $professional_add->to = $request->to[$key];
+                        $professional_add->from = $request->from[$key];
+                        $professional_add->description = $request->description[$key];
+                    
+                        
+                        if(isset($request->certificate_pdf[$key])){
+
+                            $file = $request->certificate_pdf[$key];  // get file
+                            $file_name=time().rand()."_image.".$file->getClientOriginalExtension();// make file name
+                            $file->move('console/upload/employee/profession_training',$file_name); //file name move upload in public		
+                            $professional_add->certificate_pdf = $file_name;
+                        }
+                        
+                        $professional_add->user_id = $user->id;
+                        $professional_add->created_by = Auth::id();
+                        $professional_add->uuid = \Str::uuid();
+                    
+                        $res = $professional_add->save();
+
+                        $message = "professional training detail add successfully";
+
+                        if(!$res)
+                        {
+                            DB::rollback();
+                            Session::flash('danger','Internal server error please try again later.');
+                        
+                        
+                            return redirect()->back();
+                        }
+                    }
+                 
+                }
+                DB::commit();
+                Session::flash('success',$message);
+            
+                return redirect()->back();
+          
 
         }catch (\Illuminate\Database\QueryException $e) {
             Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
             Log::info('Error Code: ' . $e->getCode());
             Log::info('Error Message: ' . $e->getMessage());
-            Log::info("Exiting class:MediumOfInstructionController function:store");
+            Log::info("Exiting class:ProfessionalController function:store");
             Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
-        }    
-        catch (\Exception $e) {
+
+        }catch (\Exception $e) {
                 Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
                 Log::info('Error Code: ' . $e->getCode());
                 Log::info('Error Message: ' . $e->getMessage());
                 Session::flash('danger', "Internal server error.Please try again later.");
                 return redirect()->back();
-
         }
     }
 
-    public function workexperience_add(Request $request)
+    public function workexperienceAdd(Request $request)
     {
-        Log::info('aaaaaaa');
-        // dd($request->all());
-         $professional = $request->validate([
+     
+         $workExpValidation = $request->validate([
 
             'name.*'=>'bail|required' ,
             'address.*'=>'bail|required' ,
@@ -177,23 +154,24 @@ class ProfessionalController extends Controller
             'experience_certificate.*'=>'bail|required'
             
         ]); 
-        // $errors = $medium->errors();
-        // dd($errors);
+       
         try{
             DB::beginTransaction();
             $user = User::where('uuid',$request->user_id)->first();
-            //   dd($request->all());
-            // dd( $user);
+            if( is_null($user) ) {
+
+                return view('errors.404');
+            
+            }
             foreach($request->name as $key=> $data){
 
-                \Log::info($request->name);
+               
                 if(isset($request->work_uuid[$key]))
                 {
-                    \Log::info($request->work_uuid[$key]);
-                    \Log::info('iffffffff');
+                   
                     $workexp_update = EmpWorkExperienceDetail::where('uuid',$request->work_uuid[$key])->first();
                     
-                    \Log::info($request->work_uuid[$key]);
+                  
                     $workexp_update->name  = $request->name[$key];
                     $workexp_update->address  = $request->address[$key];
                     $workexp_update->date_of_joining = $request->date_of_joining[$key];
@@ -210,7 +188,6 @@ class ProfessionalController extends Controller
                     
                     if(isset($request->experience_certificate[$key])){
 
-                       
                         $file = $request->experience_certificate[$key];  // get file
                         $file_name=time().rand()."_image.".$file->getClientOriginalExtension();// make file name
                         $file->move('console/upload/employee/work_experience/',$file_name); //file name move upload in public		
@@ -221,17 +198,17 @@ class ProfessionalController extends Controller
                 
                     $res = $workexp_update->update();
                     $message="work experiene detail update successfully";
+
                     if(!$res)
                     {
                         DB::rollback();
-                        Session::flash('error','Internal server error please try again later.');
-                    
+                        Session::flash('danger','Internal server error please try again later.');
                     
                         return redirect()->back();
                     }
 
                 }else{
-                    \Log::info('else 121212');
+
                     
                     $workexp_add = new EmpWorkExperienceDetail();
 
@@ -264,37 +241,33 @@ class ProfessionalController extends Controller
                   
                     $res = $workexp_add->save();
                     $message =" work experiene add successfully";
+
                     if(!$res)
                     {
                         DB::rollback();
-                        Session::flash('error','Internal server error please try again later.');
+                        Session::flash('danger','Internal server error please try again later.');
                      
-                    
                         return redirect()->back();
                     }
                 }
-                /* 
-                */
+              
             }
-           
-            Log::info('bbbbbbb');
             DB::commit();
             Session::flash('success',$message);
            
             return redirect()->back();
            
 
-
         }catch (\Illuminate\Database\QueryException $e) {
           
             Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
             Log::info('Error Code: ' . $e->getCode());
             Log::info('Error Message: ' . $e->getMessage());
-            Log::info("Exiting class:MediumOfInstructionController function:store");
+            Log::info("Exiting class:ProfessionalController function:store");
             Session::flash('danger', "Internal server error.Please try again later 12121.");
             return redirect()->back();
-        }    
-        catch (\Exception $e) {
+            
+        }catch (\Exception $e) {
                 Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
                 Log::info('Error Code: ' . $e->getCode());
                 Log::info('Error Message: ' . $e->getMessage());
@@ -308,26 +281,5 @@ class ProfessionalController extends Controller
     }
 
    
-    public function show($id)
-    {
-        //
-    }
-
-    
-    public function edit($id)
-    {
-        //
-    }
-
-   
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-   
-    public function destroy($id)
-    {
-        //
-    }
+  
 }

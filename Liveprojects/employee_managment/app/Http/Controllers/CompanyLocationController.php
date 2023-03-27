@@ -14,7 +14,7 @@ class CompanyLocationController extends Controller
     public function index(Request $request)
     {
         $query = CompanyLocation::query();
-        if($request->input('search')){
+        if($request->has('search')){
             $query->where ( 'name', 'LIKE', '%' . $request->input('search') . '%' );
         }
         $location  = $query->where('is_active',1)->paginate(5);
@@ -30,7 +30,7 @@ class CompanyLocationController extends Controller
     public function store(Request $request)
     {
         Log::info('aaaaaaa');
-         $location = $request->validate([
+         $locationValidation = $request->validate([
             'location_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
@@ -50,7 +50,7 @@ class CompanyLocationController extends Controller
             if(!$res)
             {
                 DB::rollback();
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
              
             
                 return redirect()->back();
@@ -88,11 +88,11 @@ class CompanyLocationController extends Controller
 
             return abort(404);
 
-        } else {
+        }
 
             $location = CompanyLocation::where('uuid',$id)->first();
             return view('admin.modules.company_location.show',compact('location'));
-        }
+        
 
     }
 
@@ -104,18 +104,17 @@ class CompanyLocationController extends Controller
 
             return abort(404);
 
-        } else {
-
+        } 
             $location = CompanyLocation::where('uuid',$id)->first();
             return view('admin.modules.company_location.edit',compact('location'));
-        }
+        
     }
 
    
     public function update(Request $request, $id)
     {
         Log::info('dddddddd');
-         $location = $request->validate([
+         $locationUpdateValidation = $request->validate([
             'location_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
@@ -125,14 +124,21 @@ class CompanyLocationController extends Controller
             Log::info('eeeeeeee');
             DB::beginTransaction();
             $location = CompanyLocation::where('uuid',$id)->first();
+
+            if( is_null($location) ) {
+
+                return abort(404);
+    
+            } 
+
             $location->name = $request->location_name;
             $location->updated_by  = Auth::id();
-            $res = $location->save();
+            $res = $location->update();
 
             if(!$res)
             {
                 DB::rollback();
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
              
             
                 return redirect()->back();
@@ -169,6 +175,12 @@ class CompanyLocationController extends Controller
            Log::info('hbjjhbdjhqw');
            DB::beginTransaction();
            $location = CompanyLocation::where('uuid',$id)->first();
+
+           if( is_null($location) ) {
+
+                return view('errors.404');
+        
+            }
            $location->is_active = 0;
            $location->updated_by  = Auth::id();
            $res = $location->update();
@@ -176,7 +188,7 @@ class CompanyLocationController extends Controller
            if(!$res)
            {
                DB::rollback();
-               Session::flash('error','Internal server error please try again later.');
+               Session::flash('danger','Internal server error please try again later.');
             
            
                return redirect()->back();
@@ -188,29 +200,25 @@ class CompanyLocationController extends Controller
 
 
        }catch (\Illuminate\Database\QueryException $e) {
-        Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
-        Log::info('Error Code: ' . $e->getCode());
-        Log::info('Error Message: ' . $e->getMessage());
-        Log::info("Exiting class:CompanyLocationController function:delete");
-        Session::flash('danger', "Internal server error.Please try again later.");
-        return redirect()->back();
-    }    
-    catch (\Exception $e) {
-            Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
             Log::info('Error Code: ' . $e->getCode());
             Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:CompanyLocationController function:delete");
             Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+            
+        }catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
-    }
+        }
 
       
 
     }
 
    
-    public function destroy($id)
-    {
-        //
-    }
 }

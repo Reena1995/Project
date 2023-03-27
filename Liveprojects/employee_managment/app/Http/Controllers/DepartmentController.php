@@ -20,7 +20,7 @@ class DepartmentController extends Controller
     {
 
         $query = Department::query();
-        if($request->input('search')){
+        if($request->has('search')){
             $query->where ( 'name', 'LIKE', '%' . $request->input('search') . '%' );
         }
         $department  = $query->where('is_active',1)->paginate(5);
@@ -38,7 +38,7 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         Log::info('aaaaaaa');
-         $department = $request->validate([
+         $departmentValidation = $request->validate([
             'department_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
@@ -59,13 +59,13 @@ class DepartmentController extends Controller
             {
                 DB::rollback();
 
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
              
                 return redirect()->back();
             }
             DB::commit();
 
-            Session::flash('success','department create successfully');
+            Session::flash('success','Department added successfully');
 
             return redirect()->route('department.index');
         
@@ -97,12 +97,12 @@ class DepartmentController extends Controller
 
             return abort(404);
 
-        } else {
+        } 
             
             $department = Department::where('uuid',$id)->first();
 
             return view('admin.modules.department.show',compact('department'));
-        }    
+          
     }
 
     
@@ -113,12 +113,12 @@ class DepartmentController extends Controller
 
         if( is_null($post) ) {
             return abort(404);
-        } else {
+        } 
             
             $department = Department::where('uuid',$id)->first();
     
             return view('admin.modules.department.edit',compact('department'));
-        }
+        
     }
 
    
@@ -126,7 +126,7 @@ class DepartmentController extends Controller
     {
         Log::info('dddddddd');
 
-         $department = $request->validate([
+         $departmentUpdateValidation = $request->validate([
 
             'department_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
@@ -136,6 +136,10 @@ class DepartmentController extends Controller
             Log::info('eeeeeeee');
             DB::beginTransaction();
             $department = Department::where('uuid',$id)->first();
+
+            if( is_null($department) ) {
+                return abort(404);
+            } 
             $department->name = $request->department_name;
             $department->updated_by  = Auth::id();
             $res = $department->save();
@@ -143,12 +147,12 @@ class DepartmentController extends Controller
             if(!$res)
             {
                 DB::rollback();
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
              
                 return redirect()->back();
             }
             DB::commit();
-            Session::flash('success','department updatesuccessfully');
+            Session::flash('success','Department updated successfully');
             return redirect()->route('department.index');
 
         }catch (\Illuminate\Database\QueryException $e) {
@@ -171,12 +175,16 @@ class DepartmentController extends Controller
     public function status($id)
     {
       
-       try{
+        try{
 
            Log::info('hbjjhbdjhqw');
            DB::beginTransaction();
            $department = Department::where('uuid',$id)->first();
-           if($department->id){
+           if(is_null($department) ) {
+               
+                return view('errors.404');
+            } 
+          
             Designation::where('department_id',$department->id)->update(['is_active'=>'0']);
             OrganizationRole::where('department_id',$department->id)->update(['is_active'=>'0']);
             $department->is_active = 0;
@@ -187,55 +195,32 @@ class DepartmentController extends Controller
             { 
                 DB::rollback();
 
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
 
                 return redirect()->back();
             }
             DB::commit();
             Session::flash('success','Department delete successfully');
-        }else{
-            Session::flash('success','Please try again..!');
-        }
-           return redirect()->route('department.index');
+            return redirect()->route('department.index');
+        
 
-       } catch (\Illuminate\Database\QueryException $e) {
-        Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
-        Log::info('Error Code: ' . $e->getCode());
-        Log::info('Error Message: ' . $e->getMessage());
-        Log::info("Exiting class:DepartmentController function:delete");
-        Session::flash('danger', "Internal server error.Please try again later.");
-        return redirect()->back();
-        }catch (\Exception $e) {
-            Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
             Log::info('Error Code: ' . $e->getCode());
             Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:DepartmentController function:delete");
             Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
+        }catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
 
         }
     }
 
     
-    public function destroy($id)
-    {
-        //
-    }
-
-    // public function index(Request $request)
-    // {
-    //     $query = Department::query();
-    //     if($request->ajax()){
-    //         $department = $query->where('name','LIKE','%'.$request->xxx.'%')->paginate(5);
-    //         \Log::info('department');
-    //         \Log::info($department);
-    //         return response()->json(['department'=> $department]);
-    //     }
-    //     else
-    //     {
-    //         $department = $query->where('is_active',1)->paginate(5);
-    //         return view('admin.modules.department.index',compact('department'));
-    //     }
-       
-        
-    // }   
+   
 }

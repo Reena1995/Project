@@ -14,7 +14,7 @@ class MediumOfInstructionController extends Controller
     public function index(Request $request)
     {
         $query = MediumOfInstruction::query();
-        if($request->input('search')){
+        if($request->has('search')){
             $query->where ( 'name', 'LIKE', '%' . $request->input('search') . '%' );
         }
         $medium  = $query->where('is_active',1)->paginate(5);
@@ -30,7 +30,7 @@ class MediumOfInstructionController extends Controller
     public function store(Request $request)
     {
         Log::info('aaaaaaa');
-         $medium = $request->validate([
+         $mediumValidation= $request->validate([
             'medium_instruction_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
@@ -50,7 +50,7 @@ class MediumOfInstructionController extends Controller
             if(!$res)
             {
                 DB::rollback();
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
              
             
                 return redirect()->back();
@@ -92,11 +92,11 @@ class MediumOfInstructionController extends Controller
 
             return abort(404);
 
-        } else {
+        }
 
             $medium = MediumOfInstruction::where('uuid',$id)->first();
             return view('admin.modules.medium_instruction.show',compact('medium'));
-        }
+        
     }    
 
     
@@ -108,18 +108,18 @@ class MediumOfInstructionController extends Controller
 
             return abort(404);
 
-        } else {
+        } 
 
             $medium = MediumOfInstruction::where('uuid',$id)->first();
             return view('admin.modules.medium_instruction.edit',compact('medium'));
-        }    
+          
     }
 
    
     public function update(Request $request, $id)
     {
         Log::info('dddddddd');
-        $medium = $request->validate([
+        $mediumUpdateValidation = $request->validate([
             'medium_instruction_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
@@ -128,7 +128,12 @@ class MediumOfInstructionController extends Controller
 
             Log::info('eeeeeeee');
             DB::beginTransaction();
-            $medium = MediumOfInstruction::where('uuid',$id)->first();;
+            $medium = MediumOfInstruction::where('uuid',$id)->first();
+            if( is_null($medium) ) {
+
+                return view('errors.404');
+            
+            }
             $medium -> name = $request->medium_instruction_name;
             $medium->updated_by = Auth::id();
             $res = $medium ->save();
@@ -136,7 +141,7 @@ class MediumOfInstructionController extends Controller
             if(!$res)
             {
                 DB::rollback();
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
              
             
                 return redirect()->back();
@@ -175,6 +180,11 @@ class MediumOfInstructionController extends Controller
            Log::info('hbjjhbdjhqw');
            DB::beginTransaction();
            $medium = MediumOfInstruction::where('uuid',$id)->first();
+           if( is_null($medium) ) {
+
+            return view('errors.404');
+        
+            }
            $medium->is_active = 0;
            $medium->updated_by = Auth::id();
            $res = $medium->update();
@@ -182,7 +192,7 @@ class MediumOfInstructionController extends Controller
            if(!$res)
            {
                DB::rollback();
-               Session::flash('error','Internal server error please try again later.');
+               Session::flash('danger','Internal server error please try again later.');
             
            
                return redirect()->back();
@@ -194,28 +204,25 @@ class MediumOfInstructionController extends Controller
 
 
        }catch (\Illuminate\Database\QueryException $e) {
-        Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
-        Log::info('Error Code: ' . $e->getCode());
-        Log::info('Error Message: ' . $e->getMessage());
-        Log::info("Exiting class:MediumOfInstructionController function:delete");
-        Session::flash('danger', "Internal server error.Please try again later.");
-        return redirect()->back();
-    }    
-    catch (\Exception $e) {
-            Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
             Log::info('Error Code: ' . $e->getCode());
             Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:MediumOfInstructionController function:delete");
             Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
 
-    }
+        }catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
+
+        }
 
       
 
     }
 
-    public function destroy($id)
-    {
-        //
-    }
+    
 }

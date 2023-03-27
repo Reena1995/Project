@@ -144,15 +144,12 @@
                         </a>
                     </div>
                     <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <button type="button" id="emeBtn" class="theme-btn text-white">Save</button>
+                        <button type="sumit" id="emeBtn" class="theme-btn text-white">Save</button>
                     </div>
             </div>     
 
 
-        </form>
-
-   
-
+</form>
 
 @push('scripts')
  <script>

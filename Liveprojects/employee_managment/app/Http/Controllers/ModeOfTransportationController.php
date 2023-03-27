@@ -15,7 +15,7 @@ class ModeOfTransportationController extends Controller
     public function index(Request $request)
     {
         $query = ModeOfTransportation::query();
-        if($request->input('search')){
+        if($request->has('search')){
             $query->where ( 'type', 'LIKE', '%' . $request->input('search') . '%' );
         }
         $modetype  = $query->where('is_active',1)->paginate(5);
@@ -31,7 +31,7 @@ class ModeOfTransportationController extends Controller
     public function store(Request $request)
     {
         Log::info('aaaaaaa');
-         $modetype= $request->validate([
+         $modetypeValidation= $request->validate([
             'mode_of_transportation_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
@@ -51,7 +51,7 @@ class ModeOfTransportationController extends Controller
             if(!$res)
             {
                 DB::rollback();
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
              
             
                 return redirect()->back();
@@ -68,8 +68,8 @@ class ModeOfTransportationController extends Controller
             Log::info("Exiting class:ModeOfTransportationController function:store");
             Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
-        }    
-        catch (\Exception $e) {
+
+        }catch (\Exception $e) {
                 Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
                 Log::info('Error Code: ' . $e->getCode());
                 Log::info('Error Message: ' . $e->getMessage());
@@ -89,11 +89,11 @@ class ModeOfTransportationController extends Controller
 
             return abort(404);
 
-        } else {
+        } 
 
             $modetype = ModeOfTransportation::where('uuid',$id)->first();
             return view('admin.modules.mode_of_transportation.show',compact('modetype'));
-        }    
+        
     }
 
     
@@ -105,11 +105,11 @@ class ModeOfTransportationController extends Controller
 
             return abort(404);
 
-        } else {
+        } 
 
             $modetype = ModeOfTransportation::where('uuid',$id)->first();
             return view('admin.modules.mode_of_transportation.edit',compact('modetype'));
-        }    
+       
     }
 
    
@@ -125,7 +125,12 @@ class ModeOfTransportationController extends Controller
 
             Log::info('eeeeeeee');
             DB::beginTransaction();
-            $modetype = ModeOfTransportation::where('uuid',$id)->first();;
+            $modetype = ModeOfTransportation::where('uuid',$id)->first();
+            if( is_null($modetype) ) {
+
+                return view('errors.404');
+            
+            }
             $modetype -> type = $request->mode_of_transportation_name;
             $modetype->updated_by = Auth::id();
             $res = $modetype ->save();
@@ -133,7 +138,7 @@ class ModeOfTransportationController extends Controller
             if(!$res)
             {
                 DB::rollback();
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
              
             
                 return redirect()->back();
@@ -172,6 +177,11 @@ class ModeOfTransportationController extends Controller
            Log::info('hbjjhbdjhqw');
            DB::beginTransaction();
            $modetype = ModeOfTransportation::where('uuid',$id)->first();
+           if( is_null($modetype) ) {
+
+                return view('errors.404');
+        
+            }
            $modetype->is_active = 0;
            $modetype->updated_by = Auth::id();
            $res = $modetype->update();
@@ -179,7 +189,7 @@ class ModeOfTransportationController extends Controller
            if(!$res)
            {
                DB::rollback();
-               Session::flash('error','Internal server error please try again later.');
+               Session::flash('danger','Internal server error please try again later.');
             
            
                return redirect()->back();
@@ -191,27 +201,24 @@ class ModeOfTransportationController extends Controller
 
 
        }catch (\Illuminate\Database\QueryException $e) {
-        Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
-        Log::info('Error Code: ' . $e->getCode());
-        Log::info('Error Message: ' . $e->getMessage());
-        Log::info("Exiting class:ModeOfTransportationController function:delete");
-        Session::flash('danger', "Internal server error.Please try again later.");
-        return redirect()->back();
-    }    
-    catch (\Exception $e) {
-            Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
             Log::info('Error Code: ' . $e->getCode());
             Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:ModeOfTransportationController function:delete");
             Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
 
-    }
+        }catch (\Exception $e) {
+                Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
+                Log::info('Error Code: ' . $e->getCode());
+                Log::info('Error Message: ' . $e->getMessage());
+                Session::flash('danger', "Internal server error.Please try again later.");
+                return redirect()->back();
+
+        }
 
       
 
     }
-    public function destroy($id)
-    {
-        //
-    }
+   
 }

@@ -16,8 +16,8 @@ class AssetSubTypeController extends Controller
     {
        
         $query =AssetSubType::query();
-        if($request->input('search')){
-            $search = $request->input('search');
+        if($request->has('search')){
+            $search = $request->search;
             $query->where ( 'type', 'LIKE', '%' . $search . '%' )
                 ->orWhereHas('ass_type_active', function($q) use ($search){ 
                     $q->where('type', 'LIKE', '%' . $search . '%');
@@ -37,7 +37,7 @@ class AssetSubTypeController extends Controller
     public function store(Request $request)
     {
         Log::info('aaaaaaa');
-         $ass_sub_type = $request->validate([
+         $assSubTypeValidation = $request->validate([
             'asset_sub_type_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             'asset_type_id'=>'bail|required'
 
@@ -57,7 +57,7 @@ class AssetSubTypeController extends Controller
             if(!$res)
             {
                 DB::rollback();
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
              
             
                 return redirect()->back();
@@ -117,19 +117,18 @@ class AssetSubTypeController extends Controller
 
             return abort(404);
 
-        } else {
-
-            $ass_type=AssetType::where('is_active',1)->orderBy('type', 'ASC')->get();
-            $ass_sub_type = AssetSubType::where('uuid',$id)->first();
-            return view('admin.modules.asset_sub_type.edit',compact('ass_type','ass_sub_type'));
-        }    
+        } 
+        $ass_type=AssetType::where('is_active',1)->orderBy('type', 'ASC')->get();
+        $ass_sub_type = AssetSubType::where('uuid',$id)->first();
+        return view('admin.modules.asset_sub_type.edit',compact('ass_type','ass_sub_type'));
+         
     }
 
    
     public function update(Request $request, $id)
     {
         Log::info('dddddddd');
-         $designation = $request->validate([
+         $assSubTypeUpdateValidation = $request->validate([
             'asset_sub_type_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             'asset_type_id'=>'bail|required',
             
@@ -140,6 +139,13 @@ class AssetSubTypeController extends Controller
             Log::info('eeeeeeee');
             DB::beginTransaction();
             $ass_sub_type = AssetSubType::where('uuid',$id)->first();
+
+            if( is_null($ass_sub_type) ) {
+
+                return abort(404);
+    
+            }
+
             $ass_sub_type->type = $request->asset_sub_type_name;
             $ass_sub_type->asset_type_id = $request->asset_type_id;
             $ass_sub_type->updated_by  = Auth::id();
@@ -148,7 +154,7 @@ class AssetSubTypeController extends Controller
             if(!$res)
             {
                 DB::rollback();
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
              
             
                 return redirect()->back();
@@ -185,6 +191,13 @@ class AssetSubTypeController extends Controller
            Log::info('hbjjhbdjhqw');
            DB::beginTransaction();
            $ass_sub_type = AssetSubType::where('uuid',$id)->first();
+
+           if( is_null($ass_sub_type) ) {
+
+                return view('errors.404');
+
+            }
+
            $ass_sub_type->is_active = 0;
            $ass_sub_type->updated_by  = Auth::id();
            $res = $ass_sub_type->update();
@@ -192,7 +205,7 @@ class AssetSubTypeController extends Controller
            if(!$res)
            {
                DB::rollback();
-               Session::flash('error','Internal server error please try again later.');
+               Session::flash('danger','Internal server error please try again later.');
             
            
                return redirect()->back();
@@ -202,12 +215,12 @@ class AssetSubTypeController extends Controller
            return redirect()->route('asset_sub_type.index');
         
         }catch (\Illuminate\Database\QueryException $e) {
-        Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
-        Log::info('Error Code: ' . $e->getCode());
-        Log::info('Error Message: ' . $e->getMessage());
-        Log::info("Exiting class:AssetSubTypeController function:delete");
-        Session::flash('danger', "Internal server error.Please try again later.");
-        return redirect()->back();
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:AssetSubTypeController function:delete");
+            Session::flash('danger', "Internal server error.Please try again later.");
+            return redirect()->back();
         }    
         catch (\Exception $e) {
             Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
@@ -220,8 +233,5 @@ class AssetSubTypeController extends Controller
 
     } 
 
-    public function destroy($id)
-    {
-        //
-    }
+    
 }

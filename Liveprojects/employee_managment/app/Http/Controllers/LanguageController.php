@@ -15,7 +15,7 @@ class LanguageController extends Controller
     {
         
         $query = Language::query();
-        if($request->input('search')){
+        if($request->has('search')){
             $query->where ( 'name', 'LIKE', '%' . $request->input('search') . '%' );
         }
         $language  = $query->where('is_active',1)->paginate(5);
@@ -30,7 +30,7 @@ class LanguageController extends Controller
     public function store(Request $request)
     {
         Log::info('aaaaaaa');
-         $language= $request->validate([
+         $languageValidation= $request->validate([
             'language_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
@@ -50,7 +50,7 @@ class LanguageController extends Controller
             if(!$res)
             {
                 DB::rollback();
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
              
             
                 return redirect()->back();
@@ -68,8 +68,8 @@ class LanguageController extends Controller
             Log::info("Exiting class:LanguageController function:store");
             Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
-        }    
-        catch (\Exception $e) {
+
+        }catch (\Exception $e) {
                 Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
                 Log::info('Error Code: ' . $e->getCode());
                 Log::info('Error Message: ' . $e->getMessage());
@@ -87,11 +87,11 @@ class LanguageController extends Controller
 
             return abort(404);
 
-        } else {
+        } 
 
             $language = Language::where('uuid',$id)->first();
             return view('admin.modules.language.show',compact('language'));
-        }    
+           
     }
 
     public function edit($id)
@@ -102,18 +102,18 @@ class LanguageController extends Controller
 
             return abort(404);
 
-        } else {
+        } 
 
             $language = Language::where('uuid',$id)->first();
             return view('admin.modules.language.edit',compact('language'));
-        }    
+          
     }
 
    
     public function update(Request $request, $id)
     {
         Log::info('dddddddd');
-        $medium = $request->validate([
+        $langaugeUpdateValidation = $request->validate([
             'language_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
@@ -122,7 +122,12 @@ class LanguageController extends Controller
 
             Log::info('eeeeeeee');
             DB::beginTransaction();
-            $language = Language::where('uuid',$id)->first();;
+            $language = Language::where('uuid',$id)->first();
+            if( is_null($language) ) {
+
+                return view('errors.404');
+            
+            }
             $language -> name = $request->language_name;
             $language->updated_by = Auth::id();
             $res = $language ->save();
@@ -130,7 +135,7 @@ class LanguageController extends Controller
             if(!$res)
             {
                 DB::rollback();
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
              
             
                 return redirect()->back();
@@ -148,8 +153,7 @@ class LanguageController extends Controller
             Log::info("Exiting class:LanguageController function:update");
             Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
-        }    
-        catch (\Exception $e) {
+        }catch (\Exception $e) {
                 Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
                 Log::info('Error Code: ' . $e->getCode());
                 Log::info('Error Message: ' . $e->getMessage());
@@ -167,6 +171,11 @@ class LanguageController extends Controller
            Log::info('hbjjhbdjhqw');
            DB::beginTransaction();
            $language = Language::where('uuid',$id)->first();
+           if( is_null($language) ) {
+
+            return view('errors.404');
+        
+            }
            $language->is_active = 0;
            $language->updated_by = Auth::id();
            $res = $language->update();
@@ -174,7 +183,7 @@ class LanguageController extends Controller
            if(!$res)
            {
                DB::rollback();
-               Session::flash('error','Internal server error please try again later.');
+               Session::flash('danger','Internal server error please try again later.');
             
            
                return redirect()->back();
@@ -206,8 +215,5 @@ class LanguageController extends Controller
 
     }
 
-    public function destroy($id)
-    {
-        //
-    }
+    
 }
