@@ -13,12 +13,10 @@
                         <div class="card education mt-3 workadd">
                 
                             <div class="card-body " >
-            
+                                    <h3>Update validation</h3>
                                     <div class="form-row">
                                 
                                         <input type="hidden" name="work_uuid[]" value="{{$work->uuid}}">
-
-                                        
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Name</label>
@@ -157,142 +155,241 @@
                     @endforeach
 
                 @else 
+                    @if(session()->getOldinput())
+                         @foreach(session()->getOldinput()['name'] as $index => $value) 
+                         <div class="card education mt-3 workadd educationDetails" id="">
+                                <h3>Backendvalidation</h3>
+                                <div class="card-body " >
 
-                    <div class="card education mt-3 workadd educationDetails" id="">
-            
-                        <div class="card-body " >
-        
-                            <div class="form-row">
-                            
-                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>Name</label>
-                                            <input type="text" value = "" name="name[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('name[]'))
-                                                    <span class="errr-validation">{{ $errors->first('name[]') }}</span>
-                                            @endif
-                                        </div>
+                                    <div class="form-row">
+                                    
+                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                        <label>Name</label>
+                                                        <input type="text" value ="{{ old('name.'.$index) }}" name="{{ 'name[]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                                        
+                                                        @error('name')
+                                                            <span class="error">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>Address</label>
-                                            <textarea  class="form-control form-control-lg" value="" name="address[]" cols="30" placeholder="Enter Details Of disaility"></textarea>
-                                            @if ($errors->has('address[]'))
-                                                <span class="errr-validation">{{ $errors->first('address[]') }}</span>
-                                            @endif
-                                        </div>
+                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                        <label>Address</label>
+                                                        <textarea  class="form-control form-control-lg" value="" name="{{ 'address[]' }}" cols="30" placeholder="Enter Details Of disaility">{{ old('address.'.$index) }}	</textarea>
+                                                        @error('address')
+                                                            <span class="error">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>Date of joining</label>
-                                            <input type="date" name="date_of_joining[]"  value =""  class="form-control form-control-lg" placeholder="Select Date Of Birth">
-                                            @if ($errors->has('date_of_joining[]'))
-                                                <span class="errr-validation">{{ $errors->first('date_of_joining[]') }}</span>
-                                            @endif
-                                        </div>
+                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                        <label>Date of joining</label>
+                                                        <input type="date" name="{{'date_of_joining[]'}}"  value ="{{ old('date_of_joining.'.$index) }}	"  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                                        @error('date_of_joining')
+                                                            <span class="error">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>Date of Leaving</label>
-                                            <input type="date" value = "" name="date_of_leaving[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('	date_of_leaving[]'))
-                                                    <span class="errr-validation">{{ $errors->first('date_of_leaving[]') }}</span>
-                                            @endif
-                                        </div>
+                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                        <label>Date of Leaving</label>
+                                                        <input type="date" name="{{'date_of_leaving[]'}}"  value ="{{ old('date_of_leaving.'.$index) }}	"  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                                        @error('date_of_leaving')
+                                                            <span class="error">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                        
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>joining Designation</label>
-                                            <input type="text" value = "" name="joining_designation[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('joining_designation[]'))
-                                                    <span class="errr-validation">{{ $errors->first('joining_designation[]') }}</span>
-                                            @endif
-                                        </div>
+                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                        <label>joining Designation</label>
+                                                        <input type="text" value = "{{ old('joining_designation.'.$index) }}" name="{{'joining_designation[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                                        @error('joining_designation')
+                                                            <span class="error">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                       
+                                                
+                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                        <label>Leaving Designation</label>
+                                                        <input type="text" value = "{{ old('leaving_designation.'.$index) }}" name="{{'leaving_designation[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                                        @error('leaving_designation')
+                                                            <span class="error">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>Leaving Designation</label>
-                                            <input type="text" value = "" name="leaving_designation[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('leaving_designation[]'))
-                                                    <span class="errr-validation">{{ $errors->first('leaving_designation[]') }}</span>
-                                            @endif
-                                        </div>
+                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                        <label>role</label>
+                                                        <input type="text" value = "{{ old('role.'.$index) }}" name="{{'role[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                                        @error('role')
+                                                            <span class="error">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>role</label>
-                                            <input type="text" value = "" name="role[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('role[]'))
-                                                    <span class="errr-validation">{{ $errors->first('role[]') }}</span>
-                                            @endif
-                                        </div>
+                                                    
 
-                                        
+                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                    
+                                                        <label>Last salary</label>
+                                                        <input type="text" value = "{{ old('last_salary.'.$index) }}" name="last_salary[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                                        @error('last_salary')
+                                                            <span class="error">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                          
-                                            <label>Last salary</label>
-                                            <input type="text" value = "" name="last_salary[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('last_salary[]'))
-                                                    <span class="errr-validation">{{ $errors->first('last_salary[]') }}</span>
-                                            @endif
-                                        </div>
+                                                    
 
-                                         
+                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                        <label>leaving_reason</label>
+                                                        <textarea  class="form-control form-control-lg" value="{{ old('leaving_reason.'.$index) }}	" name="leaving_reason[]" cols="30" placeholder="Enter Details Of disaility"></textarea>
+                                                        @error('leaving_reason')
+                                                            <span class="error">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>leaving_reason</label>
-                                            <textarea  class="form-control form-control-lg" value="" name="leaving_reason[]" cols="30" placeholder="Enter Details Of disaility"></textarea>
-                                            @if ($errors->has('leaving_reason[]'))
-                                                <span class="errr-validation">{{ $errors->first('leaving_reason[]') }}</span>
-                                            @endif
-                                        </div>
+                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                    
+                                                        <label>reporting_authority_name</label>
+                                                        <input type="text" value = "{{ old('reporting_authority_name.'.$index) }}" name="reporting_authority_name[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                                        @error('reporting_authority_name')
+                                                            <span class="error">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                           
-                                            <label>reporting_authority_name</label>
-                                            <input type="text" value = "" name="reporting_authority_name[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('reporting_authority_name[]'))
-                                                    <span class="errr-validation">{{ $errors->first('reporting_authority_name[]') }}</span>
-                                            @endif
-                                        </div>
+                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                        
+                                                        <label>reporting_authority_contact</label>
+                                                        <input type="text" value = "{{ old('reporting_authority_contact.'.$index) }}" name="reporting_authority_contact[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                                        @error('name')
+                                                            <span class="error">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            
-                                            <label>reporting_authority_contact</label>
-                                            <input type="text" value = "" name="reporting_authority_contact[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('reporting_authority_contact[]'))
-                                                    <span class="errr-validation">{{ $errors->first('reporting_authority_contact[]') }}</span>
-                                            @endif
-                                        </div>
+                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                        
+                                                        <label>reporting_authority_designation</label>
+                                                        <input type="text" value = "{{ old('reporting_authority_designation.'.$index) }}" name="{{'reporting_authority_designation[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                                        @error('reporting_authority_designation')
+                                                            <span class="error">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            
-                                            <label>reporting_authority_designation</label>
-                                            <input type="text" value = "" name="reporting_authority_designation[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('reporting_authority_designation[]'))
-                                                    <span class="errr-validation">{{ $errors->first('reporting_authority_designation[]') }}</span>
-                                            @endif
-                                        </div>
+                                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                        <lable>experience_certificate</lable>
+                                                        <input type="file" value="{{ old('experience_certificate.'.$index) }}	" data-key="exp_image" name="{{'experience_certificate[]'}}" class=" form-control form-control-lg">
+                                                        @error('experience_certificate')
+                                                            <span class="error">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <lable>experience_certificate</lable>
-                                            <input type="file" value="" data-key="exp_image" name="experience_certificate[]" class=" form-control form-control-lg">
-                                        </div>
-                                        @if ($errors->has('experience_certificate[]'))
-                                                <span class="errr-validation">{{ $errors->first('experience_certificate[]') }}</span>
-                                        @endif
-                                
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            
+                                                   
+
                                         </div> 
 
-                                        <div class="container removecard">
-                                            <div class="row ">
-                                                <button type="button" class="btn btn-danger d-none delete">delete</button> 
-                                            </div>
+                                    </div>
+                                </div>  
+
+                            </div>
+		                @endforeach 
+                    @else
+                        <div class="card education mt-3 workadd educationDetails" id="">
+                    
+                            <div class="card-body " >
+                                <h3>first Design</h3>
+                                <div class="form-row">
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>Name</label>
+                                        <input type="text" value = "" name="name[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                       
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>Address</label>
+                                        <textarea  class="form-control form-control-lg" value="" name="address[]" cols="30" placeholder="Enter Details Of disaility"></textarea>
+                                       
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>Date of joining</label>
+                                        <input type="date" name="date_of_joining[]"  value =""  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                       
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>Date of Leaving</label>
+                                        <input type="date" value = "" name="date_of_leaving[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                        
+                                    </div>
+                                    
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>joining Designation</label>
+                                        <input type="text" value = "" name="joining_designation[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                       
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>Leaving Designation</label>
+                                        <input type="text" value = "" name="leaving_designation[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                        
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>role</label>
+                                        <input type="text" value = "" name="role[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                       
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                    
+                                        <label>Last salary</label>
+                                        <input type="text" value = "" name="last_salary[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                       
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>leaving_reason</label>
+                                        <textarea  class="form-control form-control-lg" value="" name="leaving_reason[]" cols="30" placeholder="Enter Details Of disaility"></textarea>
+                                       
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                    
+                                        <label>reporting_authority_name</label>
+                                        <input type="text" value = "" name="reporting_authority_name[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                        
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        
+                                        <label>reporting_authority_contact</label>
+                                        <input type="text" value = "" name="{{'reporting_authority_contact[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                       
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        
+                                        <label>reporting_authority_designation</label>
+                                        <input type="text" value = "" name="{{'reporting_authority_designation[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                       
+                                    </div>
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <lable>experience_certificate</lable>
+                                        <input type="file" value="" data-key="exp_image" name="{{'experience_certificate[]'}}" class=" form-control form-control-lg">
+                                        
+                                    </div>
+
+                                    <div class="container removecard">
+                                        <div class="row ">
+                                            <button type="button" class="btn btn-danger d-none delete">delete</button> 
                                         </div>
+                                    </div>
+                                
+                                </div>   
+                                
+                                
+                            </div>   
 
-                            </div> 
+                        </div>
+ 
+                    @endif 
+                   
 
-                        </div>   
-                    </div>
+                    
                     
                 @endif     
             </div>

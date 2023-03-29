@@ -12,17 +12,15 @@
                         <div class="card education mt-3 emergencyadd">
                 
                             <div class="card-body " >
-            
+                                    <h3>Update</h3>
                                     <div class="form-row">
                                 
                                         <input type="hidden" name="emergency_uuid[]" value="{{$em->uuid}}">
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Name</label>
-                                            <input type="text" value = "{{ $em->name}}" name="name[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('name[]'))
-                                                    <span class="errr-validation">{{ $errors->first('name[]') }}</span>
-                                            @endif
+                                            <input type="text" value = "{{$em->name}}" name="name[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                           
                                         </div>
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
@@ -30,25 +28,19 @@
                                             <textarea  class="form-control form-control-lg"  name="address[]" cols="30" placeholder="Enter Details Of disaility">
                                                 {{ $em->address }}
                                             </textarea>
-                                            @if ($errors->has('address[]'))
-                                                <span class="errr-validation">{{ $errors->first('address[]') }}</span>
-                                            @endif
+                                           
                                         </div>
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Relationship</label>
                                             <input type="text" value = "{{ $em->relationship}}" name="relationship[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('relationship[]'))
-                                                    <span class="errr-validation">{{ $errors->first('relationship[]') }}</span>
-                                            @endif
+                                          
                                         </div>
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Contact No</label>
                                             <input type="text" value = "{{ $em->contact_no}}" name="contact_no[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('contact_no[]'))
-                                                    <span class="errr-validation">{{ $errors->first('contact_no[]') }}</span>
-                                            @endif
+                                           
                                         </div>
                                         
                                         <input type="hidden" name="emergency_uuid[]" value="{{$em->uuid}}">
@@ -56,9 +48,7 @@
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Name</label>
                                             <input type="text" value = "{{ $em->name}}" name="name[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('name[]'))
-                                                    <span class="errr-validation">{{ $errors->first('name[]') }}</span>
-                                            @endif
+                                           
                                         </div>
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
@@ -66,25 +56,19 @@
                                             <textarea  class="form-control form-control-lg"  name="address[]" cols="30" placeholder="Enter Details Of disaility">
                                                 {{ $em->address }}
                                             </textarea>
-                                            @if ($errors->has('address[]'))
-                                                <span class="errr-validation">{{ $errors->first('address[]') }}</span>
-                                            @endif
+                                           
                                         </div>
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Relationship</label>
                                             <input type="text" value = "{{ $em->relationship}}" name="relationship[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('relationship[]'))
-                                                    <span class="errr-validation">{{ $errors->first('relationship[]') }}</span>
-                                            @endif
+                                            
                                         </div>
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Contact No</label>
                                             <input type="text" value = "{{ $em->contact_no}}" name="contact_no[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('contact_no[]'))
-                                                    <span class="errr-validation">{{ $errors->first('contact_no[]') }}</span>
-                                            @endif
+                                            
                                         </div>
                                         
                                     </div> 
@@ -94,109 +78,108 @@
 
                 @else 
 
-                    <div class="card education mt-3 emergencyadd educationDetails" id="">
-                         
-                            @if(session()->getOldinput())
-                                @foreach(session()->getOldinput()['name'] as $index => $value)  
-                                <div class="card-body mr-2">
-                                    <h3>Elses</h3>
-                                    <div class="form-row">
+                        @if(session()->getOldinput())
+
+                            @foreach(session()->getOldinput()['name'] as $index => $value)  
+
+                                <div class="card education mt-3 emergencyadd educationDetails" id="">
+                                    
+                                    <div class="card-body mr-2">
+                                        <h3>backend validation</h3>
+                                        <div class="form-row">
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                    <label>Name</label>
+                                                    <input type="text" value="{{ old('name.'.$index) }}" class="form-control form-control-lg" name="{{ 'name[]' }}"   placeholder="Enter University Name">
+                                                    @error('name.'.$index)
+                                                        <span class="error">{{ $message }}</span>
+                                                    @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12"> 
+                                                    <label>address</label>
+                                                    <textarea class="form-control form-control-lg"  name="{{ 'address[]' }}" cols="30" placeholder="Enter Details Of disaility">{{ old('address.'.$index) }}</textarea>
+                                                    @error('address.'.$index)
+                                                        <span class="error">{{ $message }}</span>
+                                                    @enderror
+                                            </div>
+                                
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Relationship</label>
+                                                <input type="text" value="{{ old('relationship.'.$index) }}"  name="{{ 'relationship[]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                                @error('relationship.'.$index)
+                                                        <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Contact No</label>
+                                                <input type="text" value="{{ old('contact_no.'.$index) }}"  name="{{ 'contact_no[]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                                @error('contact_no.'.$index)
+                                                        <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="container removecard">
+                                                <div class="row ">
+                                                        <button type="button" class="btn btn-danger d-none delete">delete</button> 
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>  
+
+                                </div>           
+                            @endforeach
+
+                        @else
+                            <div class="card education mt-3 emergencyadd educationDetails" id="">
+                                <div class="card-body">
+                                    <h3>first Design</h3>
+                                    <div class="form-row"> 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                                 <label>Name</label>
-                                                <input type="text" value="{{ old('name.'.$index) }}" class="form-control form-control-lg" name="{{ 'name[0]' }}"   placeholder="Enter University Name">
-                                                @error('name.'.$index)
+                                                <input type="text"  value="" class="form-control form-control-lg" name="{{ 'name[]' }}" value = ""   placeholder="Enter University Name">
+                                                @error('name')
                                                     <span class="error">{{ $message }}</span>
                                                 @enderror
                                         </div>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12"> 
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                                 <label>address</label>
-                                                <textarea class="form-control form-control-lg"  name="{{ 'address[0]' }}" cols="30" placeholder="Enter Details Of disaility">{{ old('address.'.$index) }}</textarea>
-                                                @error('address.'.$index)
+                                                <textarea  class="form-control form-control-lg"  name="{{ 'address[]' }}" cols="30" placeholder="Enter Details Of disaility"></textarea>
+                                                @error('address')
                                                     <span class="error">{{ $message }}</span>
                                                 @enderror
                                         </div>
-                            
+                                
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Relationship</label>
-                                            <input type="text" value="{{ old('relationship.'.$index) }}"  name="{{ 'relationship[0]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @error('relationship.'.$index)
+                                            <input type="text" value =""  name="{{ 'relationship[]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                            @error('relationship')
                                                     <span class="error">{{ $message }}</span>
                                             @enderror
                                         </div>
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Contact No</label>
-                                            <input type="text" value="{{ old('contact_no.'.$index) }}"  name="{{ 'contact_no[0]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @error('contact_no.'.$index)
-                                                    <span class="error">{{ $message }}</span>
+                                            <input type="text" value = ""  name="{{ 'contact_no[]' }}" class="form-control form-control-lG" placeholder="Enter University Name">
+                                            @error('contact_no')
+                                            <span class="error">{{ $message }}</span>
                                             @enderror
                                         </div>
 
                                         <div class="container removecard">
-                                            <div class="row ">
-                                                    <button type="button" class="btn btn-danger d-none delete">delete</button> 
-                                            </div>
+                                                <div class="row ">
+                                                        <button type="button" class="btn btn-danger d-none delete">delete</button> 
+                                                </div>
                                         </div>
-                                    </div>
-                                </div>         
-                                @endforeach
-                               
-                            @else
-                            <div class="card-body">
-                                <h3>last div</h3>
-                                <div class="form-row"> 
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>Name</label>
-                                            <input type="text"  value="" class="form-control form-control-lg" name="{{ 'name[0]' }}" value = ""   placeholder="Enter University Name">
-                                            @error('name')
-                                                <span class="error">{{ $message }}</span>
-                                            @enderror
-                                    </div>
-
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>address</label>
-                                            <textarea  class="form-control form-control-lg"  name="{{ 'address[0]' }}" cols="30" placeholder="Enter Details Of disaility"></textarea>
-                                            @error('address')
-                                                <span class="error">{{ $message }}</span>
-                                            @enderror
-                                    </div>
-                            
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        <label>Relationship</label>
-                                        <input type="text" value =""  name="{{ 'relationship[0]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
-                                        @error('relationship')
-                                                <span class="error">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        <label>Contact No</label>
-                                        <input type="text" value = ""  name="{{ 'contact_no[0]' }}" class="form-control form-control-lG" placeholder="Enter University Name">
-                                        @error('contact_no')
-                                        <span class="error">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="container removecard">
-                                            <div class="row ">
-                                                    <button type="button" class="btn btn-danger d-none delete">delete</button> 
-                                            </div>
-                                    </div>
-                                
-                                </div>  
-                            </div>  
-                            @endif
-                               
-
-         
-                            
-                           
-                       
-                    </div>
-                  
-
-                   
+                                    
+                                    </div>  
+                                </div> 
+                            </div>     
+   
+                        @endif
+                     
                 @endif  
                 
                 
@@ -244,10 +227,7 @@
                 
                 var name = $(this).attr('name');
                 $(this).attr('name',name).val('');
-                var  splitename = name.split('[');
-                $(this).attr('name',splitename[0]+"["+rowIndex+"]");
-                console.log('name',splitename[0]+"["+rowIndex+"]");
-
+              
                
               
                 $(this).parents('.emergencyadd').append('');
@@ -257,9 +237,7 @@
                 console.log('textaaaaa');
                 var name = $(this).attr('name');
                 $(this).attr('name',name).val('');
-                var  splitename = name.split('[');
-                $(this).attr('name',splitename[0]+"["+rowIndex+"]");
-                console.log('name',splitename[0]+"["+rowIndex+"]");
+               
                
               
                 $(this).parents('.emergencyadd').append('');

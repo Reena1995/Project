@@ -22,14 +22,39 @@ class ContactController extends Controller
     public function familyAdd(Request $request)
     {
        
-         $familyValidation = $request->validate([
-            'name.*'=>'bail|required' ,
-            'relationship.*'=>'bail|required' ,
-            'profession.*'=>'bail|required' ,
-            'contact_no.*'=>'bail|required' ,
-            'age.*'=>'bail|required',
+         // dd($request->all());
+         $rules =[
+            'name' => 'required|array',
+            'name.*'=>'required' ,
+            'relationship'=>'required|array' ,
+            'relationship.*'=>'required' ,
+            'profession'=>'required|array' ,
+            'profession.*'=>'required' ,
+            'contact_no'=>'required|array' ,
+            'contact_no.*'=>'required' ,
+            'age'=>'required|array' ,
+            'age.*'=>'required' 
+           
+        ];  
+        $msg = [
             
-        ]); 
+            'name.*.required'=>'The Name field is require',
+            'relationship.*.required'=>'The relationship field is require',
+            'profession.*.required'=>'The profession field is require',
+            'contact_no.*.required'=>'The Contact No field is require',
+            'age.*.required'=>'The Age field is require',
+
+        ];
+        $validator = Validator::make($request->all(),$rules,$msg);
+        
+        
+
+        if($validator->fails()){
+           
+            //     dd($validator->errors());
+         
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
       
         try{
                 DB::beginTransaction();
@@ -156,38 +181,28 @@ class ContactController extends Controller
         ];
         $validator = Validator::make($request->all(),$rules,$msg);
         
-        // dd($validator->errors());
-
-
-        \Log::info($validator->errors());
+        
 
         if($validator->fails()){
-            // dump('in if validation');
+           
             //     dd($validator->errors());
          
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
-        print_r($request->all());
-        
-
-      
        
+     
         try{
             DB::beginTransaction();
             $user = User::where('uuid',$request->user_id)->first();
 
-            /* if( is_null($user) ) {
-
-                return view('errors.401');
-            
-            } */
            
             foreach($request->name as $key=> $data){
 
-            //    dump($key);
+               
                 if(isset($request->emergency_uuid[$key]))
                 {
-                    
+
+                      \Log::info($request->emergency_uuid[$key]);
                     $emergency_update =  EmpEmergencyContact::where('uuid',$request->emergency_uuid[$key])->first();
                     
                     $emergency_update->name  = $request->name[$key];
@@ -196,8 +211,10 @@ class ContactController extends Controller
                     $emergency_update->contact_no = $request->contact_no[$key];
                     
                     $emergency_update->updated_by = Auth::id();
+                    // dd($emergency_update);
                     $message = "employee emergency detail update successfully";
                     $res = $emergency_update->update();
+                    // dd($res);
                   
                     if(!$res)
                     {
@@ -208,7 +225,9 @@ class ContactController extends Controller
                     }
 
                 }else{
-                   dump('in else');
+
+                    \Log::info('if update part');
+                  
                     $emergency_add = new EmpEmergencyContact;
 
                     $emergency_add->name  = $request->name[$key];

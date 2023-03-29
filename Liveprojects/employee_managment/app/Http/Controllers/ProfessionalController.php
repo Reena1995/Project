@@ -11,6 +11,7 @@ use Log;
 use Auth;
 use Session;
 use Validate;
+use Illuminate\Support\Facades\Validator;
 
 class ProfessionalController extends Controller
 {
@@ -19,16 +20,51 @@ class ProfessionalController extends Controller
 
     public function professionalAdd(Request $request)
     {
-       
-         $professionalValidation = $request->validate([
+        $user = User::where('uuid',$request->user_id)->first();
+        $professional_detail = EmpProfessionalTrainingDetail::where('user_id',$user->id)->first();
+      
 
-            'name_of_institute.*'=>'bail|required' ,
-            'address.*'=>'bail|required' ,
-            'description.*'=>'bail|required' ,
-            'to.*'=>'bail|required' ,
-            'from.*'=>'bail|required',
-            'certificate_pdf.*'=>'bail|required',
-        ]); 
+        $isCertficate= '';
+        if(empty($professional_detail->id)){ 
+
+            $isCertficate = '|required';
+        }
+
+        $rules =[
+            'name_of_institute' => 'required|array',
+            'name_of_institute.*'=>'required' ,
+            'address'=>'required|array' ,
+            'address.*'=>'required' ,
+            'to'=>'required|array' ,
+            'to.*'=>'required' ,
+            'from'=>'required|array' ,
+            'from.*'=>'required' ,
+            'description'=>'required|array' ,
+            'description.*'=>'required' ,
+            'certificate_pdf'=> $isCertficate ,
+            'certificate_pdf.*'=> $isCertficate 
+           
+        ];  
+        $msg = [
+            
+            'name_of_institute.*.required'=>'The Name Of the Insititute field is require',
+            'address.*.required'=>'The Address field is require',
+            'to.*.required'=>'The to field is require',
+            'from.*.required'=>'The from  field is require',
+            'description.*.required'=>'The description field is require',
+            'certificate_pdf.*.required'=>'The certificate_pdf field is require',
+
+        ];
+        $validator = Validator::make($request->all(),$rules,$msg);
+        
+        
+
+        if($validator->fails()){
+           
+            //     dd($validator->errors());
+         
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
     
         try{
 
@@ -137,23 +173,56 @@ class ProfessionalController extends Controller
     public function workexperienceAdd(Request $request)
     {
      
-         $workExpValidation = $request->validate([
+        $user = User::where('uuid',$request->user_id)->first();
+        $work_detail = EmpWorkExperienceDetail::where('user_id',$user->id)->first();
+      
 
-            'name.*'=>'bail|required' ,
-            'address.*'=>'bail|required' ,
-            'date_of_joining.*'=>'bail|required' ,
-            'date_of_leaving.*'=>'bail|required' ,
-            'joining_designation.*'=>'bail|required',
-            'leaving_designation.*'=>'bail|required',
-            'role.*'=>'bail|required' ,
-            'last_salary.*'=>'bail|required' ,
-            'leaving_reason.*'=>'bail|required' ,
-            'reporting_authority_name.*'=>'bail|required' ,
-            'reporting_authority_contact.*'=>'bail|required',
-            'reporting_authority_designation.*'=>'bail|required',
-            'experience_certificate.*'=>'bail|required'
+      
+
+        $rules =[
+            'name' => 'required|array',
+            'name.*'=>'required' ,
+            'address'=>'required|array' ,
+            'address.*'=>'required' ,
+            'date_of_joining'=>'required|array' ,
+            'date_of_joining.*'=>'required' ,
+            'date_of_leaving'=>'required|array' ,
+            'date_of_leaving.*'=>'required' ,
+            'joining_designation'=>'required|array' ,
+            'joining_designation.*'=>'required' ,
+            'leaving_designation' => 'required|array',
+            'leaving_designation.*'=>'required' ,
+            'role'=>'required|array' ,
+            'role.*'=>'required' ,
+            'last_salary'=>'required|array' ,
+            'last_salary.*'=>'required' ,
+            'leaving_reason'=>'required|array' ,
+            'leaving_reason.*'=>'required' ,
+            'reporting_authority_name'=>'required|array' ,
+            'reporting_authority_name.*'=>'required' ,
+            'reporting_authority_contact'=>'required|array' ,
+            'reporting_authority_contact.*'=>'required' ,
+            'reporting_authority_designation'=>'required|array' ,
+            'reporting_authority_designation.*'=>'required' ,
+           
+        ];  
+        $msg = [
             
-        ]); 
+            'name.*.required'=>'The Name field is require',
+            'address.*.required'=>'The Address field is require',
+            'date_of_joining.*.required'=>'The date of joining field is require',
+            'date_of_leaving.*.required'=>'The date_of_leaving  field is require',
+            'joining_designation.*.required'=>'The joining_designation field is require',
+            'leaving_designation.*.required'=>'The leaving_designation field is require',
+            'role.*.required'=>'The role field is require',
+            'last_salary.*.required'=>'The last_salary field is require',
+            'leaving_reason.*.required'=>'The leaving_reason  field is require',
+            'reporting_authority_name.*.required'=>'The reporting_authority_name field is require',
+            'reporting_authority_contact.*.required'=>'The reporting_authority_contact field is require',
+            'reporting_authority_designation.*.required'=>'The reporting_authority_designation field is require',
+
+        ];
+        $validator = Validator::make($request->all(),$rules,$msg);
        
         try{
             DB::beginTransaction();
