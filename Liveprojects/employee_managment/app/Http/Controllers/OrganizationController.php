@@ -15,6 +15,7 @@ use Log;
 use Auth;
 use Session;
 use Validate;
+use Illuminate\Support\Facades\Validator;
 
 class OrganizationController extends Controller
 {
@@ -447,19 +448,51 @@ class OrganizationController extends Controller
     public function assetAdd(Request $request)
     {
         
-         $empassetValidation = $request->validate([
+        $user = User::where('uuid',$request->user_id)->first();
+        $asset_detail = EmpAssetDetail::where('user_id',$user->id)->first();
+      
 
-            'asset_brand_id.*'=>'bail|required',
-            'asset_sub_type_id .*'=>'bail|required',
-            'serial_no.*'=>'bail|required',
-            'purchased_dn.*'=>'bail|required',
-            'purchased_from.*'=>'bail|required',
-            'warranty_period.*'=>'bail|required',
-            'organization_asset_code.*'=>'bail|required',
-            'invoice_no.*'=>'bail|required',
-            'asset_image.*'=>'bail|required',        
+        $isAsset= '';
+        if(empty($asset_detail->id)){ 
+
+            $isAsset = '|required';
+        }
+
+        $rules =[
+            'serial_no' => 'required|array',
+            'serial_no.*'=>'required' ,
+            'purchased_dn'=>'required|array' ,
+            'purchased_dn.*'=>'required' ,
+            'purchased_from'=>'required|array' ,
+            'purchased_from.*'=>'required' ,
+            'warranty_period'=>'required|array' ,
+            'warranty_period.*'=>'required' ,
+            'organization_asset_code'=>'required|array' ,
+            'organization_asset_code.*'=>'required' ,
+            'asset_image'=> $isAsset ,
+            'asset_image.*'=> $isAsset 
+           
+        ];  
+        $msg = [
+            
+            'serial_no.*.required'=>'The Name Of the Insititute field is require',
+            'purchased_dn.*.required'=>'The Address field is require',
+            'purchased_from.*.required'=>'The to field is require',
+            'warranty_period.*.required'=>'The from  field is require',
+            'organization_asset_code.*.required'=>'The description field is require',
+            'asset_image.*.required'=>'The certificate_pdf field is require',
+
+        ];
+        $validator = Validator::make($request->all(),$rules,$msg);
         
-        ]); 
+        
+
+        if($validator->fails()){
+           
+                // dd($validator->errors());
+         
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
         
         try{
 

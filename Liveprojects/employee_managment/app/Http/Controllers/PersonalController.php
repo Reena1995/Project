@@ -15,6 +15,7 @@ use Log;
 use Auth;
 use Session;
 use Validate;
+use Illuminate\Support\Facades\Validator;
 
 class PersonalController extends Controller
 {
@@ -198,16 +199,35 @@ class PersonalController extends Controller
     public function educationAdd(Request $request)
     {
        
-         $empEducationValidation = $request->validate([
+        $rules =[
+            'universityname' => 'required|array',
+            'universityname.*'=>'required' ,
+            'specialization'=>'required|array' ,
+            'specialization.*'=>'required' ,
+            'percentage'=>'required|array' ,
+            'percentage.*'=>'required' ,
+            'passingyear'=>'required|array' ,
+            'passingyear.*'=>'required' ,
+           
+        ];  
+        $msg = [
+            
+            'universityname.*.required'=>'The universityname field is require',
+            'specialization.*.required'=>'The specialization field is require',
+            'percentage.*.required'=>'The percentage field is require',
+            'passingyear.*.required'=>'The passingyear field is require',
 
-            'medium.*' => 'bail|required',
-            'education.*'=>'bail|required',
-            'percentage.*'=>'bail|required',
-            'universityname.*'=>'bail|required',
-            'specialization.*'=>'bail|required',
-            'passingyear.*'=>'bail|required',
-            'result.*'=>'bail|required'  
-        ]); 
+        ];
+        $validator = Validator::make($request->all(),$rules,$msg);
+        
+        
+
+        if($validator->fails()){
+           
+            //     dd($validator->errors());
+         
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
 
         try{
                 DB::beginTransaction();
@@ -441,20 +461,26 @@ class PersonalController extends Controller
                     if(isset($request->document_uuid[$key]))
                     {
                        
-                        $empdoc =  EmpDocumentDetail::where('uuid',$request->document_uuid[$key])->first();
-                        $empdoc->medium_instruction_id  = $request->type[$key];
+                        $emplanUpdate =  EmpLangDetail::where('uuid',$request->lang_uuid[$key])->first();
+                        $emplanUpdate->language_id  = $request->language_id[$key];
                     
-                        if(isset($request->file[$key])){
+                        if(isset($request->read[$key])){
 
-                            $file = $request->type[$key];  // get file
-                            $file_name=time()."_image.".$file->getClientOriginalExtension();// make file name
-                            $file->move('console/upload/employee/education',$file_name); //file name move upload in public		
-                            $empdoc->file = $file_name;
+                            $emplanUpdate->read = $request->read[$key];
+                        }
+                        if(isset($request->write[$key])){
+
+                            $emplanUpdate->write = $request->write[$key];
+                        }
+                        if(isset($request->speak[$key])){
+
+                            $emplanUpdate->speak = $request->speak[$key];
                         }
                         
                         $empdoc->updated_by = Auth::id();
                     
-                        $res = $empdoc->update();
+                        $res = $emplanUpdate->update();
+                        $msg="employee Langauge deatils update successfully";
 
                         if(!$res)
                         {
@@ -488,7 +514,7 @@ class PersonalController extends Controller
                         $emp_lang_dtls->uuid = \Str::uuid();
                     
                         $res = $emp_lang_dtls->save();
-            
+                        $msg="employee Langauge deatils added successfully";
                         if(!$res)
                         {
                             DB::rollback();
@@ -503,7 +529,7 @@ class PersonalController extends Controller
                 }
                
                 DB::commit();
-                Session::flash('success','langauge  details add successfully');
+                Session::flash('success',$msg);
             
                 return redirect()->back();
           

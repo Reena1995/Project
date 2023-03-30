@@ -329,68 +329,68 @@
             
              /*employee education validation start */
 
-                $('#educationDetailBtn').on('click', function(event) {
-                    var isValid = 1;
-                    event.preventDefault()
+                // $('#educationDetailBtn').on('click', function(event) {
+                //     var isValid = 1;
+                //     event.preventDefault()
                   
-                    console.log('subbbbbbbbb');
+                //     console.log('subbbbbbbbb');
                 
-                    $('#education_deatil_add :input').each(function(index,ele) {
-                        console.log('xxxx');
-                        var input = $(this);
-                        console.log(ele);
-                        console.log($(ele).val());
-                        console.log($(ele).val().length , 'condition');
+                //     $('#education_deatil_add :input').each(function(index,ele) {
+                //         console.log('xxxx');
+                //         var input = $(this);
+                //         console.log(ele);
+                //         console.log($(ele).val());
+                //         console.log($(ele).val().length , 'condition');
                         
-                        if($(ele).val().length === 0){
+                //         if($(ele).val().length === 0){
 
-                            console.log('check');
+                //             console.log('check');
 
-                            if($(ele).attr('type') == 'text')
-                            {
+                //             if($(ele).attr('type') == 'text')
+                //             {
                                
-                                var elementNamee=$(ele).attr('name');
-                                var elename = elementNamee.split('[]');
-                                console.log('zzzzzzzzz');
-                                console.log(elename);
-                                isValid = 2;
-                                $(ele).parents('.form-group').find('.error').remove();
-                                ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
-                            }
+                //                 var elementNamee=$(ele).attr('name');
+                //                 var elename = elementNamee.split('[]');
+                //                 console.log('zzzzzzzzz');
+                //                 console.log(elename);
+                //                 isValid = 2;
+                //                 $(ele).parents('.form-group').find('.error').remove();
+                //                 ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
+                //             }
 
-                            if($(ele).attr('type') == 'file')
-                            {
-                                console.log('zzzzzzzzz');
+                //             if($(ele).attr('type') == 'file')
+                //             {
+                //                 console.log('zzzzzzzzz');
                                
                                 
-                                if($(ele).attr('data-key') == 'new_image'){
+                //                 if($(ele).attr('data-key') == 'new_image'){
 
-                                    var elementNamee=$(ele).attr('name');
-                                    var elename = elementNamee.split('[]');
-                                    console.log(elename);
-                                    isValid = 2;
-                                    $(ele).parents('.form-group').find('.error').remove();
-                                    ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
-                                }
-                            }
+                //                     var elementNamee=$(ele).attr('name');
+                //                     var elename = elementNamee.split('[]');
+                //                     console.log(elename);
+                //                     isValid = 2;
+                //                     $(ele).parents('.form-group').find('.error').remove();
+                //                     ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
+                //                 }
+                //             }
 
                            
-                        }
-                        else
-                        {
-                            $(ele).parents('.form-group').find('.error').remove();
-                        }
+                //         }
+                //         else
+                //         {
+                //             $(ele).parents('.form-group').find('.error').remove();
+                //         }
                        
-                    });
-                    if(isValid == 2){
-                        return false;
-                    }else{
-                        $("#education_deatil_add").submit();
-                    }
+                //     });
+                //     if(isValid == 2){
+                //         return false;
+                //     }else{
+                //         $("#education_deatil_add").submit();
+                //     }
                   
                    
 
-                });
+                // });
 
             /*employee education validation end */   
 
@@ -636,108 +636,108 @@
 
             /*employee work validation start */
 
-                // $('#workBtn').on('click', function(event) {
+                $('#workBtn').on('click', function(event) {
 
-                //     var isValid = 1;
-                //     event.preventDefault()
+                    var isValid = 1;
+                    event.preventDefault()
                   
-                //     console.log('subbbbbbbbb');
+                    console.log('subbbbbbbbb');
                 
-                //     $('#emp_work_add :input').each(function(index,ele) {
-                //         console.log('xxxx');
-                //         var input = $(this);
-                //         console.log(ele);
-                //         console.log($(ele).val());
-                //         console.log($(ele).val().length , 'condition');
+                    $('#emp_work_add :input').each(function(index,ele) {
+                        console.log('xxxx');
+                        var input = $(this);
+                        console.log(ele);
+                        console.log($(ele).val());
+                        console.log($(ele).val().length , 'condition');
                         
-                //         if($(ele).val().length === 0){
+                        if($(ele).val().length === 0){
 
-                //             console.log('check');
+                            console.log('check');
 
-                //             if($(ele).attr('type') == 'text')
-                //             {
+                            if($(ele).attr('type') == 'text')
+                            {
                                
-                //                 var elementNamee=$(ele).attr('name');
-                //                 var elename = elementNamee.split('[]');
-                //                 console.log('zzzzzzzzz');
-                //                 console.log(elename);
-                //                 isValid = 2;
-                //                 $(ele).parents('.form-group').find('.error').remove();
-                //                 ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
-                //             }
+                                var elementNamee=$(ele).attr('name');
+                                var elename = elementNamee.split('[]');
+                                console.log('zzzzzzzzz');
+                                console.log(elename);
+                                isValid = 2;
+                                $(ele).parents('.form-group').find('.error').remove();
+                                ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
+                            }
 
-                //             if($(ele).attr('type') == 'date')
-                //             {
-                //                 var elementNamee=$(ele).attr('name');
-                //                 var elename = elementNamee.split('[]');
-                //                 isValid = 2;
-                //                 console.log('zzzzzzzzz');
-                //                 console.log(elename);
-                //                 $(ele).parents('.form-group').find('.error').remove();
-                //                 ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
-                //             }
+                            if($(ele).attr('type') == 'date')
+                            {
+                                var elementNamee=$(ele).attr('name');
+                                var elename = elementNamee.split('[]');
+                                isValid = 2;
+                                console.log('zzzzzzzzz');
+                                console.log(elename);
+                                $(ele).parents('.form-group').find('.error').remove();
+                                ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
+                            }
                           
                           
                            
-                //             if($(ele).attr('type') == 'file')
-                //             {
-                //                 console.log('zzzzzzzzz');
+                            if($(ele).attr('type') == 'file')
+                            {
+                                console.log('zzzzzzzzz');
                                
                                 
-                //                 if($(ele).attr('data-key') == 'exp_image'){
+                                if($(ele).attr('data-key') == 'exp_image'){
 
-                //                     var elementNamee=$(ele).attr('name');
-                //                     var elename = elementNamee.split('[]');
-                //                     console.log(elename);
-                //                     isValid = 2;
-                //                     $(ele).parents('.form-group').find('.error').remove();
-                //                     ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
-                //                 }
-                //             }
+                                    var elementNamee=$(ele).attr('name');
+                                    var elename = elementNamee.split('[]');
+                                    console.log(elename);
+                                    isValid = 2;
+                                    $(ele).parents('.form-group').find('.error').remove();
+                                    ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
+                                }
+                            }
 
-                //             if(!($(ele).val())){
+                            if(!($(ele).val())){
 
-                //                     if(this.tagName == 'TEXTAREA'){
+                                    if(this.tagName == 'TEXTAREA'){
 
-                //                         if(!$.trim($(".textArea").val()))
-                //                         {
-                //                             isValid = 2;
-                //                             console.log('textareacheck');
+                                        if(!$.trim($(".textArea").val()))
+                                        {
+                                            isValid = 2;
+                                            console.log('textareacheck');
 
-                //                             console.log($(ele));
-                //                             var elementNamee=$(ele).attr('name');
-                //                             var elename = elementNamee.split('[]');
-                //                             console.log(elename);
-                //                             $(ele).parents('.form-group').find('.error').remove();
-                //                             ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
-                //                         }else{
-                //                             isValid = 1;
+                                            console.log($(ele));
+                                            var elementNamee=$(ele).attr('name');
+                                            var elename = elementNamee.split('[]');
+                                            console.log(elename);
+                                            $(ele).parents('.form-group').find('.error').remove();
+                                            ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
+                                        }else{
+                                            isValid = 1;
 
-                //                         }
-                //                     }
-                //                     }else{
-                //                             isValid = 1;
+                                        }
+                                    }
+                                    }else{
+                                            isValid = 1;
 
-                //             }
+                            }
 
 
                            
-                //         }
-                //         else
-                //         {
-                //             $(ele).parents('.form-group').find('.error').remove();
-                //         }
+                        }
+                        else
+                        {
+                            $(ele).parents('.form-group').find('.error').remove();
+                        }
                        
-                //     });
-                //     if(isValid == 2){
-                //         return false;
-                //     }else{
-                //         $("#emp_work_add").submit();
-                //     }
+                    });
+                    if(isValid == 2){
+                        return false;
+                    }else{
+                        $("#emp_work_add").submit();
+                    }
                   
                    
 
-                // });
+                });
 
             /*employee work validation end */ 
 

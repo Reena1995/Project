@@ -223,6 +223,13 @@ class ProfessionalController extends Controller
 
         ];
         $validator = Validator::make($request->all(),$rules,$msg);
+
+         if($validator->fails()){
+           
+                // dd($validator->errors());
+         
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
        
         try{
             DB::beginTransaction();

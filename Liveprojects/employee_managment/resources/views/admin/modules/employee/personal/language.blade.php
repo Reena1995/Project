@@ -17,6 +17,7 @@
                         @foreach($emp_languages as $emp_language)
                             <tr>
                                 <td>
+                                    <input type="hidden" name="lang_uuid[]" value="{{ $emp_language->uuid }}">
                                     <div class="form-group floating-label mb-0">
                                         <input type="hidden" name="language_id[]"  value="{{$emp_language->id}}" >
                                         <input type="text"  value="{{$emp_language->languageName->name}}" readonly class="form-control form-control-lg">

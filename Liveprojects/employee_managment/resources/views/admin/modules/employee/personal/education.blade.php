@@ -98,83 +98,157 @@
                         </div>
                     @endforeach
                 @else 
-                    <div class="card education mt-3 eduremove educationDetails" id="">
+                    @if(session()->getOldinput())
+                            @foreach(session()->getOldinput()['universityname'] as $index => $value)
+                            <div class="card education mt-3 eduremove educationDetails" id="">
+                                <div class="card-body " >
+                                    <h3>backend validation</h3>
+                                    <div class="form-row">
+                                            <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
+                                                <label>Medium</label>
+                                                <select class="form-control" name="{{ 'medium[]' }}">
+                                                    @foreach($medium as $me)
+                                                            <option value="{{$me->id}}">{{$me->name}} </option>
+                                                    @endforeach
+                                                </select>
+                                                
+                                            </div>
+
+                                            <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
+                                                <label>Education Level</label>
+                                                <select class="form-control" name="{{ 'education[]' }}">
+                                                    @foreach($educationlevel as $edu)
+
+                                                        <option value="{{$edu->id}}">{{$edu->name}} </option>
+
+                                                    @endforeach
+                                                </select>
+                                                
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Universityname</label>
+                                                <input type="text" name="{{ 'universityname[]' }}"  value = "{{ old('universityname.'.$index) }}"  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                                @error('universityname.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>percentage</label>
+                                                <input type="text" name="{{ 'percentage[]' }}"  value = "{{ old('percentage.'.$index) }}"  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                                @error('percentage.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>specialization</label>
+                                                <input type="text" name="{{ 'specialization[]' }}"  value = "{{ old('specialization.'.$index) }}"  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                                @error('specialization.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>passingyear</label>
+                                                <input type="text" name="{{ 'passingyear[]' }}"  value = "{{ old('passingyear.'.$index) }}"  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                                @error('passingyear.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <lable>Result</lable>
+                                                <input type="file" data-key="result" value="{{ old('result.'.$index) }}" name="{{ 'result[]' }}" class=" form-control form-control-lg">
+                                            </div>
+                                            @error('result.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
+                                        </div>    
+
+                                </div>   
+                            </div>
+                            @endforeach 
+                    @else
+                        <div class="card education mt-3 eduremove educationDetails" id="">
             
-                        <div class="card-body " >
-        
-                                <div class="form-row">
-                            
-        
-                                    <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
-                                        <label>Medium</label>
-                                        <select class="form-control employee_medium" name="medium[]">
-                                        @foreach($medium as $me) 
-                                                <option value="{{$me->id}}">{{$me->name}} </option>
-                                        @endforeach
-                                        </select>
-                                       
-                                    </div>
-                                    <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
-                                        <label>Education Level</label>
-                                        <select class="form-control" name="education[]">
-                                            @foreach($educationlevel as $edu)
-
-                    
-                                            <option value="{{$edu->id}}">{{$edu->name}} </option>
-
+                            <div class="card-body " >
+                            <h3>First Page</h3>
+                                    <div class="form-row">
+                                
+                                        <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
+                                            <label>Medium</label>
+                                            <select class="form-control employee_medium" name="medium[]">
+                                            @foreach($medium as $me) 
+                                                    <option value="{{$me->id}}">{{$me->name}} </option>
                                             @endforeach
-                                        </select>
-
-                                        @if ($errors->has('education[]'))
-                                            <span class="errr-validation">{{ $errors->first('education[]') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        <input type="text" name="universityname[]"class="form-control form-control-lg universityname" placeholder="Enter University Name">
-                                    </div>
-                                    @if ($errors->has('universityname[]'))
-                                            <span class="errr-validation">{{ $errors->first('universityname[]') }}</span>
-                                    @endif
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                    
-                                        <input type="text" name="percentage[]"class="form-control form-control-lg" placeholder="Enter your Percentage">
-                                    </div>
-                                    @if ($errors->has('percentage[]'))
-                                            <span class="errr-validation">{{ $errors->first('percentage[]') }}</span>
-                                        @endif
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            </select>
                                         
-                                        <input type="text" name="specialization[]" class="form-control form-control-lg" placeholder="Enter your Specialization">
-                                    </div>
-                                    @if ($errors->has('specialization[]'))
-                                            <span class="errr-validation">{{ $errors->first('specialization[]') }}</span>
-                                        @endif
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        
-                                        <input type="text" name="passingyear[]"class=" form-control form-control-lg" placeholder="Enter your Passing Year" >
-                                    </div>
-                                    @if ($errors->has('passingyear[]'))
-                                            <span class="errr-validation">{{ $errors->first('passingyear[]') }}</span>
-                                        @endif
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        <lable>Result</lable>
-                                        <input type="file" data-key="new_image" name="result[]" id="result_id"class="form-control form-control-lg" accept="image/png, image/gif, image/jpeg">
-                                    </div>
-                                    @if ($errors->has('result[]'))
-                                            <span class="errr-validation">{{ $errors->first('result[]') }}</span>
-                                        @endif
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        
-                                    </div> 
-                                    <div class="container removecard">
-                                        <div class="row ">
-                                            <button type="button" class="btn btn-danger d-none delete">delete</button> 
                                         </div>
-                                    </div>
-                                  
-                                </div> 
-                        </div>   
-                    </div>
+                                        <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
+                                            <label>Education Level</label>
+                                            <select class="form-control" name="education[]">
+                                                @foreach($educationlevel as $edu)
+
+                        
+                                                <option value="{{$edu->id}}">{{$edu->name}} </option>
+
+                                                @endforeach
+                                            </select>
+
+                                            @if ($errors->has('education[]'))
+                                                <span class="errr-validation">{{ $errors->first('education[]') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            <input type="text" name="universityname[]"class="form-control form-control-lg universityname" placeholder="Enter University Name">
+                                        </div>
+                                        @if ($errors->has('universityname[]'))
+                                                <span class="errr-validation">{{ $errors->first('universityname[]') }}</span>
+                                        @endif
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        
+                                            <input type="text" name="percentage[]"class="form-control form-control-lg" placeholder="Enter your Percentage">
+                                        </div>
+                                        @if ($errors->has('percentage[]'))
+                                                <span class="errr-validation">{{ $errors->first('percentage[]') }}</span>
+                                            @endif
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            
+                                            <input type="text" name="specialization[]" class="form-control form-control-lg" placeholder="Enter your Specialization">
+                                        </div>
+                                        @if ($errors->has('specialization[]'))
+                                                <span class="errr-validation">{{ $errors->first('specialization[]') }}</span>
+                                            @endif
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            
+                                            <input type="text" name="passingyear[]"class=" form-control form-control-lg" placeholder="Enter your Passing Year" >
+                                        </div>
+                                        @if ($errors->has('passingyear[]'))
+                                                <span class="errr-validation">{{ $errors->first('passingyear[]') }}</span>
+                                            @endif
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            <lable>Result</lable>
+                                            <input type="file" data-key="new_image" name="result[]" id="result_id"class="form-control form-control-lg" accept="image/png, image/gif, image/jpeg">
+                                        </div>
+                                        @if ($errors->has('result[]'))
+                                                <span class="errr-validation">{{ $errors->first('result[]') }}</span>
+                                            @endif
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            
+                                        </div> 
+                                        <div class="container removecard">
+                                            <div class="row ">
+                                                <button type="button" class="btn btn-danger d-none delete">delete</button> 
+                                            </div>
+                                        </div>
+                                    
+                                    </div> 
+                            </div>   
+                         </div>
+                    @endif        
+                    
                 @endif     
             </div>
             
