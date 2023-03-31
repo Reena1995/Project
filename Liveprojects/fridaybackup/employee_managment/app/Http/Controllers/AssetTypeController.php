@@ -15,7 +15,7 @@ class AssetTypeController extends Controller
     public function index(Request $request)
     {
         $query = AssetType::query();
-        if($request->input('search')){
+        if($request->has('search')){
             $query->where ( 'type', 'LIKE', '%' . $request->input('search') . '%' );
         }
         $asstype  = $query->where('is_active',1)->paginate(5);
@@ -32,7 +32,7 @@ class AssetTypeController extends Controller
     public function store(Request $request)
     {
         Log::info('aaaaaaa');
-         $asstype= $request->validate([
+         $asstypeValidation= $request->validate([
             'asset_type'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
 
@@ -52,7 +52,7 @@ class AssetTypeController extends Controller
             if(!$res)
             {
                 DB::rollback();
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
              
             
                 return redirect()->back();
@@ -91,11 +91,11 @@ class AssetTypeController extends Controller
 
             return abort(404);
 
-        } else {
+        } 
 
             $asstype = AssetType::where('uuid',$id)->first();
             return view('admin.modules.asset_type.show',compact('asstype'));
-        }    
+         
     }
 
     
@@ -107,18 +107,18 @@ class AssetTypeController extends Controller
 
             return abort(404);
 
-        } else {
+        } 
 
             $asstype = AssetType::where('uuid',$id)->first();
             return view('admin.modules.asset_type.edit',compact('asstype'));
-        }    
+          
     }
 
    
     public function update(Request $request, $id)
     {
         Log::info('dddddddd');
-        $asstype = $request->validate([
+        $asstypeUpdateValidation = $request->validate([
             'asset_type'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
@@ -127,7 +127,14 @@ class AssetTypeController extends Controller
 
             Log::info('eeeeeeee');
             DB::beginTransaction();
-            $asstype = AssetType::where('uuid',$id)->first();;
+            $asstype = AssetType::where('uuid',$id)->first();
+
+            if( is_null($asstype) ) {
+
+                return abort(404);
+    
+            } 
+
             $asstype -> type = $request->asset_type;
             $asstype->updated_by = Auth::id();
             $res = $asstype ->save();
@@ -135,7 +142,7 @@ class AssetTypeController extends Controller
             if(!$res)
             {
                 DB::rollback();
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
              
             
                 return redirect()->back();
@@ -173,7 +180,13 @@ class AssetTypeController extends Controller
            Log::info('hbjjhbdjhqw');
            DB::beginTransaction();
            $asstype = AssetType::where('uuid',$id)->first();
-           if($asstype->id){
+
+           if( is_null($asstype) ) {
+
+                return view('errors.404');
+
+            }
+          
             AssetSubType::where('asset_type_id',$asstype->id)->update(['is_active'=>'0']);
             $asstype->is_active = 0;
             $asstype->updated_by  = Auth::id();
@@ -183,24 +196,23 @@ class AssetTypeController extends Controller
             { 
                 DB::rollback();
 
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
 
                 return redirect()->back();
             }
             DB::commit();
             Session::flash('success','asset type delete successfully');
-        }else{
-            Session::flash('success','Please try again..!');
-        }
-           return redirect()->route('asset_type.index');
-
+            return redirect()->route('asset_type.index');
+        
+           
        } catch (\Illuminate\Database\QueryException $e) {
-        Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
-        Log::info('Error Code: ' . $e->getCode());
-        Log::info('Error Message: ' . $e->getMessage());
-        Log::info("Exiting class:AssetTypeController function:delete");
-        Session::flash('danger', "Internal server error.Please try again later.");
-        return redirect()->back();
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:AssetTypeController function:delete");
+            Session::flash('danger', "Internal server error.Please try again later.");
+            return redirect()->back();
+
         }catch (\Exception $e) {
             Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
             Log::info('Error Code: ' . $e->getCode());

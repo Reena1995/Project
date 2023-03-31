@@ -10,159 +10,367 @@
                 @if(count($emp_professional_details))
                 
                     @foreach($emp_professional_details as $professional)
-                        <div class="card education mt-3 profeadd">
+
+                            <div class="card education mt-3 profeadd">
+                    
+                                <div class="card-body " >
                 
-                            <div class="card-body " >
-            
-                                    <div class="form-row">
-                                
-                                        <input type="hidden" name="professional_uuid[]" value="{{$professional->uuid}}">
-
-                                        
-
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>Name Of The Institute</label>
-                                            <input type="text" value = "{{ $professional->name_of_institute }}" name="name_of_institute[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('name_of_institute[]'))
-                                                    <span class="errr-validation">{{ $errors->first('name_of_institute[]') }}</span>
-                                            @endif
-                                        </div>
-
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>To</label>
-                                            <input type="date" name="to[]"  value = "{{ $professional->to }}"  class="form-control form-control-lg" placeholder="Select Date Of Birth">
-                                            @if ($errors->has('to[]'))
-                                                <span class="errr-validation">{{ $errors->first('to[]') }}</span>
-                                            @endif
-                                        </div>
-
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>From</label>
-                                            <input type="date" value = "{{ $professional->from}}" name="from[]"class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('from[]'))
-                                                    <span class="errr-validation">{{ $errors->first('from[]') }}</span>
-                                            @endif
-                                        </div>
-
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>Address</label>
-                                            <textarea  class="form-control form-control-lg"  name="address[]" cols="30" placeholder="Enter Details Of disaility">
-                                                    {{ $professional->address}}
-                                            </textarea>
-                                            @if ($errors->has('address[]'))
-                                                <span class="errr-validation">{{ $errors->first('address[]') }}</span>
-                                            @endif
-                                        </div>
-
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>Description</label>
-                                            <textarea  class="form-control form-control-lg"  name="description[]" cols="30" placeholder="Enter Details Of disaility">
-                                                {{ $professional->description}}
-                                            </textarea>
-                                            @if ($errors->has('description[]'))
-                                                <span class="errr-validation">{{ $errors->first('description[]') }}</span>
-                                            @endif
-                                        </div>
-
-
-                                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                            @if(empty($professional))
-                                                <lable >Certificate</lable>
-                                                <input type="file" name="certificate_pdf[]" class=" form-control form-control-lg">
-                                            @else
-                                                <lable >Certificate</lable>
-                                                <input type="file" name="certificate_pdf[]" class=" form-control form-control-lg">
-                                                <div class="imageset mt-4 m-4">
-                                                        <img src="{{asset('console/upload/employee/profession_training/'.$professional->certificate_pdf)}}" height="120px" width="100px"> 
-                                                </div>   
-                                            @endif
-                                        </div>
-
-                                        @if ($errors->has('certificate_pdf[]'))
-                                                <span class="errr-validation">{{ $errors->first('certificate_pdf[]') }}</span>
-                                         @endif
-
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        
-                                        </div>
-
+                                        <div class="form-row">
                                     
-                                    </div> 
-                            </div>   
-                        </div>
+                                            <input type="hidden" name="professional_uuid[]" value="{{$professional->uuid}}">
+
+                                            
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Name Of The Institute</label>
+                                                <input type="text" value = "{{ $professional->name_of_institute }}" name="name_of_institute[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                                @if ($errors->has('name_of_institute[]'))
+                                                        <span class="errr-validation">{{ $errors->first('name_of_institute[]') }}</span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>To</label>
+                                                <input type="date" name="to[]"  value = "{{ $professional->to }}"  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                                @if ($errors->has('to[]'))
+                                                    <span class="errr-validation">{{ $errors->first('to[]') }}</span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>From</label>
+                                                <input type="date" value = "{{ $professional->from}}" name="from[]"class="form-control form-control-lg" placeholder="Enter University Name">
+                                                @if ($errors->has('from[]'))
+                                                        <span class="errr-validation">{{ $errors->first('from[]') }}</span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Address</label>
+                                                <textarea  class="form-control form-control-lg"  name="address[]" cols="30" placeholder="Enter Details Of disaility">
+                                                        {{ $professional->address}}
+                                                </textarea>
+                                                @if ($errors->has('address[]'))
+                                                    <span class="errr-validation">{{ $errors->first('address[]') }}</span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Description</label>
+                                                <textarea  class="form-control form-control-lg"  name="description[]" cols="30" placeholder="Enter Details Of disaility">
+                                                    {{ $professional->description}}
+                                                </textarea>
+                                                @if ($errors->has('description[]'))
+                                                    <span class="errr-validation">{{ $errors->first('description[]') }}</span>
+                                                @endif
+                                            </div>
+
+
+                                            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                                @if(empty($professional))
+                                                    <lable >Certificate</lable>
+                                                    <input type="file" name="certificate_pdf[]" class=" form-control form-control-lg">
+                                                @else
+                                                    <lable >Certificate</lable>
+                                                    <input type="file" name="certificate_pdf[]" class=" form-control form-control-lg">
+                                                    <div class="imageset mt-4 m-4">
+                                                            <img src="{{asset('console/upload/employee/profession_training/'.$professional->certificate_pdf)}}" height="120px" width="100px"> 
+                                                    </div>   
+                                                @endif
+                                            </div>
+
+                                            @if ($errors->has('certificate_pdf[]'))
+                                                    <span class="errr-validation">{{ $errors->first('certificate_pdf[]') }}</span>
+                                            @endif
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            
+                                            </div>
+
+                                        
+                                        </div> 
+                                </div>   
+                            </div>
                     @endforeach
+
+                    <!-- @if(!empty(session()->getOldinput()['name_of_institute']))
+                            @foreach(session()->getOldinput()['name_of_institute'] as $index => $value) 
+                                <div class="card education mt-3 profeadd educationDetails" id="">
+                                    <div class="card-body " >
+                                    <h3>backend update validation</h3>
+                                        <div class="form-row">
+                                            
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Name Of The Institute</label>
+                                                <input type="text" value = "{{ old('name_of_institute.'.$index) }}" name="{{ 'name_of_institute[]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                                @error('name_of_institute.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>To</label>
+                                                <input type="date" name="{{ 'to[]' }}"  value = "{{ old('to.'.$index) }}"  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                                @error('to.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>From</label>
+                                                <input type="date" value = "{{ old('from.'.$index) }}" name="{{ 'from[]' }}"class="form-control form-control-lg" placeholder="Enter University Name">
+                                                @error('from.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Address</label>
+                                                <textarea  class="form-control form-control-lg"   name="{{ 'address[]' }}" cols="30" placeholder="Enter Details Of disaility">{{ old('address.'.$index) }}</textarea>
+                                                @error('address.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Description</label>
+                                                <textarea  class="form-control form-control-lg"   name="{{ 'description[]' }}" cols="30" placeholder="Enter Details Of disaility">{{ old('description.'.$index) }}</textarea>
+                                                @error('description.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <lable>certificate</lable>
+                                                <input type="file" data-key="certificate_image" value="{{ old('certificate_pdf.'.$index) }}" name="{{ 'certificate_pdf[]' }}" class=" form-control form-control-lg">
+                                            </div>
+                                            @error('certificate_pdf.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
+
+                                            <div class="container removecard">
+                                                    <div class="row ">
+                                                        <button type="button" class="btn btn-danger d-none delete">delete</button> 
+                                                    </div>
+                                            </div>
+
+                                        </div> 
+
+                                    </div>   
+                                </div>
+                            @endforeach 
+                    @else  
+                        @foreach($emp_professional_details as $professional)
+                            <div class="card education mt-3 profeadd">
+                    
+                                <div class="card-body " >
+                
+                                        <div class="form-row">
+                                    
+                                            <input type="hidden" name="professional_uuid[]" value="{{$professional->uuid}}">
+
+                                            
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Name Of The Institute</label>
+                                                <input type="text" value = "{{ $professional->name_of_institute }}" name="name_of_institute[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                                @if ($errors->has('name_of_institute[]'))
+                                                        <span class="errr-validation">{{ $errors->first('name_of_institute[]') }}</span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>To</label>
+                                                <input type="date" name="to[]"  value = "{{ $professional->to }}"  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                                @if ($errors->has('to[]'))
+                                                    <span class="errr-validation">{{ $errors->first('to[]') }}</span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>From</label>
+                                                <input type="date" value = "{{ $professional->from}}" name="from[]"class="form-control form-control-lg" placeholder="Enter University Name">
+                                                @if ($errors->has('from[]'))
+                                                        <span class="errr-validation">{{ $errors->first('from[]') }}</span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Address</label>
+                                                <textarea  class="form-control form-control-lg"  name="address[]" cols="30" placeholder="Enter Details Of disaility">
+                                                        {{ $professional->address}}
+                                                </textarea>
+                                                @if ($errors->has('address[]'))
+                                                    <span class="errr-validation">{{ $errors->first('address[]') }}</span>
+                                                @endif
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Description</label>
+                                                <textarea  class="form-control form-control-lg"  name="description[]" cols="30" placeholder="Enter Details Of disaility">
+                                                    {{ $professional->description}}
+                                                </textarea>
+                                                @if ($errors->has('description[]'))
+                                                    <span class="errr-validation">{{ $errors->first('description[]') }}</span>
+                                                @endif
+                                            </div>
+
+
+                                            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                                @if(empty($professional))
+                                                    <lable >Certificate</lable>
+                                                    <input type="file" name="certificate_pdf[]" class=" form-control form-control-lg">
+                                                @else
+                                                    <lable >Certificate</lable>
+                                                    <input type="file" name="certificate_pdf[]" class=" form-control form-control-lg">
+                                                    <div class="imageset mt-4 m-4">
+                                                            <img src="{{asset('console/upload/employee/profession_training/'.$professional->certificate_pdf)}}" height="120px" width="100px"> 
+                                                    </div>   
+                                                @endif
+                                            </div>
+
+                                            @if ($errors->has('certificate_pdf[]'))
+                                                    <span class="errr-validation">{{ $errors->first('certificate_pdf[]') }}</span>
+                                            @endif
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            
+                                            </div>
+
+                                        
+                                        </div> 
+                                </div>   
+                            </div>
+                        @endforeach
+                    @endif         -->
 
                 @else 
 
-                    <div class="card education mt-3 profeadd educationDetails" id="">
-            
-                        <div class="card-body " >
-        
-                            <div class="form-row">
-                            
-                              
-                                <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                    <label>Name Of The Institute</label>
-                                    <input type="text" value = "" name="name_of_institute[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                    @if ($errors->has('name_of_institute[]'))
-                                            <span class="errr-validation">{{ $errors->first('name_of_institute[]') }}</span>
-                                    @endif
+                    @if(!empty(session()->getOldinput()['name_of_institute']))
+                            @foreach(session()->getOldinput()['name_of_institute'] as $index => $value) 
+                                <div class="card education mt-3 profeadd educationDetails" id="">
+                                    <div class="card-body " >
+                                    <h3>backend validation</h3>
+                                        <div class="form-row">
+                                            
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Name Of The Institute</label>
+                                                <input type="text" value = "{{ old('name_of_institute.'.$index) }}" name="{{ 'name_of_institute[]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                                @error('name_of_institute.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>To</label>
+                                                <input type="date" name="{{ 'to[]' }}"  value = "{{ old('to.'.$index) }}"  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                                @error('to.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>From</label>
+                                                <input type="date" value = "{{ old('from.'.$index) }}" name="{{ 'from[]' }}"class="form-control form-control-lg" placeholder="Enter University Name">
+                                                @error('from.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Address</label>
+                                                <textarea  class="form-control form-control-lg"   name="{{ 'address[]' }}" cols="30" placeholder="Enter Details Of disaility">{{ old('address.'.$index) }}</textarea>
+                                                @error('address.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Description</label>
+                                                <textarea  class="form-control form-control-lg"  value="{{ old('description.'.$index) }}" name="{{ 'description[]' }}" cols="30" placeholder="Enter Details Of disaility"></textarea>
+                                                @error('description.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <lable>certificate</lable>
+                                                <input type="file" data-key="certificate_image" value="{{ old('certificate_pdf.'.$index) }}" name="{{ 'certificate_pdf[]' }}" class=" form-control form-control-lg">
+                                            </div>
+                                            @error('certificate_pdf.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
+
+                                            <div class="container removecard">
+                                                    <div class="row ">
+                                                        <button type="button" class="btn btn-danger d-none delete">delete</button> 
+                                                    </div>
+                                            </div>
+
+                                        </div> 
+
+                                    </div>   
                                 </div>
+                            @endforeach 
+                    @else
 
-                                <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                    <label>To</label>
-                                    <input type="date" name="to[]"  value = ""  class="form-control form-control-lg" placeholder="Select Date Of Birth">
-                                    @if ($errors->has('to[]'))
-                                        <span class="errr-validation">{{ $errors->first('to[]') }}</span>
-                                    @endif
-                                </div>
-
-                                <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                    <label>From</label>
-                                    <input type="date" value = "" name="from[]"class="form-control form-control-lg" placeholder="Enter University Name">
-                                    @if ($errors->has('from[]'))
-                                            <span class="errr-validation">{{ $errors->first('from[]') }}</span>
-                                    @endif
-                                </div>
-
-                                <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                    <label>Address</label>
-                                    <textarea  class="form-control form-control-lg"   name="address[]" cols="30" placeholder="Enter Details Of disaility"></textarea>
-                                    @if ($errors->has('address[]'))
-                                        <span class="errr-validation">{{ $errors->first('address[]') }}</span>
-                                    @endif
-                                </div>
-
-                                <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                    <label>Description</label>
-                                    <textarea  class="form-control form-control-lg"  value="" name="description[]" cols="30" placeholder="Enter Details Of disaility"></textarea>
-                                    @if ($errors->has('description[]'))
-                                        <span class="errr-validation">{{ $errors->first('description[]') }}</span>
-                                    @endif
-                                </div>
-
-                                <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                    <lable>certificate</lable>
-                                    <input type="file" data-key="certificate_image"  name="certificate_pdf[]" class=" form-control form-control-lg">
-                                </div>
-                                @if ($errors->has('certificate_pdf[]'))
-                                        <span class="errr-validation">{{ $errors->first('certificate_pdf[]') }}</span>
-                                @endif
-
-
-                                <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                        <div class="card education mt-3 profeadd educationDetails" id="">
+                    
+                            <div class="card-body " >
+                                <h3>first Design</h3>
+                                <div class="form-row">
                                     
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>Name Of The Institute</label>
+                                        <input type="text" value = "" name="name_of_institute[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                        
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>To</label>
+                                        <input type="date" name="to[]"  value = ""  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                        
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>From</label>
+                                        <input type="date" value = "" name="from[]"class="form-control form-control-lg" placeholder="Enter University Name">
+                                       
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>Address</label>
+                                        <textarea  class="form-control form-control-lg"   name="address[]" cols="30" placeholder="Enter Details Of disaility"></textarea>
+                                       
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>Description</label>
+                                        <textarea  class="form-control form-control-lg"  value="" name="description[]" cols="30" placeholder="Enter Details Of disaility"></textarea>
+                                        
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <lable>certificate</lable>
+                                        <input type="file" data-key="certificate_image"  name="certificate_pdf[]" class=" form-control form-control-lg">
+                                    </div>
+                                    
+
+                                    <div class="container removecard">
+                                            <div class="row ">
+                                                <button type="button" class="btn btn-danger d-none delete">delete</button> 
+                                            </div>
+                                    </div>
+
                                 </div> 
 
-                                <div>
-                                    <button type="button"  class="btn btn-danger d-none delete">delete</button> 
-                                </div>
+                            </div>   
+                
+                        </div>
+    
+                    @endif 
 
-                            </div> 
-
-                        </div>   
-                       
-                    </div>
+                    
                   
 
                    
@@ -181,7 +389,7 @@
                         </a>
                     </div>
                     <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <button type="button" id="profBtn"   class="theme-btn text-white">Save</button>
+                        <button type="submit" id="profBtn"   class="theme-btn text-white">Save</button>
                     </div>
             </div>     
 

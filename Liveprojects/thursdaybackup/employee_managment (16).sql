@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2023 at 02:55 PM
+-- Generation Time: Mar 30, 2023 at 03:53 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.24
 
@@ -48579,7 +48579,7 @@ CREATE TABLE `company_location_types` (
 
 INSERT INTO `company_location_types` (`id`, `uuid`, `type`, `is_active`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (1, '7f1d8541-ed7b-4226-9d0b-9ba2c5d46158', 'Sf dvsdvs', 0, 1, 1, '2023-02-22 04:42:19', '2023-02-22 04:42:52'),
-(2, 'ed4e76eb-9f9d-4386-ae03-d23d4501d290', 'remote dd', 1, 1, NULL, '2023-02-22 04:42:47', '2023-02-22 04:42:47'),
+(2, 'ed4e76eb-9f9d-4386-ae03-d23d4501d290', '5555555555555', 1, 1, 1, '2023-02-22 04:42:47', '2023-03-27 03:07:49'),
 (3, '87f18a37-c94c-4ec0-901e-90136b974d8d', 'sdvsdv', 1, 1, NULL, '2023-02-22 04:43:06', '2023-02-22 04:43:06'),
 (4, '3773d43c-06c9-411d-9437-24e437ca8ad2', 'cvcvb', 0, 1, 1, '2023-02-24 03:06:18', '2023-03-06 04:51:11'),
 (5, '2ab763a3-c401-4e74-b55c-673f4af57bc1', 'zxvzdf', 1, 1, NULL, '2023-02-24 03:07:00', '2023-02-24 03:07:00'),
@@ -48914,8 +48914,11 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`id`, `uuid`, `name`, `is_active`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 'a3ca5649-c31f-4145-8ae0-ca7402de8e72', 'HR', 1, 1, NULL, '2023-03-18 00:18:57', '2023-03-18 00:18:57'),
-(2, '80a23139-5d20-4b81-ad02-c676a5b9708c', 'Designing', 1, 1, NULL, '2023-03-18 00:19:10', '2023-03-18 00:19:10');
+(1, 'a3ca5649-c31f-4145-8ae0-ca7402de8e72', 'HRr', 1, 1, 1, '2023-03-18 00:18:57', '2023-03-27 05:17:01'),
+(2, '80a23139-5d20-4b81-ad02-c676a5b9708c', 'Designing', 1, 1, NULL, '2023-03-18 00:19:10', '2023-03-18 00:19:10'),
+(3, '5aefc776-9d9d-4de1-b084-978cee639f10', 'xxx', 0, 1, 1, '2023-03-27 05:02:45', '2023-03-27 05:21:14'),
+(4, 'b97e34b2-4b40-476a-9c66-099b46b35458', 'yyyyddddd', 0, 1, 1, '2023-03-27 05:11:43', '2023-03-27 05:21:09'),
+(5, '52575cb0-ad54-44e4-84f8-ee6fbf480902', 'yyyyzdgzsdge svsdvd', 0, 1, 1, '2023-03-27 05:12:04', '2023-03-27 05:21:06');
 
 -- --------------------------------------------------------
 
@@ -49041,7 +49044,9 @@ CREATE TABLE `employee_job_profile_details` (
 --
 
 INSERT INTO `employee_job_profile_details` (`id`, `uuid`, `company_employee_id`, `company_emp_device_id`, `department_id`, `designation_id`, `organization_role_id`, `user_id`, `is_active`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, '3009ecd4-a3b2-4e1c-af5e-1109ba1551ce', 'Duke and Noble Trading', 'Mcgowan Adams Traders', 2, 1, 2, 16, 1, 1, NULL, '2023-03-24 02:37:25', '2023-03-24 02:37:25');
+(1, '3009ecd4-a3b2-4e1c-af5e-1109ba1551ce', 'Duke and Noble Trading', 'Mcgowan Adams Traders', 2, 1, 2, 16, 1, 1, NULL, '2023-03-24 02:37:25', '2023-03-24 02:37:25'),
+(2, '0ae1e3f3-302c-4ee0-9d70-f551720ebb98', 'Frederick and Santos Trading', 'Strickland Wiggins Trading', 1, 2, 1, 18, 1, 1, NULL, '2023-03-25 08:47:00', '2023-03-25 08:47:00'),
+(3, '74c1b807-582a-4d0e-b785-ce903be6d302', 'Rodriguez and Dean Co', 'Tillman and Schroeder Co', 1, 1, 2, 19, 1, 1, NULL, '2023-03-25 11:32:41', '2023-03-25 11:32:41');
 
 -- --------------------------------------------------------
 
@@ -49067,7 +49072,9 @@ CREATE TABLE `employee_location_histories` (
 --
 
 INSERT INTO `employee_location_histories` (`id`, `uuid`, `user_id`, `company_location_id`, `company_location_type_id`, `is_active`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, '56200f6f-5a26-47ac-befb-e4f2fc1b7f20', 16, 5, 2, 1, 1, NULL, '2023-03-24 02:38:16', '2023-03-24 02:38:16');
+(1, '56200f6f-5a26-47ac-befb-e4f2fc1b7f20', 16, 5, 2, 1, 1, NULL, '2023-03-24 02:38:16', '2023-03-24 02:38:16'),
+(2, 'b48a7f16-1cfd-469f-bc94-026bcfe0c3b2', 18, 5, 2, 1, 1, NULL, '2023-03-25 08:51:16', '2023-03-25 08:51:16'),
+(3, 'cb20ae77-77a5-4745-9060-2a05d7ae0f33', 19, 1, 3, 1, 1, NULL, '2023-03-25 11:33:30', '2023-03-25 11:33:30');
 
 -- --------------------------------------------------------
 
@@ -49113,7 +49120,9 @@ CREATE TABLE `employee_personal_details` (
 --
 
 INSERT INTO `employee_personal_details` (`id`, `uuid`, `user_id`, `fathername`, `mothername`, `dob`, `gender`, `marital_status`, `image`, `alternate_no`, `blood_group`, `current_residence_type_id`, `details_of_disability`, `total_of_experience`, `current_address`, `current_country_id`, `current_state_id`, `current_city_id`, `current_pincode`, `permanent_address`, `permanent_country_id`, `permanent_state_id`, `permanent_city_id`, `permanent_pincode`, `mode_of_transportation_id`, `is_active`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, '34b294dc-03cb-4a3d-a23c-21e3a796c3d2', 16, 'Kirestin Petersen', 'Cathleen Stewart', '1982-06-11', 'Female', 'divorce', '1679641392_image.jpeg', '8587375375', 'Sint dignissimos do', 11, 'Velit voluptatem of', '36', 'Quaerat Nam neque er', 220, 3615, 40008, '2526323', 'Officia cum natus de', 175, 3082, 37384, '380008', 11, 1, 1, NULL, '2023-03-24 01:33:12', '2023-03-24 01:33:12');
+(1, '34b294dc-03cb-4a3d-a23c-21e3a796c3d2', 16, 'Kirestin Petersen', 'Cathleen Stewart', '1982-06-11', 'Female', 'divorce', '1679641392_image.jpeg', '8587375375', 'Sint dignissimos do', 11, 'Velit voluptatem of', '36', 'Quaerat Nam neque er', 220, 3615, 40008, '2526323', 'Officia cum natus de', 175, 3082, 37384, '380008', 11, 1, 1, NULL, '2023-03-24 01:33:12', '2023-03-24 01:33:12'),
+(3, 'ad0c1722-8dcb-4f3f-8dd8-8f147750a3dc', 18, 'Sara Peck', 'TaShya Kelley', '2004-05-02', 'Female', 'married', '1679750387_image.jpeg', '7899644996', 'Accusantium reprehen', 10, 'Maxime qui quaerat e', '60', 'Optio ut tempore r', 168, 2750, 31731, '626', 'Reprehenderit porro', 148, 2505, 29578, '855', 12, 1, 1, NULL, '2023-03-25 07:49:47', '2023-03-25 07:49:47'),
+(4, 'eeb94b79-be70-4615-ac13-000fdc0f628f', 19, 'Madonna Mcdaniel', 'Charissa Hendricks', '2006-06-17', 'Male', 'single', '1679762949_image.jpeg', '7990235200', 'Aut blanditiis modi', 10, 'Dolore aute aute lib', '76', 'Incidunt nostrum ne', 171, 2797, 31823, '25', 'Officia consequuntur', 148, 2513, 29608, '552', 11, 1, 1, NULL, '2023-03-25 11:19:10', '2023-03-25 11:19:10');
 
 -- --------------------------------------------------------
 
@@ -49187,7 +49196,10 @@ CREATE TABLE `emp_asset_details` (
 INSERT INTO `emp_asset_details` (`id`, `uuid`, `user_id`, `asset_brand_id`, `asset_sub_type_id`, `serial_no`, `purchased_dn`, `purchased_from`, `warranty_period`, `organization_asset_code`, `invoice_no`, `asset_image`, `is_active`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (1, '84aeac26-ae05-4ff2-9c0b-7499a4274e77', 16, 13, 3, 'Nisi maiores corpori', '1998-03-04', 'Totam totam eaque ma', 'Repellendus Quia et', 'House Mccormick Trading', 'Iste ut temporibus a', '167964531437582195_image.jpeg', 1, 1, 1, '2023-03-24 02:38:34', '2023-03-24 05:22:57'),
 (2, 'c85f28bf-bf70-4e83-a9f9-de61ea2c5881', 16, 2, 3, 'Quo cillum amet aut', '2014-09-16', 'Mollitia minim repud', 'Expedita commodi del', 'Carter and Young Plc', 'Ex in officia odit n', '1679645464398956758_image.jpeg', 1, 1, 1, '2023-03-24 02:41:04', '2023-03-24 05:22:57'),
-(3, 'c909702d-7984-47d5-aca9-a27070d5911f', 16, 2, 2, 'Eius dolor libero au', '2009-04-21', 'Lorem reprehenderit', 'Consequatur Accusan', 'Sykes and Wells Plc', 'Optio itaque eum po', '16796551771018163676_image.jpeg', 1, 1, NULL, '2023-03-24 05:22:57', '2023-03-24 05:22:57');
+(3, 'c909702d-7984-47d5-aca9-a27070d5911f', 16, 2, 2, 'Eius dolor libero au', '2009-04-21', 'Lorem reprehenderit', 'Consequatur Accusan', 'Sykes and Wells Plc', 'Optio itaque eum po', '16796551771018163676_image.jpeg', 1, 1, NULL, '2023-03-24 05:22:57', '2023-03-24 05:22:57'),
+(4, 'dcf2121d-7a16-4dbb-8060-eac6f20471af', 18, 12, 3, 'Blanditiis eos cons', '2017-08-22', 'Beatae reprehenderit', 'Nostrum est voluptat', 'Ramos and Ayala Traders', 'Iusto ullamco magna', '1679754363780316215_image.jpeg', 1, 1, NULL, '2023-03-25 08:56:03', '2023-03-25 08:56:03'),
+(8, 'ac952b73-3f88-4ba0-a41e-b751f1839a1f', 19, 13, 2, 'A iure quam tempor i', '1983-03-16', 'Sunt porro velit qui', 'Quis labore sit sed   vvvvvv', 'Crane and Hodges LLC', '111111sggsgseg', '1680160729895189240_image.jpeg', 1, 1, 1, '2023-03-30 01:48:49', '2023-03-30 01:49:13'),
+(9, '0949f5bb-b73e-46db-9211-31a86a39bd01', 19, 12, 2, 'Labore tenetur maxim', '1979-11-09', 'Enim quia do laborum', 'Illo sed duis ex et', 'Booker and Dudley Traders xxxxxxx', '222222sgsrg', '1680160729398964845_image.jpeg', 1, 1, 1, '2023-03-30 01:48:49', '2023-03-30 01:49:13');
 
 -- --------------------------------------------------------
 
@@ -49216,7 +49228,9 @@ CREATE TABLE `emp_bank_details` (
 --
 
 INSERT INTO `emp_bank_details` (`id`, `uuid`, `user_id`, `ac_holder_name`, `bank_name`, `branch_name`, `account_no`, `ifsc_code`, `is_active`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, '5de756a9-106b-4c86-9f25-766ff47de1c3', 16, 'Latifah Spears', 'Brent Osborn', 'Fuller Lowery', 'Dolor neque explicab', 'Non quis do aut eum', 1, 1, NULL, '2023-03-24 02:37:33', '2023-03-24 02:37:33');
+(1, '5de756a9-106b-4c86-9f25-766ff47de1c3', 16, 'Latifah Spears', 'Brent Osborn', 'Fuller Lowery', 'Dolor neque explicab', 'Non quis do aut eum', 1, 1, NULL, '2023-03-24 02:37:33', '2023-03-24 02:37:33'),
+(2, '71adfcbc-4a20-4a13-bc13-cb047917d938', 18, 'Hu Estes', 'Clayton Lyons', 'Guy Bowman', 'Neque id quasi aspe', 'Magni tempore ut as', 1, 1, NULL, '2023-03-25 08:49:24', '2023-03-25 08:49:24'),
+(3, '83327d4d-b246-4f60-aea9-27a2e94c113c', 19, 'Karleigh Rice', 'Emery Michael', 'Stella Wilson', 'Veniam corrupti an', 'Qui dignissimos offi', 1, 1, NULL, '2023-03-25 11:32:55', '2023-03-25 11:32:55');
 
 -- --------------------------------------------------------
 
@@ -49243,7 +49257,11 @@ CREATE TABLE `emp_document_details` (
 
 INSERT INTO `emp_document_details` (`id`, `uuid`, `user_id`, `document_type_id`, `file`, `is_active`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (1, 'e9835cc1-57a9-4cc1-8cad-e7d792cbb0aa', 16, 1, '1679644279797899053_image.jpeg', 1, 1, 1, '2023-03-24 02:21:19', '2023-03-24 02:35:53'),
-(2, '1d230490-ad7c-49b0-ac0b-e65d31fc15f9', 16, 2, '16796451731407202023_image.jpeg', 1, 1, 1, '2023-03-24 02:21:19', '2023-03-24 02:36:13');
+(2, '1d230490-ad7c-49b0-ac0b-e65d31fc15f9', 16, 2, '16796451731407202023_image.jpeg', 1, 1, 1, '2023-03-24 02:21:19', '2023-03-24 02:36:13'),
+(3, '76e37dc2-7755-40d3-be64-9a5bbc0dd3c9', 18, 1, '1679753459415452437_image.jpeg', 1, 1, NULL, '2023-03-25 08:40:59', '2023-03-25 08:40:59'),
+(4, '4eb7a4d9-acd0-4f75-98a6-3ed1b3207b18', 18, 2, '1679753459612674287_image.jpeg', 1, 1, NULL, '2023-03-25 08:40:59', '2023-03-25 08:40:59'),
+(5, '015146a9-4771-43c3-a8bd-1f69ba26fc6a', 19, 1, '16801843551766245416_image.jpeg', 1, 1, 1, '2023-03-25 11:32:25', '2023-03-30 08:22:35'),
+(6, '217927d8-ed9b-4b68-abb2-75c4183f1022', 19, 2, '1680184355434164708_image.jpeg', 1, 1, 1, '2023-03-25 11:32:25', '2023-03-30 08:22:35');
 
 -- --------------------------------------------------------
 
@@ -49275,7 +49293,11 @@ CREATE TABLE `emp_education_details` (
 
 INSERT INTO `emp_education_details` (`id`, `uuid`, `user_id`, `education_level_id`, `medium_instruction_id`, `university_name`, `percentage`, `specilaization`, `passing_year`, `result`, `is_active`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (1, '23f430ae-1352-4974-8ea5-66a7854af077', 16, 4, 1, 'Guy Galloway aaa', 'Fuga Aute sed tempo', 'Esse perferendis vol sasc', 1979, '1679641402_image.jpeg', 1, 1, 1, '2023-03-24 01:33:22', '2023-03-24 08:16:21'),
-(2, '4689c5ff-08dd-4650-b65c-7f805975c8ce', 16, 2, 10, 'Summer Justice', 'Accusantium est cons', 'Doloremque facere do ascasc', 1972, '1679665567_image.jpeg', 1, 1, 1, '2023-03-24 08:16:07', '2023-03-24 08:16:22');
+(2, '4689c5ff-08dd-4650-b65c-7f805975c8ce', 16, 2, 10, 'Summer Justice', 'Accusantium est cons', 'Doloremque facere do ascasc', 1972, '1679665567_image.jpeg', 1, 1, 1, '2023-03-24 08:16:07', '2023-03-24 08:16:22'),
+(4, '5c9de70c-dd37-495b-ba39-bab6a0b9420c', 18, 4, 9, 'Nomlanga Mccall', 'Qui dolorem eligendi', 'Ut rerum quisquam ma', 2017, '1679753144_image.jpeg', 1, 1, NULL, '2023-03-25 08:35:44', '2023-03-25 08:35:44'),
+(6, '0e832ea5-e07d-4db7-bc1d-38c4d5d3a25f', 19, 4, 11, 'Candice Stone', 'Ut quis quibusdam ac', 'Inventore molestiasxxxxxx', 2000, '1680165020_image.jpeg', 1, 1, 1, '2023-03-30 02:59:20', '2023-03-30 03:00:20'),
+(7, '781478db-21d2-48f2-b965-3c0682cc269b', 19, 13, 3, 'Teagan Glass', 'Eligendi voluptatem', 'Quia est sunt nisixxxxxxx', 2006, '1680164960_image.jpeg', 1, 1, 1, '2023-03-30 02:59:20', '2023-03-30 03:00:20'),
+(8, '17853c75-946b-455d-b433-aaf0a57c2dc7', 19, 4, 11, 'Mari Cain', 'Consequatur Placeat', 'Unde cumque consequazzzz', 2009, '1680165038_image.jpeg', 1, 1, 1, '2023-03-30 02:59:46', '2023-03-30 03:00:38');
 
 -- --------------------------------------------------------
 
@@ -49305,7 +49327,10 @@ CREATE TABLE `emp_emergency_contacts` (
 INSERT INTO `emp_emergency_contacts` (`id`, `uuid`, `user_id`, `name`, `address`, `relationship`, `contact_no`, `is_active`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (1, '18aca56b-a2b3-423d-a9a4-666be9d64aec', 16, 'Neve Cobb', 'Animi laboriosam d', 'Non officia vel quid', 'Ex exercitationem su', 1, 1, 1, '2023-03-24 07:02:51', '2023-03-24 07:05:37'),
 (2, '6573d797-4b3a-4e92-ad11-d2e605c18518', 16, 'Brenda George', 'Non quis aperiam asp', 'Illo adipisci quia v', 'Reiciendis commodi v', 1, 1, 1, '2023-03-24 07:02:51', '2023-03-24 07:05:37'),
-(3, 'd9b0d28f-c9d2-4fb0-a7ac-ba95fc6a4759', 16, 'Hu Holman', 'Quae suscipit tempor', 'Architecto non venia', 'In aut minim alias s', 1, 1, NULL, '2023-03-24 07:05:37', '2023-03-24 07:05:37');
+(3, 'd9b0d28f-c9d2-4fb0-a7ac-ba95fc6a4759', 16, 'Hu Holman', 'Quae suscipit tempor', 'Architecto non venia', 'In aut minim alias s', 1, 1, NULL, '2023-03-24 07:05:37', '2023-03-24 07:05:37'),
+(4, '230faa77-e931-42b1-b2e7-026affc78a57', 18, 'Sigourney Wyatt', 'Rerum velit lorem u', 'Labore ipsam et at a', 'A et porro eligendi', 1, 1, NULL, '2023-03-25 09:13:45', '2023-03-25 09:13:45'),
+(16, '125f8667-382a-48db-97d0-17a131a39218', 19, 'Adara Stout', 'Et mollit commodi ei', 'Nesciunt est neque', 'Dolorem perspiciatis', 1, 1, 1, '2023-03-29 11:44:25', '2023-03-29 12:06:45'),
+(17, '21bebe2e-db9a-4d44-9c75-7f762671ff50', 19, 'Thane Lloyd', 'Perspiciatis sapien', 'Dolor dolore maiores', 'Eos quisquam dolore', 1, 1, 1, '2023-03-29 11:44:25', '2023-03-29 12:02:43');
 
 -- --------------------------------------------------------
 
@@ -49334,7 +49359,9 @@ CREATE TABLE `emp_employment_details` (
 --
 
 INSERT INTO `emp_employment_details` (`id`, `uuid`, `date_of_joining`, `date_of_resigning`, `date_of_leaving`, `reason_for_leaving`, `resign_letter_pdf`, `user_id`, `is_active`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 'd526de74-7ae8-473b-882a-f6f6798b99ee', '2006-02-11', '2003-11-03', '1974-10-21', 'Est aperiam fugit v', '1679645286_image.jpeg', 16, 1, 1, NULL, '2023-03-24 02:38:06', '2023-03-24 02:38:06');
+(1, 'd526de74-7ae8-473b-882a-f6f6798b99ee', '2006-02-11', '2003-11-03', '1974-10-21', 'Est aperiam fugit v', '1679645286_image.jpeg', 16, 1, 1, NULL, '2023-03-24 02:38:06', '2023-03-24 02:38:06'),
+(2, 'e0f524f6-1a16-4f04-a0fe-cd7b72871aa0', '1979-03-01', '1970-02-13', '1986-11-07', 'Placeat nostrud mag', '1679754004_image.jpeg', 18, 1, 1, NULL, '2023-03-25 08:50:04', '2023-03-25 08:50:04'),
+(3, '3ed6c64a-d90c-4065-8a07-a3031a42fc1e', '1978-12-08', '1975-06-02', '1981-04-05', 'Aut id officiis exer', '1679763797_image.jpeg', 19, 1, 1, NULL, '2023-03-25 11:33:17', '2023-03-25 11:33:17');
 
 -- --------------------------------------------------------
 
@@ -49389,7 +49416,10 @@ CREATE TABLE `emp_family_details` (
 INSERT INTO `emp_family_details` (`id`, `uuid`, `user_id`, `name`, `relationship`, `profession`, `age`, `contact_no`, `is_dependent`, `is_active`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (1, 'cd10242d-98bb-4885-ac54-07485d470074', 16, 'Walter Garner', 'Quasi ad et eu offic', 'Nihil nesciunt obca', 'Minima ipsam incidid', 'Mollitia pariatur V', 'YES', 1, 1, 1, '2023-03-24 06:58:06', '2023-03-24 06:58:39'),
 (2, 'ef3d6409-1544-4629-b717-45e39af1a791', 16, 'Aaron Durham', 'Et corrupti et esse', 'Veritatis nihil cupi', 'Ex non voluptas null', 'Et enim aliquam odit', 'NO', 1, 1, 1, '2023-03-24 06:58:06', '2023-03-24 06:58:39'),
-(3, '080791c5-fb5e-4faf-8118-1da17f924dd3', 16, 'Sierra Gardner', 'Nemo totam omnis et', 'Esse sit nihil at en', 'Proident in molesti', 'Et officia qui qui e', 'NO', 1, 1, NULL, '2023-03-24 06:58:39', '2023-03-24 06:58:39');
+(3, '080791c5-fb5e-4faf-8118-1da17f924dd3', 16, 'Sierra Gardner', 'Nemo totam omnis et', 'Esse sit nihil at en', 'Proident in molesti', 'Et officia qui qui e', 'NO', 1, 1, NULL, '2023-03-24 06:58:39', '2023-03-24 06:58:39'),
+(5, '700d67d6-dc6d-41b3-848a-d55d17106cfa', 18, 'Abraham Ewing', 'Aut inventore nulla', 'Dignissimos nulla ut', 'Aut ea sit nostrud', 'Ab laudantium nisi', 'YES', 1, 1, NULL, '2023-03-25 09:12:43', '2023-03-25 09:12:43'),
+(7, 'b0954985-b161-4c04-9460-5f3fafade657', 19, 'Lyle Knox vvvvvvvvvvvvvvv', 'Voluptas itaque moll', 'Mollit qui suscipit', 'Excepteur quasi dolo', 'Consequatur aut in', 'YES', 1, 1, 1, '2023-03-29 12:31:33', '2023-03-29 12:31:45'),
+(8, 'c154cd3d-a81b-4c51-be2e-2338c352f558', 19, 'Steel Rasmussen zcdDC', 'Alias voluptate temp', 'Repellendus Quis qu', 'Odit obcaecati consez  dcdasc', 'Incidunt est exped', 'YES', 1, 1, 1, '2023-03-29 12:31:33', '2023-03-29 12:31:56');
 
 -- --------------------------------------------------------
 
@@ -49443,7 +49473,13 @@ CREATE TABLE `emp_lang_details` (
 INSERT INTO `emp_lang_details` (`id`, `uuid`, `language_id`, `read`, `write`, `speak`, `user_id`, `is_active`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (1, '80b53298-1e69-4c39-8fde-4811708452dc', 3, 'YES', 'YES', 'NO', 16, 1, 1, NULL, '2023-03-24 02:36:55', '2023-03-24 02:36:55'),
 (2, 'fb00a1e6-dbd4-43b2-a9e7-b58aaab5891c', 2, 'YES', 'YES', 'NO', 16, 1, 1, NULL, '2023-03-24 02:36:56', '2023-03-24 02:36:56'),
-(3, '2848e750-1c2a-4ec8-9246-e412004c21a8', 1, 'NO', 'YES', 'NO', 16, 1, 1, NULL, '2023-03-24 02:36:56', '2023-03-24 02:36:56');
+(3, '2848e750-1c2a-4ec8-9246-e412004c21a8', 1, 'NO', 'YES', 'NO', 16, 1, 1, NULL, '2023-03-24 02:36:56', '2023-03-24 02:36:56'),
+(4, '7838daea-83b3-4a6d-983f-23c58f5c28b4', 3, 'YES', 'NO', 'NO', 18, 1, 1, NULL, '2023-03-25 08:43:49', '2023-03-25 08:43:49'),
+(5, '83756ed3-f50b-4c57-bb04-8e3698ac5ab7', 2, 'NO', 'NO', 'NO', 18, 1, 1, NULL, '2023-03-25 08:43:49', '2023-03-25 08:43:49'),
+(6, 'c06296ab-f544-47a9-838a-8bf7f7d502bc', 1, 'NO', 'NO', 'NO', 18, 1, 1, NULL, '2023-03-25 08:43:49', '2023-03-25 08:43:49'),
+(81, '0ed6f842-9d94-4458-91e5-2896eb957fb5', 3, 'YES', 'YES', 'NO', 19, 1, 1, 1, '2023-03-30 08:11:20', '2023-03-30 08:17:04'),
+(82, '02f648b9-8ba0-4343-b1d3-55c18028aa01', 2, 'YES', 'YES', 'YES', 19, 1, 1, 1, '2023-03-30 08:11:20', '2023-03-30 08:17:04'),
+(83, '5a7f5ba3-468c-448b-9a29-bbe8471ed057', 1, 'NO', 'YES', 'NO', 19, 1, 1, 1, '2023-03-30 08:11:20', '2023-03-30 08:17:04');
 
 -- --------------------------------------------------------
 
@@ -49530,10 +49566,9 @@ CREATE TABLE `emp_professional_training_details` (
 --
 
 INSERT INTO `emp_professional_training_details` (`id`, `uuid`, `user_id`, `name_of_institute`, `address`, `to`, `from`, `description`, `certificate_pdf`, `is_active`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(6, 'c727a5c7-1280-4982-a588-33ba11fa6389', 16, 'Jolene Bird', 'Inventore enim volup', '2002-09-26', '2006-04-15', 'Omnis ut ut ut animicccccccccccccccc', '16796600911760291482_image.jpeg', 1, 1, 1, '2023-03-24 06:44:51', '2023-03-24 06:56:48'),
-(7, 'd50a2aa2-30f2-40ef-965c-09b427490763', 16, 'Vivian Wagner', 'Dolor voluptatibus o', '1970-05-05', '2002-03-18', 'Laborum Aliquip nos', '167966009258723219_image.jpeg', 1, 1, 1, '2023-03-24 06:44:52', '2023-03-24 06:56:35'),
-(8, '6d60c5f8-9a91-422b-8c81-9f430aef4ee6', 16, 'Cain Saunders', 'Tenetur aut architec', '2018-01-21', '1994-06-06', 'Enim id voluptate d', '16796601921511277874_image.jpeg', 1, 1, 1, '2023-03-24 06:46:32', '2023-03-24 06:56:35'),
-(9, '952b5dc0-4ac4-4e42-8c67-e36e9efb79ab', 16, 'Helen Reilly', 'Exercitationem moles', '1975-03-28', '1995-09-22', 'In ea officia perspi', '16796607952110712715_image.jpeg', 1, 1, 1, '2023-03-24 06:56:35', '2023-03-24 06:56:48');
+(10, 'baf0fb0a-fd7b-42d2-a5cc-58646b637595', 18, 'Jillian Petersen', 'Repellendus Eum dui', '1999-04-25', '1982-03-10', 'Cupiditate velit mol', '1679754803385296412_image.jpeg', 1, 1, NULL, '2023-03-25 09:03:23', '2023-03-25 09:03:23'),
+(12, 'dae3b6ea-e622-4859-94c2-5dd586ac647b', 16, 'Dante Donaldson', 'Anim consequatur cor', '1982-05-22', '2011-07-14', 'Omnis commodo rem no', '16799786721065058747_image.jpeg', 1, 1, NULL, '2023-03-27 23:14:32', '2023-03-27 23:14:32'),
+(15, '555c732d-864d-4bdb-af9f-66f74311b6c4', 19, 'Burton Nixon', 'Exercitation et volu', '2001-10-23', '2019-03-23', 'Non quo aut doloribu', '16801160771623015056_image.jpeg', 1, 1, 1, '2023-03-29 13:23:40', '2023-03-29 13:26:56');
 
 -- --------------------------------------------------------
 
@@ -49555,7 +49590,7 @@ CREATE TABLE `emp_work_experience_details` (
   `last_salary` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `leaving_reason` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `reporting_authority_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `reporting_authority_contact` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `reporting_authority_contact` int(11) NOT NULL,
   `reporting_authority_designation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `experience_certificate` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT 1,
@@ -49570,8 +49605,8 @@ CREATE TABLE `emp_work_experience_details` (
 --
 
 INSERT INTO `emp_work_experience_details` (`id`, `uuid`, `user_id`, `name`, `address`, `date_of_joining`, `date_of_leaving`, `joining_designation`, `leaving_designation`, `role`, `last_salary`, `leaving_reason`, `reporting_authority_name`, `reporting_authority_contact`, `reporting_authority_designation`, `experience_certificate`, `is_active`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, '722cc8f6-60bf-4723-8d7d-7003eb249478', 16, 'Kennan Ross', 'Libero dolor ea quae', '2014-09-21', '1982-04-13', 'Nulla fugiat harum q', 'Vero fugiat mollitia', 'Odio et nostrum ut e', 'Qui iste praesentium', 'Cumque non eligendi', 'Violet Wells', 'Ex dolorum proident', 'Sunt aute quos persp', '1679660743280465762_image.jpeg', 1, 1, NULL, '2023-03-24 06:55:43', '2023-03-24 06:55:43'),
-(2, '6ad14e0d-3b5e-491c-a9b6-0f867eeec062', 16, 'Shad Holcomb', 'Qui aut cum in aut r', '1991-02-18', '2005-05-09', 'Ea deserunt aute sit', 'Sunt laboris sapien', 'Ipsum est fugiat', 'Obcaecati in quis qu', 'Necessitatibus amet', 'Anastasia Lester', 'Sed et iure veniam', 'Qui eiusmod sunt per', '1679660743114754978_image.jpeg', 1, 1, NULL, '2023-03-24 06:55:43', '2023-03-24 06:55:43');
+(1, '4e220e53-fadc-4aff-8985-7e6bc9127a61', 19, 'Callie Crosby', 'Quis est quasi et do', '2012-12-30', '2010-07-06', 'Qui quia reprehender', 'Qui nostrum Nam qui', 'Quasi ut velit ut arxxxxxx', 'Mollitia quidem modi', 'Ipsam illum consequ', 'Emmanuel Houston', 123456789, 'Libero anim perferen', '1680162548801488984_image.jpeg', 1, 1, 1, '2023-03-30 02:16:18', '2023-03-30 02:29:21'),
+(2, '0cecf941-32ec-4b23-9869-605ecf2fdf7b', 19, 'Tobias Hensley', 'Culpa ea duis archit', '1998-02-24', '2012-09-12', 'Consectetur laborios', 'Occaecat et est dol', 'Cupiditate quia nisi', 'Ab nisi consecteturvvvvvvvv', 'Minima debitis vel i', 'Kermit Phillips', 123456789, 'Ex consectetur sed addddd', '16801631181167015338_image.jpeg', 1, 1, 1, '2023-03-30 02:28:38', '2023-03-30 02:29:21');
 
 -- --------------------------------------------------------
 
@@ -49725,7 +49760,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (31, '2023_02_22_055514_create_emp_professional_training_details_table', 23),
 (32, '2023_02_10_051436_create_emp_family_details_table', 24),
 (33, '2023_02_10_052045_create_emp_emergency_contacts_table', 25),
-(34, '2023_02_22_061228_create_emp_work_experience_details_table', 26),
 (35, '2023_02_10_053600_create_emp_bank_details_table', 27),
 (36, '2023_02_10_054304_create_document_types_table', 28),
 (37, '2023_02_10_054517_create_emp_documents_table', 29),
@@ -49748,7 +49782,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (63, '2023_02_10_050143_create_emp_education_details_table', 47),
 (64, '2023_02_09_133207_create_emp_lang_details_table', 48),
 (65, '2023_02_09_131116_create_employee_job_profile_details_table', 49),
-(66, '2023_02_10_114427_create_emp_employment_details_table', 50);
+(66, '2023_02_10_114427_create_emp_employment_details_table', 50),
+(67, '2023_02_22_061228_create_emp_work_experience_details_table', 51);
 
 -- --------------------------------------------------------
 
@@ -49811,7 +49846,7 @@ CREATE TABLE `organization_roles` (
 
 INSERT INTO `organization_roles` (`id`, `uuid`, `name`, `department_id`, `designation_id`, `is_active`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (1, 'c0a7799c-e8a3-468a-9dc3-6558d32c3839', 'xxx', 2, 1, 1, 1, NULL, '2023-03-18 00:20:15', '2023-03-18 00:20:15'),
-(2, '491bd175-0798-453c-94f5-4fddde9b3bc4', 'yyy', 1, 2, 1, 1, NULL, '2023-03-18 00:20:27', '2023-03-18 00:20:27');
+(2, '491bd175-0798-453c-94f5-4fddde9b3bc4', 'yyy', 1, 2, 0, 1, 1, '2023-03-18 00:20:27', '2023-03-27 05:22:01');
 
 -- --------------------------------------------------------
 
@@ -54038,7 +54073,13 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `uuid`, `name`, `email`, `password`, `mobile_no`, `onboarding_dtls`, `role_id`, `created_by`, `updated_by`, `is_active`, `created_at`, `updated_at`) VALUES
 (1, '9b0c7da3-67b1-450f-b9f7-87eca9ab388b', 'admin', 'admin@gmail.com', '$2y$10$vxjYovf2aw1mCB4cU7R6iezMmkKurtqWjfIVgXxHghocTE.bosHkK', NULL, '0', 1, 1, NULL, 1, NULL, NULL),
-(16, '1780f36f-6914-4988-815e-65a548164688', 'reena valekar', 'reena.technotery@gmail.com', '$2y$10$XCIC1GBAU7crOO/ndPSukeWFARDsdMidhxA1TeEFtOyLoxe8xk0Iu', '7990235200', '1', 2, 1, NULL, 1, '2023-03-24 01:30:16', '2023-03-24 07:02:51');
+(16, '1780f36f-6914-4988-815e-65a548164688', 'reena valekar', 'reena.technotery@gmail.com', '$2y$10$XCIC1GBAU7crOO/ndPSukeWFARDsdMidhxA1TeEFtOyLoxe8xk0Iu', '7990235200', '1', 2, 1, NULL, 1, '2023-03-24 01:30:16', '2023-03-24 07:02:51'),
+(18, '9f3c0c67-6669-4280-9b7c-e453c32a8f2a', 'ziya valekar', 'ziya.technotery@gmail.com', '$2y$10$74zzxqiAfdxO.WZAbTS9WuHodxm2FdBzp/ji19tVRdqNlP8/QyvPy', '8347256265', '1', 2, 1, NULL, 1, '2023-03-25 07:47:10', '2023-03-25 09:13:45'),
+(19, 'bae0fe4c-340a-4432-a2ec-c8bc9943e29a', 'mansi patel', 'mansi.tech@gmail.com', '$2y$10$ySizrwZcPUJ5Zt7eaNf6l.b3Rb4eI.o7SOg3Uf0nhXmZKO18uBb5u', '7990235211', '1', 2, 1, NULL, 1, '2023-03-25 09:40:59', '2023-03-29 08:18:50'),
+(23, '79fd9f0c-b7c2-4e6a-a78a-d665a1f499ed', 'heli patel', 'heli@gmail.com', '$2y$10$ac0MKQtUrSZqnAtQVqgeLu4ehbnoJmAt7RQPgtb9g64B3uilFz8nS', '1234567890', '0', 2, 1, NULL, 1, '2023-03-29 01:03:55', '2023-03-29 01:03:55'),
+(24, 'cd18a448-ec15-4d17-b0ad-f96ff8ed3403', 'khanika valekar', 'khanika@gmail.com', '$2y$10$JIhLW3RjjTk6JaQIaSSXvOWG/vn5Lhi7jVoMCp5pmMaeyUo.fxDbK', '7990235211', '0', 2, 1, NULL, 1, '2023-03-30 05:09:19', '2023-03-30 05:09:19'),
+(25, '8bc5e7c4-3563-4ffd-abbf-9236685e7e9a', 'krisha jambekar', 'krishatech@gmail.com', '$2y$10$eThVVXHkSi/4rENqP5ag2eASlftPRzAB3U6pPqNhpqDPTn4gQeIoy', '1234567890', '0', 2, 1, NULL, 1, '2023-03-30 05:10:58', '2023-03-30 05:10:58'),
+(26, '76844400-cfe2-4e2d-8b07-1a7f9597478e', 'hanishka valekar', 'hany@gmail.com', '$2y$10$EcK.SXPejHxfggwduo6bL.lPG6PSeuXov45EI4AH7oD8UhSFwFsKy', '7990235200', '0', 2, 1, NULL, 1, '2023-03-30 05:42:40', '2023-03-30 05:42:40');
 
 --
 -- Indexes for dumped tables
@@ -54475,7 +54516,7 @@ ALTER TABLE `current_residence_types`
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `designations`
@@ -54499,19 +54540,19 @@ ALTER TABLE `education_levels`
 -- AUTO_INCREMENT for table `employee_job_profile_details`
 --
 ALTER TABLE `employee_job_profile_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `employee_location_histories`
 --
 ALTER TABLE `employee_location_histories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `employee_personal_details`
 --
 ALTER TABLE `employee_personal_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `employee_personal_detail_histories`
@@ -54523,37 +54564,37 @@ ALTER TABLE `employee_personal_detail_histories`
 -- AUTO_INCREMENT for table `emp_asset_details`
 --
 ALTER TABLE `emp_asset_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `emp_bank_details`
 --
 ALTER TABLE `emp_bank_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `emp_document_details`
 --
 ALTER TABLE `emp_document_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `emp_education_details`
 --
 ALTER TABLE `emp_education_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `emp_emergency_contacts`
 --
 ALTER TABLE `emp_emergency_contacts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `emp_employment_details`
 --
 ALTER TABLE `emp_employment_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `emp_employment_detail_histories`
@@ -54565,7 +54606,7 @@ ALTER TABLE `emp_employment_detail_histories`
 -- AUTO_INCREMENT for table `emp_family_details`
 --
 ALTER TABLE `emp_family_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `emp_job_prof_dtl_histories`
@@ -54577,7 +54618,7 @@ ALTER TABLE `emp_job_prof_dtl_histories`
 -- AUTO_INCREMENT for table `emp_lang_details`
 --
 ALTER TABLE `emp_lang_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `emp_leave_details`
@@ -54595,13 +54636,13 @@ ALTER TABLE `emp_leave_detail_histories`
 -- AUTO_INCREMENT for table `emp_professional_training_details`
 --
 ALTER TABLE `emp_professional_training_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `emp_work_experience_details`
 --
 ALTER TABLE `emp_work_experience_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -54631,7 +54672,7 @@ ALTER TABLE `medium_of_instructions`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `mode_of_transportations`
@@ -54667,7 +54708,7 @@ ALTER TABLE `states`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables

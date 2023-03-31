@@ -15,15 +15,17 @@ class OrganizationRoleController extends Controller
 {
     public function index(Request $request)
     {
-        $query =OrganizationRole::query();
-        if($request->input('search')){
-            $search = $request->input('search');
-            $query->where ( 'name', 'LIKE', '%' . $search . '%' )
+        $query = OrganizationRole::query();
+
+        if($request -> has('search')){
+
+            $search = $request->search;
+            $query -> where ( 'name', 'LIKE', '%' . $search . '%' )
                 ->orWhereHas('departmentActive', function($q) use ($search){ 
-                    $q->where('name', 'LIKE', '%' . $search . '%');
+                    $q -> where('name', 'LIKE', '%' . $search . '%');
                 })
                 ->orWhereHas('designationActive', function($q) use ($search){ 
-                    $q->where('name', 'LIKE', '%' . $search . '%');
+                    $q -> where('name', 'LIKE', '%' . $search . '%');
                 });
         } 
         $org_role  = $query->where('is_active',1)->paginate(5);
@@ -32,16 +34,15 @@ class OrganizationRoleController extends Controller
 
     public function create()
     {  
-        $department=Department::where('is_active',1)->orderBy('name', 'ASC')->get();
-        $designation=Designation::where('is_active',1)->orderBy('name', 'ASC')->get();
-       return view('admin.modules.organization_role.add',compact('department','designation'));
+        $department = Department::where('is_active',1)->orderBy('name', 'ASC')->get();
+        $designation = Designation::where('is_active',1)->orderBy('name', 'ASC')->get();
+        return view('admin.modules.organization_role.add',compact('department','designation'));
     }
 
     
     public function store(Request $request)
     {
-        Log::info('aaaaaaa');
-         $org_role = $request->validate([
+         $orgRoleValidation = $request->validate([
             'organization_role_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             'department_id' =>'bail|required',
             'designation_id' =>'bail|required'
@@ -50,7 +51,7 @@ class OrganizationRoleController extends Controller
         
         try{
 
-            Log::info('bbbbbbb');
+          
             DB::beginTransaction();
             $org_role = new OrganizationRole;
             $org_role->name = $request->organization_role_name;
@@ -64,17 +65,13 @@ class OrganizationRoleController extends Controller
             if(!$res)
             {
                 DB::rollback();
-                Session::flash('error','Internal server error please try again later.');
-             
-            
+                Session::flash('danger','Internal server error please try again later.');
                 return redirect()->back();
             }
             DB::commit();
             Session::flash('success','organization role create successfully');
             return redirect()->route('organization_role.index');
            
-
-
         }catch (\Illuminate\Database\QueryException $e) {
             Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
             Log::info('Error Code: ' . $e->getCode());
@@ -82,8 +79,8 @@ class OrganizationRoleController extends Controller
             Log::info("Exiting class:OrganizationRoleController function:store");
             Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
-        }    
-        catch (\Exception $e) {
+
+        }catch (\Exception $e) {
                 Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
                 Log::info('Error Code: ' . $e->getCode());
                 Log::info('Error Message: ' . $e->getMessage());
@@ -103,8 +100,8 @@ class OrganizationRoleController extends Controller
             return abort(404);
 
         } else {
-            $department=Department::where('is_active',1)->orderBy('name', 'ASC')->first();
-            $designation=Designation::where('is_active',1)->orderBy('name', 'ASC')->first();
+            $department = Department::where('is_active',1)->orderBy('name', 'ASC')->first();
+            $designation = Designation::where('is_active',1)->orderBy('name', 'ASC')->first();
             $org_role = OrganizationRole::where('uuid',$id)->first();
             return view('admin.modules.organization_role.show',compact('department','designation','org_role'));
         }
@@ -132,39 +129,38 @@ class OrganizationRoleController extends Controller
 
     public function update(Request $request, $id)
     {
-        Log::info('dddddddd');
-         $org_role = $request->validate([
+         $orgRoleUpdateValidation= $request->validate([
             'organization_role_name'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             'department_id'=>'bail|required',
-            'designation_id'=>'bail|required',
-            
+            'designation_id'=>'bail|required', 
 
         ]); 
+
         try{
 
-            Log::info('eeeeeeee');
-            DB::beginTransaction();
-            $org_role = OrganizationRole::where('uuid',$id)->first();
-            $org_role->name = $request->organization_role_name;
-            $org_role->department_id = $request->department_id;
-            $org_role->designation_id = $request->designation_id;
-            $org_role->updated_by = Auth::id();
-            $res = $org_role->save();
+                DB::beginTransaction();
+                $org_role = OrganizationRole::where('uuid',$id)->first();
+                if( is_null($org_role) ) {
 
-            if(!$res)
-            {
-                DB::rollback();
-                Session::flash('error','Internal server error please try again later.');
-             
-            
-                return redirect()->back();
-            }
-            DB::commit();
-            Session::flash('success','organization role update  successfully');
-            return redirect()->route('organization_role.index');
-           
+                    return view('errors.404');
+                
+                }
+                $org_role->name = $request->organization_role_name;
+                $org_role->department_id = $request->department_id;
+                $org_role->designation_id = $request->designation_id;
+                $org_role->updated_by = Auth::id();
+                $res = $org_role->save();
 
-
+                if(!$res)
+                {
+                    DB::rollback();
+                    Session::flash('danger','Internal server error please try again later.');
+                    return redirect()->back();
+                }
+                DB::commit();
+                Session::flash('success','organization role update  successfully');
+                return redirect()->route('organization_role.index');
+         
         }catch (\Illuminate\Database\QueryException $e) {
             Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
             Log::info('Error Code: ' . $e->getCode());
@@ -172,8 +168,8 @@ class OrganizationRoleController extends Controller
             Log::info("Exiting class:OrganizationRoleController function:update");
             Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
-        }    
-        catch (\Exception $e) {
+
+        }catch (\Exception $e) {
                 Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
                 Log::info('Error Code: ' . $e->getCode());
                 Log::info('Error Message: ' . $e->getMessage());
@@ -186,50 +182,47 @@ class OrganizationRoleController extends Controller
     public function status($id)
     {
       
-       try{
+        try{   
+            DB::beginTransaction();
+            $org_role = OrganizationRole::where('uuid',$id)->first();
+            if( is_null($org_role) ) {
 
-           Log::info('hbjjhbdjhqw');
-           DB::beginTransaction();
-           $org_role = OrganizationRole::where('uuid',$id)->first();
-           $org_role->is_active = 0;
-           $org_role->updated_by = Auth::id();
-           $res = $org_role->update();
-
-           if(!$res)
-           {
-               DB::rollback();
-               Session::flash('error','Internal server error please try again later.');
+                return view('errors.404');
             
-           
-               return redirect()->back();
-           }
-           DB::commit();
-           Session::flash('success','designation delete successfully');
-           return redirect()->route('organization_role.index');
-          
+            }
+            $org_role->is_active = 0;
+            $org_role->updated_by = Auth::id();
+            $res = $org_role->update();
 
-       }catch (\Illuminate\Database\QueryException $e) {
-        Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
-        Log::info('Error Code: ' . $e->getCode());
-        Log::info('Error Message: ' . $e->getMessage());
-        Log::info("Exiting class:OrganizationRoleController function:delete");
-        Session::flash('danger', "Internal server error.Please try again later.");
-        return redirect()->back();
-    }    
-    catch (\Exception $e) {
+            if(!$res)
+            {
+                DB::rollback();
+                Session::flash('danger','Internal server error please try again later.');
+                
+                return redirect()->back();
+            }
+            DB::commit();
+            Session::flash('success','designation delete successfully');
+            return redirect()->route('organization_role.index');
+            
+
+        }catch (\Illuminate\Database\QueryException $e) {
+            Log::info('Error occured While executing query for user-id ' . Auth::id() . '. See the log below.');
+            Log::info('Error Code: ' . $e->getCode());
+            Log::info('Error Message: ' . $e->getMessage());
+            Log::info("Exiting class:OrganizationRoleController function:delete");
+            Session::flash('danger', "Internal server error.Please try again later.");
+            return redirect()->back();
+
+        }catch (\Exception $e) {
             Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
             Log::info('Error Code: ' . $e->getCode());
             Log::info('Error Message: ' . $e->getMessage());
             Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
-
-    }
+        }
 
       
-
     }
-    public function destroy($id)
-    {
-        //
-    }
+   
 }

@@ -16,7 +16,7 @@ class DocumentTypeController extends Controller
     {
         
         $query = DocumentType::query();
-        if($request->input('search')){
+        if($request->has('search')){
             $query->where ( 'type', 'LIKE', '%' . $request->input('search') . '%' );
         }
         $doctype  = $query->where('is_active',1)->paginate(5);
@@ -31,10 +31,9 @@ class DocumentTypeController extends Controller
     public function store(Request $request)
     {
         Log::info('aaaaaaa');
-         $doctype= $request->validate([
+         $doctypeValidation= $request->validate([
             'document_type'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
-
         ]); 
         
         try{
@@ -51,7 +50,7 @@ class DocumentTypeController extends Controller
             if(!$res)
             {
                 DB::rollback();
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
              
             
                 return redirect()->back();
@@ -88,11 +87,11 @@ class DocumentTypeController extends Controller
 
             return abort(404);
 
-        } else {
+        } 
 
             $doctype = DocumentType::where('uuid',$id)->first();
             return view('admin.modules.document_type.show',compact('doctype'));
-        }
+        
     }
 
     
@@ -104,19 +103,19 @@ class DocumentTypeController extends Controller
 
             return abort(404);
 
-        } else {
+        }
 
             $doctype = DocumentType::where('uuid',$id)->first();
             return view('admin.modules.document_type.edit',compact('doctype'));
 
-        }
+        
     }
 
    
     public function update(Request $request, $id)
     {
         Log::info('dddddddd');
-        $doctype = $request->validate([
+        $doctypeUpdateValidation = $request->validate([
             'document_type'=>'bail|required','regex:/(^[A-Za-z0-9 ]+$)+/',
             
         ]); 
@@ -125,7 +124,12 @@ class DocumentTypeController extends Controller
 
             Log::info('eeeeeeee');
             DB::beginTransaction();
-            $doctype = DocumentType::where('uuid',$id)->first();;
+            $doctype = DocumentType::where('uuid',$id)->first();
+            if( is_null($doctype) ) {
+
+                return abort(404);
+    
+            }
             $doctype -> type = $request->document_type;
             $doctype->updated_by = Auth::id();
             $res = $doctype ->save();
@@ -133,7 +137,7 @@ class DocumentTypeController extends Controller
             if(!$res)
             {
                 DB::rollback();
-                Session::flash('error','Internal server error please try again later.');
+                Session::flash('danger','Internal server error please try again later.');
              
             
                 return redirect()->back();
@@ -151,8 +155,8 @@ class DocumentTypeController extends Controller
             Log::info("Exiting class:DocumentTypeController function:update");
             Session::flash('danger', "Internal server error.Please try again later.");
             return redirect()->back();
-        }    
-        catch (\Exception $e) {
+
+        }catch (\Exception $e) {
                 Log::info('Error occured for user-id ' . Auth::id() . '. See log below');
                 Log::info('Error Code: ' . $e->getCode());
                 Log::info('Error Message: ' . $e->getMessage());
@@ -172,6 +176,11 @@ class DocumentTypeController extends Controller
            Log::info('hbjjhbdjhqw');
            DB::beginTransaction();
            $doctype = DocumentType::where('uuid',$id)->first();
+           if( is_null($doctype) ) {
+
+            return view('errors.404');
+        
+            }
            $doctype->is_active = 0;
            $doctype->updated_by = Auth::id();
            $res = $doctype->update();
@@ -179,7 +188,7 @@ class DocumentTypeController extends Controller
            if(!$res)
            {
                DB::rollback();
-               Session::flash('error','Internal server error please try again later.');
+               Session::flash('danger','Internal server error please try again later.');
             
            
                return redirect()->back();

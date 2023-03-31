@@ -13090,10 +13090,14 @@ a:hover {
 .admin-sidebar .menu .menu-item .sub-menu {
     display: none;
     padding: 0;
-    padding-left: 10px;
+    /* padding-left: 10px; */
     list-style: none;
 }
-
+.sub-menu-ul
+{
+    padding-left: 10px;
+    /* background: var(--main-light-color); */
+}
 .admin-sidebar .menu .menu-item.active {
     background: whitesmoke;
 }
@@ -13120,7 +13124,8 @@ a:hover {
 .admin-sidebar .menu .menu-item.opened .sub-menu {
     border-top: 1px solid rgba(255, 255, 255, 0.07);
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-    background: whitesmoke;
+    background: var(--thm-graybg);
+    padding-left: 8px;
 }
 
 .sidebar-backdrop {
@@ -15988,4 +15993,18 @@ height: 40px !important;
 .imageset img
 {
     margin-bottom: 84px;
+}
+.removecard .btn-danger
+{
+    margin-left: 651px;
+    font-size: small;
+}
+.sameadd .btn-primary
+{
+    
+    font-size: small;
+}
+.menu-label
+{
+    white-space: nowrap;
 }

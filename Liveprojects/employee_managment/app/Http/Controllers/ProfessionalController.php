@@ -25,7 +25,7 @@ class ProfessionalController extends Controller
         $professional_detail = EmpProfessionalTrainingDetail::where('user_id',$user->id)->first();
       
 
-        $isCertficate= '';
+        $isCertficate= 'nullable';
         if(empty($professional_detail->id)){ 
 
             $isCertficate = '|required';
@@ -42,7 +42,7 @@ class ProfessionalController extends Controller
             'from.*'=>'required' ,
             'description'=>'required|array' ,
             'description.*'=>'required' ,
-            'certificate_pdf'=> $isCertficate ,
+            'certificate_pdf'=>'required',
             'certificate_pdf.*'=> $isCertficate 
            
         ];  
@@ -58,11 +58,11 @@ class ProfessionalController extends Controller
         ];
         $validator = Validator::make($request->all(),$rules,$msg);
         
-        
+        // dd($validator->errors());
 
         if($validator->fails()){
            
-            //     dd($validator->errors());
+                // dd($validator->errors());
          
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
@@ -177,7 +177,11 @@ class ProfessionalController extends Controller
         $user = User::where('uuid',$request->user_id)->first();
         $work_detail = EmpWorkExperienceDetail::where('user_id',$user->id)->first();
       
+        $isCertficate= 'nullable';
+        if(empty($professional_detail->id)){ 
 
+            $isCertficate = '|required';
+        }
       
 
         $rules =[
@@ -224,10 +228,10 @@ class ProfessionalController extends Controller
 
         ];
         $validator = Validator::make($request->all(),$rules,$msg);
-
+        // dd($validator->errors());
+        // dd($validator->err)
          if($validator->fails()){
            
-                // dd($validator->errors());
          
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }

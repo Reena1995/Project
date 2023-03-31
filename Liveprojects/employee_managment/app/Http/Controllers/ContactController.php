@@ -155,7 +155,7 @@ class ContactController extends Controller
     public function emergencyAdd(Request $request)
     {
        
-       
+      
         $rules =[
             'name' => 'required|array',
             'name.*'=>'required' ,
@@ -164,7 +164,7 @@ class ContactController extends Controller
             'relationship'=>'required|array' ,
             'relationship.*'=>'required' ,
             'contact_no'=>'required|array' ,
-            'contact_no.*'=>'required' ,
+            'contact_no.*'=>'required|numeric|digits:10' ,
            
         ];  
         $msg = [
@@ -173,6 +173,8 @@ class ContactController extends Controller
             'address.*.required'=>'The Address field is require',
             'relationship.*.required'=>'The Relationship field is require',
             'contact_no.*.required'=>'The Contact No field is require',
+            'contact_no.*.numeric'=>'Only digit',
+            'contact_no.*.digits'=>'Only 10 Number',
 
         ];
         $validator = Validator::make($request->all(),$rules,$msg);

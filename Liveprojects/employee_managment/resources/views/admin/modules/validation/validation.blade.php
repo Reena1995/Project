@@ -527,217 +527,217 @@
 
              /*employee professional validation start */
 
-                $('#profBtn').on('click', function(event) {
-                    var isValid = 1;
-                    event.preventDefault()
+                // $('#profBtn').on('click', function(event) {
+                //     var isValid = 1;
+                //     event.preventDefault()
                   
-                    console.log('subbbbbbbbb');
+                //     console.log('subbbbbbbbb');
                 
-                    $('#emp_proessional_add :input').each(function(index,ele) {
-                        console.log('xxxx');
-                        var input = $(this);
-                        console.log(this.tagName);
-                        // console.log($(ele).val());
+                //     $('#emp_proessional_add :input').each(function(index,ele) {
+                //         console.log('xxxx');
+                //         var input = $(this);
+                //         console.log(this.tagName);
+                //         // console.log($(ele).val());
                        
-                        console.log('bbbbbbbbb');
-                        // console.log($(ele).val().length , 'condition');
+                //         console.log('bbbbbbbbb');
+                //         // console.log($(ele).val().length , 'condition');
                         
-                        if($(ele).val().length === 0){
+                //         if($(ele).val().length === 0){
 
-                            console.log('check');
+                //             console.log('check');
 
-                            if($(ele).attr('type') == 'text')
-                            {
+                //             if($(ele).attr('type') == 'text')
+                //             {
                                
-                                var elementNamee=$(ele).attr('name');
-                                var elename = elementNamee.split('[]');
-                                console.log('zzzzzzzzz');
-                                console.log(elename);
-                                isValid = 2;
-                                $(ele).parents('.form-group').find('.error').remove();
-                                ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
-                            }
+                //                 var elementNamee=$(ele).attr('name');
+                //                 var elename = elementNamee.split('[]');
+                //                 console.log('zzzzzzzzz');
+                //                 console.log(elename);
+                //                 isValid = 2;
+                //                 $(ele).parents('.form-group').find('.error').remove();
+                //                 ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
+                //             }
 
-                            if($(ele).attr('type') == 'date')
-                            {
-                                var elementNamee=$(ele).attr('name');
-                                var elename = elementNamee.split('[]');
-                                isValid = 2;
-                                console.log('zzzzzzzzz');
-                                console.log(elename);
-                                $(ele).parents('.form-group').find('.error').remove();
-                                ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
-                            }
+                //             if($(ele).attr('type') == 'date')
+                //             {
+                //                 var elementNamee=$(ele).attr('name');
+                //                 var elename = elementNamee.split('[]');
+                //                 isValid = 2;
+                //                 console.log('zzzzzzzzz');
+                //                 console.log(elename);
+                //                 $(ele).parents('.form-group').find('.error').remove();
+                //                 ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
+                //             }
 
-                            if($(ele).attr('type') == 'file')
-                            {
-                                console.log('ffffffffff');
+                //             if($(ele).attr('type') == 'file')
+                //             {
+                //                 console.log('ffffffffff');
                                
                                 
-                                if($(ele).attr('data-key') == 'certificate_image'){
+                //                 if($(ele).attr('data-key') == 'certificate_image'){
 
-                                    var elementNamee=$(ele).attr('name');
-                                    var elename = elementNamee.split('[]');
-                                    console.log(elename);
-                                    isValid = 2;
-                                    $(ele).parents('.form-group').find('.error').remove();
-                                    ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
-                                }
-                            }
+                //                     var elementNamee=$(ele).attr('name');
+                //                     var elename = elementNamee.split('[]');
+                //                     console.log(elename);
+                //                     isValid = 2;
+                //                     $(ele).parents('.form-group').find('.error').remove();
+                //                     ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
+                //                 }
+                //             }
 
                         
-                            if(!($(ele).val())){
+                //             if(!($(ele).val())){
 
-                                if(this.tagName == 'TEXTAREA'){
+                //                 if(this.tagName == 'TEXTAREA'){
 
-                                    if(!$.trim($(".textArea").val()))
-                                    {
-                                        isValid = 2;
-                                        console.log('textareacheck');
+                //                     if(!$.trim($(".textArea").val()))
+                //                     {
+                //                         isValid = 2;
+                //                         console.log('textareacheck');
 
-                                        console.log($(ele));
-                                        var elementNamee=$(ele).attr('name');
-                                        var elename = elementNamee.split('[]');
-                                        console.log(elename);
-                                        $(ele).parents('.form-group').find('.error').remove();
-                                        ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
-                                    }else{
-                                        isValid = 1;
+                //                         console.log($(ele));
+                //                         var elementNamee=$(ele).attr('name');
+                //                         var elename = elementNamee.split('[]');
+                //                         console.log(elename);
+                //                         $(ele).parents('.form-group').find('.error').remove();
+                //                         ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
+                //                     }else{
+                //                         isValid = 1;
 
-                                    }
-                            }
-                            }else{
-                                    isValid = 1;
+                //                     }
+                //             }
+                //             }else{
+                //                     isValid = 1;
 
-                            }
+                //             }
                          
                            
-                        }
-                        else
-                        {
-                            isValid = 1;
-                            $(ele).parents('.form-group').find('.error').remove();
-                        }
+                //         }
+                //         else
+                //         {
+                //             isValid = 1;
+                //             $(ele).parents('.form-group').find('.error').remove();
+                //         }
                        
-                    });
-                    console.log('isValid',isValid);
-                    if(isValid == 2){
-                        return false;
-                    }else{
-                        $("#emp_proessional_add").submit();
-                    }
+                //     });
+                //     console.log('isValid',isValid);
+                //     if(isValid == 2){
+                //         return false;
+                //     }else{
+                //         $("#emp_proessional_add").submit();
+                //     }
                   
                            
 
-                });
+                // });
 
             /*employee professional validation end */ 
 
 
             /*employee work validation start */
 
-                $('#workBtn').on('click', function(event) {
+                // $('#workBtn').on('click', function(event) {
 
-                    var isValid = 1;
-                    event.preventDefault()
+                //     var isValid = 1;
+                //     event.preventDefault()
                   
-                    console.log('subbbbbbbbb');
+                //     console.log('subbbbbbbbb');
                 
-                    $('#emp_work_add :input').each(function(index,ele) {
-                        console.log('xxxx');
-                        var input = $(this);
-                        console.log(ele);
-                        console.log($(ele).val());
-                        console.log($(ele).val().length , 'condition');
+                //     $('#emp_work_add :input').each(function(index,ele) {
+                //         console.log('xxxx');
+                //         var input = $(this);
+                //         console.log(ele);
+                //         console.log($(ele).val());
+                //         console.log($(ele).val().length , 'condition');
                         
-                        if($(ele).val().length === 0){
+                //         if($(ele).val().length === 0){
 
-                            console.log('check');
+                //             console.log('check');
 
-                            if($(ele).attr('type') == 'text')
-                            {
+                //             if($(ele).attr('type') == 'text')
+                //             {
                                
-                                var elementNamee=$(ele).attr('name');
-                                var elename = elementNamee.split('[]');
-                                console.log('zzzzzzzzz');
-                                console.log(elename);
-                                isValid = 2;
-                                $(ele).parents('.form-group').find('.error').remove();
-                                ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
-                            }
+                //                 var elementNamee=$(ele).attr('name');
+                //                 var elename = elementNamee.split('[]');
+                //                 console.log('zzzzzzzzz');
+                //                 console.log(elename);
+                //                 isValid = 2;
+                //                 $(ele).parents('.form-group').find('.error').remove();
+                //                 ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
+                //             }
 
-                            if($(ele).attr('type') == 'date')
-                            {
-                                var elementNamee=$(ele).attr('name');
-                                var elename = elementNamee.split('[]');
-                                isValid = 2;
-                                console.log('zzzzzzzzz');
-                                console.log(elename);
-                                $(ele).parents('.form-group').find('.error').remove();
-                                ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
-                            }
+                //             if($(ele).attr('type') == 'date')
+                //             {
+                //                 var elementNamee=$(ele).attr('name');
+                //                 var elename = elementNamee.split('[]');
+                //                 isValid = 2;
+                //                 console.log('zzzzzzzzz');
+                //                 console.log(elename);
+                //                 $(ele).parents('.form-group').find('.error').remove();
+                //                 ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
+                //             }
                           
                           
                            
-                            if($(ele).attr('type') == 'file')
-                            {
-                                console.log('zzzzzzzzz');
+                //             if($(ele).attr('type') == 'file')
+                //             {
+                //                 console.log('zzzzzzzzz');
                                
                                 
-                                if($(ele).attr('data-key') == 'exp_image'){
+                //                 if($(ele).attr('data-key') == 'exp_image'){
 
-                                    var elementNamee=$(ele).attr('name');
-                                    var elename = elementNamee.split('[]');
-                                    console.log(elename);
-                                    isValid = 2;
-                                    $(ele).parents('.form-group').find('.error').remove();
-                                    ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
-                                }
-                            }
+                //                     var elementNamee=$(ele).attr('name');
+                //                     var elename = elementNamee.split('[]');
+                //                     console.log(elename);
+                //                     isValid = 2;
+                //                     $(ele).parents('.form-group').find('.error').remove();
+                //                     ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
+                //                 }
+                //             }
 
-                            if(!($(ele).val())){
+                //             if(!($(ele).val())){
 
-                                    if(this.tagName == 'TEXTAREA'){
+                //                     if(this.tagName == 'TEXTAREA'){
 
-                                        if(!$.trim($(".textArea").val()))
-                                        {
-                                            isValid = 2;
-                                            console.log('textareacheck');
+                //                         if(!$.trim($(".textArea").val()))
+                //                         {
+                //                             isValid = 2;
+                //                             console.log('textareacheck');
 
-                                            console.log($(ele));
-                                            var elementNamee=$(ele).attr('name');
-                                            var elename = elementNamee.split('[]');
-                                            console.log(elename);
-                                            $(ele).parents('.form-group').find('.error').remove();
-                                            ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
-                                        }else{
-                                            isValid = 1;
+                //                             console.log($(ele));
+                //                             var elementNamee=$(ele).attr('name');
+                //                             var elename = elementNamee.split('[]');
+                //                             console.log(elename);
+                //                             $(ele).parents('.form-group').find('.error').remove();
+                //                             ($(ele).parents('.form-group').append('<p class="error">This '+elename[0]+'  is required</p>'));
+                //                         }else{
+                //                             isValid = 1;
 
-                                        }
-                                    }
-                                    }else{
-                                            isValid = 1;
+                //                         }
+                //                     }
+                //                     }else{
+                //                             isValid = 1;
 
-                            }
+                //             }
 
 
                            
-                        }
-                        else
-                        {
-                            $(ele).parents('.form-group').find('.error').remove();
-                        }
+                //         }
+                //         else
+                //         {
+                //             $(ele).parents('.form-group').find('.error').remove();
+                //         }
                        
-                    });
-                    if(isValid == 2){
-                        return false;
-                    }else{
-                        $("#emp_work_add").submit();
-                    }
+                //     });
+                //     if(isValid == 2){
+                //         return false;
+                //     }else{
+                //         $("#emp_work_add").submit();
+                //     }
                   
                    
 
-                });
+                // });
 
             /*employee work validation end */ 
 
@@ -819,7 +819,7 @@
 
                     //                 if($(ele).attr('type') == 'text')
                     //                 {
-                                    
+                                       
                     //                     var elementNamee=$(ele).attr('name');
                     //                     var elename = elementNamee.split('[]');
                     //                     console.log('zzzzzzzzz');
@@ -828,8 +828,11 @@
                     //                     isValid = 2;
                     //                     $(ele).parents('.form-group').find('.error').remove();
                     //                     ($(ele).parents('.form-group').append('<p class="error">This ssss'+elename[0]+'  is required</p>'));
-                    //                 }
 
+                                       
+                                            
+                    //                 }
+                                   
                                     
                     //                 if(!($(ele).val())){
 
@@ -859,14 +862,50 @@
 
                                 
                     //             }
+                                
+                    //             else if($(ele).attr('data-key') == 'mobile'){
+
+                    //                 var mobNum = this.value;
+                    //                 var numericCheck=$.isNumeric(mobNum);
+
+                    //                 if($.isNumeric(mobNum))
+                    //                 {
+                    //                         if(mobNum.length==10){
+                    //                             console.log('else1');
+                                            
+                    //                                 $(ele).parents('.form-group').find('.error').remove();
+                                               
+                                    
+                    //                         } else {
+
+                    //                             console.log('else12');
+
+                    //                             $(ele).parents('.form-group').find('.error').remove();
+                    //                             ($(ele).parents('.form-group').append('<p class="error">Please put 10  digit mobile number</p>'));
+                                            
+                                           
+                    //                         }
+                                            
+                    //                 }
+                    //                 else{
+
+                    //                             $(ele).parents('.form-group').find('.error').remove();
+                    //                             ($(ele).parents('.form-group').append('<p class="error">Please enter only digit number</p>'));
+                                            
+                                           
+                    //                 }
+                    //             }    
+                                    
                     //             else
                     //             {
+
                     //                 $(ele).parents('.form-group').find('.error').remove();
+                                   
                     //             }
 
                     //         });
+                    //         return false;
                     //         if(isValid == 2){
-                    //             return false;
                     //         }else{
                     //             $("#emp_emergency_add").submit();
                     //         }

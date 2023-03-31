@@ -78,7 +78,7 @@
 
                 @else 
 
-                        @if(session()->getOldinput())
+                @if(!empty(session()->getOldinput()['name']))
 
                             @foreach(session()->getOldinput()['name'] as $index => $value)  
 
@@ -162,10 +162,11 @@
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Contact No</label>
-                                            <input type="text" value = ""  name="{{ 'contact_no[]' }}" class="form-control form-control-lG" placeholder="Enter University Name">
+                                            <input type="text" value = "" data-key="mobile" name="{{ 'contact_no[]' }}" class="form-control form-control-lG number" placeholder="Enter University Name">
                                             @error('contact_no')
                                             <span class="error">{{ $message }}</span>
                                             @enderror
+                                            <span class="error"></span>
                                         </div>
 
                                         <div class="container removecard">
@@ -227,6 +228,7 @@
                 
                 var name = $(this).attr('name');
                 $(this).attr('name',name).val('');
+                $(this).parents('.form-group').find('.error').remove();
               
                
               
@@ -237,9 +239,9 @@
                 console.log('textaaaaa');
                 var name = $(this).attr('name');
                 $(this).attr('name',name).val('');
+                $(this).parents('.form-group').find('.error').remove();
                
                
-              
                 $(this).parents('.emergencyadd').append('');
 		    }); 
          

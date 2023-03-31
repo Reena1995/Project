@@ -14,36 +14,36 @@
                 </thead>
                 <tbody>
                     @if(count($emp_languages))
-                        @foreach($emp_languages as $emp_language)
+                        @foreach($emp_languages as $r => $emp_language)
                             <tr>
                                 <td>
+                                    <input type="hidden" name="lang_uuid[]" value="{{$emp_language->uuid}}"> 
                                     <div class="form-group floating-label mb-0">
-                                        <input type="hidden" name="language_id[]"  value="{{$emp_language->id}}" >
-                                        <input type="text"  value="{{$emp_language->languageName->name}}" readonly class="form-control form-control-lg">
+                                        <input type="hidden" name="language_id[]"  value="{{$emp_language->languageName->id}}" >
+                                        <input type="text"  value="{{$emp_language->languageName->id}}" readonly class="form-control form-control-lg">
                                     </div>  
                                 </td>
                                 
-                                <td><input type="checkbox" id="read" name="read[]" value="YES" {{$emp_language->read == 'YES' ? 'checked' : ''}}></td>
-                                
-                                <td><input type="checkbox" id="write" name="write[]" value="YES" {{$emp_language->write == 'YES' ? 'checked' : ''}}></td>
-                                <td><input type="checkbox" id="speack" name="speack[]" value="YES" {{$emp_language->speack == 'YES' ? 'checked' : ''}}></td>
+                                <td><input type="checkbox" id="read" name="read[{{$r}}]" value="YES" {{$emp_language->read == 'YES' ? 'checked' : ''}}></td>
+                                <td><input type="checkbox" id="write" name="write[{{$r}}]" value="YES" {{$emp_language->write == 'YES' ? 'checked' : ''}}></td>
+                                <td><input type="checkbox" id="speak" name="speak[{{$r}}]" value="YES" {{$emp_language->speak == 'YES' ? 'checked' : ''}}></td>
                             </tr>
                          @endforeach   
                     @else
                         @if(count($langauge))
-                            @foreach($langauge as $lang)
+                            @foreach($langauge as $k => $lang)
                             <tr>
                                 <td>
                                     <div class="form-group floating-label mb-0">
                                         <input type="hidden" name="language_id[]"  value="{{$lang->id}}" >
-                                        <input type="text"  value="{{$lang->name}}" class="form-control form-control-lg" readonly>
+                                        <input type="text"  value="{{$lang->id}}" class="form-control form-control-lg" readonly>
                                     </div>  
                                 </td>
                                 
-                                <td><input type="checkbox" id="read" name="read[]" value="YES"></td>
+                                <td><input type="checkbox" id="read" name="read[{{$k}}]" value="YES"></td>
                                 
-                                <td><input type="checkbox" id="write" name="write[]" value="YES"></td>
-                                <td><input type="checkbox" id="speack" name="speack[]" value="YES"></td>
+                                <td><input type="checkbox" id="write" name="write[{{$k}}]" value="YES"></td>
+                                <td><input type="checkbox" id="speak" name="speak[{{$k}}]" value="YES"></td>
                             </tr>
                             @endforeach
                         @endif  

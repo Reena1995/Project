@@ -121,109 +121,203 @@
                     @endforeach
 
                 @else 
+                        @if(!empty(session()->getOldinput()['serial_no']))
+                            @foreach(session()->getOldinput()['serial_no'] as $index => $value) 
+                            <div class="card education mt-3 assetadd educationDetails" id="">
+                                <div class="card-body" >
 
-                    <div class="card education mt-3 assetadd educationDetails" id="">
-            
-                        <div class="card-body " >
-        
-                                <div class="form-row">
-                            
-                               
-                                        <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
-                                            <label>Asset brand</label>
-                                            <select class="form-control" name="asset_brand_id[]">
-                                            @foreach($asset_brand as $brand)
-                                                    <option value="{{$brand->id}}">{{$brand->name}} </option>
-
-                                            @endforeach
-                                            </select>
-                                            @if ($errors->has('asset_brand_id[]'))
-                                                <span class="errr-validation">{{ $errors->first('asset_brand_id[]') }}</span>
-                                            @endif
-                                        </div>
-
-                                        <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
-                                            <label>Asset Sub Type Brand</label>
-                                            <select class="form-control" name="asset_sub_type_id[]">
-                                                @foreach($asset_sub_type as $sub)
-                        
-                                                    <option value="{{$sub->id}}">{{$sub->type}} </option>
+                                        <h3>backend validation</h3>
+                                        <div class="form-row">
+                                            <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
+                                                <label>Asset brand</label>
+                                                <select class="form-control" name="{{ 'asset_brand_id[]' }}">
+                                                @foreach($asset_brand as $brand)
+                                                        <option value="{{$brand->id}}">{{$brand->name}} </option>
 
                                                 @endforeach
-                                            </select>
-                                            @if ($errors->has('asset_sub_type_id[]'))
-                                                <span class="errr-validation">{{ $errors->first('asset_sub_type_id[]') }}</span>
-                                            @endif
+                                                </select>
+                                                
+                                            </div>
+
+                                            <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
+                                                <label>Asset Sub Type Brand</label>
+                                                <select class="form-control" name="{{ 'asset_sub_type_id[]' }}">
+                                                    @foreach($asset_sub_type as $sub)
+                            
+                                                        <option value="{{$sub->id}}">{{$sub->type}} </option>
+
+                                                    @endforeach
+                                                </select>
+                                                
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Serial No</label>
+                                                <input type="text" value = "{{ old('serial_no.'.$index) }}" name="{{ 'serial_no[]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                                @error('serial_no.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Purchased Date</label>
+                                                <input type="date" name="{{ 'purchased_dn[]' }}"  value = "{{ old('purchased_dn.'.$index) }}"  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                                @error('purchased_dn.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Purchased From</label>
+                                                <input type="text" name="{{ 'purchased_from[]' }}"  value = "{{ old('purchased_from.'.$index) }}"  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                                @error('purchased_from.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Warranty Period</label>
+                                                <input type="text" name="{{ 'warranty_period[]' }}"  value = "{{ old('warranty_period.'.$index) }}"  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                                @error('warranty_period.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Organization Asset Code</label>
+                                                <input type="text" name="{{ 'organization_asset_code[]' }}"  value = "{{ old('organization_asset_code.'.$index) }}"  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                                @error('organization_asset_code.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Invoice No</label>
+                                                <input type="text" name="{{ 'invoice_no[]' }}"  value = "{{ old('invoice_no.'.$index) }}"  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                                @error('invoiceno.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <label>Asset Image</label>
+                                                <input type="file" data-key="image_fill" name="{{ 'asset_image[]' }}"  value = "{{ old('asset_image.'.$index) }}"  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                               
+                                            </div>
+                                            @error('asset_image.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
+
+                                           
+
                                         </div>
+                                            
+                                </div>
+                            </div>        
+                            @endforeach 
+                        @else
+                        <div class="card education mt-3 assetadd educationDetails" id="">
+            
+                                <div class="card-body " >
+                                <h3>First Page</h3>
+                                        <div class="form-row">
+                                    
+                                                <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
+                                                    <label>Asset brand</label>
+                                                    <select class="form-control" name="{{ 'asset_brand_id[]' }}">
+                                                    @foreach($asset_brand as $brand)
+                                                            <option value="{{$brand->id}}">{{$brand->name}} </option>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>Serial No</label>
-                                            <input type="text" value = "" name="serial_no[]"class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('serial_no[]'))
-                                                    <span class="errr-validation">{{ $errors->first('serial_no[]') }}</span>
-                                            @endif
-                                        </div>
+                                                    @endforeach
+                                                    </select>
+                                                   
+                                                </div>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>Purchased Date</label>
-                                            <input type="date"    value = "" name="purchased_dn[]"class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('purchased_dn[]'))
-                                                    <span class="errr-validation">{{ $errors->first('purchased_dn[]') }}</span>
-                                            @endif
-                                        </div>
+                                                <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
+                                                    <label>Asset Sub Type Brand</label>
+                                                    <select class="form-control" name="{{ 'asset_sub_type_id[]' }}">
+                                                        @foreach($asset_sub_type as $sub)
+                                
+                                                            <option value="{{$sub->id}}">{{$sub->type}} </option>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>Purchased From</label>
-                                            <input type="text" value = "" name="purchased_from[]"class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('purchased_from[]'))
-                                                    <span class="errr-validation">{{ $errors->first('purchased_from[]') }}</span>
-                                            @endif
-                                        </div>
+                                                        @endforeach
+                                                    </select>
+                                                   
+                                                </div>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>Warranty Period</label>
-                                            <input type="text" value = "" name="warranty_period[]"class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('warranty_period[]'))
-                                                    <span class="errr-validation">{{ $errors->first('warranty_period[]') }}</span>
-                                            @endif
-                                        </div>
+                                                <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                    <label>Serial No</label>
+                                                    <input type="text" value = "" name="{{ 'serial_no[]' }}"class="form-control form-control-lg" placeholder="Enter University Name">
+                                                    @error('serial_no')
+                                                                <span class="error">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>Organization Asset Code</label>
-                                            <input type="text" value = "" name="organization_asset_code[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('organization_asset_code[]'))
-                                                    <span class="errr-validation">{{ $errors->first('organization_asset_code[]') }}</span>
-                                            @endif
-                                        </div>
+                                                <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                    <label>Purchased Date</label>
+                                                    <input type="date"    value = "" name="{{ 'purchased_dn[]' }}"class="form-control form-control-lg" placeholder="Enter University Name">
+                                                    @error('purchased_dn')
+                                                                <span class="error">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
 
-                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                            <label>Invoice No</label>
-                                            <input type="text" value = "" name="invoice_no[]"class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('invoice_no[]'))
-                                                    <span class="errr-validation">{{ $errors->first('invoice_no[]') }}</span>
-                                            @endif
-                                        </div>
+                                                <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                    <label>Purchased From</label>
+                                                    <input type="text" value = "" name="{{ 'purchased_from[]' }}"class="form-control form-control-lg" placeholder="Enter University Name">
+                                                    @error('purchased_from')
+                                                                <span class="error">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
 
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        <lable>Asset Image</lable>
-                                        <input type="file" data-key="image_fill"  name="asset_image[]" class=" form-control form-control-lg">
-                                    </div>
-                                    @if ($errors->has('asset_image[]'))
-                                            <span class="errr-validation">{{ $errors->first('asset_image[]') }}</span>
-                                    @endif
+                                                <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                    <label>Warranty Period</label>
+                                                    <input type="text" value = "" name="{{ 'warranty_period[]' }}"class="form-control form-control-lg" placeholder="Enter University Name">
+                                                    @error('warranty_period')
+                                                                <span class="error">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                    <label>Organization Asset Code</label>
+                                                    <input type="text" value = "" name="{{ 'organization_asset_code[]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                                    @error('organization_asset_code')
+                                                                <span class="error">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                    <label>Invoice No</label>
+                                                    <input type="text" value = "" name="{{ 'invoice_no[]' }}"class="form-control form-control-lg" placeholder="Enter University Name">
+                                                    @error('invoice_no')
+                                                                <span class="error">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+
+                                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                                <lable>Asset Image</lable>
+                                                <input type="file" data-key="image_fill"  name="{{ 'asset_image[]' }}" class=" form-control form-control-lg">
+                                                @error('asset_image')
+                                                                <span class="error">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                          
 
 
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        
-                                    </div> 
+                                            <div class="container removecard">
+                                                <div class="row ">
+                                                    <button type="button" class="btn btn-danger d-none delete">delete</button> 
+                                                </div>
+                                            </div>
 
-                                    <div>
-                                        <button type="button" class="btn btn-danger d-none delete">delete</button> 
-                                    </div>
+                                        </div> 
+                                </div>   
+                        </div>
+        
+                        @endif 
 
-                                </div> 
-                        </div>   
-                    </div>
+                    
+
                 @endif     
             </div>
             
@@ -236,7 +330,7 @@
                         </a>
                     </div>
                     <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <button type="button"  id="assetbtn" class="theme-btn text-white">Save</button>
+                        <button type="submit"  id="assetbtn" class="theme-btn text-white">Save</button>
                     </div>
             </div>     
 

@@ -14,7 +14,7 @@
     <div class="centerbad"> 
         <div class='error-top'>
             <h3 >404 not Found</h3>
-            <p class="mt-2">Your Bad Request</h4> 
+            <p class="mt-2">Your Bad Request.</h4> 
         </div>
     </div>
     

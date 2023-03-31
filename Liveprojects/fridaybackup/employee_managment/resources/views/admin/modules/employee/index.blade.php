@@ -58,10 +58,10 @@
                                                             <tr>
                                                                 <td>{{$user->firstItem() + $index}}</td>
                                                                 <td>{{$use->name}}</td>
-                                                                <td>
+                                                                <td  style="text-align:center">
                                                                     @if($use->onboarding_dtls == 0)
                                                                     
-                                                                        <div class="btn btn-warning">Not Available</div>
+                                                                        <div class="btn btn-danger">Not Available</div>
                                                                     
                                                                     @else
                                                                     

@@ -18,8 +18,6 @@
                                 
                                         <input type="hidden" name="family_uuid[]" value="{{$family->uuid}}">
 
-                                        
-
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Name</label>
                                             <input type="text" value = "{{ $family->name}}" name="name[]" class="form-control form-control-lg" placeholder="Enter University Name">
@@ -80,78 +78,138 @@
                     @endforeach
 
                 @else 
-
-                    <div class="card education mt-3 familyadd educationDetails" id="">
-            
-                        <div class="card-body " >
-        
-                            <div class="form-row">
-                            
-                              
-                            <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                @if(!empty(session()->getOldinput()['name']))
+                        @foreach(session()->getOldinput()['name'] as $index => $value) 
+                        <div class="card education mt-3 familyadd educationDetails" id="">
+                
+                                <div class="card-body " >
+                                    <h3>backend validation</h3>
+                                    <div class="form-row">
+                                    
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Name</label>
-                                            <input type="text" value = "" name="name[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('name[]'))
-                                                    <span class="errr-validation">{{ $errors->first('name[]') }}</span>
-                                            @endif
+                                            <input type="text" value ="{{ old('name.'.$index) }}" name="{{ 'name[]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                            @error('name.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
                                         </div>
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Relationship</label>
-                                            <input type="text" value = "" name="relationship[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('relationship[]'))
-                                                    <span class="errr-validation">{{ $errors->first('relationship[]') }}</span>
-                                            @endif
+                                            <input type="text" value = "{{ old('relationship.'.$index) }}" name="{{ 'relationship[]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                            @error('relationship.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
                                         </div>
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>	profession</label>
-                                            <input type="text" value = "" name="profession[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('	profession[]'))
-                                                    <span class="errr-validation">{{ $errors->first('	profession[]') }}</span>
-                                            @endif
+                                            <input type="text" value = "{{ old('profession.'.$index) }}" name="{{ 'profession[]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                            @error('profession.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
                                         </div>
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Age</label>
-                                            <input type="text" value = "" name="age[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('age[]'))
-                                                    <span class="errr-validation">{{ $errors->first('age[]') }}</span>
-                                            @endif
+                                            <input type="text" value = "{{ old('age.'.$index) }}" name="age[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                            @error('age.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
                                         </div>
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Contact No</label>
-                                            <input type="text" value = "" name="contact_no[]" class="form-control form-control-lg" placeholder="Enter University Name">
-                                            @if ($errors->has('contact_no[]'))
-                                                    <span class="errr-validation">{{ $errors->first('contact_no[]') }}</span>
-                                            @endif
+                                            <input type="text" value = "{{ old('contact_no.'.$index) }}" name="{{ 'contact_no[]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                            @error('contact_no.'.$index)
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
                                         </div>
 
                                         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                             <label>Is Depended </label>
                                             <input type="checkbox" id="is_dependent" name="is_dependent[]" value="YES">
-                                            @if ($errors->has('is_dependent[]'))
-                                                    <span class="errr-validation">{{ $errors->first('is_dependent[]') }}</span>
-                                            @endif
+                                            
                                         </div>
 
-                                <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <div class="container removecard">
+                                                <div class="row ">
+                                                    <button type="button" class="btn btn-danger d-none delete">delete</button> 
+                                                </div>
+                                        </div>
+
+                                    </div> 
+
+                                </div>   
+
+                        </div>
+                        @endforeach 
+                    @else
+                        <div class="card education mt-3 familyadd educationDetails" id="">
+                
+                            <div class="card-body " >
+                                <h3>first Design</h3>
+                                <div class="form-row">
                                     
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>Name</label>
+                                        <input type="text" value ="" name="{{ 'name[]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                        @error('name')
+                                            <span class="error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>Relationship</label>
+                                        <input type="text" value = "" name="{{ 'relationship[]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                        @error('relationship')
+                                            <span class="error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>	profession</label>
+                                        <input type="text" value = "" name="{{ 'profession[]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                        @error('profession')
+                                            <span class="error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>Age</label>
+                                        <input type="text" value = "" name="age[]" class="form-control form-control-lg" placeholder="Enter University Name">
+                                        @error('age')
+                                            <span class="error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>Contact No</label>
+                                        <input type="text" value = "" name="{{ 'contact_no[]' }}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                        @error('contact_no')
+                                            <span class="error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        <label>Is Depended </label>
+                                        <input type="checkbox" id="is_dependent" name="is_dependent[]" value="YES">
+                                        
+                                    </div>
+
+                                    <div class="container removecard">
+                                            <div class="row ">
+                                                <button type="button" class="btn btn-danger d-none delete">delete</button> 
+                                            </div>
+                                    </div>
+
                                 </div> 
+                                 
+                            </div>   
+            
+                        </div>
+                    @endif  
 
-                                <div>
-                                    <button type="button"  class="btn btn-danger d-none delete">delete</button> 
-                                </div>
-
-                            </div> 
-
-                        </div>   
-                       
-                    </div>
-                  
-
-                   
                 @endif  
                 
                 
@@ -167,7 +225,7 @@
                         </a>
                     </div>
                     <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <button type="button" id="familyBtn"  class="theme-btn text-white">Save</button>
+                        <button type="sumit" id="familyBtn"  class="theme-btn text-white">Save</button>
                     </div>
             </div>     
 

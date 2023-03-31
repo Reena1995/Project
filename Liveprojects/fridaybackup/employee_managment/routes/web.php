@@ -27,11 +27,9 @@ use App\Http\Controllers\ContactController;
 
 
 
+//====================================Admin Panel Start-----=====================================================
 Route::get('login',[LoginController::class,'create'])->name('login');
 Route::post('authnication',[LoginController::class,'login'])->name('authnication');
-
-
-
 
 Route::group(['middleware'=>['afterlogin']], function()
 {
@@ -235,6 +233,7 @@ Route::group(['prefix'=>'employee/','middleware'=>[],'as'=>'employee.'], functio
    Route::get('/list',[UserController::class,'index'])->name('index');
    Route::get('/edit/{id}',[UserController::class,'edit'])->name('edit');
    Route::get('/status/{id}',[UserController::class,'status'])->name('status');
+ 
    
 });
 /* ------------------------------- employee  end  ---------------------------*/
@@ -248,10 +247,10 @@ Route::get('/getCitty',[UserController::class,'getCity'])->name('getcity');
 /* -----------------==---------- personal details start--------------------------*/
 Route::group(['prefix'=>'personal/','middleware'=>[],'as'=>'personal.'], function(){
  
-   Route::post('save',[PersonalController::class,'personaldetail_add'])->name('personaldetail.add');
-   Route::post('edusave',[PersonalController::class,'education_add'])->name('education.add');
-   Route::post('documentsave',[PersonalController::class,'document_add'])->name('document.add');
-   Route::post('langauge/save',[PersonalController::class,'langauge_add'])->name('langauge.add');
+   Route::post('save',[PersonalController::class,'personaldetailAdd'])->name('personaldetail.add');
+   Route::post('edusave',[PersonalController::class,'educationAdd'])->name('education.add');
+   Route::post('documentsave',[PersonalController::class,'documentAdd'])->name('document.add');
+   Route::post('langauge/save',[PersonalController::class,'langaugeAdd'])->name('langauge.add');
    
    
 });
@@ -260,11 +259,11 @@ Route::group(['prefix'=>'personal/','middleware'=>[],'as'=>'personal.'], functio
 /* -----------------==---------- Organization details start--------------------------*/
 Route::group(['prefix'=>'organization/','middleware'=>[],'as'=>'organization.'], function(){
  
-   Route::post('jobprofile/save',[OrganizationController::class,'jobprofile_add'])->name('jobprofile.add');
-   Route::post('bandetail/save',[OrganizationController::class,'bank_add'])->name('bank.add');
-   Route::post('employment/save',[OrganizationController::class,'employment_add'])->name('employment.add');
-   Route::post('location/save',[OrganizationController::class,'location_add'])->name('location.add');
-   Route::post('asset/save',[OrganizationController::class,'asset_add'])->name('asset.add');
+   Route::post('jobprofile/save',[OrganizationController::class,'jobprofileAdd'])->name('jobprofile.add');
+   Route::post('bandetail/save',[OrganizationController::class,'bankAdd'])->name('bank.add');
+   Route::post('employment/save',[OrganizationController::class,'employmentAdd'])->name('employment.add');
+   Route::post('location/save',[OrganizationController::class,'locationAdd'])->name('location.add');
+   Route::post('asset/save',[OrganizationController::class,'assetAdd'])->name('asset.add');
    
    
 });
@@ -273,8 +272,8 @@ Route::group(['prefix'=>'organization/','middleware'=>[],'as'=>'organization.'],
 /* -----------------==---------- professional details start--------------------------*/
 Route::group(['prefix'=>'professional/','middleware'=>[],'as'=>'professional.'], function(){
  
-   Route::post('professional/save',[ProfessionalController::class,'professional_add'])->name('professional.add');
-   Route::post('workexperience/save',[ProfessionalController::class,'workexperience_add'])->name('workexperience.add');
+   Route::post('professional/save',[ProfessionalController::class,'professionalAdd'])->name('professional.add');
+   Route::post('workexperience/save',[ProfessionalController::class,'workexperienceAdd'])->name('workexperience.add');
    
    
 });
@@ -283,8 +282,8 @@ Route::group(['prefix'=>'professional/','middleware'=>[],'as'=>'professional.'],
 /* -----------------==---------- contact details start--------------------------*/
 Route::group(['prefix'=>'contact/','middleware'=>[],'as'=>'contact.'], function(){
  
-   Route::post('family/save',[ContactController::class,'family_add'])->name('family.add');
-   Route::post('emergency/save',[ContactController::class,'emergency_add'])->name('emergency.add');
+   Route::post('family/save',[ContactController::class,'familyAdd'])->name('family.add');
+   Route::post('emergency/save',[ContactController::class,'emergencyAdd'])->name('emergency.add');
    
    
 });
@@ -292,6 +291,10 @@ Route::group(['prefix'=>'contact/','middleware'=>[],'as'=>'contact.'], function(
 
 
 
-
-
 });
+
+//====================================Admin Panel end-----=====================================================
+
+//====================================Employee Panel Start-----=====================================================
+
+//====================================Employee Panel Start-----=====================================================

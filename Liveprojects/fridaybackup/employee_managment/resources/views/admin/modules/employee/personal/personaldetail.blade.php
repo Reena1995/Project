@@ -151,7 +151,7 @@
 
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label for="inputAddress">Current Address</label>
-            <textarea  rows="6" tabindex="13" name="current_address" class="form-control form-control-lg" id="inputAddress" placeholder="1234 Main St">
+            <textarea  rows="6" tabindex="13" name="current_address" class="form-control form-control-lg craddress" id="inputAddress" placeholder="1234 Main St">
                   {{ (isset($personal_detail) ? $personal_detail->current_address :  old('current_address')) }}
             </textarea>
             @if ($errors->has('current_address'))
@@ -160,7 +160,7 @@
         </div>
         <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
             <label>Country</label>
-            <select class="form-control" tabindex="14" id="current_country"  name="current_country">
+            <select class="form-control crcountry" tabindex="14" id="current_country"  name="current_country">
                 <option value="" selected="">Select Country</option>
                 @foreach($country as $con)
                         <option value="{{$con->id}}" {{ (isset($personal_detail) ? ($personal_detail->current_country_id  == $con->id ? 'selected' : '') :  old('current_country') == $con->id ? 'selected' : '' ) }}>{{$con->name}}  </option>
@@ -192,13 +192,25 @@
         </div>
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
             <label>Pincode</label>
-            <input type="text" tabindex="17" name="current_pincode" value = "{{ (isset($personal_detail) ? $personal_detail->current_pincode :  old('current_pincode')) }}"  class="form-control form-control-lg" placeholder="Enter current pincode">
+            <input type="text" tabindex="17" name="current_pincode" value = "{{ (isset($personal_detail) ? $personal_detail->current_pincode :  old('current_pincode')) }}"  class="form-control form-control-lg crpincode" placeholder="Enter current pincode">
             @if ($errors->has('current_pincode'))
                 <span class="errr-validation">{{ $errors->first('current_pincode') }}</span>
             @endif
         </div>
         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-           
+                
+        </div>
+
+        <div class="container sameadd">
+            <div class="row">
+                    <label>
+                        <input type="checkbox" name="homepostalcheck" id="homepostalcheck"/>Same as above:
+                    </label>
+                    <br>
+                
+                
+            </div>
+            <button type="button" id="same_ddress" class="btn btn-primary">Same As Above</button>
         </div>
 
         <h5 class="font-weight-semibold p-t-20 m-b-20">Permanent Address</h5>
@@ -207,59 +219,71 @@
            
         </div>
 
-        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-            <label for="inputAddress2">Permanent Address</label>
-            <textarea  rows="6"  tabindex="18" name="permanent_address"   class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                {{ (isset($personal_detail) ? $personal_detail->permanent_address :  old('permanent_address')) }}
-            </textarea>
-            @if ($errors->has('permanent_address'))
-                <span class="errr-validation">{{ $errors->first('permanent_address') }}</span>
-            @endif
-        </div>
+       
+        <div class="container" id="replace">
+
+            <div class="row" >
+
+                <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                    <label for="inputAddress2">Permanent Address</label>
+                    <textarea  rows="6"  tabindex="18" name="permanent_address"   class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                        {{ (isset($personal_detail) ? $personal_detail->permanent_address :  old('permanent_address')) }}
+                    </textarea>
+                    @if ($errors->has('permanent_address'))
+                        <span class="errr-validation">{{ $errors->first('permanent_address') }}</span>
+                    @endif
+                </div>
         
-        <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
-            <label>Country </label>
-            <select class="form-control"  tabindex="19" id="permanent_country" name="permanent_country">
-                <option value="" selected="">Select Country</option>
-                @foreach($country as $con)
-                    <option value="{{$con->id}}" {{ (isset($personal_detail) ? ($personal_detail->permanent_country_id  == $con->id ? 'selected' : '') :  old('current_country') == $con->id ? 'selected' : '' ) }}>{{$con->name}}  </option>
-                @endforeach
-            </select>
-            @if ($errors->has('permanent_country'))
-                <span class="errr-validation">{{ $errors->first('permanent_country') }}</span>
-            @endif
-        </div>
+                <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
+                    <label>Country </label>
+                    <select class="form-control"  tabindex="19" id="permanent_country" name="permanent_country">
+                        <option value="" selected="">Select Country</option>
+                        @foreach($country as $con)
+                            <option value="{{$con->id}}" {{ (isset($personal_detail) ? ($personal_detail->permanent_country_id  == $con->id ? 'selected' : '') :  old('current_country') == $con->id ? 'selected' : '' ) }}>{{$con->name}}  </option>
+                        @endforeach
+                    </select>
+                    @if ($errors->has('permanent_country'))
+                        <span class="errr-validation">{{ $errors->first('permanent_country') }}</span>
+                    @endif
+                </div>
         
-        <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
-            <label>State</label>
-            <select class="form-control"  tabindex="20" id="permanent_state"  name="permanent_state" >
-                
-                
-            </select>
-            @if ($errors->has('permanent_state'))
-                <span class="errr-validation">{{ $errors->first('permanent_state') }}</span>
-            @endif
-        </div>
+                <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
+                    <label>State</label>
+                    <select class="form-control"  tabindex="20" id="permanent_state"  name="permanent_state" >
+                        
+                        
+                    </select>
+                    @if ($errors->has('permanent_state'))
+                        <span class="errr-validation">{{ $errors->first('permanent_state') }}</span>
+                    @endif
+                </div>
         
-        <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
-            <label>City</label>
-            <select class="form-control"id="permanent_city"  tabindex="21" name="permanent_city">
-                
-                    
-            </select>
-            @if ($errors->has('permanent_city'))
-                <span class="errr-validation">{{ $errors->first('permanent_city') }}</span>
-            @endif
-        </div>
+                <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
+                    <label>City</label>
+                    <select class="form-control"id="permanent_city"  tabindex="21" name="permanent_city">
+                        
+                            
+                    </select>
+                    @if ($errors->has('permanent_city'))
+                        <span class="errr-validation">{{ $errors->first('permanent_city') }}</span>
+                    @endif
+                </div>
         
         
-        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-            <label>Pincode</label>
-            <input type="text" name="permanent_pincode"  tabindex="22" value = "{{ (isset($personal_detail) ? $personal_detail->permanent_pincode :  old('permanent_pincode')) }}"  class="form-control form-control-lg" placeholder="Enter permanant pincode">
-            @if ($errors->has('permanent_pincode'))
-                <span class="errr-validation">{{ $errors->first('permanent_pincode') }}</span>
-            @endif
+                <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                    <label>Pincode</label>
+                    <input type="text" name="permanent_pincode"  tabindex="22" value = "{{ (isset($personal_detail) ? $personal_detail->permanent_pincode :  old('permanent_pincode')) }}"  class="form-control form-control-lg" placeholder="Enter permanant pincode">
+                    @if ($errors->has('permanent_pincode'))
+                        <span class="errr-validation">{{ $errors->first('permanent_pincode') }}</span>
+                    @endif
+                </div>
+
+            </div>
+
         </div>
+       
+
+       
         
         <div class="form-card-footer card-footer p-t-20 p-0 text-right">
             <div class="btn-group mr-2" role="group" aria-label="Second group">
@@ -277,7 +301,7 @@
  <script>
     $(document).ready(function () {
         /* date picker code start*/ 
-        $(".theme-date-picker").datepicker();
+            $(".theme-date-picker").datepicker();
         /* date picker code end*/ 
 
       
@@ -385,114 +409,174 @@
                 
          /* state select than after city fetch  code end */ 
 
-          /*validation Frontend jquery start*/
-        //   var isEditImage = '{{ !empty($personal_detail) && ($personal_detail->image) }}' ? 2:1; 
-       
+         /*  same as address code start*/
 
-        //     $(document).delegate('#personalDetailBtn','click',function(){
-        //         isImageValidation() 
-        //         formSubmit();  
-        //     });
-        //     function isImageValidation(){
-        //          console.log('isEditImage :',isEditImage);
-        //         var img = $('#inputGroupFile02').val();
-        //         var html = '';
-        //         console.log('img ::',img);
-        //         if(img == '' && (isEditImage == 1)){
-        //             html = 'Please select image';
-        //             $('#img-error').html(html);
-        //             return false;
-        //         }   
-        //         $('#img-error').html(html);
-        //         console.log(img);
-        //         console.log('Html ::    ',html);
-        //         return true;
-        //     }
-        //     function formSubmit(){
-        //         console.log('asd');
-        //         $("#personalDetailForm").validate({
-        //             rules : {
-        //                 fathername : "required",  
-        //                 mothername : "required", 
-        //                 dob : "required",  
-        //                 gender : "required",    
-        //                 bloodgroup : "required",  
-        //                 alternateno : { required : true,
-        //                     number:true,
-        //                     minlength:10,
-        //                     maxlength:10
-        //                 },    
-        //                 marital_status : "required",  
-        //                 //image :  {extension:'jpg|jpeg|png|ico|bmp'},    
-        //                 residencetype : "required",     
-        //                 transportationmode : "required",    
-        //                 disabilitydtls : "required",  
-        //                 totalexperience : "required",
-        //                 current_address : "required",  
-        //                 permanent_address : "required", 
-        //                 current_country : "required",  
-        //                 permanent_country : "required",    
-        //                 current_state : "required",  
-        //                 permanent_state : "required",    
-        //                 current_city : "required",  
-        //                 permanent_city : "required",    
-        //                 current_pincode : {required: true,number:true},  
-        //                 permanent_pincode : {required: true,number:true},    
+            // $("#same_ddress").click(function(){
+
+            //      console.log('same as address button entered');
+
+              
+
+            //         add=`
+            //         <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+            //         <label for="inputAddress2">Permanent Address</label>
+            //         <textarea  rows="6"  tabindex="18" name="permanent_address"   class="form-control praddress" id="inputAddress2" placeholder="Apartment, studio, or floor"></textarea>
+                  
+            //     </div>
+        
+            //     <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
+            //         <label>Country </label>
+            //         <select class="form-control prcountry"  tabindex="19" id="permanent_country" name="permanent_country">
+            //             <option value="" selected="">Select Country</option>
+            //             @foreach($country as $con)
+            //                 <option value="{{$con->id}}" {{ (isset($personal_detail) ? ($personal_detail->permanent_country_id  == $con->id ? 'selected' : '') :  old('current_country') == $con->id ? 'selected' : '' ) }}>{{$con->name}}  </option>
+            //             @endforeach
+                       
+            //         </select>
+                   
+            //     </div>
+        
+            //     <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
+            //         <label>State</label>
+            //         <select class="form-control"  tabindex="20" id="permanent_state"  name="permanent_state" >
+            //         <option value="" selected="">Select State</option>
+                  
                         
-        //             },
-        //             messages : {
-        //                 fathername : "Please Enter a fathername ",
-        //                 mothername : "Please Enter  a mothername ",
-        //                 dob : "Please select a date of birth ",
-        //                 gender : "Please Select  a gender ",
-        //                 bloodgroup : "Please Enter a bloodgroup ",
-        //                 alternateno : {
-        //                     required : "Please enter a Mobile Number.",
-        //                     number:'Please enter valid Number.',
-        //                     minlength : "Please enter at least 10 digit Number.",
-        //                     maxlength : "Please enter at least 10 digit Number.",
-        //                 },
-        //                 marital_status : "Please Select a marital status ",
-        //                // image : {extension:"only jpg ,jpeg ,pdf"},
-        //                 residencetype : "Please Select a residencetype ",
-        //                 transportationmode : "Please Select  a transportationmode ",
-        //                 disabilitydtls : "Please Enter a disability details ",
-        //                 totalexperience : "Please Enter a totalexperience ",  
-        //                 current_address : "Please Enter a Address ",
-        //                 permanent_address : "Please Enter  a Address ",
-        //                 current_country : "Please Select a Country ",
-        //                 permanent_country : "Please Select  a Country ",
-        //                 current_state : "Please Select a State ",
-        //                 permanent_state : "Please Select  a State ",
-        //                 current_city : "Please Select  a City",
-        //                 permanent_city : "Please Select  a City",
-        //                 current_pincode :  {required: "Please Enter a pincode",number:"Please enter numbers Only"},
-        //                 permanent_pincode :  {required: "Please Enter a pincode",number:"Please enter numbers Only"},
-        //             },
-        //             errorClass: "custom-error",
-        //             errorElement: "span",
-        //             errorPlacement: function(error, element) {
-        //                 var placement = $(element).data('error');
-        //                 console.log(element.attr("type"),'placement');
-        //                 if((element.attr("type") == 'radio')){                       
-        //                     $(element).parents('.gender').append(error)
-        //                 }else if (element.attr("type") == 'file') {
-        //                     $('.file').append(error)
-        //                 } else {
-        //                     error.insertAfter(element);
-        //                 }
-        //             },
-        //             submitHandler : function(form){
-        //                 if(!isImageValidation()){
-        //                     return false;
-        //                 }else{
-        //                     form.submit();
-        //                 }
-        //             }
-        //         });
-        //     }
+            //         </select>
+                  
+            //     </div>
+        
+            //     <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
+            //         <label>City</label>
+            //         <select class="form-control"id="permanent_city"  tabindex="21" name="permanent_city">
+            //         <option value="" selected="">Select city</option>
+                       
+                            
+            //         </select>
+                   
+            //     </div>
+        
+        
+            //     <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+            //         <label>Pincode</label>
+            //         <input type="text" name="permanent_pincode"  tabindex="22" value = ""  class="form-control form-control-lg prpincode" placeholder="Enter permanant pincode">
+                   
+            //     </div>
 
-         /*validation Frontend jquery start*/
+            //         `;
+        
+               
+            //     $( "#replace" ).replaceWith(add);
+
+            //     $craddress=$('.craddress').val();
+            //         console.log($craddress);
+
+            //     $('.praddress').val($craddress);
+
+
+               
+
+
+            //     $crpincode=$('.crpincode').val();
+            //         console.log($crpincode);
+
+            //     $('.prpincode').val($crpincode);
+
+
+                
+            //     $crcountry=$('.crcountry').val();
+            //         console.log($crcountry);
+            //         $('.prcountry').val($crcountry);    
+
+                
+                                          
+              
+            // });
+
+            
+
+            $('#homepostalcheck').click(function(){
+                if ($("#homepostalcheck").is(":checked")) 
+                {
+                    console.log('same as address button entered');
+
+              
+
+                    add=`
+                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                    <label for="inputAddress2">Permanent Address</label>
+                    <textarea  rows="6"  tabindex="18" name="permanent_address"   class="form-control praddress" id="inputAddress2" placeholder="Apartment, studio, or floor"></textarea>
+
+                    </div>
+
+                    <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
+                    <label>Country </label>
+                    <select class="form-control prcountry"  tabindex="19" id="permanent_country" name="permanent_country">
+                        <option value="" selected="">Select Country</option>
+                        @foreach($country as $con)
+                            <option value="{{$con->id}}" {{ (isset($personal_detail) ? ($personal_detail->permanent_country_id  == $con->id ? 'selected' : '') :  old('current_country') == $con->id ? 'selected' : '' ) }}>{{$con->name}}  </option>
+                        @endforeach
+                    
+                    </select>
+
+                    </div>
+
+                    <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
+                    <label>State</label>
+                    <select class="form-control"  tabindex="20" id="permanent_state"  name="permanent_state" >
+                    <option value="" selected="">Select State</option>
+
+                        
+                    </select>
+
+                    </div>
+
+                    <div class="form-group floating-label show-label col-lg-6 col-md-6 col-sm-12">
+                    <label>City</label>
+                    <select class="form-control"id="permanent_city"  tabindex="21" name="permanent_city">
+                    <option value="" selected="">Select city</option>
+                    
+                            
+                    </select>
+
+                    </div>
+
+
+                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                    <label>Pincode</label>
+                    <input type="text" name="permanent_pincode"  tabindex="22" value = ""  class="form-control form-control-lg prpincode" placeholder="Enter permanant pincode">
+
+                    </div>
+
+                    `;
+
+
+                    $( "#replace" ).replaceWith(add);
+
+                    $craddress=$('.craddress').val();
+                    console.log($craddress);
+
+                    $('.praddress').val($craddress);
+
+
+
+
+
+                    $crpincode=$('.crpincode').val();
+                    console.log($crpincode);
+
+                    $('.prpincode').val($crpincode);
+
+
+
+                    $crcountry=$('.crcountry').val();
+                    console.log($crcountry);
+                    $('.prcountry').val($crcountry);    
+
+
+                }
+            })
+         /*  same as address code end*/
 
          
          

@@ -58,7 +58,7 @@
         </main>
 		 @include('admin.partial.footer')
          @include('admin.modules.validation.validation')
-    </body>
-    @stack('scripts')
+        </body>
+        @stack('scripts')
    
 </html>

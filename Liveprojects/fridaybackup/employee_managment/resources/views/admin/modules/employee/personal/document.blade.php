@@ -40,6 +40,9 @@
                                     <input type="hidden" name="type[]"  value="{{$doc->id}}" >
                                     <input type="text"   value="{{$doc->type}}" class="form-control form-control-lg" readonly>
                                 </div>
+                                @if ($errors->has('type[]'))
+                                        <span class="errr-validation">{{ $errors->first('type[]') }}</span>
+                                    @endif
 
                                 <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
                                     <div class="custom-file">

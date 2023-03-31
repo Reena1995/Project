@@ -78,7 +78,7 @@
                     @endforeach
 
                 @else 
-                    @if(session()->getOldinput())
+                @if(!empty(session()->getOldinput()['name']))
                         @foreach(session()->getOldinput()['name'] as $index => $value) 
                         <div class="card education mt-3 familyadd educationDetails" id="">
                 

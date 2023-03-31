@@ -121,7 +121,7 @@
                     @endforeach
 
                 @else 
-                        @if(session()->getOldinput())
+                        @if(!empty(session()->getOldinput()['serial_no']))
                             @foreach(session()->getOldinput()['serial_no'] as $index => $value) 
                             <div class="card education mt-3 assetadd educationDetails" id="">
                                 <div class="card-body" >

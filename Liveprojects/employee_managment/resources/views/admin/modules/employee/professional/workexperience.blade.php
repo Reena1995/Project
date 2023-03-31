@@ -155,7 +155,7 @@
                     @endforeach
 
                 @else 
-                @if(session()->getOldinput())
+                    @if(!empty(session()->getOldinput()['name']))
                             @foreach(session()->getOldinput()['name'] as $index => $value) 
                             <div class="card education mt-3 workadd educationDetails" id="">
                                 <div class="card-body " >
@@ -272,111 +272,107 @@
                             @endforeach 
                      
                         
-                    @else
-                        <div class="card education mt-3 workadd educationDetails" id="">
-                    
-                            <div class="card-body " >
-                                <h3>first Design</h3>
-                                <div class="form-row">
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        <label>Name</label>
-                                        <input type="text" value = "" name="{{'name[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
-                                       
-                                    </div>
-
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        <label>Address</label>
-                                        <textarea  class="form-control form-control-lg" value="" name="{{'address[]'}}" cols="30" placeholder="Enter Details Of disaility"></textarea>
-                                       
-                                    </div>
-
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        <label>Date of joining</label>
-                                        <input type="date" name="{{'date_of_joining[]'}}"  value =""  class="form-control form-control-lg" placeholder="Select Date Of Birth">
-                                       
-                                    </div>
-
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        <label>Date of Leaving</label>
-                                        <input type="date" value = "" name="{{'date_of_leaving[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
+                        @else
+                            <div class="card education mt-3 workadd educationDetails" id="">
+                        
+                                <div class="card-body " >
+                                    <h3>first Design</h3>
+                                    <div class="form-row">
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            <label>Name</label>
+                                            <input type="text" value = "" name="{{'name[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
                                         
-                                    </div>
-                                    
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        <label>joining Designation</label>
-                                        <input type="text" value = "" name="{{'joining_designation[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
-                                       
-                                    </div>
-
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        <label>Leaving Designation</label>
-                                        <input type="text" value = "" name="{{'leaving_designation[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
-                                        
-                                    </div>
-
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        <label>role</label>
-                                        <input type="text" value = "" name="{{'role[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
-                                       
-                                    </div>
-
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                    
-                                        <label>Last salary</label>
-                                        <input type="text" value = "" name="{{'last_salary[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
-                                       
-                                    </div>
-
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        <label>leaving_reason</label>
-                                        <textarea  class="form-control form-control-lg" value="" name="{{'leaving_reason[]'}}" cols="30" placeholder="Enter Details Of disaility"></textarea>
-                                       
-                                    </div>
-
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                    
-                                        <label>reporting_authority_name</label>
-                                        <input type="text" value = "" name="{{'reporting_authority_name[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
-                                        
-                                    </div>
-
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        
-                                        <label>reporting_authority_contact</label>
-                                        <input type="text" value = "" name="{{'reporting_authority_contact[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
-                                       
-                                    </div>
-
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        
-                                        <label>reporting_authority_designation</label>
-                                        <input type="text" value = "" name="{{'reporting_authority_designation[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
-                                       
-                                    </div>
-                                    <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
-                                        <lable>experience_certificate</lable>
-                                        <input type="file" value="" data-key="exp_image" name="{{'experience_certificate[]'}}" class=" form-control form-control-lg">
-                                        
-                                    </div>
-
-                                    <div class="container removecard">
-                                        <div class="row ">
-                                            <button type="button" class="btn btn-danger d-none delete">delete</button> 
                                         </div>
-                                    </div>
-                                
+
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            <label>Address</label>
+                                            <textarea  class="form-control form-control-lg" value="" name="{{'address[]'}}" cols="30" placeholder="Enter Details Of disaility"></textarea>
+                                        
+                                        </div>
+
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            <label>Date of joining</label>
+                                            <input type="date" name="{{'date_of_joining[]'}}"  value =""  class="form-control form-control-lg" placeholder="Select Date Of Birth">
+                                        
+                                        </div>
+
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            <label>Date of Leaving</label>
+                                            <input type="date" value = "" name="{{'date_of_leaving[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                            
+                                        </div>
+                                        
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            <label>joining Designation</label>
+                                            <input type="text" value = "" name="{{'joining_designation[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                        
+                                        </div>
+
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            <label>Leaving Designation</label>
+                                            <input type="text" value = "" name="{{'leaving_designation[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                            
+                                        </div>
+
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            <label>role</label>
+                                            <input type="text" value = "" name="{{'role[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                        
+                                        </div>
+
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        
+                                            <label>Last salary</label>
+                                            <input type="text" value = "" name="{{'last_salary[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                        
+                                        </div>
+
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            <label>leaving_reason</label>
+                                            <textarea  class="form-control form-control-lg" value="" name="{{'leaving_reason[]'}}" cols="30" placeholder="Enter Details Of disaility"></textarea>
+                                        
+                                        </div>
+
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                        
+                                            <label>reporting_authority_name</label>
+                                            <input type="text" value = "" name="{{'reporting_authority_name[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                            
+                                        </div>
+
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            
+                                            <label>reporting_authority_contact</label>
+                                            <input type="text" value = "" name="{{'reporting_authority_contact[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                        
+                                        </div>
+
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            
+                                            <label>reporting_authority_designation</label>
+                                            <input type="text" value = "" name="{{'reporting_authority_designation[]'}}" class="form-control form-control-lg" placeholder="Enter University Name">
+                                        
+                                        </div>
+                                        <div class="form-group floating-label col-lg-6 col-md-6 col-sm-12">
+                                            <lable>experience_certificate</lable>
+                                            <input type="file" value="" data-key="exp_image" name="{{'experience_certificate[]'}}" class=" form-control form-control-lg">
+                                            
+                                        </div>
+
+                                        <div class="container removecard">
+                                            <div class="row ">
+                                                <button type="button" class="btn btn-danger d-none delete">delete</button> 
+                                            </div>
+                                        </div>
+                                    
+                                    </div>   
+                                    
+                                    
                                 </div>   
-                                
-                                
-                            </div>   
 
-                        </div>
- 
-                    @endif 
-                   
-
-                    
-                    
+                            </div>
+    
+                        @endif 
                 @endif     
             </div>
             
